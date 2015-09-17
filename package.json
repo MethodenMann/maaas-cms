@@ -1,6 +1,9 @@
 {
   "name": "ServeStaticContent",
   "version": "0.0.1",
+  "engines": {
+    "node": ">0.11.9"
+  },
   "scripts": {
     "postinstall": "grunt broccoli:www:build",
     "start": "node app.js"
