@@ -1,0 +1,19 @@
+{
+  "name": "maaas-cms",
+  "version": "0.0.1",
+  "homepage": "https://github.com/MethodenMann/maaas-cms",
+  "authors": [
+    "MethodenMann <dkeller.ch@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6"
+  }
+}
