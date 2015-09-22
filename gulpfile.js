@@ -21,7 +21,7 @@ gulp.task('connect', function() {
 
 
 gulp.task('typescript', function() {
-  var tsResult = gulp.src('www_source/scripts/**/*.ts')
+  var tsResult = gulp.src('www_source/scripts/app.ts')
     .pipe(ts({
       noImplicitAny: true,
       out: 'app.js'
