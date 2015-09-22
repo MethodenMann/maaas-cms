@@ -5,4 +5,4 @@ module maaas {
 
     var maaascms = angular.module('maaascms', [])
             .controller('areaCtrl', AreaCtrl)
-} 
+}

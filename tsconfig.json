@@ -1,6 +1,16 @@
 {
-  "version": "1.4",
-  "compilerOptions": {
-    "target": "es5"
-  }
+    "version": "1.5",
+    "compilerOptions": {
+        "target": "es5"
+    },
+    "filesGlob": [
+        "./www_source/scripts/**/*.ts"
+    ],
+    "files": [
+        "./www_source/scripts/_all.ts",
+        "./www_source/scripts/app.ts",
+        "./www_source/scripts/controllers/areaController.ts",
+        "./www_source/scripts/interfaces/iAreaScope.ts",
+        "./www_source/scripts/models/area.ts"
+    ]
 }

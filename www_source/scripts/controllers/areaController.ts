@@ -23,7 +23,7 @@ module maaas {
 			private $location: ng.ILocationService
 		) {
 			//this.areas =
-			$scope.somestring = 'test';
+			$scope.somestring = "test";
 			$scope.vm = this;
 		}
 
