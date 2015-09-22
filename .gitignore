@@ -29,3 +29,6 @@ tmp
 
 www
 wwwdev
+
+
+www_source/scripts/**/*.js

@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       www: {
         dest: "www",
         config: "Brocfile.js",
-        env: "production"
+        env: "development"
       }
     },
   });

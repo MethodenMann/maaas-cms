@@ -1,6 +1,7 @@
 var env = require('broccoli-env').getEnv();
 
 var compileTypeScript  = require('broccoli-typescript');
+var tsTranspiler = require('broccoli-typescript-compiler');
 var uglifyJavaScript = require('broccoli-uglify-js');
 var compileSass = require('broccoli-sass');
 var pickFiles = require('broccoli-static-compiler');
@@ -18,15 +19,15 @@ function prepareJs() {
       srcDir: '/',
       destDir: '/js'
     })
-    return compileTypeScript(tree, {})
+    return tsTranspiler(tree);
   }
   var app = pickTypeScripts('www_source/scripts')
 
   var sourceTrees = [app]
-  if (env !== 'production') {
-    var appDev = pickTypeScripts('www_source/dev/js')
-    sourceTrees.push(appDev)
-  }
+  // if (env !== 'production') {
+  //   var appDev = pickTypeScripts('www_source/dev/js')
+  //   sourceTrees.push(appDev)
+  // }
   var appJs = new mergeTrees(sourceTrees, { overwrite: true })
 
   appJs = concat(appJs, {
@@ -62,19 +63,19 @@ function prepareTemplates() {
     var templates = pickFiles('www_source', {
       srcDir: srcDir,
       files: ['**/*.jade'],
-      destDir: '/templates'
+      destDir: '/views'
     })
     return templates
   }
 
-  var templates = pickTemplates('/templates')
+  var templates = pickTemplates('/views')
 
   var sourceTrees = [templates]
 
-  if (env == "development") {
-    var templatesDev = pickTemplates('/dev/templates')
-    sourceTrees.push(templatesDev)
-  }
+  // if (env == "development") {
+  //   var templatesDev = pickTemplates('/dev/views')
+  //   sourceTrees.push(templatesDev)
+  // }
 
   var appStyles = new mergeTrees(sourceTrees, { overwrite: true })
 
@@ -89,4 +90,12 @@ function copyRemainingAssets() {
   });
 }
 
-module.exports = mergeTrees([prepareJs(), prepareTemplates(), prepareCss(), copyRemainingAssets()])
+function copyNodeModules() {
+  return pickFiles('node_modules', {
+     srcDir: '/',
+     files: ['angular/*.*'],
+     destDir: 'node_modules'
+  });
+}
+
+module.exports = mergeTrees([prepareJs(), prepareTemplates(), prepareCss(), copyRemainingAssets(), copyNodeModules()])

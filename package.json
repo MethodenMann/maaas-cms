@@ -9,10 +9,7 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "express": "3.x",
-    "grunt": "0.4.5",
-    "grunt-cli": "0.1.13",
-    "grunt-broccoli": "^0.4.1",
+    "angular": "^1.4.6",
     "broccoli": "^0.16.8",
     "broccoli-concat": "0.0.13",
     "broccoli-env": "0.0.1",
@@ -21,12 +18,17 @@
     "broccoli-sass": "^0.6.6",
     "broccoli-static-compiler": "^0.2.2",
     "broccoli-typescript": "^0.4.0",
+    "broccoli-typescript-compiler": "0.0.6",
+    "typescript": "^1.6.2",
     "broccoli-uglify-js": "^0.1.3",
+    "express": "3.x",
     "grunt": "^0.4.5",
+    "grunt-broccoli": "^0.4.1",
     "grunt-broccoli-build": "^0.6.0",
+    "grunt-cli": "0.1.13",
     "grunt-sync": "^0.4.1"
   },
   "devDependencies": {
-
+    "grunt-dts-bundle": "^0.3.0"
   }
 }
