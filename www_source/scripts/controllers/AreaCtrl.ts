@@ -4,7 +4,6 @@ module maaas {
 	'use strict';
 
 	export class AreaCtrl {
-
 		//private areas: Area[];
 
 		// $inject annotation.

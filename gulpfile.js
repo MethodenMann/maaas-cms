@@ -4,6 +4,7 @@ var ts = require('gulp-typescript');
 var tslint = require('gulp-tslint');
 var jade = require('gulp-jade');
 var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
 var connect = require('gulp-connect');
@@ -21,19 +22,22 @@ gulp.task('connect', function() {
 });
 
 
-gulp.task('typescript-lint', function () {
-    return gulp.src(config.typescriptSrcPath + '/**/*.ts').pipe(tslint()).pipe(tslint.report('prose'));
+gulp.task('typescript-lint', function() {
+  return gulp.src(config.typescriptSrcPath + '/**/*.ts').pipe(tslint()).pipe(tslint.report('prose'));
 });
 
 
 
 gulp.task('typescript', function() {
   var tsResult = gulp.src(config.typescriptSrcPath + '/App.ts')
+    .pipe(sourcemaps.init())
     .pipe(ts({
       noImplicitAny: true,
       out: 'app.js'
     }));
-  return tsResult.js.pipe(gulp.dest(config.typescriptDestPath));
+  return tsResult.js
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(config.typescriptDestPath));
 });
 
 
