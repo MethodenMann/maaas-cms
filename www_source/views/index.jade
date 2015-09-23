@@ -3,11 +3,12 @@ html(lang='en', ng-app='maaascms', data-framework='typescript')
   head
     meta(charset='utf-8')
     title maaas cms
-    link(href='../css/app.css', rel='stylesheet')
+    link(href='../css/styles.css', rel='stylesheet')
   body
-    div(ng-controller='areaCtrl')
+    div(ng-controller='AreaCtrl')
       h1 test 1234233Test
 
       span {{somestring}}
+      button(ng-click='changeString("1")') Test
     script(src='../libs/angular.js')
     script(src='../js/app.js')

@@ -9,8 +9,10 @@
     "files": [
         "./www_source/scripts/_all.ts",
         "./www_source/scripts/app.ts",
-        "./www_source/scripts/controllers/areaController.ts",
-        "./www_source/scripts/interfaces/iAreaScope.ts",
-        "./www_source/scripts/models/area.ts"
+        "./www_source/scripts/controllers/areacontroller.ts",
+        "./www_source/scripts/interfaces/iareascope.ts",
+        "./www_source/scripts/interfaces/itestservice.ts",
+        "./www_source/scripts/models/area.ts",
+        "./www_source/scripts/services/testservice.ts"
     ]
 }

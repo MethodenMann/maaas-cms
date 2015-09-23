@@ -13,21 +13,24 @@ module maaas {
 		// See http://docs.angularjs.org/guide/di
 		public static $inject = [
 			'$scope',
-			'$location'
+			'$location',
+			'TestService'
 		];
 
 		// dependencies are injected via AngularJS $injector
 		// controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
 		constructor(
 			private $scope: IAreaScope,
-			private $location: ng.ILocationService
+			private $location: ng.ILocationService,
+			private testservice : ITestService
 		) {
-			$scope.somestring = "test";
+			$scope.somestring = 'test1';
 			$scope.vm = this;
 		}
 
 		changeString(value: string) {
-		    this.$scope.somestring = value;
+				this.testservice.put(+value);
+		    this.$scope.somestring = this.testservice.get().toString();
 		}
 	}
 
