@@ -84,4 +84,4 @@ gulp.task('watch', function() {
 
 gulp.task('build', ['bowercopy', 'jade', 'sass', 'typescript-lint', 'typescript'])
 
-gulp.task('default', ['connect', 'watch']);
+gulp.task('default', ['build', 'connect', 'watch']);
