@@ -1,23 +1,32 @@
 /// <reference path='../_all.ts' />
 
 interface JQueryStatic {
-  cloudinary: any;
+  cloudinary: any
 }
 
 module maaas {
-  'use strict';
+  'use strict'
 
   export function ImageLoader(): ng.IDirective {
     return {
       restrict: 'A',
       replace: true,
       link: (scope: ng.IScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes) => {
-        console.log('blabla');
+        $.cloudinary.config({cloud_name: 'nmsg', api_key: '145367384875325'})
 
-        $('.upload_form').append($.cloudinary.unsigned_upload_tag('zcudy0uz',
-          { cloud_name: 'demo' }));
+        var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', { cloud_name: 'nmsg' })
+        var thumbnailTag = angular.element("<div></div>")
+        element.append(imageTag)
+        element.append(thumbnailTag)
+
+        imageTag.bind('cloudinarydone', (e, data) => {
+          thumbnailTag.append($.cloudinary.image(data.result.public_id, {
+            format: 'jpg', width: 150, height: 100,
+            crop: 'thumb', gravity: 'face', effect: 'saturation:50'
+          }))
+        })
       }
-    };
+    }
   }
-  // myDirective.$inject = ['toaster'];
+  // myDirective.$inject = ['toaster']
 }
