@@ -65,6 +65,16 @@ gulp.task('jade', function() {
 gulp.task('bowercopy', function() {
   gulp.src(config.bowerPath + '/angular/angular.js')
     .pipe(gulp.dest(config.libsDestPath));
+  gulp.src(config.bowerPath + '/jquery/dist/jquery.js')
+    .pipe(gulp.dest(config.libsDestPath));
+  gulp.src(config.bowerPath + '/blueimp-file-upload/js/jquery.fileupload.js')
+    .pipe(gulp.dest(config.libsDestPath));
+  gulp.src(config.bowerPath + '/blueimp-file-upload/js/jquery.iframe-transport.js')
+    .pipe(gulp.dest(config.libsDestPath));
+  gulp.src(config.bowerPath + '/cloudinary/js/jquery.cloudinary.js')
+    .pipe(gulp.dest(config.libsDestPath));
+  gulp.src(config.bowerPath + '/jquery-ui/ui/widget.js')
+    .pipe(gulp.dest(config.libsDestPath));
 });
 
 gulp.task('watch', function() {
