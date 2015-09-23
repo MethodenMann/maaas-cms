@@ -28,7 +28,7 @@ gulp.task('typescript-lint', function () {
 
 
 gulp.task('typescript', function() {
-  var tsResult = gulp.src(config.typescriptSrcPath + '/app.ts')
+  var tsResult = gulp.src(config.typescriptSrcPath + '/App.ts')
     .pipe(ts({
       noImplicitAny: true,
       out: 'app.js'

@@ -7,12 +7,12 @@
         "./www_source/scripts/**/*.ts"
     ],
     "files": [
+        "./www_source/scripts/App.ts",
         "./www_source/scripts/_all.ts",
-        "./www_source/scripts/app.ts",
-        "./www_source/scripts/controllers/areacontroller.ts",
-        "./www_source/scripts/interfaces/iareascope.ts",
-        "./www_source/scripts/interfaces/itestservice.ts",
-        "./www_source/scripts/models/area.ts",
-        "./www_source/scripts/services/testservice.ts"
+        "./www_source/scripts/controllers/AreaCtrl.ts",
+        "./www_source/scripts/interfaces/IAreaScope.ts",
+        "./www_source/scripts/interfaces/ITestService.ts",
+        "./www_source/scripts/models/Area.ts",
+        "./www_source/scripts/services/TestService.ts"
     ]
 }

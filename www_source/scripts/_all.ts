@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
-/// <reference path='app.ts' />
-/// <reference path='models/area.ts' />
-/// <reference path='interfaces/iareascope.ts' />
-/// <reference path='interfaces/itestservice.ts' />
-/// <reference path="services/testservice.ts"/>
-/// <reference path='controllers/areacontroller.ts' />
+/// <reference path='App.ts' />
+/// <reference path='models/Area.ts' />
+/// <reference path='interfaces/IAreaScope.ts' />
+/// <reference path='interfaces/ITestService.ts' />
+/// <reference path="services/TestService.ts"/>
+/// <reference path='controllers/AreaCtrl.ts' />
