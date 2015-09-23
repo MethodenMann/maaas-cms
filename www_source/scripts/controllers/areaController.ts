@@ -22,7 +22,6 @@ module maaas {
 			private $scope: IAreaScope,
 			private $location: ng.ILocationService
 		) {
-			//this.areas =
 			$scope.somestring = "test";
 			$scope.vm = this;
 		}
