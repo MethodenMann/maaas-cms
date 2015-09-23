@@ -5,5 +5,6 @@ module maaas {
 
   var maaascms = angular.module('maaascms', [])
     .service('TestService', TestService)
-    .controller('AreaCtrl', AreaCtrl);
+    .controller('AreaCtrl', AreaCtrl)
+    .directive('imageLoader', ImageLoader);
 };

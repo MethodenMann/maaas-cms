@@ -4,4 +4,5 @@
 /// <reference path='interfaces/IAreaScope.ts' />
 /// <reference path='interfaces/ITestService.ts' />
 /// <reference path="services/TestService.ts"/>
-/// <reference path='controllers/AreaCtrl.ts' />  
+/// <reference path='controllers/AreaCtrl.ts' />
+/// <reference path="./directives/ImageLoader.ts"/>
