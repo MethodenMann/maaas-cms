@@ -29,15 +29,15 @@ gulp.task('typescript-lint', function() {
 
 
 gulp.task('typescript', function() {
-  var tsResult = gulp.src(config.typescriptSrcPath + '/App.ts')
-    .pipe(sourcemaps.init())
-    .pipe(ts({
-      noImplicitAny: true,
-      out: 'app.js'
-    }));
-  return tsResult.js
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(config.typescriptDestPath));
+  var tsProject = ts.createProject('www_source/tsconfig.json');
+
+   var tsResult = gulp.src('./www_source/**/**.ts')
+     .pipe(ts(tsProject));
+
+   return tsResult.js
+   .pipe(concat('app.js')) 
+   .pipe(gulp.dest(config.typescriptDestPath));
+
 });
 
 
