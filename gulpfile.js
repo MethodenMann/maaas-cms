@@ -16,7 +16,7 @@ var config = new Config();
 gulp.task('connect', function() {
   connect.server({
     port: 1337,
-    root: 'www',
+    root: 'out',
     livereload: true
   });
 });
@@ -29,14 +29,11 @@ gulp.task('typescript-lint', function() {
 
 
 gulp.task('typescript', function() {
-  var tsResult = gulp.src(config.typescriptSrcPath + '/App.ts')
-    .pipe(sourcemaps.init())
-    .pipe(ts({
-      noImplicitAny: true,
-      out: 'app.js'
-    }));
+  var tsProject = ts.createProject(config.baseSrcPath + '/tsconfig.json');
+  var tsResult = tsProject.src()
+    .pipe(ts(tsProject));
+
   return tsResult.js
-    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.typescriptDestPath));
 });
 
@@ -53,12 +50,16 @@ gulp.task('sass', function() {
 });
 
 
-gulp.task('jade', function() {
+gulp.task('views', function() {
   gulp.src(config.jadeSrcPath + '/**/*.jade')
     .pipe(jade({
       pretty: true
     }))
     .pipe(gulp.dest(config.jadeDestPath))
+
+    gulp.src(config.baseSrcPath + '/**/*.html')
+    .pipe(gulp.dest(config.baseDestPath))
+
 });
 
 
@@ -82,6 +83,6 @@ gulp.task('watch', function() {
   });
 });
 
-gulp.task('build', ['bowercopy', 'jade', 'sass', 'typescript-lint', 'typescript'])
+gulp.task('build', ['bowercopy', 'views', 'sass', 'typescript-lint', 'typescript'])
 
 gulp.task('default', ['build', 'connect', 'watch']);

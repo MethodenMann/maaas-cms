@@ -31,8 +31,7 @@ tmp
 www
 wwwdev
 
-typings
 
 
 
-www_source/scripts/**/*.js
+source/ts/**/*.js

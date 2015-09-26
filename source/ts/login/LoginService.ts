@@ -3,10 +3,7 @@
 module maaas {
     'use strict';
 
-    /**
-     * Services that persists and retrieves TODOs from localStorage.
-     */
-    export class TestService implements ITestService {
+    export class LoginService {
         private numb: number = 33;
 
         get (): number {
@@ -17,4 +14,7 @@ module maaas {
            this.numb = i;
         }
     }
+
+
+
 }

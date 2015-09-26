@@ -1,8 +1,8 @@
 'use strict';
 var GulpConfig = (function() {
   function gulpConfig() {
-    this.baseSrcPath = 'www_source';
-    this.baseDestPath = "www";
+    this.baseSrcPath = 'source';
+    this.baseDestPath = "out";
     this.sassSrcPath = this.baseSrcPath + '/styles';
     this.sassDestPath = this.baseDestPath + "/css";
     this.libsDestPath = this.baseDestPath + '/libs';

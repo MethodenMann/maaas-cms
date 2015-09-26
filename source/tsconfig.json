@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "sourceMap": true,
+        "out": "app.js"
+    },
+    "filesGlob": [
+        "./ts/**/*.ts"
+    ],
+    "files": [
+        "./ts/_all.ts",
+        "./ts/app.ts",
+        "./ts/login/Login.ts",
+        "./ts/login/LoginCtrl.ts",
+        "./ts/login/LoginService.ts",
+        "./ts/test/TestCtrl.ts"
+    ]
+}
