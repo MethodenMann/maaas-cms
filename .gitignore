@@ -28,10 +28,6 @@ node_modules
 bower_components
 tmp
 
-www
-wwwdev
-
-
-
-
+out
+source/typings
 source/ts/**/*.js
