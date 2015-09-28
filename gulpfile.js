@@ -64,15 +64,21 @@ gulp.task('views', function() {
 });
 
 
-gulp.task('bowercopy', function() {
-  gulp.src([config.bowerPath + '/angular/angular.min.js', config.bowerPath + '/angular-route/angular-route.min.js'])
-    .pipe(gulp.dest(config.libsDestPath));
+gulp.task('copyassets', function() {
+  gulp.src([config.baseSrcPath + '/img/**/*.*'])
+    .pipe(gulp.dest(config.baseDestPath+'/img/'));
+
+    gulp.src([config.bowerPath + '/angular/angular.min.js', config.bowerPath + '/angular-route/angular-route.min.js'])
+      .pipe(gulp.dest(config.libsDestPath));
 });
+
+
 
 gulp.task('watch', function() {
   gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
   gulp.watch([config.applicationSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
-  gulp.watch(config.sassSrcPath, ['sass']);
+  gulp.watch(config.sassSrcPath+ '/**/*.scss', ['sass']);
+  gulp.watch(config.config.baseSrcPath+ '/img/**/*.*', ['copyassets']);
 
   gulp.watch([
     config.baseDestPath + '/**/*.html',
@@ -84,6 +90,6 @@ gulp.task('watch', function() {
   });
 });
 
-gulp.task('build', ['bowercopy', 'views', 'sass', 'typescript-lint', 'typescript'])
+gulp.task('build', ['copyassets', 'views', 'sass', 'typescript-lint', 'typescript'])
 
 gulp.task('default', ['build', 'connect', 'watch']);

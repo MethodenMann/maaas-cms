@@ -2,10 +2,10 @@
 var GulpConfig = (function() {
   function gulpConfig() {
     this.baseSrcPath = 'source';
-    this.baseDestPath = "out";
+    this.baseDestPath = 'out';
 
     this.sassSrcPath = this.baseSrcPath + '/styles';
-    this.sassDestPath = this.baseDestPath + "/css";
+    this.sassDestPath = this.baseDestPath + '/css';
 
     this.applicationSrcPath = this.baseSrcPath + '/app';
     this.applicationDestPath = this.baseDestPath + '/app'
