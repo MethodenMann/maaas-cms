@@ -4,7 +4,7 @@ module maaas {
 
   @Directive('$location', '$rootScope')
   export class LoginButton implements ng.IDirective {
-    public template:string = '!my login directive!';
+    public templateUrl:string = 'app/login/view/loginbutton.html';
     public restrict:string = 'EA';
     public scope:Object = {
       story: '='
