@@ -30,4 +30,4 @@ tmp
 
 out
 source/typings
-source/ts/**/*.js
+source/app/**/*.js

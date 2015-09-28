@@ -2,12 +2,12 @@
 
 module maaas {
 
-  @Directive("$location", "$rootScope")
+  @Directive('$location', '$rootScope')
   export class LoginButton implements ng.IDirective {
-    public template:string = "!my login directive!";
-    public restrict:string = "EA";
+    public template:string = '!my login directive!';
+    public restrict:string = 'EA';
     public scope:Object = {
-      story: "="
+      story: '='
     };
 
     public link:Function = (scope:ng.IScope, element:ng.IAugmentedJQuery, attrs:ng.IAttributes):void => {

@@ -13,8 +13,8 @@
         "./app/app.ts",
         "./app/decorators/directive.ts",
         "./app/login/Login.ts",
+        "./app/login/LoginButtonDirective.ts",
         "./app/login/LoginCtrl.ts",
-        "./app/login/LoginDirective.ts",
         "./app/login/LoginService.ts",
         "./app/test/Test.ts",
         "./app/test/TestCtrl.ts"
