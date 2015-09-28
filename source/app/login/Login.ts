@@ -2,7 +2,7 @@
 module maaas {
   maaas.app.controller('LoginCtrl', LoginCtrl);
   maaas.app.service('LoginService', LoginService);
-
+  maaas.app.directive('loginButton', <any>LoginButton);
 
 
   maaas.app.config(['$routeProvider',

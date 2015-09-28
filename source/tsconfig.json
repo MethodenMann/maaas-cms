@@ -2,7 +2,8 @@
     "compilerOptions": {
         "target": "es5",
         "sourceMap": true,
-        "out": "app.js"
+        "out": "app.js",
+        "experimentalDecorators": true
     },
     "filesGlob": [
         "./app/**/*.ts"
@@ -10,8 +11,10 @@
     "files": [
         "./app/_all.ts",
         "./app/app.ts",
+        "./app/decorators/directive.ts",
         "./app/login/Login.ts",
         "./app/login/LoginCtrl.ts",
+        "./app/login/LoginDirective.ts",
         "./app/login/LoginService.ts",
         "./app/test/Test.ts",
         "./app/test/TestCtrl.ts"
