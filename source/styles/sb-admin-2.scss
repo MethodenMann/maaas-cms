@@ -15,6 +15,11 @@ body {
   background-color: $gray-lightest;
 }
 
+a,
+a:hover {
+  color: green;
+}
+
 // Wrappers
 #wrapper {
   width: 100%;
