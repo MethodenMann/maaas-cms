@@ -1,4 +1,5 @@
 /// <reference path='./../typings/tsd.d.ts' />
+/// <reference path="./services/devise.ts"/>
 /// <reference path='app.ts' />
 /// <reference path='./decorators/directive.ts'/>
 /// <reference path='./login/LoginButtonDirective.ts'/>

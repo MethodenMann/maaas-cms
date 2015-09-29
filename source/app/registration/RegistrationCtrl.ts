@@ -25,7 +25,6 @@ module maaas {
         }
       };
 
-      console.log(this.Auth)
       this.Auth.register(credentials, config).then(function(registeredUser) {
       }, function(error) {
       });
