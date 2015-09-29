@@ -19,6 +19,9 @@
         "./app/login/LoginCtrl.ts",
         "./app/login/LoginService.ts",
         "./app/master/Master.ts",
+        "./app/registration/Registration.ts",
+        "./app/registration/RegistrationCtrl.ts",
+        "./app/services/devise.ts",
         "./app/test/Test.ts",
         "./app/test/TestCtrl.ts",
         "./app/util/ImageLoader.ts"
