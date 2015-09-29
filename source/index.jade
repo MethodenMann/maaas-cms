@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title Maaas CMS
+
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/metisMenu.min.css', rel='stylesheet')
+    link(href='css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    
+    link(href='css/styles.css', rel='stylesheet')
+  body(ng-app='maaas')
+    div(ui-view='')
+    
+    
+    script(src='libs/jquery.min.js')
+    script(src='libs/bootstrap.min.js')
+    script(src='libs/metisMenu.min.js')
+    script(src='libs/sb-admin.js')
+    script(src='libs/angular.min.js')
+    script(src='libs/angular-ui-router.min.js')
+    
+    script(src='app/app.js')

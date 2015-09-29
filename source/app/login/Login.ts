@@ -4,15 +4,14 @@ module maaas {
   maaas.app.service('LoginService', LoginService);
   maaas.app.directive('loginButton', <any>LoginButton);
 
+  maaas.app.config(function($stateProvider, $urlRouterProvider) {
 
-  maaas.app.config(['$routeProvider',
-    function routes($routeProvider) {
-      $routeProvider
-        .when('/login', {
-        templateUrl: './app/login/view/login.html',
-        controller: 'LoginCtrl'
-      });
-    }
-  ]);
+    $stateProvider
+      .state('login', {
+      url: '/login',
+      templateUrl: './app/login/view/login.html',
+      controller: 'LoginCtrl'
+    });
+  });
 
 }
