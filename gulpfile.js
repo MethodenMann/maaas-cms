@@ -9,12 +9,16 @@ var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
 var connect = require('gulp-connect');
-var open = require('gulp-open');
 var clean = require('gulp-clean');
+var runSequence = require('run-sequence');
 var Config = require('./gulpfile.config');
 
-
 var config = new Config();
+
+function swallowError(error) {
+  console.log(error.toString());
+  this.emit('end');
+}
 
 gulp.task('connect', function() {
   connect.server({
@@ -22,15 +26,12 @@ gulp.task('connect', function() {
     root: config.baseDestPath,
     livereload: true
   });
-  gulp.src('').pipe(open({
-    uri: 'http://localhost:1337'
-  }));
 });
 
 
-gulp.task('clean', function() {
+gulp.task('clean', function(callback) {
   return gulp.src(config.baseDestPath)
-    .pipe(clean());
+    .pipe(clean(), callback);
 });
 
 
@@ -60,19 +61,11 @@ gulp.task('sass', function() {
     .pipe(gulp.dest(config.cssDestPath));
 });
 
-
-gulp.task('less', function() {
-  return gulp.src(config.sassSrcPath + '/**/*.less')
-    .pipe(less())
-    .pipe(gulp.dest(config.sassDestPath));
-});
-
-
 gulp.task('views', function() {
   gulp.src([config.baseSrcPath + '/**/*.jade'])
     .pipe(jade({
       pretty: true
-    }))
+    }).on('error', swallowError))
     .pipe(gulp.dest(config.baseDestPath))
 
   gulp.src(config.baseSrcPath + '/**/*.html')
@@ -110,7 +103,7 @@ gulp.task('copyassets', function() {
   gulp.src([config.bowerPath + '/bootstrap/fonts/**/*.*',
       config.bowerPath + '/font-awesome/fonts/**/*.*'
     ])
-    .pipe(gulp.dest(config.baseDestPath+'/fonts'));
+    .pipe(gulp.dest(config.baseDestPath + '/fonts'));
 
 });
 
@@ -132,6 +125,10 @@ gulp.task('watch', function() {
   });
 });
 
-gulp.task('build', ['copyassets', 'views', 'sass', 'typescript-lint', 'typescript'])
+gulp.task('build', function(callback) {
+  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript'], callback);
+});
 
-gulp.task('default', ['build', 'connect', 'watch']);
+gulp.task('default', function() {
+  runSequence('build', 'connect', 'watch');
+});
