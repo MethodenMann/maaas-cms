@@ -1,16 +1,16 @@
 'use strict';
 var GulpConfig = (function() {
   function gulpConfig() {
-    this.baseSrcPath = 'www_source';
-    this.baseDestPath = "www";
+    this.baseSrcPath = 'source';
+    this.baseDestPath = 'out';
+
     this.sassSrcPath = this.baseSrcPath + '/styles';
-    this.sassDestPath = this.baseDestPath + "/css";
-    this.libsDestPath = this.baseDestPath + '/libs';
-    this.typescriptSrcPath = this.baseSrcPath + '/scripts';
-    this.typescriptDestPath = this.baseDestPath + '/js'
-    this.jadeSrcPath = this.baseSrcPath + '/views';
-    this.jadeDestPath = this.baseDestPath + '/views';
+    this.cssDestPath = this.baseDestPath + '/css';
+
+    this.applicationSrcPath = this.baseSrcPath + '/app';
+    this.applicationDestPath = this.baseDestPath + '/app'
     this.bowerPath = './bower_components';
+    this.libsDestPath = this.baseDestPath + '/libs';
   }
   return gulpConfig;
 })();
