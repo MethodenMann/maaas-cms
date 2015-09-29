@@ -11,6 +11,29 @@ module maaas {
       private Auth: any
     ) {
       $scope.vm = this;
+
+      Auth.currentUser().then((user) => {
+        console.log(user);
+      });
+
+      var credentials = {
+        email: "a@b.com",
+        password: "testtest",
+        password_confirmation: "testtest"
+      };
+      var config = {
+        headers: {
+            'X-HTTP-Method-Override': 'POST'
+        }
+      }
+
+      Auth.login(credentials, config).then((user) => {
+        console.log(user);
+
+        Auth.currentUser().then((user) => {
+          console.log("here", user);
+        });
+      });
     }
 
     register() {
