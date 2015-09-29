@@ -79,13 +79,17 @@ gulp.task('copyassets', function() {
     .pipe(gulp.dest(config.baseDestPath + '/img/'));
 
   //Bower Libs
-  gulp.src([config.bowerPath + '/angular/angular.min.js',
-      config.bowerPath + '/angular-ui-router/release/angular-ui-router.min.js',
-      config.bowerPath + '/jquery/dist/jquery.min.js',
-      config.bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
-      config.bowerPath + '/metisMenu/dist/metisMenu.min.js'
-    ])
-    .pipe(gulp.dest(config.libsDestPath));
+  gulp.src([
+    config.bowerPath + '/angular/angular.min.js',
+    config.bowerPath + '/angular-ui-router/release/angular-ui-router.min.js',
+    config.bowerPath + '/jquery/dist/jquery.min.js',
+    config.bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
+    config.bowerPath + '/metisMenu/dist/metisMenu.min.js',
+    config.bowerPath + '/blueimp-file-upload/js/jquery.fileupload.js',
+    config.bowerPath + '/blueimp-file-upload/js/jquery.iframe-transport.js',
+    config.bowerPath + '/cloudinary/js/jquery.cloudinary.js',
+    config.bowerPath + '/jquery-ui/ui/widget.js'
+  ]).pipe(gulp.dest(config.libsDestPath));
 
   //sb admin js with rename
   gulp.src(config.bowerPath + '/sb-admin-2/index.js')
@@ -104,7 +108,6 @@ gulp.task('copyassets', function() {
       config.bowerPath + '/font-awesome/fonts/**/*.*'
     ])
     .pipe(gulp.dest(config.baseDestPath + '/fonts'));
-
 });
 
 
