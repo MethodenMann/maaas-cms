@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 
+var rename = require('gulp-rename');
 var ts = require('gulp-typescript');
 var tslint = require('gulp-tslint');
 var jade = require('gulp-jade');
@@ -9,6 +10,7 @@ var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
 var connect = require('gulp-connect');
 var open = require('gulp-open');
+var clean = require('gulp-clean');
 var Config = require('./gulpfile.config');
 
 
@@ -20,9 +22,16 @@ gulp.task('connect', function() {
     root: config.baseDestPath,
     livereload: true
   });
-  gulp.src('').pipe(open({uri: 'http://localhost:1337'}));
+  gulp.src('').pipe(open({
+    uri: 'http://localhost:1337'
+  }));
 });
 
+
+gulp.task('clean', function() {
+  return gulp.src(config.baseDestPath)
+    .pipe(clean());
+});
 
 
 gulp.task('typescript-lint', function() {
@@ -48,37 +57,70 @@ gulp.task('sass', function() {
       cascade: false
     }))
     .pipe(concat('styles.css'))
+    .pipe(gulp.dest(config.cssDestPath));
+});
+
+
+gulp.task('less', function() {
+  return gulp.src(config.sassSrcPath + '/**/*.less')
+    .pipe(less())
     .pipe(gulp.dest(config.sassDestPath));
 });
 
 
 gulp.task('views', function() {
-  gulp.src([config.applicationSrcPath + '/**/*.jade'])
+  gulp.src([config.baseSrcPath + '/**/*.jade'])
     .pipe(jade({
       pretty: true
     }))
-    .pipe(gulp.dest(config.applicationDestPath))
+    .pipe(gulp.dest(config.baseDestPath))
 
-    gulp.src(config.baseSrcPath + '/**/*.html')
+  gulp.src(config.baseSrcPath + '/**/*.html')
     .pipe(gulp.dest(config.baseDestPath))
 });
 
 
 gulp.task('copyassets', function() {
+  //Images
   gulp.src([config.baseSrcPath + '/img/**/*.*'])
-    .pipe(gulp.dest(config.baseDestPath+'/img/'));
+    .pipe(gulp.dest(config.baseDestPath + '/img/'));
 
-    gulp.src([config.bowerPath + '/angular/angular.min.js', config.bowerPath + '/angular-route/angular-route.min.js'])
-      .pipe(gulp.dest(config.libsDestPath));
+  //Bower Libs
+  gulp.src([config.bowerPath + '/angular/angular.min.js',
+      config.bowerPath + '/angular-route/angular-route.min.js',
+      config.bowerPath + '/jquery/dist/jquery.min.js',
+      config.bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
+      config.bowerPath + '/metisMenu/dist/metisMenu.min.js'
+    ])
+    .pipe(gulp.dest(config.libsDestPath));
+
+  //sb admin js with rename
+  gulp.src(config.bowerPath + '/sb-admin-2/index.js')
+    .pipe(rename('sb-admin.js'))
+    .pipe(gulp.dest(config.libsDestPath));
+
+  //Bower CSS
+  gulp.src([config.bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
+      config.bowerPath + '/metisMenu/dist/metisMenu.min.css',
+      config.bowerPath + '/font-awesome/css/font-awesome.min.css'
+    ])
+    .pipe(gulp.dest(config.cssDestPath));
+
+  //Fonts
+  gulp.src([config.bowerPath + '/bootstrap/fonts/**/*.*',
+      config.bowerPath + '/font-awesome/fonts/**/*.*'
+    ])
+    .pipe(gulp.dest(config.baseDestPath+'/fonts'));
+
 });
 
 
 
 gulp.task('watch', function() {
   gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
-  gulp.watch([config.applicationSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
-  gulp.watch(config.sassSrcPath+ '/**/*.scss', ['sass']);
-  gulp.watch(config.config.baseSrcPath+ '/img/**/*.*', ['copyassets']);
+  gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
+  gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass']);
+  gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets']);
 
   gulp.watch([
     config.baseDestPath + '/**/*.html',

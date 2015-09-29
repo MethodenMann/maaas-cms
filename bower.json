@@ -15,6 +15,10 @@
   ],
   "dependencies": {
     "angular": "~1.4.6",
-    "angular-route": "~1.4.6"
+    "angular-route": "~1.4.6",
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "metisMenu": "~2.2.0",
+    "sb-admin-2": "https://raw.githubusercontent.com/IronSummitMedia/startbootstrap-sb-admin-2/gh-pages/dist/js/sb-admin-2.js"
   }
 }

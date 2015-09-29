@@ -5,7 +5,7 @@ var GulpConfig = (function() {
     this.baseDestPath = 'out';
 
     this.sassSrcPath = this.baseSrcPath + '/styles';
-    this.sassDestPath = this.baseDestPath + '/css';
+    this.cssDestPath = this.baseDestPath + '/css';
 
     this.applicationSrcPath = this.baseSrcPath + '/app';
     this.applicationDestPath = this.baseDestPath + '/app'
