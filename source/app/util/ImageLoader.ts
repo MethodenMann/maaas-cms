@@ -28,5 +28,6 @@ module maaas {
       }
     }
   }
-  // myDirective.$inject = ['toaster']
+
+  maaas.app.directive('imageLoader', <any>ImageLoader);
 }

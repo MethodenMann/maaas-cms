@@ -12,11 +12,13 @@
         "./app/_all.ts",
         "./app/app.ts",
         "./app/decorators/directive.ts",
+        "./app/imageUploadDemo/Upload.ts",
         "./app/login/Login.ts",
         "./app/login/LoginButtonDirective.ts",
         "./app/login/LoginCtrl.ts",
         "./app/login/LoginService.ts",
         "./app/test/Test.ts",
-        "./app/test/TestCtrl.ts"
+        "./app/test/TestCtrl.ts",
+        "./app/util/ImageLoader.ts"
     ]
 }
