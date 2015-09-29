@@ -7,6 +7,7 @@
 /// <reference path='./login/LoginCtrl.ts'/>
 /// <reference path='./registration/RegistrationCtrl.ts'/>
 /// <reference path='./test/TestCtrl.ts'/>
+/// <reference path="./master/MasterCrtrl.ts"/>
 /// <reference path='./master/Master.ts'/>
 /// <reference path='./login/Login.ts'/>
 /// <reference path="./util/ImageLoader.ts"/>

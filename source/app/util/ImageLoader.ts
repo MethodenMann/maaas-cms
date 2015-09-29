@@ -15,7 +15,7 @@ module maaas {
         $.cloudinary.config({cloud_name: 'nmsg', api_key: '145367384875325'})
 
         var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', { cloud_name: 'nmsg' })
-        var thumbnailTag = angular.element("<div></div>")
+        var thumbnailTag = angular.element('<div></div>')
         element.append(imageTag)
         element.append(thumbnailTag)
 
