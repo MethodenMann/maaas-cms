@@ -5,5 +5,6 @@
 /// <reference path='./login/LoginService.ts'/>
 /// <reference path='./login/LoginCtrl.ts'/>
 /// <reference path='./test/TestCtrl.ts'/>
+/// <reference path='./master/Master.ts'/>
 /// <reference path='./login/Login.ts'/>
 /// <reference path="./util/ImageLoader.ts"/>
