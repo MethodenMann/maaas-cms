@@ -11,11 +11,13 @@
     "files": [
         "./app/_all.ts",
         "./app/app.ts",
+        "./app/beacons/Beacons.ts",
         "./app/decorators/directive.ts",
         "./app/login/Login.ts",
         "./app/login/LoginButtonDirective.ts",
         "./app/login/LoginCtrl.ts",
         "./app/login/LoginService.ts",
+        "./app/master/Master.ts",
         "./app/test/Test.ts",
         "./app/test/TestCtrl.ts"
     ]
