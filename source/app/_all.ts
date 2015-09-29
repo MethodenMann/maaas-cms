@@ -4,5 +4,6 @@
 /// <reference path='./login/LoginButtonDirective.ts'/>
 /// <reference path='./login/LoginService.ts'/>
 /// <reference path='./login/LoginCtrl.ts'/>
+/// <reference path='./registration/RegistrationCtrl.ts'/>
 /// <reference path='./test/TestCtrl.ts'/>
 /// <reference path='./login/Login.ts'/>
