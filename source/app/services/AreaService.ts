@@ -7,7 +7,7 @@ module maaas {
     store: any;
 
     constructor(private $resource) {
-      this.store = $resource('areas.json')
+      this.store = $resource('http://localhost:3000/areas.json')
     }
 
     public getAllAreas() {
