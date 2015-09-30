@@ -12,7 +12,7 @@
         "./app/_all.ts",
         "./app/app.ts",
         "./app/beacons/Beacons.ts",
-        "./app/decorators/directive.ts",
+        "./app/decorators/Directive.ts",
         "./app/imageUploadDemo/Upload.ts",
         "./app/login/Login.ts",
         "./app/login/LoginButtonDirective.ts",
