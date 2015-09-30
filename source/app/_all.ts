@@ -4,7 +4,6 @@
 
 /// <reference path='./decorators/directive.ts'/>
 /// <reference path='./decorators/Inject.ts'/>
-/// <reference path="./services/AreaService.ts"/>
 
 /// <reference path='./area/Area.ts'/>
 /// <reference path='./login/LoginButtonDirective.ts'/>
