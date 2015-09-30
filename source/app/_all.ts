@@ -1,8 +1,11 @@
 /// <reference path='./../typings/tsd.d.ts' />
 /// <reference path='./services/devise.ts'/>
 /// <reference path='app.ts' />
+
 /// <reference path='./decorators/directive.ts'/>
 /// <reference path='./decorators/Inject.ts'/>
+/// <reference path="./services/AreaService.ts"/>
+
 /// <reference path='./area/Area.ts'/>
 /// <reference path='./login/LoginButtonDirective.ts'/>
 /// <reference path='./login/LoginService.ts'/>
@@ -13,4 +16,3 @@
 /// <reference path='./master/Master.ts'/>
 /// <reference path='./login/Login.ts'/>
 /// <reference path="./util/ImageLoader.ts"/>
-/// <reference path="./services/AreaService.ts"/>

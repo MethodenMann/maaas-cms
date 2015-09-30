@@ -4,14 +4,16 @@ module maaas {
   export class AreaService {
     public static $inject = ['$resource'];
 
-    store: any;
+    private store: any;
 
-    constructor(private $resource) {
-      this.store = $resource('http://localhost:3000/areas')
+    constructor(
+      @Inject('$resource') private $resource
+      ) {
+      this.store = $resource('https://maaas-backend.herokuapp.com/areas')
     }
 
     public getAllAreas() {
-      return this.store.query()
+      return this.store.query().$promise;
     }
   }
 

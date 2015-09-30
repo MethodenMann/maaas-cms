@@ -1,5 +1,5 @@
 /// <reference path='../_all.ts' />
-/// <reference path="./IArea.ts"/>
+/// <reference path='./IArea.ts'/>
 /// <reference path='./OverviewCtrl.ts' />
 /// <reference path='./DetailCtrl.ts' />
 
@@ -14,12 +14,14 @@ module maaas {
       .state('cms.areas', {
       url: '/areas',
       templateUrl: './app/area/views/overview.html',
-      controller: 'OverviewCtrl'
+      controller: 'OverviewCtrl',
+      controllerAs: 'ctrl'
     })
-      .state('cms.detail', {
+      .state('cms.area', {
       url: '/areas/:areaId',
       templateUrl: './app/area/views/detail.html',
-      controller: 'DetailCtrl'
+      controller: 'DetailCtrl',
+      controllerAs: 'ctrl'
     });
   });
 

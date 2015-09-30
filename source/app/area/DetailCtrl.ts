@@ -1,21 +1,19 @@
 /// <reference path='../_all.ts' />
 
-
 module maaas {
-
   export class DetailCtrl {
 
-    area: IArea = { 'id': 1, 'name': 'Test', 'background_image_id': 'XYZ123' };
+    private area: IArea;
 
     constructor(
-      @Inject('$scope') private $scope,
-      @Inject('$stateParams') private $stateParams
+      @Inject('$stateParams') private $stateParams,
+      @Inject('AreaService') private AreaService
       ) {
 
-      console.log($stateParams.areaId);
-      $scope.vm = this;
+      AreaService.getAllAreas().then((data) => {
+        this.area = data[$stateParams.areaId];
+        this.area.id = $stateParams.areaId;
+      });
     }
-
-
   }
 }
