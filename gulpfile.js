@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 
-var rename = require('gulp-rename');
 var ts = require('gulp-typescript');
 var tslint = require('gulp-tslint');
 var jade = require('gulp-jade');
@@ -94,11 +93,6 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/cloudinary/js/jquery.cloudinary.js',
     config.bowerPath + '/jquery-ui/ui/widget.js'
   ]).pipe(gulp.dest(config.libsDestPath));
-
-  //sb admin js with rename
-  gulp.src(config.bowerPath + '/sb-admin-2/index.js')
-    .pipe(rename('sb-admin.js'))
-    .pipe(gulp.dest(config.libsDestPath));
 
   //Bower CSS
   gulp.src([config.bowerPath + '/bootstrap/dist/css/bootstrap.min.css',

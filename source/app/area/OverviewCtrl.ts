@@ -1,11 +1,8 @@
 /// <reference path='../_all.ts' />
 
-
 module maaas {
   export class OverviewCtrl {
-
     private areas: IArea[] = [];
-
 
     constructor(
       @Inject('$location') private $location,
@@ -15,10 +12,6 @@ module maaas {
       AreaService.getAllAreas().then((data) => {
         this.areas = data;
       });
-
-
     }
-
-
   }
 }
