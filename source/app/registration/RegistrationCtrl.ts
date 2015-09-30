@@ -1,39 +1,62 @@
 /// <reference path='../_all.ts' />
 
+interface IArea {
+  id : number;
+}
+
 module maaas {
   export class RegistrationCtrl {
 
-    public static $inject = ['$scope', '$location', 'Auth'];
+    public static $inject = ['$scope', '$location', 'Auth', 'AreaService', 'Area', 'Beacon'];
 
     constructor(
       private $scope,
       private $location: ng.ILocationService,
-      private Auth: any
+      private Auth: any,
+      private AreaService: AreaService,
+      private Area,
+      private Beacon
     ) {
       $scope.vm = this;
 
-      Auth.currentUser().then((user) => {
-        console.log(user);
-      });
-
-      var credentials = {
-        email: "a@b.com",
-        password: "testtest",
-        password_confirmation: "testtest"
-      };
-      var config = {
-        headers: {
-            'X-HTTP-Method-Override': 'POST'
-        }
-      }
-
-      Auth.login(credentials, config).then((user) => {
-        console.log(user);
-
-        Auth.currentUser().then((user) => {
-          console.log("here", user);
+      Beacon.findAll().then((beacons) => {
+        console.log(beacons);
+        Area.findAll().then((areas) => {
+          console.log(areas);
+          console.log(areas[2].beacons);
+          var area : IArea = beacons[1].area;
+          console.log(area.id);
         });
       });
+
+
+
+      // this.AreaService.getAllAreas().$promise.then((abc) => {
+      //   console.log(abc);
+      // });
+
+      // Auth.currentUser().then((user) => {
+      //   console.log(user);
+      // });
+      //
+      // var credentials = {
+      //   email: "a@b.com",
+      //   password: "testtest",
+      //   password_confirmation: "testtest"
+      // };
+      // var config = {
+      //   headers: {
+      //       'X-HTTP-Method-Override': 'POST'
+      //   }
+      // }
+      //
+      // Auth.login(credentials, config).then((user) => {
+      //   console.log(user);
+      //
+      //   Auth.currentUser().then((user) => {
+      //     console.log("here", user);
+      //   });
+      // });
     }
 
     register() {
