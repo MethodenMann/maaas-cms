@@ -7,13 +7,12 @@ interface IArea {
 module maaas {
   export class RegistrationCtrl {
 
-    public static $inject = ['$scope', '$location', 'Auth', 'AreaService', 'Area', 'Beacon'];
+    public static $inject = ['$scope', '$location', 'Auth', 'Area', 'Beacon'];
 
     constructor(
       private $scope,
       private $location: ng.ILocationService,
       private Auth: any,
-      private AreaService: AreaService,
       private Area,
       private Beacon
     ) {
@@ -29,11 +28,6 @@ module maaas {
         });
       });
 
-
-
-      // this.AreaService.getAllAreas().$promise.then((abc) => {
-      //   console.log(abc);
-      // });
 
       // Auth.currentUser().then((user) => {
       //   console.log(user);
