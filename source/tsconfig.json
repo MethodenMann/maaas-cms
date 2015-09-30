@@ -27,6 +27,7 @@
         "./app/master/MasterCrtrl.ts",
         "./app/registration/Registration.ts",
         "./app/registration/RegistrationCtrl.ts",
+        "./app/services/AreaService.ts",
         "./app/services/devise.ts",
         "./app/test/Test.ts",
         "./app/test/TestCtrl.ts",

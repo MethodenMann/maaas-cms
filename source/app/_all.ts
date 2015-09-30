@@ -12,4 +12,5 @@
 /// <reference path='./master/MasterCrtrl.ts'/>
 /// <reference path='./master/Master.ts'/>
 /// <reference path='./login/Login.ts'/>
-/// <reference path='./util/ImageLoader.ts'/>
+/// <reference path="./util/ImageLoader.ts"/>
+/// <reference path="./services/AreaService.ts"/>
