@@ -5,7 +5,6 @@
 
 
 module maaas {
-
   maaas.app.controller('OverviewCtrl', OverviewCtrl);
   maaas.app.controller('DetailCtrl', DetailCtrl);
 
