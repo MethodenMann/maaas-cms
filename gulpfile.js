@@ -81,6 +81,7 @@ gulp.task('copyassets', function() {
   //Bower Libs
   gulp.src([
     config.bowerPath + '/angular/angular.min.js',
+    config.bowerPath + '/angular-resource/angular-resource.min.js',
     config.bowerPath + '/angular-ui-router/release/angular-ui-router.min.js',
     config.bowerPath + '/jquery/dist/jquery.min.js',
     config.bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
