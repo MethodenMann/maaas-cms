@@ -6,10 +6,10 @@ module maaas {
 
     constructor(
       @Inject('$location') private $location,
-      @Inject('AreaService') private AreaService
+      @Inject('Area') private Area
       ) {
 
-      AreaService.getAllAreas().then((data) => {
+      Area.findAll().then((data) => {
         this.areas = data;
       });
     }

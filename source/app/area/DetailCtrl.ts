@@ -7,10 +7,10 @@ module maaas {
 
     constructor(
       @Inject('$stateParams') private $stateParams,
-      @Inject('AreaService') private AreaService
+      @Inject('Area') private Area
       ) {
 
-      AreaService.getAllAreas().then((data) => {
+      Area.findAll().then((data) => {
         this.area = data[$stateParams.areaId];
         this.area.id = $stateParams.areaId;
       });
