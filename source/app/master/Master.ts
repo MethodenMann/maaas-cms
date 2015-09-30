@@ -9,7 +9,8 @@ module maaas {
       .state('cms', {
       url: '/cms',
       templateUrl: './app/master/view/master.html',
-      controller: 'MasterCtrl'
+      controller: 'MasterCtrl',
+      controllerAs: 'ctrl'
     });
   });
 

@@ -1,4 +1,5 @@
 /// <reference path='../_all.ts' />
+
 module maaas {
   maaas.app.controller('LoginCtrl', LoginCtrl);
   maaas.app.service('LoginService', LoginService);
