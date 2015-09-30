@@ -1,0 +1,9 @@
+h1 Areas
+
+
+.row
+  .col-md-4(ng-repeat-start='area in vm.areas')
+    img.img-circle(style='height:50px' src='http://www.jail.se/hardware/digital_camera/canon/ixus_800is-powershot_sd700/images/sample_photos/sample3.jpg')
+    | {{area.name}}
+  .clearfix(ng-if='$index%3==2')
+  div(ng-repeat-end='')
