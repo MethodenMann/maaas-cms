@@ -1,8 +1,5 @@
 /// <reference path='../_all.ts' />
 
-interface JQueryStatic {
-  cloudinary: any;
-}
 
 module maaas {
   export function ImageLoader(): ng.IDirective {

@@ -32,6 +32,8 @@
         "./app/services/devise.ts",
         "./app/test/Test.ts",
         "./app/test/TestCtrl.ts",
-        "./app/util/ImageLoader.ts"
+        "./app/util/ImageLoader.ts",
+        "./app/util/ImageUpload.ts",
+        "./app/util/MakeDirective.ts"
     ]
 }

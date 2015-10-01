@@ -1,9 +1,12 @@
 /// <reference path='./../typings/tsd.d.ts' />
-/// <reference path='./services/devise.ts'/>
-/// <reference path='app.ts' />
-
 /// <reference path='./decorators/directive.ts'/>
 /// <reference path='./decorators/Inject.ts'/>
+/// <reference path="./util/MakeDirective.ts"/>
+/// <reference path='./services/devise.ts'/>
+/// <reference path="./util/ImageUpload.ts"/>
+/// <reference path='app.ts' />
+
+
 
 /// <reference path='./area/Area.ts'/>
 /// <reference path='./login/LoginButtonDirective.ts'/>
