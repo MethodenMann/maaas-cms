@@ -84,7 +84,8 @@
     function httpConfig(action, data, additionalConfig) {
         var config = {
             method: methods[action].toLowerCase(),
-            url: paths[action]
+            url: paths[action],
+            data: undefined
         };
 
         if (data) {
@@ -199,7 +200,7 @@
              * @returns {Promise} A $http promise that will be resolved or
              *                  rejected by the server.
              */
-            login: function(creds, config) {
+            login: function(creds?, config?) {
                 var withCredentials = arguments.length > 0,
                     loggedIn = service.isAuthenticated();
 
