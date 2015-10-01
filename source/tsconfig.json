@@ -20,6 +20,7 @@
         "./app/decorators/Directive.ts",
         "./app/decorators/Inject.ts",
         "./app/imageUploadDemo/Upload.ts",
+        "./app/jsDataConfig.ts",
         "./app/login/Login.ts",
         "./app/login/LoginButtonDirective.ts",
         "./app/login/LoginCtrl.ts",
