@@ -1,7 +1,7 @@
 /// <reference path='../_all.ts' />
 
 module maaas {
-  export class DetailCtrl {
+  export class CreateCtrl {
 
     private area: IArea;
 
@@ -9,14 +9,12 @@ module maaas {
       @Inject('$stateParams') private $stateParams,
       @Inject('Area') private Area
       ) {
-
-      Area.find($stateParams.areaId).then((data) => {
-        this.area = data;
-      });
+        console.log("CREATE");
     }
 
     saveArea() {
-      this.Area.update(this.area.id, this.area);
+      console.log("create",this.area);
+      this.Area.create(this.area);
     }
 
   }

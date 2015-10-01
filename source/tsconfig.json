@@ -12,6 +12,7 @@
         "./app/_all.ts",
         "./app/app.ts",
         "./app/area/Area.ts",
+        "./app/area/CreateCtrl.ts",
         "./app/area/DetailCtrl.ts",
         "./app/area/IArea.ts",
         "./app/area/OverviewCtrl.ts",
