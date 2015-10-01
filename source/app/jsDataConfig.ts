@@ -29,6 +29,24 @@ module maaas {
           beacons: {
             foreignKey: 'areaId',
             localField: 'beacons'
+          },
+          contents: {
+            foreignKey: 'areaId',
+            localField: 'contents'
+          }
+        }
+      }
+    });
+  });
+
+  maaas.app.factory('Content', function (DS) {
+    return DS.defineResource({
+      name: 'contents',
+      relations: {
+        belongsTo: {
+          area: {
+            localKey: 'areaId',
+            localField: 'area'
           }
         }
       }
