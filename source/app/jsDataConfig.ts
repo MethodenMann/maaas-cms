@@ -33,6 +33,10 @@ module maaas {
           contents: {
             foreignKey: 'areaId',
             localField: 'contents'
+          },
+          challenges: {
+            foreignKey: 'areaId',
+            localField: 'challenges'
           }
         }
       }
@@ -44,7 +48,21 @@ module maaas {
       name: 'contents',
       relations: {
         belongsTo: {
-          area: {
+          areas: {
+            localKey: 'areaId',
+            localField: 'area'
+          }
+        }
+      }
+    });
+  });
+
+  maaas.app.factory('Challenge', function (DS) {
+    return DS.defineResource({
+      name: 'challenges',
+      relations: {
+        belongsTo: {
+          areas: {
             localKey: 'areaId',
             localField: 'area'
           }
