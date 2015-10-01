@@ -5,9 +5,9 @@ module maaas {
 
   maaasmodule.config(function (DSProvider, DSHttpAdapterProvider) {
     angular.extend(DSHttpAdapterProvider.defaults, {
-      basePath: "http://localhost:3000"
+      basePath: 'https://maaas-backend.herokuapp.com'
     });
-  })
+  });
 
   maaasmodule.factory('Area', function (DS) {
     return DS.defineResource({
