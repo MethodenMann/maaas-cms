@@ -9,11 +9,9 @@ module maaas {
       @Inject('$stateParams') private $stateParams,
       @Inject('Area') private Area
       ) {
-        console.log("CREATE");
     }
 
     saveArea() {
-      console.log("create",this.area);
       this.Area.create(this.area);
     }
 

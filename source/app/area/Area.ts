@@ -10,14 +10,14 @@ module maaas {
   maaas.app.controller('DetailCtrl', DetailCtrl);
   maaas.app.controller('CreateCtrl', CreateCtrl);
 
+
+
+
   maaas.app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('cms.area', {
-      url: '/area',
-      templateUrl: './app/area/views/master.html',
-    })
+      .state('cms.area', GetMasterRoute('area'))
       .state('cms.area.overview', {
-      url: '/overview',
+      url: '/area/overview',
       templateUrl: './app/area/views/overview.html',
       controller: 'OverviewCtrl',
       controllerAs: 'ctrl'
