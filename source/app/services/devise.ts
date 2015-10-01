@@ -145,6 +145,7 @@
     }
 
     this.$get = ['$q', '$http', '$rootScope', function($q, $http, $rootScope) {
+        var service = undefined;
         // Our shared save function, called
         // by `then`s.
         function save(user) {
@@ -163,7 +164,7 @@
             };
         }
 
-        var service = {
+        service = {
             /**
              * The Auth service's current user.
              * This is shared between all instances of Auth
