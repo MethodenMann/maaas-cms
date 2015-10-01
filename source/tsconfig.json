@@ -26,6 +26,7 @@
         "./app/login/LoginService.ts",
         "./app/master/Master.ts",
         "./app/master/MasterCrtrl.ts",
+        "./app/master/RouteHelper.ts",
         "./app/registration/Registration.ts",
         "./app/registration/RegistrationCtrl.ts",
         "./app/services/devise.ts",
