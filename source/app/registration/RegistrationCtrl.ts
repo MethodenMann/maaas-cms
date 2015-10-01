@@ -1,7 +1,7 @@
 /// <reference path='../_all.ts' />
 
 interface IArea {
-  id : number;
+  id: number;
 }
 
 module maaas {
@@ -15,7 +15,7 @@ module maaas {
       private Auth: any,
       private Area,
       private Beacon
-    ) {
+      ) {
       $scope.vm = this;
 
       Beacon.findAll().then((beacons) => {
@@ -23,7 +23,7 @@ module maaas {
         Area.findAll().then((areas) => {
           console.log(areas);
           console.log(areas[2].beacons);
-          var area : IArea = beacons[1].area;
+          var area: IArea = beacons[1].area;
           console.log(area.id);
         });
       });
@@ -61,13 +61,15 @@ module maaas {
       };
       var config = {
         headers: {
-            'X-HTTP-Method-Override': 'POST'
+          'X-HTTP-Method-Override': 'POST'
         }
       };
 
       this.Auth.register(credentials, config).then(function(registeredUser) {
+        console.log(registeredUser);
       }, function(error) {
-      });
+          console.log(error);
+        });
     }
   }
 }

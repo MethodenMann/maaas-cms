@@ -3,7 +3,7 @@
 
 module maaas {
   export interface IArea {
-    id: number,
+    id: number;
     name: string;
     background_image_id: string;
   }

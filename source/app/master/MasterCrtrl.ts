@@ -2,14 +2,14 @@
 
 module maaas {
   export class MasterCtrl {
-    private title = 'maaas'
+    private title = 'maaas';
     constructor(
       @Inject('$window') private $window
       ) {
       $('#side-menu').metisMenu();
 
 
-      angular.element($window).bind("load resize", this.resizeHandler);
+      angular.element($window).bind('load resize', this.resizeHandler);
       this.resizeHandler();
     }
 
@@ -26,9 +26,11 @@ module maaas {
 
       var height = ((window.innerHeight > 0) ? window.innerHeight : screen.height) - 1;
       height = height - topOffset;
-      if (height < 1) height = 1;
+      if (height < 1) {
+        height = 1;
+      }
       if (height > topOffset) {
-        $("#page-wrapper").css("min-height", (height) + "px");
+        $('#page-wrapper').css('min-height', (height) + 'px');
       }
     }
 
