@@ -7,18 +7,24 @@ module maaas {
     private static template = '';
     private static replace = true;
 
-    constructor() { };
+    private static options = {
+      bindToController: {
+        imageId: '@'
+      }
+    };
 
-    private static link($scope: ng.IScope, element: JQuery, attributes: ng.IAttributes) {
+    constructor(){};
+
+    private static link($scope, element: JQuery, attributes) {
       var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', { cloud_name: 'nmsg' });
-
       element.append(imageTag);
-
-
-      imageTag.bind('cloudinarydone', (e, data) => {
-        console.log(data.result.public_id);
+      imageTag.bind('cloudinarydone',(e, data) => {
+            var emitInfos = {
+               id: $scope.ctrl.imageId,
+               cloudId: data.result.public_id
+            }
+            $scope.$emit('imageUploaded', emitInfos)
       });
     }
-
   }
 }

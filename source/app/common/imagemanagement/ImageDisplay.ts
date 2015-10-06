@@ -8,7 +8,7 @@ module maaas {
 
     private static options = {
       bindToController: {
-        imageid: '@',
+        imageId: '@',
         width: '@',
         height: '@'
       }
@@ -22,19 +22,20 @@ module maaas {
     };
 
 
-    private static link($scope: ng.IScope, element: JQuery, attributes) {
+    private static link($scope, element: JQuery, attributes) {
 
       var thumbnailTag = angular.element('<div></div>');
 
       element.append(thumbnailTag);
 
-
-      thumbnailTag.append($.cloudinary.image(attributes.imageid, {
-        format: 'jpg', width: attributes.width, height: attributes.height,
-        crop: 'thumb', gravity: 'face', effect: 'saturation:50'
-      }));
-
+      $scope.$watch('ctrl.imageId', function(newValue, oldValue) {
+        if ($scope.ctrl.imageId && $scope.ctrl != "") {
+          thumbnailTag.html("");
+          thumbnailTag.append($.cloudinary.image($scope.ctrl.imageId, {
+            format: 'jpg', width: $scope.ctrl.width, height: $scope.ctrl.height,
+            crop: 'thumb', gravity: 'face', effect: 'saturation:50'
+          }));
+        }
+      });
     }
-
   }
-}

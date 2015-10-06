@@ -7,9 +7,13 @@
         label Name                                        
         input.form-control(ng-model='ctrl.area.name')  
         p.help-block Hier könnte ein Hilfetext stehen
+        label Bild                                        
+        image-upload(image-id='backgroundImageId')  
+        image-display(image-id='{{ctrl.area.backgroundImageId}}', height='100')               
+        p.help-block Hier könnte ein Hilfetext stehen
 
                                   
       button.btn.btn-default(type='submit', ng-click='ctrl.saveArea()') Speichern  
       test
-      image-upload                                  
+                                  
       image-display(imageid='rhyvcggx0tndsv5mhqcu', height='100')                                  
