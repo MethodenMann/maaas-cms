@@ -1,12 +1,8 @@
 import 'jquery';
 import 'bootstrap';
 import 'metis-menu';
-import 'widget';
-import 'jquery-iframe-transport';
-// TODO: these have special require syntax built in which fucks up System.js
-//       we need to fix that >:(
-// import 'jquery-fileupload';
-// import 'jquery-cloudinary';
+
+import 'jquery-cloudinary';
 
 import 'angular';
 import 'angular-ui-router';
@@ -21,6 +17,7 @@ import 'devise'
 import {loadArea} from './area/Area';
 import {loadMaster} from './master/Master';
 import {loadJsDataConfig} from './jsDataConfig';
+import {loadImageManagement} from './common/imagemanagement/ImageManagement';
 
 import {makeDirective, makeSelector} from './utils/component-utils';
 
@@ -37,6 +34,7 @@ leApp.config(function (DSProvider, DSHttpAdapterProvider) {
 loadJsDataConfig(leApp);
 loadMaster(leApp);
 loadArea(leApp);
+loadImageManagement(leApp);
 
 // angular.module('my-app')
 // .directive(

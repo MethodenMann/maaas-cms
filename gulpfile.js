@@ -90,10 +90,10 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/js-data-angular/dist/js-data-angular.min.js',
     config.bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
     config.bowerPath + '/metisMenu/dist/metisMenu.min.js',
-    config.bowerPath + '/blueimp-file-upload/js/jquery.fileupload.js',
+    config.bowerPath + '/jquery-ui/ui/widget.js',
     config.bowerPath + '/blueimp-file-upload/js/jquery.iframe-transport.js',
-    config.bowerPath + '/cloudinary/js/jquery.cloudinary.js',
-    config.bowerPath + '/jquery-ui/ui/widget.js'
+    config.bowerPath + '/blueimp-file-upload/js/jquery.fileupload.js',
+    config.bowerPath + '/cloudinary/js/jquery.cloudinary.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   //Bower CSS
