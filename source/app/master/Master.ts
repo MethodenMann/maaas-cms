@@ -1,16 +1,18 @@
-import {app} from '../app';
+// import {app} from '../app';
 import {MasterCtrl} from './MasterCrtrl';
 
-app.controller('MasterCtrl', MasterCtrl);
+export function loadMaster(app) {
+  app.controller('MasterCtrl', MasterCtrl);
 
-app.config(function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/cms');
+  app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/cms');
 
-  $stateProvider
-    .state('cms', {
-    url: '/cms',
-    templateUrl: './app/master/view/master.html',
-    controller: 'MasterCtrl',
-    controllerAs: 'ctrl'
+    $stateProvider
+      .state('cms', {
+      url: '/cms',
+      templateUrl: './app/master/view/master.html',
+      controller: 'MasterCtrl',
+      controllerAs: 'ctrl'
+    });
   });
-});
+}

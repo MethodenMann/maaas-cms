@@ -16,25 +16,38 @@ import 'js-data';
 import 'js-data-http';
 import 'js-data-angular';
 
+import 'devise'
+
+import {loadArea} from './area/Area';
+import {loadMaster} from './master/Master';
+import {loadJsDataConfig} from './jsDataConfig';
+
 import {makeDirective, makeSelector} from './utils/component-utils';
 
 import {DummyComponent} from './components/dummy-component/dummy';
 
-var app = angular.module('my-app', []);
+var leApp = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
 
-angular.module('my-app')
-.directive(
-  makeSelector(DummyComponent),
-  makeDirective(DummyComponent));
-
-
-angular.element(document).ready(function() {
-  angular.bootstrap(document, ['my-app']);
+leApp.config(function (DSProvider, DSHttpAdapterProvider) {
+  angular.extend(DSHttpAdapterProvider.defaults, {
+    basePath: 'https://maaas-backend.herokuapp.com'
+  });
 });
 
-export {app as app};
+loadJsDataConfig(leApp);
+loadMaster(leApp);
+loadArea(leApp);
 
-// export module maaas {
-//   // var app = app;
-//   export var app = app;
-// }
+// angular.module('my-app')
+// .directive(
+//   makeSelector(DummyComponent),
+//   makeDirective(DummyComponent));
+//
+//
+
+// TODO: remove this
+export var app = leApp;
+
+angular.element(document).ready(function() {
+  angular.bootstrap(document, ['maaas']);
+});
