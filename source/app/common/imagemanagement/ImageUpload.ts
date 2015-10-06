@@ -2,7 +2,7 @@
 
 export class ImageUploadDirective {
 
-  private static template = '<div id="uploadbutton" class="fileUpload btn btn-default"> Bild Hochladen </div>';
+  private static template = '<div id="uploadbutton" class="fileUpload btn btn-outline btn-success"> Bild Hochladen </div>';
   private static replace = true;
 
   private static options = {

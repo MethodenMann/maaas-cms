@@ -6,11 +6,26 @@
       .form-group
         label Name                                        
         input.form-control(ng-model='ctrl.area.name')  
-        p.help-block Hier könnte ein Hilfetext stehen
-        label Bild                                        
-        image-upload(image-id='backgroundImageId')  
-        image-load( image-id='{{ctrl.area.backgroundImageId}}', height='100')               
-        p.help-block Hier könnte ein Hilfetext stehen
+        p.help-block Der Titel der Area, dieser erscheint oben
+        label Go to Text                                        
+        input.form-control(ng-model='ctrl.area.gotoText')  
+        p.help-block Dieser Text wird in der Navigation angezeigt
+        label Primäre Farbe                                    
+        input.form-control(ng-model='ctrl.area.primaryColor')  
+        p.help-block Hex-Code der Primären Farbe. Wird zB für den Titel der Area verwendet
+        label Sekundäre Farbe                                    
+        input.form-control(ng-model='ctrl.area.secondaryColor')  
+        p.help-block Hex-Code der Sekundären Farbe. 
+        label Hintergrund Bild                                        
+        div
+          image-upload(image-id='backgroundImageId')  
+          image-load( image-id='{{ctrl.area.backgroundImageId}}', height='100')               
+        p.help-block HIntergrund Bild der Area
+        label Sticker Bild  
+        div                                
+          image-upload(image-id='stickerImageId')  
+          image-load( image-id='{{ctrl.area.stickerImageId}}', height='100')               
+        p.help-block Sticker BIld
 
                                   
       button.btn.btn-default(type='submit', ng-click='ctrl.saveArea()') Speichern  
