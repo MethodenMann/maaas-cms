@@ -17,7 +17,7 @@
         "./app/area/IArea.ts",
         "./app/area/OverviewCtrl.ts",
         "./app/beacons/Beacons.ts",
-        "./app/common/imagemanagement/ImageDisplay.ts",
+        "./app/common/imagemanagement/ImageLoad.ts",
         "./app/common/imagemanagement/ImageManagement.ts",
         "./app/common/imagemanagement/ImageUpload.ts",
         "./app/common/services/devise.ts",

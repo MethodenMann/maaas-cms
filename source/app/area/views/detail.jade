@@ -2,14 +2,14 @@
   .panel-heading 
     |   Area Details
   .panel-body
-    form(role='form')
+    form(role='form' ng-show='ctrl.area')
       .form-group
         label Name                                        
         input.form-control(ng-model='ctrl.area.name')  
         p.help-block Hier könnte ein Hilfetext stehen
         label Bild                                        
         image-upload(image-id='backgroundImageId')  
-        image-display(image-id='{{ctrl.area.backgroundImageId}}', height='100')               
+        image-load( image-id='{{ctrl.area.backgroundImageId}}', height='100')               
         p.help-block Hier könnte ein Hilfetext stehen
 
                                   
