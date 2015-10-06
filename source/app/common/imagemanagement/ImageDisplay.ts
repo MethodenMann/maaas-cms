@@ -23,13 +23,16 @@ module maaas {
 
 
     private static link($scope: ng.IScope, element: JQuery, attributes) {
+
       var thumbnailTag = angular.element('<div></div>');
+
       element.append(thumbnailTag);
 
-      thumbnailTag.append($.cloudinary.image(attributes.imageid), {
-        format: 'jpg', width: 150, height: 10,
+
+      thumbnailTag.append($.cloudinary.image(attributes.imageid, {
+        format: 'jpg', width: attributes.width, height: attributes.height,
         crop: 'thumb', gravity: 'face', effect: 'saturation:50'
-      });
+      }));
 
     }
 
