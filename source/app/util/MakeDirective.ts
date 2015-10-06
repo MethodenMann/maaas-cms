@@ -17,11 +17,7 @@ module maaas {
         });
       }
 
-      if (component.link) {
-        angular.extend(ddo, {
-          link: component.link
-        });
-      }
+
 
       if (component.templateUrl) {
         angular.extend(ddo, {
@@ -31,6 +27,12 @@ module maaas {
 
       if (component.options) {
         angular.extend(ddo, component.options);
+      }
+
+      if (component.link) {
+        angular.extend(ddo, {
+          link: component.link
+        });
       }
 
       return ddo;

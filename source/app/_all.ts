@@ -1,12 +1,12 @@
 /// <reference path='./../typings/tsd.d.ts' />
-/// <reference path='./decorators/directive.ts'/>
-/// <reference path='./decorators/Inject.ts'/>
+/// <reference path='./util/decorators/Directive.ts'/>
+/// <reference path='./util/decorators/Inject.ts'/>
 /// <reference path="./util/MakeDirective.ts"/>
-/// <reference path='./services/devise.ts'/>
-/// <reference path="./util/ImageUpload.ts"/>
+/// <reference path='./common/services/devise.ts'/>
+
 /// <reference path='app.ts' />
 
-
+/// <reference path="./common/imagemanagement/ImageManagement.ts"/>
 
 /// <reference path='./area/Area.ts'/>
 /// <reference path='./login/LoginButtonDirective.ts'/>
@@ -19,4 +19,3 @@
 /// <reference path='./master/RouteHelper.ts'/>
 
 /// <reference path='./login/Login.ts'/>
-/// <reference path="./util/ImageLoader.ts"/>

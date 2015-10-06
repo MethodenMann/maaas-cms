@@ -17,8 +17,10 @@
         "./app/area/IArea.ts",
         "./app/area/OverviewCtrl.ts",
         "./app/beacons/Beacons.ts",
-        "./app/decorators/Directive.ts",
-        "./app/decorators/Inject.ts",
+        "./app/common/imagemanagement/ImageDisplay.ts",
+        "./app/common/imagemanagement/ImageManagement.ts",
+        "./app/common/imagemanagement/ImageUpload.ts",
+        "./app/common/services/devise.ts",
         "./app/imageUploadDemo/Upload.ts",
         "./app/jsDataConfig.ts",
         "./app/login/Login.ts",
@@ -30,11 +32,10 @@
         "./app/master/RouteHelper.ts",
         "./app/registration/Registration.ts",
         "./app/registration/RegistrationCtrl.ts",
-        "./app/services/devise.ts",
         "./app/test/Test.ts",
         "./app/test/TestCtrl.ts",
-        "./app/util/ImageLoader.ts",
-        "./app/util/ImageUpload.ts",
-        "./app/util/MakeDirective.ts"
+        "./app/util/MakeDirective.ts",
+        "./app/util/decorators/Directive.ts",
+        "./app/util/decorators/Inject.ts"
     ]
 }

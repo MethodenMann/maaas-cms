@@ -1,5 +1,3 @@
-/// <reference path='../_all.ts' />
-
 module maaas {
   export function Inject(injectable) {
     return function(prototype, method, argumentPosition) {

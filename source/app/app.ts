@@ -3,9 +3,6 @@
 module maaas {
   var maaasmodule = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
 
-  maaasmodule.directive("test", makeDirective(ImageUploadDirective))
-
-
   maaasmodule.config(function (DSProvider, DSHttpAdapterProvider) {
     angular.extend(DSHttpAdapterProvider.defaults, {
       basePath: 'https://maaas-backend.herokuapp.com'

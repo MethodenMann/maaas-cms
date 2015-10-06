@@ -1,4 +1,3 @@
-/// <reference path='../_all.ts' />
 module maaas {
 
   export function Directive(...values:string[]):any {
