@@ -1,26 +1,16 @@
-/// <reference path='../_all.ts' />
+export class TestCtrl {
+  public static $inject = [
+    '$scope',
+    '$location',
+    'LoginService'
+  ];
 
-module maaas {
-  export class TestCtrl {
+  constructor(
+    private $scope,
+    private $location: ng.ILocationService
 
-    public static $inject = [
-      '$scope',
-      '$location',
-      'LoginService'
-    ];
-
-    constructor(
-      private $scope,
-      private $location: ng.ILocationService
-
-      ) {
-      $scope.somestring = 'test12';
-      $scope.vm = this;
-    }
-
-
+    ) {
+    $scope.somestring = 'test12';
+    $scope.vm = this;
   }
-
-
-
 }

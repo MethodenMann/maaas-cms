@@ -1,13 +1,12 @@
-/// <reference path='../_all.ts' />
-module maaas {
-  maaas.app.controller('TestCtrl', TestCtrl);
+import {app} from '../app';
+import {TestCtrl} from './TestCtrl';
 
-  maaas.app.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('cms.test', {
-      url: '/test',
-      templateUrl: './app/test/view/test.html'
-    });
+app.controller('TestCtrl', TestCtrl);
+
+app.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('cms.test', {
+    url: '/test',
+    templateUrl: './app/test/view/test.html'
   });
-
-}
+});

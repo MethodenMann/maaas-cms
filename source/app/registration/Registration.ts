@@ -1,14 +1,13 @@
-/// <reference path='../_all.ts' />
+import {app} from '../app';
+import {RegistrationCtrl} from './RegistrationCtrl';
 
-module maaas {
-  maaas.app.controller('RegistrationCtrl', RegistrationCtrl);
+app.controller('RegistrationCtrl', RegistrationCtrl);
 
-  maaas.app.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('registration', {
-      url: '/registration',
-      templateUrl: './app/registration/view/registration.html',
-      controller: 'RegistrationCtrl'
-    });
+app.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('registration', {
+    url: '/registration',
+    templateUrl: './app/registration/view/registration.html',
+    controller: 'RegistrationCtrl'
   });
-}
+});

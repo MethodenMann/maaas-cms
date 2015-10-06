@@ -1,12 +1,9 @@
-/// <reference path='../_all.ts' />
-module maaas {
+import {app} from '../app';
 
-  maaas.app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('cms.beacons', {
       url: '/beacons',
       templateUrl: './app/beacons/view/beacons.html'
     });
   });
-
-}

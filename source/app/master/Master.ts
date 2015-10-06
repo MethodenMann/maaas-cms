@@ -1,17 +1,16 @@
-/// <reference path='../_all.ts' />
-module maaas {
-  maaas.app.controller('MasterCtrl', MasterCtrl);
+import {app} from '../app';
+import {MasterCtrl} from './MasterCrtrl';
 
-  maaas.app.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/cms');
+app.controller('MasterCtrl', MasterCtrl);
 
-    $stateProvider
-      .state('cms', {
-      url: '/cms',
-      templateUrl: './app/master/view/master.html',
-      controller: 'MasterCtrl',
-      controllerAs: 'ctrl'
-    });
+app.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/cms');
+
+  $stateProvider
+    .state('cms', {
+    url: '/cms',
+    templateUrl: './app/master/view/master.html',
+    controller: 'MasterCtrl',
+    controllerAs: 'ctrl'
   });
-
-}
+});

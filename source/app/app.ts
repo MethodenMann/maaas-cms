@@ -20,7 +20,7 @@ import {makeDirective, makeSelector} from './utils/component-utils';
 
 import {DummyComponent} from './components/dummy-component/dummy';
 
-angular.module('my-app', []);
+var app = angular.module('my-app', []);
 
 angular.module('my-app')
 .directive(
@@ -31,3 +31,10 @@ angular.module('my-app')
 angular.element(document).ready(function() {
   angular.bootstrap(document, ['my-app']);
 });
+
+export {app as app};
+
+// export module maaas {
+//   // var app = app;
+//   export var app = app;
+// }

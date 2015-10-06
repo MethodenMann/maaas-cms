@@ -1,19 +1,17 @@
-/// <reference path='../_all.ts' />
+import {Inject} from '../utils/di';
+import {IArea} from './IArea';
 
-module maaas {
-  export class CreateCtrl {
+export class CreateCtrl {
 
-    private area: IArea;
+  private area: IArea;
 
-    constructor(
-      @Inject('$stateParams') private $stateParams,
-      @Inject('Area') private Area
-      ) {
-    }
+  constructor(
+    @Inject('$stateParams') private $stateParams,
+    @Inject('Area') private Area
+    ) {
+  }
 
-    saveArea() {
-      this.Area.create(this.area);
-    }
-
+  saveArea() {
+    this.Area.create(this.area);
   }
 }
