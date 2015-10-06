@@ -4,7 +4,7 @@
         "target": "es5",
         "sourceMap": true,
         "experimentalDecorators": true,
-        "outDir": "out/js/"
+        "outDir": "./../atom_out/js/"
     },
     "filesGlob": [
         "./app/**/*.ts",

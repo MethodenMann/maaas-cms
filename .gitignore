@@ -28,6 +28,7 @@ node_modules
 bower_components
 tmp
 
-out
+/out
+/atom_out
 source/typings
 source/app/**/*.js
