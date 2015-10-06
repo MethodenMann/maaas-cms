@@ -13,7 +13,7 @@ html(lang='en')
     link(href='css/font-awesome.min.css', rel='stylesheet', type='text/css')
     
     link(href='css/styles.css', rel='stylesheet')
-  body(ng-app='maaas')
+  body
     div(ui-view='')
     
     
@@ -31,4 +31,9 @@ html(lang='en')
     script(src='libs/js-data-http.min.js')
     script(src='libs/js-data-angular.min.js')
     
-    script(src='app/app.js')
+    script(src="/node_modules/systemjs/dist/system.js")
+    script(src="/system.config.js")
+    script(type='text/javascript').
+      System.import('app/Users/samuelmueller/Development/maaas-cms/source/app/app.js')
+        
+    ngc-login-form()

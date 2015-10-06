@@ -1,44 +1,17 @@
-/// <reference path='_all.ts' />
+import 'angular';
 
-module maaas {
-  var maaasmodule = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
+import {makeDirective, makeSelector} from './utils/component-utils';
 
-  maaasmodule.config(function (DSProvider, DSHttpAdapterProvider) {
-    angular.extend(DSHttpAdapterProvider.defaults, {
-      basePath: 'https://maaas-backend.herokuapp.com'
-    });
-  });
+import {DummyComponent} from './components/dummy-component/dummy';
+
+angular.module('my-app', []);
+
+angular.module('my-app')
+.directive(
+  makeSelector(DummyComponent),
+  makeDirective(DummyComponent));
 
 
-  maaasmodule.factory('Area', function (DS) {
-    return DS.defineResource({
-      name: 'areas',
-      relations: {
-        hasMany: {
-          beacons: {
-            foreignKey: 'areaId',
-            localField: 'beacons'
-          }
-        }
-      }
-    });
-  });
-
-  maaasmodule.factory('Beacon', function (DS) {
-    return DS.defineResource({
-      name: 'beacons',
-      relations: {
-        belongsTo: {
-          areas: {
-            localKey: 'areaId',
-            localField: 'area'
-          }
-        }
-      }
-    });
-  });
-
-  export module maaas {
-    export var app = maaasmodule;
-  }
-};
+angular.element(document).ready(function() {
+  angular.bootstrap(document, ['my-app']);
+});

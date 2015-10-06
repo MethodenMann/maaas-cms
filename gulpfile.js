@@ -11,6 +11,10 @@ var connect = require('gulp-connect');
 var clean = require('gulp-clean');
 var runSequence = require('run-sequence');
 var Config = require('./gulpfile.config');
+var rename = require('gulp-rename');
+var replace = require('gulp-replace');
+var size = require('gulp-size');
+var browserSync = require('browser-sync').create();
 
 var config = new Config();
 
@@ -38,8 +42,12 @@ gulp.task('typescript-lint', function() {
   return gulp.src(config.applicationSrcPath + '/**/*.ts').pipe(tslint()).pipe(tslint.report('prose'));
 });
 
+gulp.task('systemjs-config', function () {
+  return gulp.src(['source/system.config.js'])
+    .pipe(gulp.dest('out'));
+});
 
-gulp.task('typescript', function() {
+gulp.task('typescript', ['systemjs-config'], function() {
   var tsProject = ts.createProject(config.baseSrcPath + '/tsconfig.json');
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
@@ -124,6 +132,36 @@ gulp.task('watch', function() {
     gulp.src(file.path)
       .pipe(connect.reload());
   });
+});
+
+gulp.task('serve', ['build'], function () {
+
+  browserSync.init({
+    server: {
+      baseDir: ['out'],
+      routes: {
+        "/node_modules": "node_modules"
+      }
+    },
+    files: ['out/**/*'],
+    port: 8080,
+    open: false
+  });
+
+  gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
+  gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
+  gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass']);
+  gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets']);
+
+  gulp.watch([
+    config.baseDestPath + '/**/*.html',
+    config.baseDestPath + '/**/*.js',
+    config.baseDestPath + '/**/*.css'
+  ]).on('change', function(file) {
+    gulp.src(file.path)
+      .pipe(connect.reload());
+  });
+
 });
 
 gulp.task('build', function(callback) {
