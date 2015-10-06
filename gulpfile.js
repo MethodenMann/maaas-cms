@@ -23,20 +23,10 @@ function swallowError(error) {
   this.emit('end');
 }
 
-gulp.task('connect', function() {
-  connect.server({
-    port: 1337,
-    root: config.baseDestPath,
-    livereload: true
-  });
-});
-
-
 gulp.task('clean', function(callback) {
   return gulp.src(config.baseDestPath)
     .pipe(clean(), callback);
 });
-
 
 gulp.task('typescript-lint', function() {
   return gulp.src(config.applicationSrcPath + '/**/*.ts').pipe(tslint()).pipe(tslint.report('prose'));
@@ -47,15 +37,20 @@ gulp.task('systemjs-config', function () {
     .pipe(gulp.dest('out'));
 });
 
-gulp.task('typescript', ['systemjs-config'], function() {
+gulp.task('typescript', function() {
   var tsProject = ts.createProject(config.baseSrcPath + '/tsconfig.json');
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
 
   return tsResult.js
-    .pipe(gulp.dest(config.applicationDestPath));
+    .pipe(rename(function (path) {
+      path.dirname = path.dirname.replace('source/app', 'js');
+      path.dirname = path.dirname.replace('source\\app', 'js'); //windows fix
+    }))
+    .pipe(size({title: 'JS Size:'}))
+    .pipe(sourcemaps.write({sourceRoot: '/'}))
+    .pipe(gulp.dest('out'));
 });
-
 
 gulp.task('sass', function() {
   gulp.src(config.sassSrcPath + '/**/*.scss')
@@ -78,7 +73,6 @@ gulp.task('views', function() {
   gulp.src(config.baseSrcPath + '/**/*.html')
     .pipe(gulp.dest(config.baseDestPath))
 });
-
 
 gulp.task('copyassets', function() {
   //Images
@@ -116,8 +110,6 @@ gulp.task('copyassets', function() {
     .pipe(gulp.dest(config.baseDestPath + '/fonts'));
 });
 
-
-
 gulp.task('watch', function() {
   gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
   gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
@@ -135,7 +127,6 @@ gulp.task('watch', function() {
 });
 
 gulp.task('serve', ['build'], function () {
-
   browserSync.init({
     server: {
       baseDir: ['out'],
@@ -144,30 +135,15 @@ gulp.task('serve', ['build'], function () {
       }
     },
     files: ['out/**/*'],
-    port: 8080,
+    port: 1337,
     open: false
   });
-
-  gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
-  gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
-  gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass']);
-  gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets']);
-
-  gulp.watch([
-    config.baseDestPath + '/**/*.html',
-    config.baseDestPath + '/**/*.js',
-    config.baseDestPath + '/**/*.css'
-  ]).on('change', function(file) {
-    gulp.src(file.path)
-      .pipe(connect.reload());
-  });
-
 });
 
 gulp.task('build', function(callback) {
-  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript'], callback);
+  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'systemjs-config'], callback);
 });
 
 gulp.task('default', function() {
-  runSequence('build', 'connect', 'watch');
+  runSequence('build', 'serve', 'watch');
 });

@@ -7,16 +7,22 @@
         "outDir": "out/js/"
     },
     "filesGlob": [
-        "./app/**/*.ts"
+        "./app/**/*.ts",
+        "./typings/**/*.ts"
     ],
     "files": [
-        "./typings/tsd.d.ts",
         "./app/app.ts",
         "./app/components/dummy-component/dummy.ts",
         "./app/jsDataConfig.ts",
         "./app/utils/component-utils.ts",
         "./app/utils/di.ts",
         "./app/utils/store-utils.ts",
-        "./app/utils/test-utils.ts"
+        "./app/utils/test-utils.ts",
+        "./typings/angular-ui-router/angular-ui-router.d.ts",
+        "./typings/angularjs/angular-resource.d.ts",
+        "./typings/angularjs/angular.d.ts",
+        "./typings/jquery/jquery.d.ts",
+        "./typings/metismenu/metismenu.d.ts",
+        "./typings/tsd.d.ts"
     ]
 }

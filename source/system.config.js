@@ -2,11 +2,18 @@
 System.config({
   defaultJSExtensions: true,
   paths: {
+    'jquery': 'libs/jquery.min.js',
+    'bootstrap': 'libs/bootstrap.min.js',
+    'metis-menu': 'libs/metisMenu.min.js',
+    'widget': 'libs/widget.js',
+    'jquery-iframe-transport': 'libs/jquery.iframe-transport.js',
+    'jquery-fileupload': 'libs/jquery.fileupload.js',
+    'jquery-cloudinary': 'libs/jquery.cloudinary.js',
     'angular': 'libs/angular.min.js',
-    'angular-ui-router': 'node_modules/angular-ui-router/release/angular-ui-router.js',
-    'immutable': 'node_modules/immutable/dist/immutable.js',
-    'koast-angular': 'node_modules/koast-angular/dist/koast.js',
-    'lodash': 'node_modules/lodash/index.js',
-    'rx.all': 'node_modules/rx/dist/rx.all.js'
+    'angular-ui-router': 'libs/angular-ui-router.min.js',
+    'angular-resource': 'libs/angular-resource.min.js',
+    'js-data': 'libs/js-data.min.js',
+    'js-data-http': 'libs/js-data-http.min.js',
+    'js-data-angular': 'libs/js-data-angular.min.js'
   }
 });
