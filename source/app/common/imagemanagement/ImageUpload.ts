@@ -1,5 +1,3 @@
-/// <reference path='../../_all.ts' />
-
 export class ImageUploadDirective {
 
   private static template = '<div id="uploadbutton" class="fileUpload btn btn-outline btn-success"> Bild Hochladen </div>';
