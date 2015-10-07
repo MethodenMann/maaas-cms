@@ -5,16 +5,11 @@ import {CreateCtrl} from './CreateCtrl';
 import {GetMasterRoute} from '../master/RouteHelper';
 
 export function loadArea(app) {
-  console.log("IM HERE 1");
-
-  console.log(app);
-
   app.controller('OverviewCtrl', OverviewCtrl);
   app.controller('DetailCtrl', DetailCtrl);
   app.controller('CreateCtrl', CreateCtrl);
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    console.log("IM HERE 2");
     $stateProvider
       .state('cms.area', GetMasterRoute('area'))
       .state('cms.area.overview', {

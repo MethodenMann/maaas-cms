@@ -25,6 +25,12 @@ export function makeDirective(component) {
       angular.extend(ddo, component.options);
     }
 
+    if (component.link) {
+      angular.extend(ddo, {
+        link: component.link
+      });
+    }
+
     return ddo;
   };
 }

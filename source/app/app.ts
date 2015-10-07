@@ -12,7 +12,7 @@ import 'js-data';
 import 'js-data-http';
 import 'js-data-angular';
 
-import 'devise'
+import 'devise';
 
 import {loadArea} from './area/Area';
 import {loadMaster} from './master/Master';

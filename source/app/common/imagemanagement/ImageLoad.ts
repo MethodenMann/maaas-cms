@@ -1,9 +1,10 @@
-import {Inject} from '../../util/decorators/Inject';
+import {Inject} from '../../utils/di';
 
 export class ImageLoadDirective {
 
   private static template = '';
   private static replace = true;
+  private static selector = 'image-load';
 
   private static options = {
     bindToController: {
@@ -21,7 +22,6 @@ export class ImageLoadDirective {
   constructor(
     @Inject('$scope') private $scope
     ) {
-
     $scope.$watch('ctrl.imageId', () => {
       this.loadImage();
     });
@@ -32,7 +32,7 @@ export class ImageLoadDirective {
     this.element.html('');
     this.element.append(thumbnailTag);
 
-    if (this.imageId != '') {
+    if (this.imageId !== '') {
       thumbnailTag.append($.cloudinary.image(this.imageId, {
         format: 'jpg', width: this.width, height: this.height,
         crop: 'thumb', gravity: 'face', effect: 'saturation:50'
