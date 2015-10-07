@@ -1,19 +1,20 @@
-/// <reference path='../_all.ts' />
-/// <reference path='./IArea.ts'/>
-/// <reference path='./OverviewCtrl.ts' />
-/// <reference path='./DetailCtrl.ts' />
-/// <reference path='./CreateCtrl.ts' />
+// import {app} from '../app';
+import {OverviewCtrl} from './OverviewCtrl';
+import {DetailCtrl} from './DetailCtrl';
+import {CreateCtrl} from './CreateCtrl';
+import {GetMasterRoute} from '../master/RouteHelper';
 
+export function loadArea(app) {
+  console.log("IM HERE 1");
 
-module maaas {
-  maaas.app.controller('OverviewCtrl', OverviewCtrl);
-  maaas.app.controller('DetailCtrl', DetailCtrl);
-  maaas.app.controller('CreateCtrl', CreateCtrl);
+  console.log(app);
 
+  app.controller('OverviewCtrl', OverviewCtrl);
+  app.controller('DetailCtrl', DetailCtrl);
+  app.controller('CreateCtrl', CreateCtrl);
 
-
-
-  maaas.app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function($stateProvider, $urlRouterProvider) {
+    console.log("IM HERE 2");
     $stateProvider
       .state('cms.area', GetMasterRoute('area'))
       .state('cms.area.overview', {
@@ -35,5 +36,4 @@ module maaas {
       controllerAs: 'ctrl'
     });
   });
-
 }

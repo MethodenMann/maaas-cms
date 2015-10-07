@@ -1,13 +1,11 @@
-/// <reference path='_all.ts' />
-
-module maaas {
-  maaas.app.config(function (DSProvider, DSHttpAdapterProvider) {
+export function loadJsDataConfig(app) {
+  app.config(function (DSProvider, DSHttpAdapterProvider) {
     angular.extend(DSHttpAdapterProvider.defaults, {
       basePath: 'http://localhost:3000'
     });
   });
 
-  maaas.app.factory('Beacon', function (DS) {
+  app.factory('Beacon', function (DS) {
     return DS.defineResource({
       name: 'beacons',
       relations: {
@@ -21,7 +19,7 @@ module maaas {
     });
   });
 
-  maaas.app.factory('Area', function (DS) {
+  app.factory('Area', function (DS) {
     return DS.defineResource({
       name: 'areas',
       relations: {
@@ -43,7 +41,7 @@ module maaas {
     });
   });
 
-  maaas.app.factory('Content', function (DS) {
+  app.factory('Content', function (DS) {
     return DS.defineResource({
       name: 'contents',
       relations: {
@@ -57,7 +55,7 @@ module maaas {
     });
   });
 
-  maaas.app.factory('Challenge', function (DS) {
+  app.factory('Challenge', function (DS) {
     return DS.defineResource({
       name: 'challenges',
       relations: {

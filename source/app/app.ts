@@ -1,44 +1,51 @@
-/// <reference path='_all.ts' />
+import 'jquery';
+import 'bootstrap';
+import 'metis-menu';
 
-module maaas {
-  var maaasmodule = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
+import 'jquery-cloudinary';
 
-  maaasmodule.config(function (DSProvider, DSHttpAdapterProvider) {
-    angular.extend(DSHttpAdapterProvider.defaults, {
-      basePath: 'https://maaas-backend.herokuapp.com'
-    });
+import 'angular';
+import 'angular-ui-router';
+import 'angular-resource';
+
+import 'js-data';
+import 'js-data-http';
+import 'js-data-angular';
+
+import 'devise'
+
+import {loadArea} from './area/Area';
+import {loadMaster} from './master/Master';
+import {loadJsDataConfig} from './jsDataConfig';
+import {loadImageManagement} from './common/imagemanagement/ImageManagement';
+
+import {makeDirective, makeSelector} from './utils/component-utils';
+
+import {DummyComponent} from './components/dummy-component/dummy';
+
+var leApp = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
+
+leApp.config(function (DSProvider, DSHttpAdapterProvider) {
+  angular.extend(DSHttpAdapterProvider.defaults, {
+    basePath: 'https://maaas-backend.herokuapp.com'
   });
+});
 
+loadJsDataConfig(leApp);
+loadMaster(leApp);
+loadArea(leApp);
+loadImageManagement(leApp);
 
-  maaasmodule.factory('Area', function (DS) {
-    return DS.defineResource({
-      name: 'areas',
-      relations: {
-        hasMany: {
-          beacons: {
-            foreignKey: 'areaId',
-            localField: 'beacons'
-          }
-        }
-      }
-    });
-  });
+// angular.module('my-app')
+// .directive(
+//   makeSelector(DummyComponent),
+//   makeDirective(DummyComponent));
+//
+//
 
-  maaasmodule.factory('Beacon', function (DS) {
-    return DS.defineResource({
-      name: 'beacons',
-      relations: {
-        belongsTo: {
-          areas: {
-            localKey: 'areaId',
-            localField: 'area'
-          }
-        }
-      }
-    });
-  });
+// TODO: remove this
+export var app = leApp;
 
-  export module maaas {
-    export var app = maaasmodule;
-  }
-};
+angular.element(document).ready(function() {
+  angular.bootstrap(document, ['maaas']);
+});

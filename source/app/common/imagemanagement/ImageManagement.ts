@@ -1,16 +1,14 @@
-/// <reference path='../../_all.ts' />
-/// <reference path='./ImageLoad.ts'/>
-/// <reference path='./ImageUpload.ts'/>
+import {makeDirective} from '../../util/MakeDirective';
+import {ImageUploadDirective} from './ImageUpload';
+import {ImageLoadDirective} from './ImageLoad'
 
+export function loadImageManagement(app) {
+  interface JQueryStatic {
+    cloudinary: any;
+  }
 
-interface JQueryStatic {
-  cloudinary: any;
-}
-
-
-module maaas {
   $.cloudinary.config({ cloud_name: 'nmsg', api_key: '145367384875325' });
 
-  maaas.app.directive('imageUpload', makeDirective(ImageUploadDirective));
-  maaas.app.directive('imageLoad', makeDirective(ImageLoadDirective));
+  app.directive('imageUpload', makeDirective(ImageUploadDirective));
+  app.directive('imageLoad', makeDirective(ImageLoadDirective));
 }

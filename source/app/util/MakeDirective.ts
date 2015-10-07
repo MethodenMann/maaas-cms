@@ -1,5 +1,3 @@
-module maaas {
-
   export function makeDirective(component) {
     return () => {
 
@@ -45,4 +43,3 @@ module maaas {
         return g[1].toUpperCase();
       });
   }
-}

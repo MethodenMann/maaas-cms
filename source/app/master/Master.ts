@@ -1,8 +1,10 @@
-/// <reference path='../_all.ts' />
-module maaas {
-  maaas.app.controller('MasterCtrl', MasterCtrl);
+// import {app} from '../app';
+import {MasterCtrl} from './MasterCrtrl';
 
-  maaas.app.config(function($stateProvider, $urlRouterProvider) {
+export function loadMaster(app) {
+  app.controller('MasterCtrl', MasterCtrl);
+
+  app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/cms');
 
     $stateProvider
@@ -13,5 +15,4 @@ module maaas {
       controllerAs: 'ctrl'
     });
   });
-
 }

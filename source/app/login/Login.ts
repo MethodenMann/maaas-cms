@@ -1,18 +1,19 @@
-/// <reference path='../_all.ts' />
+import {app} from '../app';
 
-module maaas {
-  maaas.app.controller('LoginCtrl', LoginCtrl);
-  maaas.app.service('LoginService', LoginService);
-  maaas.app.directive('loginButton', <any>LoginButton);
+import {LoginCtrl} from './LoginCtrl';
+import {LoginService} from './LoginService';
+import {LoginButton} from './LoginButtonDirective';
 
-  maaas.app.config(function($stateProvider, $urlRouterProvider) {
+app.controller('LoginCtrl', LoginCtrl);
+app.service('LoginService', LoginService);
+app.directive('loginButton', <any>LoginButton);
 
-    $stateProvider
-      .state('login', {
-      url: '/login',
-      templateUrl: './app/login/view/login.html',
-      controller: 'LoginCtrl'
-    });
+app.config(function($stateProvider, $urlRouterProvider) {
+
+  $stateProvider
+    .state('login', {
+    url: '/login',
+    templateUrl: './app/login/view/login.html',
+    controller: 'LoginCtrl'
   });
-
-}
+});
