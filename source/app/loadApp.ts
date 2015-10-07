@@ -4,6 +4,7 @@ import {loadJsDataConfig} from './jsDataConfig';
 import {loadImageManagement} from './common/imagemanagement/ImageManagement';
 import {loadLogin} from './login/Login';
 import {loadRegistration} from './registration/Registration';
+import {loadContent} from './content/Content';
 
 export function loadApp(app) {
   loadJsDataConfig(app);
@@ -12,4 +13,5 @@ export function loadApp(app) {
   loadImageManagement(app);
   loadLogin(app);
   loadRegistration(app);
+  loadContent(app);
 }

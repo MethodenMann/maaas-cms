@@ -16,6 +16,8 @@ System.config({
     'js-data-http': 'libs/js-data-http.min.js',
     'js-data-angular': 'libs/js-data-angular.min.js',
     'angularjs-color-picker': 'libs/angularjs-color-picker.min.js',
-    'devise': 'libs/devise-min.js'
+    'devise': 'libs/devise-min.js',
+    'tinymce': 'libs/tinymce.min.js',
+    'tinymce-theme': 'libs/theme.min.js'
   }
 });
