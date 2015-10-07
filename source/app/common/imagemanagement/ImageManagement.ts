@@ -1,6 +1,6 @@
 import {makeDirective, makeSelector} from '../../utils/component-utils';
-import {ImageUploadDirective} from './ImageUpload';
 import {ImageLoadDirective} from './ImageLoad'
+import {ImageUploadDirective} from './ImageUpload';
 
 export function loadImageManagement(app) {
   interface JQueryStatic {
@@ -17,8 +17,8 @@ export function loadImageManagement(app) {
     makeSelector(ImageLoadDirective),
     makeDirective(ImageLoadDirective))
   .directive(
-    makeSelector(ImageLoadDirective),
-    makeDirective(ImageLoadDirective));
+    makeSelector(ImageUploadDirective),
+    makeDirective(ImageUploadDirective));
 
 
 
