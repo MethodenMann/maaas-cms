@@ -1,7 +1,6 @@
 import 'jquery';
 import 'bootstrap';
 import 'metis-menu';
-
 import 'jquery-cloudinary';
 
 import 'angular';
@@ -13,6 +12,7 @@ import 'js-data-http';
 import 'js-data-angular';
 
 import 'devise';
+import 'angularjs-color-picker';
 
 import {loadArea} from './area/Area';
 import {loadMaster} from './master/Master';
@@ -21,7 +21,7 @@ import {loadImageManagement} from './common/imagemanagement/ImageManagement';
 
 import {makeDirective, makeSelector} from './utils/component';
 
-var leApp = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
+var leApp = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise', 'color.picker']);
 
 leApp.config(function (DSProvider, DSHttpAdapterProvider) {
   angular.extend(DSHttpAdapterProvider.defaults, {
