@@ -14,25 +14,25 @@ import 'js-data-angular';
 
 import 'devise';
 
-import {loadArea} from './area/Area';
-import {loadMaster} from './master/Master';
-import {loadJsDataConfig} from './jsDataConfig';
-import {loadImageManagement} from './common/imagemanagement/ImageManagement';
-
 import {makeDirective, makeSelector} from './utils/component';
+
+import {loadApp} from './loadApp';
 
 var leApp = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
 
-leApp.config(function (DSProvider, DSHttpAdapterProvider) {
+leApp.config(function (DSProvider, DSHttpAdapterProvider, AuthProvider) {
   angular.extend(DSHttpAdapterProvider.defaults, {
     basePath: 'https://maaas-backend.herokuapp.com'
   });
+
+  // Devise configuration
+  // TODO: Since this is configurable, we should remove the devise service from
+  //       our code base and import it via bower.
+  AuthProvider.loginPath('http://localhost:3000/users/sign_in.json');
+  AuthProvider.registerPath('http://localhost:3000/users.json');
 });
 
-loadJsDataConfig(leApp);
-loadMaster(leApp);
-loadArea(leApp);
-loadImageManagement(leApp);
+loadApp(leApp);
 
 // TODO: remove this
 export var app = leApp;
