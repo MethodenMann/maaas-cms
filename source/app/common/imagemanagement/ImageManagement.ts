@@ -1,5 +1,5 @@
 import {makeDirective, makeSelector} from '../../utils/component';
-import {ImageLoadDirective} from './ImageLoad'
+import {ImageLoadDirective} from './ImageLoad';
 import {ImageUploadDirective} from './ImageUpload';
 
 export function loadImageManagement(app) {
