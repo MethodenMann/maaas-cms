@@ -10,17 +10,15 @@ export class ImageUploadDirective {
     }
   };
 
-  constructor(){};
-
   private static link($scope, element: JQuery, attributes) {
     var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', { cloud_name: 'nmsg' });
     element.find('#uploadbutton').append(imageTag);
-    imageTag.bind('cloudinarydone',(e, data) => {
+    imageTag.bind('cloudinarydone', (e, data) => {
           var emitInfos = {
              id: $scope.ctrl.imageId,
              cloudId: data.result.public_id
-          }
-          $scope.$emit('imageUploaded', emitInfos)
+          };
+          $scope.$emit('imageUploaded', emitInfos);
     });
   }
 }
