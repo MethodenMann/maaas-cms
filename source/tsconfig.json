@@ -22,7 +22,6 @@
         "./app/common/imagemanagement/ImageManagement.ts",
         "./app/common/imagemanagement/ImageUpload.ts",
         "./app/common/imagemanagement/cloudinary.d.ts",
-        "./app/common/services/devise.ts",
         "./app/jsDataConfig.ts",
         "./app/loadApp.ts",
         "./app/login/Login.ts",
