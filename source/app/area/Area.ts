@@ -15,7 +15,8 @@ export function loadArea(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('cms.area', GetMasterRoute('area'))
+      .state('cms.area', GetMasterRoute('area')
+    )
       .state('cms.area.overview', {
       url: '/area/overview',
       templateUrl: './app/area/views/overview.html',
