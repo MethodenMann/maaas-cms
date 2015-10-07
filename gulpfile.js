@@ -88,6 +88,7 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/js-data/dist/js-data.min.js',
     config.bowerPath + '/js-data-http/dist/js-data-http.min.js',
     config.bowerPath + '/js-data-angular/dist/js-data-angular.min.js',
+    config.bowerPath + '/AngularDevise/lib/devise-min.js',
     config.bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
     config.bowerPath + '/metisMenu/dist/metisMenu.min.js',
     config.bowerPath + '/jquery-ui/ui/widget.js',

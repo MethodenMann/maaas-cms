@@ -17,6 +17,7 @@
     "angular": "~1.4.6",
     "angular-resource": "~1.4.6",
     "angular-ui-router": "~0.2.15",
+    "AngularDevise": "angular-devise#~1.1.0",
     "bootstrap": "~3.3.5",
     "cloudinary": "~1.0.24",
     "font-awesome": "~4.4.0",
