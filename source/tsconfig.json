@@ -22,6 +22,7 @@
         "./app/common/imagemanagement/ImageLoad.ts",
         "./app/common/imagemanagement/ImageManagement.ts",
         "./app/common/imagemanagement/ImageUpload.ts",
+        "./app/common/imagemanagement/cloudinary.d.ts",
         "./app/common/services/devise.ts",
         "./app/components/dummy-component/dummy.ts",
         "./app/imageUploadDemo/Upload.ts",
