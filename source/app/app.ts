@@ -25,9 +25,6 @@ leApp.config(function (DSProvider, DSHttpAdapterProvider, AuthProvider) {
     basePath: 'https://maaas-backend.herokuapp.com'
   });
 
-  // Devise configuration
-  // TODO: Since this is configurable, we should remove the devise service from
-  //       our code base and import it via bower.
   AuthProvider.loginPath('http://localhost:3000/users/sign_in.json');
   AuthProvider.registerPath('http://localhost:3000/users.json');
 });

@@ -4,7 +4,7 @@ import {RegistrationComponent} from './RegistrationComponent';
 export function loadRegistration(app) {
   app.directive(
     makeSelector(RegistrationComponent),
-    makeDirective(RegistrationComponent))
+    makeDirective(RegistrationComponent));
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

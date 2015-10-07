@@ -4,13 +4,13 @@ import {LoginComponent} from './LoginComponent';
 export function loadLogin(app) {
   app.directive(
     makeSelector(LoginComponent),
-    makeDirective(LoginComponent))
+    makeDirective(LoginComponent));
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('login', {
       url: '/login',
-      templateUrl: './app/login/view/login.html',
+      templateUrl: './app/login/view/login.html'
     });
   });
 }
