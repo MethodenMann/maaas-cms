@@ -19,9 +19,7 @@ import {loadMaster} from './master/Master';
 import {loadJsDataConfig} from './jsDataConfig';
 import {loadImageManagement} from './common/imagemanagement/ImageManagement';
 
-import {makeDirective, makeSelector} from './utils/component-utils';
-
-import {DummyComponent} from './components/dummy-component/dummy';
+import {makeDirective, makeSelector} from './utils/component';
 
 var leApp = angular.module('maaas', ['ngResource', 'js-data', 'ui.router', 'Devise']);
 
@@ -35,13 +33,6 @@ loadJsDataConfig(leApp);
 loadMaster(leApp);
 loadArea(leApp);
 loadImageManagement(leApp);
-
-// angular.module('my-app')
-// .directive(
-//   makeSelector(DummyComponent),
-//   makeDirective(DummyComponent));
-//
-//
 
 // TODO: remove this
 export var app = leApp;

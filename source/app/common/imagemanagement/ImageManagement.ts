@@ -1,4 +1,4 @@
-import {makeDirective, makeSelector} from '../../utils/component-utils';
+import {makeDirective, makeSelector} from '../../utils/component';
 import {ImageLoadDirective} from './ImageLoad'
 import {ImageUploadDirective} from './ImageUpload';
 
