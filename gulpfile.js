@@ -96,6 +96,10 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/cloudinary/js/jquery.cloudinary.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
+  gulp.src([
+    config.nodeModulesPath + '/systemjs/dist/system.js'
+  ]).pipe(gulp.dest(config.libsDestPath));
+
   //Bower CSS
   gulp.src([config.bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
       config.bowerPath + '/metisMenu/dist/metisMenu.min.css',
@@ -126,17 +130,11 @@ gulp.task('watch', function() {
   });
 });
 
-gulp.task('serve', ['build'], function () {
-  browserSync.init({
-    server: {
-      baseDir: ['out'],
-      routes: {
-        "/node_modules": "node_modules"
-      }
-    },
-    files: ['out/**/*'],
+gulp.task('connect', function() {
+  connect.server({
     port: 1337,
-    open: false
+    root: config.baseDestPath,
+    livereload: true
   });
 });
 
@@ -145,5 +143,5 @@ gulp.task('build', function(callback) {
 });
 
 gulp.task('default', function() {
-  runSequence('build', 'serve', 'watch');
+  runSequence('build', 'connect', 'watch');
 });
