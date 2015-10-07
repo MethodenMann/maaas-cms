@@ -9,8 +9,11 @@ export function loadRegistration(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('registration', {
-      url: '/registration',
-      templateUrl: './app/registration/view/registration.html'
+      url: '/register',
+      templateUrl: './app/registration/view/registration.html',
+      data: {
+        ignoreLogin: true
+      }
     });
   });
 }

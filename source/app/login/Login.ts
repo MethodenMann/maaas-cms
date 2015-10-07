@@ -10,7 +10,10 @@ export function loadLogin(app) {
     $stateProvider
       .state('login', {
       url: '/login',
-      templateUrl: './app/login/view/login.html'
+      templateUrl: './app/login/view/login.html',
+      data: {
+        ignoreLogin: true
+      }
     });
   });
 }
