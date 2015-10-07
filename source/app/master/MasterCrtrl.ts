@@ -1,4 +1,4 @@
-import {Inject} from '../util/decorators/Inject';
+import {Inject} from '../utils/di';
 
 export class MasterCtrl {
   private title = 'maaas';

@@ -1,5 +1,6 @@
 export class ImageUploadDirective {
 
+  private static selector = 'image-upload';
   private static template = '<div id="uploadbutton" class="fileUpload btn btn-outline btn-success"> Bild Hochladen </div>';
   private static replace = true;
 

@@ -1,9 +1,10 @@
-import {Inject} from '../../util/decorators/Inject';
+import {Inject} from '../../utils/di';
 
 export class ImageLoadDirective {
 
   private static template = '';
   private static replace = true;
+  private static selector = 'image-load';
 
   private static options = {
     bindToController: {
