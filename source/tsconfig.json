@@ -13,6 +13,7 @@
     "files": [
         "./app/app.ts",
         "./app/area/Area.ts",
+        "./app/area/AreaButtonDirective.ts",
         "./app/area/CreateCtrl.ts",
         "./app/area/DetailCtrl.ts",
         "./app/area/IArea.ts",

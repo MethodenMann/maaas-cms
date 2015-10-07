@@ -2,12 +2,16 @@
 import {OverviewCtrl} from './OverviewCtrl';
 import {DetailCtrl} from './DetailCtrl';
 import {CreateCtrl} from './CreateCtrl';
+import {AreaButtonDirective} from './AreaButtonDirective';
+import {makeDirective, makeSelector} from '../utils/component';
 import {GetMasterRoute} from '../master/RouteHelper';
 
 export function loadArea(app) {
   app.controller('OverviewCtrl', OverviewCtrl);
   app.controller('DetailCtrl', DetailCtrl);
   app.controller('CreateCtrl', CreateCtrl);
+
+  app.directive(makeSelector(AreaButtonDirective), makeDirective(AreaButtonDirective));
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
