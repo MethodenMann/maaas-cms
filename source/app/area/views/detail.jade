@@ -2,33 +2,52 @@
   .panel-heading 
     |   Area Details
   .panel-body
-    form(role='form' ng-show='ctrl.area')
-      .form-group
-        label Name                                        
-        input.form-control(ng-model='ctrl.area.name')  
-        p.help-block Der Titel der Area, dieser erscheint oben
-        label Go to Text                                        
-        input.form-control(ng-model='ctrl.area.gotoText')  
-        p.help-block Dieser Text wird in der Navigation angezeigt
-        label Primäre Farbe                                    
-        input.form-control(ng-model='ctrl.area.primaryColor')  
-        p.help-block Hex-Code der Primären Farbe. Wird zB für den Titel der Area verwendet
-        label Sekundäre Farbe                                    
-        input.form-control(ng-model='ctrl.area.secondaryColor')  
-        p.help-block Hex-Code der Sekundären Farbe. 
+    form(name="areaform", role='form' novalidate)
+      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("name") }') 
+        label Name                                       
+        input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")  
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("name")') Der Titel der Area, dieser erscheint oben
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("name")') Sie müssen einen gülten Namen angeben
+      
+      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("gototext") }') 
+        label Go to Text                          
+        input.form-control(name="gototext" ng-model='ctrl.area.gotoText' required ng-minlength="5")  
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("gototext")') Wird für die Navigation verwedn
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("gototext")') Sie müssen einen gülten GoTo Text eingeben
+      
+      .form-group(ng-class='{ "has-error" :  ctrl.isValidAndSubmitted("primarycolor") }') 
+        label Primäre Farbe           
+        color-picker(name="primarycolor" ng-model="ctrl.area.primaryColor", color-picker-format='"hex"')                           
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("primarycolor")') Hex-Code der Primären Farbe. Wird zB für den Titel der Area verwendet
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("primarycolor")') Sie müssen einen gülten HEX Code angeben
+    
+      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("secondarycolor")  }') 
+        label Sekundäre Farbe                         
+        color-picker(name="secondarycolor" ng-model="ctrl.area.secondaryColor" color-picker-format='"hex"')              
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("secondarycolor") ') Hex-Code der sekundäre Farbe. Wird zB für den Titel der Area verwendet
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("secondarycolor") ') Sie müssen einen gülten HEX Code angeben
+      
+      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("backgroundimageid")  }') 
         label Hintergrund Bild                                        
         div
-          image-upload(image-id='backgroundImageId')  
-          image-load( image-id='{{ctrl.area.backgroundImageId}}', height='100')               
-        p.help-block HIntergrund Bild der Area
+          image-upload(image-id='backgroundImageId' required)  
+          image-load( image-id='{{ctrl.area.backgroundImageId}}', height='100')        
+          input(type="hidden" name="backgroundimageid" ng-model="ctrl.area.backgroundImageId" required)       
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("backgroundimageid") ') Hintergrundbild
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("backgroundimageid") ') fehlt
+    
+      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("stickerimageid")  }') 
         label Sticker Bild  
         div                                
           image-upload(image-id='stickerImageId')  
-          image-load( image-id='{{ctrl.area.stickerImageId}}', height='100')               
-        p.help-block Sticker BIld
+          image-load( image-id='{{ctrl.area.stickerImageId}}', height='100')
+          input(type="hidden" name="stickerimageid" ng-model="ctrl.area.stickerImageId" required)     
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("stickerimageid") ') Stickerbild
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("stickerimageid") ') fehlt
 
                                   
       button.btn.btn-default(type='submit', ng-click='ctrl.saveArea()') Speichern  
-      test
-                                  
-      image-display(imageid='rhyvcggx0tndsv5mhqcu', height='100')                                  
+                                                               
+
+
+script(src="/libs/tinycolor.js")

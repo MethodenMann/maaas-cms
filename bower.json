@@ -25,5 +25,8 @@
     "js-data": "~2.4.0",
     "js-data-angular": "~3.1.0",
     "metisMenu": "~2.2.0"
+  },
+  "devDependencies": {
+    "angular-color-picker": "angularjs-color-picker#~0.6.8"
   }
 }

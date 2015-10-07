@@ -12,6 +12,6 @@ export class CreateCtrl {
   }
 
   saveArea() {
-    this.Area.create(this.area);
+    this.Area.create({area: this.area});
   }
 }

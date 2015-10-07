@@ -35,7 +35,7 @@ export class ImageLoadDirective {
     if (this.imageId !== '') {
       thumbnailTag.append($.cloudinary.image(this.imageId, {
         format: 'jpg', width: this.width, height: this.height,
-        crop: 'thumb', gravity: 'face', effect: 'saturation:50'
+        crop: 'thumb'
       }));
     }
   }

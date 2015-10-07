@@ -94,17 +94,23 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/jquery-ui/ui/widget.js',
     config.bowerPath + '/blueimp-file-upload/js/jquery.iframe-transport.js',
     config.bowerPath + '/blueimp-file-upload/js/jquery.fileupload.js',
-    config.bowerPath + '/cloudinary/js/jquery.cloudinary.js'
+    config.bowerPath + '/cloudinary/js/jquery.cloudinary.js',
+    config.bowerPath + '/tinycolor/tinycolor.js',
+    config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.js'
+
+
   ]).pipe(gulp.dest(config.libsDestPath));
 
   gulp.src([
-    config.nodeModulesPath + '/systemjs/dist/system.js'
+    config.nodeModulesPath + '/systemjs/dist/system.js',
+    config.nodeModulesPath + '/systemjs/dist/system-polyfills.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   //Bower CSS
   gulp.src([config.bowerPath + '/bootstrap/dist/css/bootstrap.min.css',
       config.bowerPath + '/metisMenu/dist/metisMenu.min.css',
-      config.bowerPath + '/font-awesome/css/font-awesome.min.css'
+      config.bowerPath + '/font-awesome/css/font-awesome.min.css',
+      config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.css'
     ])
     .pipe(gulp.dest(config.cssDestPath));
 

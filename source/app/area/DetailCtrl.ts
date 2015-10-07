@@ -1,11 +1,12 @@
 import {Inject} from '../utils/di';
 import {IArea} from './IArea';
 
+
 export class DetailCtrl {
   private area: IArea;
 
   constructor(
-    @Inject('$scope') private $scope: angular.IScope,
+    @Inject('$scope') private $scope,
     @Inject('$stateParams') private $stateParams,
     @Inject('Area') private Area
     ) {
@@ -20,7 +21,22 @@ export class DetailCtrl {
     });
   }
 
+  private areaform;
+
+  isValidAndSubmitted(inputName: string) {
+    if (this.$scope.areaform[inputName]) {
+      return this.$scope.areaform[inputName].$invalid && this.$scope.areaform.$submitted;
+    }
+    return false;
+  }
+
   saveArea() {
-    this.Area.update(this.area.id, {area: this.area});
+    if (this.$scope.areaform.$valid) {
+      console.log("is valid", this.$scope.areaform.$submitted);
+      this.Area.update(this.area.id, { area: this.area });
+    }
+    else{
+      $('input.ng-invalid').first().focus();
+    }
   }
 }
