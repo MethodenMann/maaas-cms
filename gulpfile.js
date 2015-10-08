@@ -98,6 +98,7 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/tinycolor/tinycolor.js',
     config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.js',
     config.bowerPath + '/tinymce/tinymce.min.js',
+    config.bowerPath + '/tinymce/plugins/image/plugin.min.js',
     config.bowerPath + '/tinymce/themes/modern/theme.min.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 

@@ -18,6 +18,7 @@ System.config({
     'angularjs-color-picker': 'libs/angularjs-color-picker.min.js',
     'devise': 'libs/devise-min.js',
     'tinymce': 'libs/tinymce.min.js',
-    'tinymce-theme': 'libs/theme.min.js'
+    'tinymce-theme': 'libs/theme.min.js',
+    'plugin': 'libs/plugin.min.js'
   }
 });
