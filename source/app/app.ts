@@ -39,6 +39,21 @@ leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {
   AuthProvider.registerPath('http://localhost:3000/users.json');
 });
 
+// leApp.run(function ($rootScope, Auth, $state) {
+//   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+//     if (toState.data && toState.data.ignoreLogin) {
+//       console.log('ignoring login!');
+//     } else {
+//       if (!Auth.isAuthenticated()) {
+//         console.log('user is not authenticated!');
+//         event.preventDefault();
+//         $state.go('login');
+//       } else {
+//         console.log('user is authenticated!');
+//       }
+//     }
+//   });
+// });
 
 leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
   $translateProvider.useLoader('$translatePartialLoader', {
