@@ -1,5 +1,4 @@
 export class ImageUploadDirective {
-
   private static selector = 'image-upload';
   private static template = '<div id="uploadbutton" class="fileUpload btn btn-outline btn-success"> {{ \'imageupload_button\' | translate }} </div>';
   private static replace = true;
@@ -14,7 +13,9 @@ export class ImageUploadDirective {
     var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
       cloud_name: 'nmsg'
     });
+
     element.find('#uploadbutton').append(imageTag);
+
     imageTag.bind('cloudinarydone', (e, data) => {
       var emitInfos = {
          id: $scope.ctrl.imageId,
