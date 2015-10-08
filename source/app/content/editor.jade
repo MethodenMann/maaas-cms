@@ -12,11 +12,16 @@ script(type='text/javascript').
 
   config.plugins = "image";
 
-  config.image_list = [
-    {title: 'My image 1', value: 'http://res.cloudinary.com/nmsg/image/upload/v1444230172/nf3ydtedojcgt5wunblr.jpg'},
-    {title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'}
+  var list = [
+       {title: 'Dog', value: 'mydog.jpg'},
+       {title: 'Cat', value: 'mycat.gif'}
   ]
 
+  config.image_list = function(success) {
+    console.log("HERE")
+    success(list);
+    list.push({title: 'oh', value: 'ah.jpg'})
+  }
 
   console.log("BLA");
-  tinymce.init(config);
+  myEditor = tinymce.init(config);

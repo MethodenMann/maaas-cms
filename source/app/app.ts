@@ -13,9 +13,6 @@ import 'js-data-angular';
 
 import 'devise';
 import 'angularjs-color-picker';
-import 'tinymce';
-import 'tinymce-theme';
-import 'plugin';
 
 import {makeDirective, makeSelector} from './utils/component';
 
