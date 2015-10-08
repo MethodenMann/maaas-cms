@@ -1,0 +1,13 @@
+h1 Content details
+
+h2 Images:
+
+image-upload(image-id='ctrl.backgroundImageId')
+image-load(image-id='ctrl.backgroundImageId' height='100')
+br
+{{ctrl.imageList}}
+
+{{ctrl.backgroundImageId}}
+image-load(ng-repeat="id in ctrl.ids" image-id='id' height='100')
+
+mas-tinymce-component(image-list="ctrl.imageList")

@@ -6,7 +6,7 @@ export class ImageUploadDirective {
 
   private static options = {
     bindToController: {
-      imageId: '@'
+      imageId: '='
     }
   };
 
@@ -14,11 +14,14 @@ export class ImageUploadDirective {
     var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', { cloud_name: 'nmsg' });
     element.find('#uploadbutton').append(imageTag);
     imageTag.bind('cloudinarydone', (e, data) => {
-          var emitInfos = {
-             id: $scope.ctrl.imageId,
-             cloudId: data.result.public_id
-          };
-          $scope.$emit('imageUploaded', emitInfos);
+      var emitInfos = {
+         id: $scope.ctrl.imageId,
+         cloudId: data.result.public_id
+      };
+      $scope.$emit('imageUploaded', emitInfos);
+
+      $scope.ctrl.imageId = data.result.public_id;
+      $scope.$apply();
     });
   }
 }

@@ -8,7 +8,7 @@ export class ImageLoadDirective {
 
   private static options = {
     bindToController: {
-      imageId: '@',
+      imageId: '=',
       width: '@',
       height: '@'
     }
@@ -32,7 +32,7 @@ export class ImageLoadDirective {
     this.element.html('');
     this.element.append(thumbnailTag);
 
-    if (this.imageId !== '') {
+    if (this.imageId && this.imageId !== '') {
       thumbnailTag.append($.cloudinary.image(this.imageId, {
         format: 'jpg', width: this.width, height: this.height,
         crop: 'thumb'

@@ -15,10 +15,10 @@ export class DetailCtrl {
       this.area = data;
     });
 
-    $scope.$on('imageUploaded', (event, mass) => {
-      this.area[mass.id] = mass.cloudId;
-      $scope.$apply(); // ? :-/
-    });
+    // $scope.$on('imageUploaded', (event, mass) => {
+    //   this.area[mass.id] = mass.cloudId;
+    //   $scope.$apply(); // ? :-/
+    // });
   }
 
   private areaform;
