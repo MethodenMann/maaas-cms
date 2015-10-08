@@ -7,16 +7,24 @@ import {makeDirective, makeSelector} from '../utils/component';
 import {GetMasterRoute} from '../master/RouteHelper';
 
 export function loadArea(app) {
+  var componentName = 'area';
   app.controller('OverviewCtrl', OverviewCtrl);
   app.controller('DetailCtrl', DetailCtrl);
   app.controller('CreateCtrl', CreateCtrl);
 
   app.directive(makeSelector(AreaButtonDirective), makeDirective(AreaButtonDirective));
 
+
+  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart(componentName);
+  });
+
+
+
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('cms.area', GetMasterRoute('area')
-    )
+      )
       .state('cms.area.overview', {
       url: '/area/overview',
       templateUrl: './app/area/views/overview.html',

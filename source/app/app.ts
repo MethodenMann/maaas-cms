@@ -38,7 +38,7 @@ leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {
 
 
 leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
-  var components = ['area', 'common/imagemanagement']
+  var components = ['common/imagemanagement']
   angular.forEach(components, (component) => {
     $translatePartialLoaderProvider.addPart(component);
   });
