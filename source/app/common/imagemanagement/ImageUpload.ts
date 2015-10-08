@@ -1,7 +1,7 @@
 export class ImageUploadDirective {
 
   private static selector = 'image-upload';
-  private static template = '<div id="uploadbutton" class="fileUpload btn btn-outline btn-success"> Bild Hochladen </div>';
+  private static template = '<div id="uploadbutton" class="fileUpload btn btn-outline btn-success"> {{ \'imageupload_button\' | translate }} </div>';
   private static replace = true;
 
   private static options = {

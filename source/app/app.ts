@@ -38,7 +38,7 @@ leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {
 
 
 leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
-  var components = ['area', 'common']
+  var components = ['area', 'common/imagemanagement']
   angular.forEach(components, (component) => {
     $translatePartialLoaderProvider.addPart(component);
   });
@@ -46,7 +46,7 @@ leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: 'app/{part}/translations/{lang}.json'
   });
-  
+
   $translateProvider.useSanitizeValueStrategy(null);
   $translateProvider.preferredLanguage('de');
   $translateProvider.useLocalStorage();

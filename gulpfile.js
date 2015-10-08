@@ -136,11 +136,10 @@ gulp.task('watch', function() {
   gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
   gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass']);
   gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets']);
+  gulp.watch(config.baseSrcPath + '/app/**/*.json', ['copyassets']);
 
   gulp.watch([
-    config.baseDestPath + '/**/*.html',
-    config.baseDestPath + '/**/*.js',
-    config.baseDestPath + '/**/*.css'
+    config.baseDestPath + '/**/*.*'
   ]).on('change', function(file) {
     gulp.src(file.path)
       .pipe(connect.reload());
