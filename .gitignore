@@ -33,3 +33,4 @@ tmp
 /atom_out
 source/typings
 source/app/**/*.js
+source/app/**/*.js.map

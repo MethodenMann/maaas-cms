@@ -1,4 +1,5 @@
 import {loadArea} from './area/Area';
+import {loadBeacon} from './beacon/Beacon';
 import {loadMaster} from './master/Master';
 import {loadJsDataConfig} from './jsDataConfig';
 import {loadImageManagement} from './common/imagemanagement/ImageManagement';
@@ -14,4 +15,5 @@ export function loadApp(app) {
   loadLogin(app);
   loadRegistration(app);
   loadContent(app);
+  loadBeacon(app);
 }

@@ -32,10 +32,9 @@ export class DetailCtrl {
 
   saveArea() {
     if (this.$scope.areaform.$valid) {
-      console.log("is valid", this.$scope.areaform.$submitted);
       this.Area.update(this.area.id, { area: this.area });
-    }
-    else{
+      alert('Gespeichert'); //TODO: anders machen
+    } else {
       $('input.ng-invalid').first().focus();
     }
   }
