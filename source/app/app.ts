@@ -25,7 +25,10 @@ import {makeDirective, makeSelector} from './utils/component';
 
 import {loadApp} from './loadApp';
 
-var leApp = angular.module('maaas', ['ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router', 'Devise', 'color.picker']);
+var leApp = angular.module('maaas', [
+  'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
+  'Devise', 'color.picker'
+]);
 
 leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {
   angular.extend(DSHttpAdapterProvider.defaults, {
@@ -38,11 +41,6 @@ leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {
 
 
 leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
-  var components = ['common/imagemanagement']
-  angular.forEach(components, (component) => {
-    $translatePartialLoaderProvider.addPart(component);
-  });
-
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: 'app/{part}/translations/{lang}.json'
   });
