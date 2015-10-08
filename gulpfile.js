@@ -79,10 +79,20 @@ gulp.task('copyassets', function() {
   gulp.src([config.baseSrcPath + '/img/**/*.*'])
     .pipe(gulp.dest(config.baseDestPath + '/img/'));
 
+
+    //Translations
+    gulp.src([config.baseSrcPath + '/app/**/*.json'])
+      .pipe(gulp.dest(config.baseDestPath + '/app/'));
+
   //Bower Libs
   gulp.src([
     config.bowerPath + '/angular/angular.min.js',
     config.bowerPath + '/angular-resource/angular-resource.min.js',
+    config.bowerPath + '/angular-cookies/angular-cookies.min.js',
+    config.bowerPath + '/angular-translate/angular-translate.min.js',
+    config.bowerPath + '/angular-translate-storage-local/angular-translate-storage-local.min.js',
+    config.bowerPath + '/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js',
+    config.bowerPath + '/angular-translate-loader-partial/angular-translate-loader-partial.min.js',
     config.bowerPath + '/angular-ui-router/release/angular-ui-router.min.js',
     config.bowerPath + '/jquery/dist/jquery.min.js',
     config.bowerPath + '/js-data/dist/js-data.min.js',
