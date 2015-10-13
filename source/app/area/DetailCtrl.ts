@@ -1,7 +1,6 @@
 import {Inject} from '../utils/di';
 import {IArea} from './IArea';
 
-
 export class DetailCtrl {
   private area: IArea;
 
@@ -13,11 +12,6 @@ export class DetailCtrl {
 
     Area.find($stateParams.areaId).then((data) => {
       this.area = data;
-    });
-
-    $scope.$on('imageUploaded', (event, mass) => {
-      this.area[mass.id] = mass.cloudId;
-      $scope.$apply(); // ? :-/
     });
   }
 
