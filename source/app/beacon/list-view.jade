@@ -1,0 +1,12 @@
+h1 {{ 'beacon_list_title' | translate }}
+span {{ 'beacon_list_description' | translate }}
+div(ui-i18n="'de'")
+  div.beaconGrid(ui-grid="ctrl.gridOptions" ui-grid-selection ui-grid-edit)
+  
+button.btn.btn-primary( ng-click="ctrl.DeleteSelected()" ng-disabled="ctrl.gridApi.selection.getSelectedRows().length <= 0")
+  i.glyphicon.glyphicon-trash
+  | {{ 'beacon_list_deletebtn' | translate }}
+
+button.btn.btn-primary.btn(ng-click='ctrl.SyncWithKontaktIO()') 
+  i.glyphicon.glyphicon-download
+  | 

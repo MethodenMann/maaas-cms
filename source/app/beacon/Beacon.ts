@@ -1,11 +1,17 @@
-import {OverviewCtrl} from './OverviewCtrl'
+import {ListView} from './list-view';
+import {KontaktIoService} from './kontaktio-service';
 import {makeDirective, makeSelector} from '../utils/component';
 import {GetMasterRoute} from '../master/RouteHelper';
-import {KontaktIoService} from './KontaktIoService';
+
 
 export function loadBeacon(app) {
   var componentName = 'beacon';
-  app.controller('BeaconOverviewCtrl', OverviewCtrl);
+
+  app.directive(
+    makeSelector(ListView),
+    makeDirective(ListView));
+
+
   app.service('KontaktIoService', KontaktIoService);
 
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
@@ -16,11 +22,9 @@ export function loadBeacon(app) {
     $stateProvider
       .state(`cms.${componentName}`, GetMasterRoute(componentName)
       )
-      .state(`cms.${componentName}.overview`, {
-      url: '/overview',
-      templateUrl: './app/beacon/views/overview.html',
-      controller: 'BeaconOverviewCtrl',
-      controllerAs: 'ctrl'
-    })
+      .state(`cms.${componentName}.list`, {
+      url: '/list',
+      template: '<mas-beacon-list-view/>'
+    });
   });
 }

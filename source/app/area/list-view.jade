@@ -1,11 +1,11 @@
 h1 {{ 'area_title' | translate }}
-.area-overview
+.area-list
   .row
     .col-md-4.top30(ng-repeat-start='area in ctrl.areas')
-      area-button(area="area")
+      mas-area-button(area="area")
     .clearfix(ng-if='$index%3==2')
     div(ng-repeat-end='')
     .col-md-4.top30.text-center
       a(ui-sref="cms.area.create")
-        button.btn.btn-default.maaas-add-btn(type='button')
+        button.btn.btn-default.mas-add-btn(type='button')
           i.fa.fa-plus

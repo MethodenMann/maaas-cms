@@ -21,6 +21,7 @@ System.config({
     'js-data-http': 'libs/js-data-http.min.js',
     'js-data-angular': 'libs/js-data-angular.min.js',
     'angularjs-color-picker': 'libs/angularjs-color-picker.min.js',
-    'devise': 'libs/devise-min.js'
+    'devise': 'libs/devise-min.js',
+    'angular-ui-grid': 'libs/ui-grid.min.js'
   }
 });
