@@ -1,3 +1,8 @@
 {
-  "beacon_title": "das beacon"
+  "beacon_list_title": "Beacon",
+  "beacon_list_description": "Verknüpfen Sie die Beacons mit einer Area.",
+  "beacon_list_sync_btn": "Mit Kontakt.io synchronisieren",
+  "beacon_list_delete_btn": "Löschen",
+  "beacon_list_columnheader_name": "Name",
+  "beacon_list_columnheader_alias": "Beschreibung."
 }

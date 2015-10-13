@@ -14,9 +14,11 @@ export class ListView {
   constructor(
     @Inject('$scope') private $scope,
     @Inject('Beacon') private Beacon,
-    @Inject('KontaktIoService') private KontaktIoService
+    @Inject('KontaktIoService') private KontaktIoService,
+    @Inject('$filter') private $filter
 
     ) {
+
     this.InitializeGrid();
     this.RetrieveAndBindBeacons();
   }
@@ -68,8 +70,8 @@ export class ListView {
         });
       },
       columnDefs: [
-        { name: 'Unique ID', field: 'uniqueId', enableCellEdit: false },
-        { name: 'Beschreibung', field: 'description' },
+        { name: this.$filter('translate')('beacon_list_columnheader_name'), field: 'uniqueId', enableCellEdit: false },
+        { name: this.$filter('translate')('beacon_list_columnheader_alias'), field: 'description' },
         { name: 'Major', field: 'major', enableCellEdit: false },
         { name: 'Minor', field: 'minor', enableCellEdit: false },
         { name: 'uuid', field: 'uuid' }
