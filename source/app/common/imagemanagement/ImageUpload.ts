@@ -25,7 +25,6 @@ export class ImageUploadDirective {
     .then((data) => {
       this.$scope.$emit('imageUploaded', data);
       this.imageMetaData = data;
-      this.$scope.$apply();
     });
   }
 

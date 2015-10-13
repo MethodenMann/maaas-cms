@@ -8,5 +8,8 @@
       image-upload(image-id='ctrl.backgroundImageId')
       br
       div.pull-left(ng-repeat="image in ctrl.imageList")
-        image-load(image-meta-data='image.imageMetaData' height='100')
+        image-load(image-meta-data='image.medium' height='100')
         | {{$index}}
+  .row
+    .col-md-10
+      button(ng-click="ctrl.save()") Save
