@@ -27,7 +27,7 @@ import {loadApp} from './loadApp';
 
 var leApp = angular.module('maaas', [
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
-  'Devise', 'color.picker', 'ui.grid'
+  'Devise', 'color.picker', 'ui.grid', 'ui.grid.selection', 'ui.grid.edit'
 ]);
 
 leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {

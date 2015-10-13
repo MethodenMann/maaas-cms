@@ -1,32 +1,14 @@
 h1 {{ 'beacon_title' | translate }}
-.table-responsive
-  table.table.table-striped
-    tr
-      th
-      th ID
-      th Beschreibung
-      th UUID
-      th Major
-      th Minor
-      th
-    tr(ng-repeat='beacon in ctrl.beacons')
-      td 
-        span.ico-ibeacon
-      td {{beacon.id}}
-      td {{beacon.description}}
-      td {{beacon.uuid}}
-      td {{beacon.major}}
-      td {{beacon.minor}}
-      td 
-        button.btn.fa.fa-trash-o(ng-click="ctrl.Delete(beacon)")
-      
-      
-      
-      
-button.btn(ng-click='ctrl.SyncWithKontaktIO()') Sync with Kontakt.io
 
 div(ui-i18n="'de'")
-  div.beaconGrid(ui-grid="ctrl.gridOptions" ui-grid-selection="")
+  div.beaconGrid(ui-grid="ctrl.gridOptions" ui-grid-selection ui-grid-edit)
   
-  
-button(on-click="console.log(ctrl.gridApi.selection.getSelectedRows());") test
+a.btn(href="" ng-disabled="ctrl.gridApi.selection.getSelectedRows().length <= 0" ng-click="ctrl.DeleteSelected()")
+  i.glyphicon.glyphicon-trash
+  |  Löschen
+
+a.btn(ng-click='ctrl.SyncWithKontaktIO()') 
+  i.glyphicon.glyphicon-download
+  | Sync with Kontakt.io
+
+| {{ctrl.b2b}}
