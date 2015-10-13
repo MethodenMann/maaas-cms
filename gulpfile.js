@@ -126,7 +126,7 @@ gulp.task('copyassets', function() {
       config.bowerPath + '/font-awesome/css/font-awesome.min.css',
       config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.css',
       config.bowerPath + '/angular-ui-grid/ui-grid.min.css',
-      config.bowerPath + '/angular-ui-grid/**/*.{ttf,woff,svg}'
+      config.bowerPath + '/angular-ui-grid/**/*.{ttf,woff,svg}',
       config.bowerPath + '/tinymce/skins/lightgray/content.min.css',
       config.bowerPath + '/tinymce/skins/lightgray/skin.min.css'
     ])
