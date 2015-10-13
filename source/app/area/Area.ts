@@ -1,18 +1,30 @@
-// import {app} from '../app';
-import {OverviewCtrl} from './OverviewCtrl';
-import {DetailCtrl} from './DetailCtrl';
-import {CreateCtrl} from './CreateCtrl';
-import {AreaButtonDirective} from './AreaButtonDirective';
+import {ListView} from './list-view';
+import {DetailView} from './detail-update-view';
+import {DetailCreateView} from './detail-create-view';
+
+import {AreaButtonComponent} from './area-button-component';
 import {makeDirective, makeSelector} from '../utils/component';
 import {GetMasterRoute} from '../master/RouteHelper';
 
 export function loadArea(app) {
   var componentName = 'area';
-  app.controller('AreaOverviewCtrl', OverviewCtrl);
-  app.controller('AreaDetailCtrl', DetailCtrl);
-  app.controller('AreaCreateCtrl', CreateCtrl);
 
-  app.directive(makeSelector(AreaButtonDirective), makeDirective(AreaButtonDirective));
+  app.directive(
+    makeSelector(ListView),
+    makeDirective(ListView));
+
+  app.directive(
+    makeSelector(DetailView),
+    makeDirective(DetailView));
+
+    app.directive(
+      makeSelector(DetailCreateView),
+      makeDirective(DetailCreateView));
+
+
+  app.directive(
+    makeSelector(AreaButtonComponent),
+    makeDirective(AreaButtonComponent));
 
 
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
@@ -25,23 +37,17 @@ export function loadArea(app) {
     $stateProvider
       .state('cms.area', GetMasterRoute('area')
       )
-      .state('cms.area.overview', {
-      url: '/overview',
-      templateUrl: './app/area/views/overview.html',
-      controller: 'AreaOverviewCtrl',
-      controllerAs: 'ctrl'
+      .state('cms.area.list', {
+      url: '/list',
+      template: '<mas-list-view/>'
     })
       .state('cms.area.detail', {
       url: '/{areaId:[0-9]{1,8}}',
-      templateUrl: './app/area/views/detail.html',
-      controller: 'AreaDetailCtrl',
-      controllerAs: 'ctrl'
+      template: '<mas-detail-update-view/>'
     })
       .state('cms.area.create', {
       url: '/create',
-      templateUrl: './app/area/views/detail.html',
-      controller: 'AreaCreateCtrl',
-      controllerAs: 'ctrl'
+      template: '<mas-detail-create-view/>'
     });
   });
 }

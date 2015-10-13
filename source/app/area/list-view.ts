@@ -1,7 +1,11 @@
 import {Inject} from '../utils/di';
-import {IArea} from './IArea';
+import {IArea} from './iarea';
 
-export class OverviewCtrl {
+export class ListView {
+  private static selector = 'mas-list-view';
+  private static templateUrl = './app/area/list-view.html';
+
+
   private areas: IArea[] = [];
 
   constructor(
