@@ -24,7 +24,10 @@ export function loadBeacon(app) {
       )
       .state(`cms.${componentName}.list`, {
       url: '/list',
-      template: '<mas-beacon-list-view/>'
+      template: '<mas-beacon-list-view/>',
+      ncyBreadcrumb: {
+        label: 'asd'
+      }
     });
   });
 }
