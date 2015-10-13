@@ -3,6 +3,8 @@ import {IArea} from './IArea';
 
 export class DetailCtrl {
   private area: IArea;
+  private backgroundImageMetaData: any;
+  private stickerImageMetaData: any;
 
   constructor(
     @Inject('$scope') private $scope,

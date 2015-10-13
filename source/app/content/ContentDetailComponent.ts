@@ -9,14 +9,30 @@ export class ContentDetailComponent {
   private ids: String[] = [];
 
   constructor(
-    // @Inject('Auth') private Auth,
-    // @Inject('$state') private $state
-    @Inject('$scope') private $scope
+    @Inject('$scope') private $scope,
+    @Inject('Content') private Content,
+    @Inject('$stateParams') private $stateParams
   ) {
-    this.imageList.push({title: 'Dog', value: 'mydog.jpg'});
-    this.imageList.push({title: 'Cat', value: 'mycat.jpg'});
+    Content.find($stateParams.contentId).then((data) => {
+      var list = []
+      data.media.forEach(medium => {
+        var url = $.cloudinary.url(medium.publicId, {
+          format: 'jpg', width: 100, height: 100, crop: 'thumb'
+        });
+        list.push({title: "a", value: url, imageMetaData: medium});
+      });
+      this.imageList = list;
+    });
 
-    this.ids.push("ud0ouj3bzzqekslmxcil");
-    this.ids.push("pizbmhgxfwpyylxhjdmq");
+    $scope.$on('imageUploaded', (e, imageMetaData) => {
+      var url = $.cloudinary.url(imageMetaData.publicId, {
+        format: 'jpg', width: 100, height: 100, crop: 'thumb'
+      });
+      this.imageList.push({title: this.imageList.length, value: url, imageMetaData: imageMetaData});
+    });
+
+    // this.imageList.push({title: 'Bild', value: 'http://res.cloudinary.com/nmsg/image/upload/v1444722014/xvcvryjuwjseytucowxw.png', imageMetaData: {publicId: 'xvcvryjuwjseytucowxw'}});
+    // this.imageList.push({title: 'Bild', value: 'http://res.cloudinary.com/nmsg/image/upload/v1444722014/xvcvryjuwjseytucowxw.png', imageMetaData: {publicId: 'xvcvryjuwjseytucowxw'}});
+    // this.imageList.push({title: 'Bild', value: 'http://res.cloudinary.com/nmsg/image/upload/v1444722014/xvcvryjuwjseytucowxw.png', imageMetaData: {publicId: 'xvcvryjuwjseytucowxw'}});
   }
 }

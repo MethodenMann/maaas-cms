@@ -1,13 +1,12 @@
-h1 Content details
-
-h2 Images:
-
-image-upload(image-id='ctrl.backgroundImageId')
-image-load(image-id='ctrl.backgroundImageId' height='100')
-br
-{{ctrl.imageList}}
-
-{{ctrl.backgroundImageId}}
-image-load(ng-repeat="id in ctrl.ids" image-id='id' height='100')
-
-mas-tinymce-component(image-list="ctrl.imageList")
+.container
+  h1 Content details
+  h2 Images:
+  .row
+    .col-md-6
+      mas-tinymce-component(image-list="ctrl.imageList")
+    .col-md-4
+      image-upload(image-id='ctrl.backgroundImageId')
+      br
+      div.pull-left(ng-repeat="image in ctrl.imageList")
+        image-load(image-meta-data='image.imageMetaData' height='100')
+        | {{$index}}
