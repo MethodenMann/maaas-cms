@@ -1,0 +1,15 @@
+.beaconGrid {
+  width: 100%;
+  height: 250px;
+}
+
+.ico-ibeacon:before {
+  content: "";
+  display: block;
+  background: url("../img/ico-standard-ibeacon.png") no-repeat;
+  display: block;
+  width: 45px;
+  height: 37px;
+  float: left;
+  margin: 0 6px 0 0;
+}

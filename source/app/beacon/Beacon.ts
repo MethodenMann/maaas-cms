@@ -1,4 +1,4 @@
-import {OverviewCtrl} from './OverviewCtrl'
+import {OverviewCtrl} from './OverviewCtrl';
 import {makeDirective, makeSelector} from '../utils/component';
 import {GetMasterRoute} from '../master/RouteHelper';
 import {KontaktIoService} from './KontaktIoService';
@@ -21,6 +21,6 @@ export function loadBeacon(app) {
       templateUrl: './app/beacon/views/overview.html',
       controller: 'BeaconOverviewCtrl',
       controllerAs: 'ctrl'
-    })
+    });
   });
 }

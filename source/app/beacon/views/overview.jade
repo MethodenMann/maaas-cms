@@ -1,4 +1,4 @@
-h1 Beaons1
+h1 {{ 'beacon_title' | translate }}
 .table-responsive
   table.table.table-striped
     tr
@@ -8,6 +8,7 @@ h1 Beaons1
       th UUID
       th Major
       th Minor
+      th
     tr(ng-repeat='beacon in ctrl.beacons')
       td 
         span.ico-ibeacon
@@ -16,9 +17,16 @@ h1 Beaons1
       td {{beacon.uuid}}
       td {{beacon.major}}
       td {{beacon.minor}}
+      td 
+        button.btn.fa.fa-trash-o(ng-click="ctrl.Delete(beacon)")
       
       
       
       
 button.btn(ng-click='ctrl.SyncWithKontaktIO()') Sync with Kontakt.io
+
+div(ui-i18n="'de'")
+  div.beaconGrid(ui-grid="ctrl.gridOptions" ui-grid-selection="")
   
+  
+button(on-click="console.log(ctrl.gridApi.selection.getSelectedRows());") test

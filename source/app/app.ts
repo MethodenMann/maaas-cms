@@ -19,7 +19,7 @@ import 'js-data-angular';
 
 import 'devise';
 import 'angularjs-color-picker';
-
+import 'angular-ui-grid';
 import {makeDirective, makeSelector} from './utils/component';
 
 
@@ -27,7 +27,7 @@ import {loadApp} from './loadApp';
 
 var leApp = angular.module('maaas', [
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
-  'Devise', 'color.picker'
+  'Devise', 'color.picker', 'ui.grid'
 ]);
 
 leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {

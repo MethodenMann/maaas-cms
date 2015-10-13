@@ -28,6 +28,7 @@
     "metisMenu": "~2.2.0",
     "angular-color-picker": "angularjs-color-picker#~0.6.8",
     "angular-translate-loader-partial": "~2.8.1",
-    "angular-translate-storage-local": "~2.8.1"
+    "angular-translate-storage-local": "~2.8.1",
+    "angular-ui-grid": "~3.0.7"
   }
 }

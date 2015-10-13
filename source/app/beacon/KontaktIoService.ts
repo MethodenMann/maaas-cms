@@ -37,7 +37,7 @@ export class KontaktIoService {
     this.LoadKontaktIoBeacons().then(response => {
       var kontaktBeacons = response.data.devices;
       angular.forEach(kontaktBeacons, kontaktBeacon => {
-        var b = this.GetBeaconById(beacons, kontaktBeacon.uniqueId)
+        var b = this.GetBeaconById(beacons, kontaktBeacon.uniqueId);
         if (b == null) {
           result.push(this.ConvertKontaktBeacon(kontaktBeacon));
         }
