@@ -1,7 +1,11 @@
 import {Inject} from '../utils/di';
 import {IBeacon} from './IBeacon';
 
-export class OverviewCtrl {
+export class ListView {
+  private static selector = 'mas-beacon-list-view';
+  private static templateUrl = './app/beacon/list-view.html';
+
+
 
   private beacons: IBeacon[] = [];
   private gridOptions: any;

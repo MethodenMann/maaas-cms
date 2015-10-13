@@ -3,7 +3,7 @@ import {IArea} from './iarea';
 import {DetailAbstract} from './detail-abstract';
 
 export class DetailView extends DetailAbstract {
-  private static selector = 'mas-detail-update-view';
+  private static selector = 'mas-area-detail-update-view';
   private static templateUrl = './app/area/detail-view.html';
 
 

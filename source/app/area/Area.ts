@@ -39,15 +39,15 @@ export function loadArea(app) {
       )
       .state('cms.area.list', {
       url: '/list',
-      template: '<mas-list-view/>'
+      template: '<mas-area-list-view/>'
     })
       .state('cms.area.detail', {
       url: '/{areaId:[0-9]{1,8}}',
-      template: '<mas-detail-update-view/>'
+      template: '<mas-area-detail-update-view/>'
     })
       .state('cms.area.create', {
       url: '/create',
-      template: '<mas-detail-create-view/>'
+      template: '<mas-area-detail-create-view/>'
     });
   });
 }

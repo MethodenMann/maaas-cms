@@ -2,7 +2,7 @@ import {Inject} from '../utils/di';
 import {IArea} from './iarea';
 
 export class ListView {
-  private static selector = 'mas-list-view';
+  private static selector = 'mas-area-list-view';
   private static templateUrl = './app/area/list-view.html';
 
 
