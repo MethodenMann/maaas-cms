@@ -71,7 +71,15 @@ export function loadJsDataConfig(app) {
 
   app.factory('Medium', function (DS) {
     return DS.defineResource({
-      name: 'media'
+      name: 'media',
+      relations: {
+        belongsTo: {
+          content: {
+            localField: 'medium',
+            localKey: 'mediumableId'
+          }
+        }
+      }
     });
   });
 }

@@ -1,10 +1,13 @@
 import {Inject} from '../utils/di';
+import {IContent} from './IContent';
+
+declare var tinyMCE: any;
 
 export class ContentDetailComponent {
   private static selector = 'mas-content-detail-component';
   private static templateUrl = './app/content/content-detail-component.html';
 
-  private content: any;
+  private content: IContent;
   private imageList: any[] = [];
   private backgroundImageId: String;
   private ids: String[] = [];
@@ -12,10 +15,14 @@ export class ContentDetailComponent {
   constructor(
     @Inject('$scope') private $scope,
     @Inject('Content') private Content,
+    @Inject('Medium') private Medium,
     @Inject('$stateParams') private $stateParams
   ) {
+
     Content.find($stateParams.contentId).then((data) => {
       this.content = data;
+
+      console.log(this.content.media);
 
       var list = []
       data.media.forEach(medium => {
@@ -28,6 +35,9 @@ export class ContentDetailComponent {
     });
 
     $scope.$on('imageUploaded', (e, medium) => {
+      medium.mediumableId = this.content.id;
+      medium.mediumableType = 'Content';
+      Medium.update(medium.id, {medium: medium});
       var url = $.cloudinary.url(medium.publicId, {
         format: 'jpg', width: 100, height: 100, crop: 'thumb'
       });
@@ -36,12 +46,7 @@ export class ContentDetailComponent {
   }
 
   save() {
-    var mediumIds = [];
-    this.imageList.forEach(image => {
-      mediumIds.push(image.medium.id);
-    });
-    this.content.mediumIds = mediumIds;
-    this.content.media = undefined;
+    this.content.data = tinyMCE.editors[0].getContent();
     this.Content.update(this.content.id, {content: this.content});
   }
 }
