@@ -1,16 +1,16 @@
 .panel.panel-green
   .panel-heading
-    |   {{ 'area_details_title' | translate }}
+    |   {{ 'contents_details_title' | translate }}
   .panel-body
     form(name="areaform", role='form' novalidate)
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("name") }')
-        label {{ 'area_details_name_label' | translate }}
+        label {{ 'contents_details_title_label' | translate }}
         input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
-        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("name")') {{ 'area_details_name_help' | translate  }}
-        p.help-block(ng-show='ctrl.IsValidAndSubmitted("name")') {{ 'area_details_name_error' | translate }}
+        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("name")') {{ 'contents_details_title_help' | translate  }}
+        p.help-block(ng-show='ctrl.IsValidAndSubmitted("name")') {{ 'contents_details_title_error' | translate }}
 
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("name") }')
-        label {{ 'area_details_name_label' | translate }}
+        label {{ 'contents_details_title_label' | translate }}
         .row
           .col-md-6
             mas-tinymce-component(image-list="ctrl.imageList")
