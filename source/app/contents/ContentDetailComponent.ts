@@ -5,7 +5,7 @@ declare var tinyMCE: any;
 
 export class ContentDetailComponent {
   private static selector = 'mas-content-detail-component';
-  private static templateUrl = './app/content/content-detail-component.html';
+  private static templateUrl = './app/contents/content-detail-component.html';
 
   private content: IContent;
   private imageList: any[] = [];
@@ -21,7 +21,7 @@ export class ContentDetailComponent {
 
     // TODO fetch media differently
     Medium.findAll().then((data) => {
-      Content.find($stateParams.contentId).then((data) => {
+      Content.find($stateParams.id).then((data) => {
         this.content = data;
 
         tinyMCE.editors[0].setContent(this.content.data);
