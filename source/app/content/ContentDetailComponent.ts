@@ -24,6 +24,8 @@ export class ContentDetailComponent {
       Content.find($stateParams.contentId).then((data) => {
         this.content = data;
 
+        tinyMCE.editors[0].setContent(this.content.data);
+
         var list = []
         this.content.media.forEach(medium => {
           var url = $.cloudinary.url(medium.publicId, {
