@@ -17,9 +17,9 @@ export function loadArea(app) {
     makeSelector(DetailView),
     makeDirective(DetailView));
 
-    app.directive(
-      makeSelector(DetailCreateView),
-      makeDirective(DetailCreateView));
+  app.directive(
+    makeSelector(DetailCreateView),
+    makeDirective(DetailCreateView));
 
 
   app.directive(
@@ -35,19 +35,28 @@ export function loadArea(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('cms.area', GetMasterRoute('area')
-      )
-      .state('cms.area.list', {
+     .state('cms.area', GetMasterRoute('area')
+     )
+     .state('cms.area.list', {
       url: '/list',
-      template: '<mas-area-list-view/>'
+      template: '<mas-area-list-view/>',
+      ncyBreadcrumb: {
+        label: 'Bereich Übersicht'
+      }
     })
       .state('cms.area.detail', {
       url: '/{areaId:[0-9]{1,8}}',
-      template: '<mas-area-detail-update-view/>'
+      template: '<mas-area-detail-update-view/>',
+      ncyBreadcrumb: {
+        label: 'Bereich Bearbeiten'
+      }
     })
       .state('cms.area.create', {
       url: '/create',
-      template: '<mas-area-detail-create-view/>'
+      template: '<mas-area-detail-create-view/>',
+      ncyBreadcrumb: {
+        label: 'Neuer Bereich'
+      }
     });
   });
 }
