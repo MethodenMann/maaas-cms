@@ -1,4 +1,4 @@
-import {loadArea} from './area/Area';
+import {loadArea} from './areas/Area';
 import {loadBeacon} from './beacon/Beacon';
 import {loadMaster} from './master/Master';
 import {loadJsDataConfig} from './jsDataConfig';

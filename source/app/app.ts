@@ -67,6 +67,12 @@ leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
   $translateProvider.useLocalStorage();
 });
 
+leApp.config(function($breadcrumbProvider) {
+    $breadcrumbProvider.setOptions({
+      //includeAbstract: true
+    });
+  })
+
 
 loadApp(leApp);
 

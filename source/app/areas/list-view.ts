@@ -2,8 +2,8 @@ import {Inject} from '../utils/di';
 import {IArea} from './iarea';
 
 export class ListView {
-  private static selector = 'mas-area-list-view';
-  private static templateUrl = './app/area/list-view.html';
+  public static selector = 'mas-area-list-view';
+  public static templateUrl = './app/areas/list-view.html';
 
 
   private areas: IArea[] = [];

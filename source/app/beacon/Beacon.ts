@@ -1,7 +1,7 @@
 import {ListView} from './list-view';
 import {KontaktIoService} from './kontaktio-service';
 import {makeDirective, makeSelector} from '../utils/component';
-import {GetMasterRoute} from '../master/RouteHelper';
+import {RouteUtil} from '../master/route-util';
 
 
 export function loadBeacon(app) {
@@ -20,7 +20,7 @@ export function loadBeacon(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state(`cms.${componentName}`, GetMasterRoute(componentName)
+      .state(`cms.${componentName}`, RouteUtil.GetMasterRoute(componentName, 'Beacon')
       )
       .state(`cms.${componentName}.list`, {
       url: '/list',

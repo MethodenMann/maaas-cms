@@ -1,10 +1,10 @@
 import {Inject} from '../utils/di';
-import {IArea} from './iarea';
+import {IArea} from './IArea';
 import {DetailAbstract} from './detail-abstract';
 
-export class DetailView extends DetailAbstract {
-  private static selector = 'mas-area-detail-update-view';
-  private static templateUrl = './app/area/detail-view.html';
+export class DetailCreateView extends DetailAbstract {
+  public static selector = 'mas-area-detail-create-view';
+  public static templateUrl = './app/areas/detail-view.html';
 
 
   constructor(
@@ -15,15 +15,9 @@ export class DetailView extends DetailAbstract {
     super($scope, $stateParams, Area);
   }
 
-  LoadData() {
-    this.Area.find(this.$stateParams.areaId).then((data) => {
-      this.area = data;
-    });
-  }
-
   Save() {
     if (this.IsFormValid()) {
-      this.Area.update(this.area.id, { area: this.area });
+      this.Area.create({ area: this.area });
       alert('Gespeichert'); //TODO: make sexy
     } else {
       this.FocusFirstInputWithError();
