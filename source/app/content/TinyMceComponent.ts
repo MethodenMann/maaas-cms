@@ -37,7 +37,7 @@ export class TinyMceComponent {
     config.toolbar = 'undo redo | bold italic | link image';
     config.plugins = 'image';
     config.image_dimensions = false;
-    // config.height = 400;
+    config.height = 400;
 
     config.image_list = (success) => {
       console.log($scope.ctrl.imageList);
