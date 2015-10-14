@@ -19,19 +19,20 @@ export class ContentDetailComponent {
     @Inject('$stateParams') private $stateParams
   ) {
 
-    Content.find($stateParams.contentId).then((data) => {
-      this.content = data;
+    // TODO fetch media differently
+    Medium.findAll().then((data) => {
+      Content.find($stateParams.contentId).then((data) => {
+        this.content = data;
 
-      console.log(this.content.media);
-
-      var list = []
-      data.media.forEach(medium => {
-        var url = $.cloudinary.url(medium.publicId, {
-          format: 'jpg', width: 100, height: 100, crop: 'thumb'
+        var list = []
+        this.content.media.forEach(medium => {
+          var url = $.cloudinary.url(medium.publicId, {
+            format: 'jpg', width: 100, height: 100, crop: 'thumb'
+          });
+          list.push({title: "a", value: url, medium: medium});
         });
-        list.push({title: "a", value: url, medium: medium});
-      });
-      this.imageList = list;
+        this.imageList = list;
+      })
     });
 
     $scope.$on('imageUploaded', (e, medium) => {

@@ -50,6 +50,18 @@ export function loadJsDataConfig(app) {
             localKey: 'areaId',
             localField: 'area'
           }
+        },
+        hasMany: {
+          media: {
+            localField: 'media',
+            foreignKey: 'mediumableId',
+            get: function(Content, relationDef, content, orig) {
+              return DS.filter('media', {
+                mediumableId: content.id,
+                mediumableType: 'Content'
+              });
+            }
+          }
         }
       }
     });
