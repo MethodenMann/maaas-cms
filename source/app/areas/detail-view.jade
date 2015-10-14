@@ -1,0 +1,50 @@
+.panel.panel-green
+  .panel-heading
+    |   {{ 'areas_details_title' | translate }}
+  .panel-body
+    form(name="areaform", role='form' novalidate)
+      .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("name") }')
+        label {{ 'areas_details_name_label' | translate }}
+        input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
+        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("name")') {{ 'areas_details_name_help' | translate  }}
+        p.help-block(ng-show='ctrl.IsValidAndSubmitted("name")') {{ 'areas_details_name_error' | translate }}
+
+      .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("gototext") }')
+        label {{ 'areas_details_gototext_label' | translate }}
+        input.form-control(name="gototext" ng-model='ctrl.area.gotoText' required ng-minlength="5")
+        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("gototext")') {{ 'areas_details_gototext_help' | translate  }}
+        p.help-block(ng-show='ctrl.IsValidAndSubmitted("gototext")')  {{ 'areas_details_gototext_error' | translate }}
+
+      .form-group(ng-class='{ "has-error" :  ctrl.IsValidAndSubmitted("primarycolor") }')
+        label {{ 'areas_details_primarycolor_label' | translate }}
+        color-picker(name="primarycolor" ng-model="ctrl.area.primaryColor", color-picker-format='"hex"')
+        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("primarycolor")') {{ 'areas_details_primarycolor_help' | translate  }}
+        p.help-block(ng-show='ctrl.IsValidAndSubmitted("primarycolor")')  {{ 'areas_details_primarycolor_error' | translate }}
+
+      .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("secondarycolor")  }')
+        label {{ 'areas_details_secondarycolor_label' | translate }}
+        color-picker(name="secondarycolor" ng-model="ctrl.area.secondaryColor" color-picker-format='"hex"')
+        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("secondarycolor") ') {{ 'areas_details_secondarycolor_help' | translate  }}
+        p.help-block(ng-show='ctrl.IsValidAndSubmitted("secondarycolor") ')  {{ 'areas_details_secondarycolor_error' | translate }}
+
+      .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("backgroundimageid")  }')
+        label {{ 'areas_details_backgroundimage_label' | translate }}
+        div
+          image-upload(image-id='ctrl.area.backgroundImageId' required)
+          image-load( image-id='ctrl.area.backgroundImageId', height='100')
+          input(type="hidden" name="backgroundimageid" ng-model="ctrl.area.backgroundImageId" required)
+        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_help' | translate  }}
+        p.help-block(ng-show='ctrl.IsValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_error' | translate }}
+
+      .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("stickerimageid")  }')
+        label {{ 'areas_details_stickerimage_label' | translate }}
+        div
+          image-upload(image-id='ctrl.area.stickerImageId')
+          image-load( image-id='ctrl.area.stickerImageId', height='100')
+          input(type="hidden" name="stickerimageid" ng-model="ctrl.area.stickerImageId" required)
+        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_help' | translate  }}
+        p.help-block(ng-show='ctrl.IsValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_error' | translate }}
+
+      button.btn.btn-default(type='submit', ng-click='ctrl.Save()') Speichern
+
+script(src="/libs/tinycolor.js") //TODO: In SystemJS einbinden

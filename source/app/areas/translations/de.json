@@ -1,0 +1,22 @@
+{
+  "areas_title": "Area",
+  "areas_details_title": "Area Details",
+  "areas_details_name_label": "Name",
+  "areas_details_name_help": "Der Titel der Area, dieser erscheint oben",
+  "areas_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
+  "areas_details_gototext_label": "Gehe zu Text",
+  "areas_details_gototext_help": "Dieser Text wird für die Navigation verwendet",
+  "areas_details_gototext_error": "Bitte Geben Sie einen gülten Wert ein",
+  "areas_details_primarycolor_label": "Primäre Farbe",
+  "areas_details_primarycolor_help": "Hex-Code der Primären Farbe. Wird zB für den Titel der Area verwendet",
+  "areas_details_primarycolor_error": "Bitte Geben Sie einen gültigen Farbcode ein",
+  "areas_details_secondarycolor_label": "Sekundäre Farbe",
+  "areas_details_secondarycolor_help": "Hex-Code der Sekundären Farbe.",
+  "areas_details_secondarycolor_error": "Bitte Geben Sie einen gültigen Farbcode ein",
+  "areas_details_backgroundimage_label": "Hintergrundbild",
+  "areas_details_backgroundimage_help": "Dieses Bild erscheint im Hintergrund der Area",
+  "areas_details_backgroundimage_error": "Bitte laden sie ein Bild hoch",
+  "areas_details_stickerimage_label": "Sticker Bild",
+  "areas_details_stickerimage_help": "Das Stickerbild. Sollte rund Sein im SVG Format.",
+  "areas_details_stickerimage_error": "Bitte laden sie ein Bild hoch"
+}
