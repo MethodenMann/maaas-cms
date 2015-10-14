@@ -3,7 +3,7 @@ import {IBeacon} from './IBeacon';
 
 export class ListView {
   private static selector = 'mas-beacon-list-view';
-  private static templateUrl = './app/beacon/list-view.html';
+  private static templateUrl = './app/beacons/list-view.html';
 
 
 
@@ -70,8 +70,8 @@ export class ListView {
         });
       },
       columnDefs: [
-        { name: this.$filter('translate')('beacon_list_columnheader_name'), field: 'uniqueId', enableCellEdit: false },
-        { name: this.$filter('translate')('beacon_list_columnheader_alias'), field: 'description' },
+        { name: this.$filter('translate')('beacons_list_columnheader_name'), field: 'uniqueId', enableCellEdit: false },
+        { name: this.$filter('translate')('beacons_list_columnheader_alias'), field: 'description' },
         { name: 'Major', field: 'major', enableCellEdit: false },
         { name: 'Minor', field: 'minor', enableCellEdit: false },
         { name: 'uuid', field: 'uuid' }
