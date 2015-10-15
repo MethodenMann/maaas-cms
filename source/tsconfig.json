@@ -38,6 +38,8 @@
         "./app/master/master-view.ts",
         "./app/master/master.ts",
         "./app/master/route-util.ts",
+        "./app/quiz/list-view.ts",
+        "./app/quiz/quiz.ts",
         "./app/registration/Registration.ts",
         "./app/registration/RegistrationComponent.ts",
         "./app/utils/component.ts",

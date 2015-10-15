@@ -1,11 +1,12 @@
 export class RouteUtil {
-  public static getMasterRoute(name, displayName) {
+  public static getAbstractRoute(url, displayName="", parent="cms") {
     return {
-      url: '/' + name,
+      url: url,
       abstract: true,
       template: '<div ui-view=""></div>',
       ncyBreadcrumb: {
-        label: displayName
+        label: displayName,
+        parent: parent
       },
       data: {
         requireLogin: true
@@ -13,6 +14,16 @@ export class RouteUtil {
     };
   }
 
+  public static getDetailRoute(url, parent) {
+    return {
+      url: url,
+      abstract: true,
+      template: '<div ui-view=""></div>',
+      ncyBreadcrumb: {
+        parent: parent
+      }
+    };
+  }
 
   public static getRoute(component, displayName, parent = '', url = '') {
     return {

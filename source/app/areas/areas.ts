@@ -20,15 +20,17 @@ export function loadArea(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.${componentName}`,
-        RouteUtil.getMasterRoute('areas', 'Bereiche'))
+      RouteUtil.getAbstractRoute('/areas', 'Bereiche'))
       .state(`cms.${componentName}.list`,
-        RouteUtil.getRoute(ListView, 'Bereiche'))
+      RouteUtil.getRoute(ListView, 'Bereiche'))
       .state(`cms.${componentName}.detail`,
-        RouteUtil.getRoute(DetailUpdateView,
-           'Bereich {{ctrl.area.name}} Bearbeiten',
-           `cms.${componentName}.list`, '/{areaId:[0-9]{1,8}}'))
+      RouteUtil.getAbstractRoute(
+        '/{areaId:[0-9]{1,8}}', 'Bereiche', 'cms.areas.list'))
+      .state(`cms.${componentName}.detail.update`,
+      RouteUtil.getRoute(DetailUpdateView,
+        '{{ctrl.area.name}}', `cms.${componentName}.list`))
       .state(`cms.${componentName}.create`,
-        RouteUtil.getRoute(DetailCreateView,
-          'Neuer Bereich', `cms.${componentName}.list`, '/create'))
+      RouteUtil.getRoute(DetailCreateView,
+        'Neuer Bereich', `cms.${componentName}.list`, '/create'))
   });
 }
