@@ -3,20 +3,17 @@ import {MasterView} from './master-view';
 import {RouteUtil} from './route-util';
 
 export function loadMaster(app) {
-
-
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart("master");
   });
 
-
   app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/cms');
     $stateProvider
-      .state('cms', RouteUtil.GetRoute(MasterView, 'CMS', '', '/cms'))
+      .state('cms', RouteUtil.getRoute(MasterView, 'CMS', '', '/cms'))
   });
 
-
+  //TODO: refactor in own component
   app.directive('uiSrefActiveIf', ['$state', function($state) {
     return {
       restrict: "A",
@@ -24,11 +21,10 @@ export function loadMaster(app) {
         var state = $attrs.uiSrefActiveIf;
 
         function update() {
-          console.log(state);
           if ($state.includes(state) || $state.is(state)) {
-            $element.addClass("active");
+            $element.addClass('active');
           } else {
-            $element.removeClass("active");
+            $element.removeClass('active');
           }
         }
 

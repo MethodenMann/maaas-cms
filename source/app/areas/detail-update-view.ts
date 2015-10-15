@@ -15,18 +15,18 @@ export class DetailUpdateView extends DetailAbstract {
     super($scope, $stateParams, Area);
   }
 
-  LoadData() {
+  loadData() {
     this.Area.find(this.$stateParams.areaId).then((data) => {
       this.area = data;
     });
   }
 
-  Save() {
-    if (this.IsFormValid()) {
+  save() {
+    if (this.isFormValid()) {
       this.Area.update(this.area.id, { area: this.area });
       alert('Gespeichert'); //TODO: make sexy
     } else {
-      this.FocusFirstInputWithError();
+      this.focusFirstInputWithError();
     }
   }
 }

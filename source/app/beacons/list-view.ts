@@ -19,11 +19,11 @@ export class ListView {
 
     ) {
 
-    this.InitializeGrid();
-    this.RetrieveAndBindBeacons();
+    this.initializeGrid();
+    this.retrieveAndBindBeacons();
   }
 
-  private RetrieveAndBindBeacons() {
+  private retrieveAndBindBeacons() {
     this.Beacon.findAll().then(() => {
       this.$scope.$watch(() => {
         return this.Beacon.lastModified();
@@ -34,7 +34,7 @@ export class ListView {
     });
   }
 
-  private DeleteSelected() {
+  private deleteSelected() {
     var conf = confirm('really?'); //Todo: Make more sexy
     if (conf) {
       this.gridApi.selection.getSelectedRows().forEach((b) => {
@@ -43,7 +43,7 @@ export class ListView {
     }
   }
 
-  private SyncWithKontaktIO() {
+  private syncWithKontaktIO() {
     this.KontaktIoService.GetNewBeacons(this.beacons).then(beacons => {
       var conf = confirm(beacons.length + ' Beacon(s) werden hinzugefügt'); //Todo: Make more sexy
       if (conf) {
@@ -54,11 +54,11 @@ export class ListView {
     });
   }
 
-  private OnCellEdit(Beacon, rowEntity) {
+  private onCellEdit(Beacon, rowEntity) {
     Beacon.update(rowEntity.id, { beacon: rowEntity });
   }
 
-  private InitializeGrid() {
+  private initializeGrid() {
     this.gridOptions = {
       enableSorting: true,
       enableHorizontalScrollbar: 0,
@@ -66,7 +66,7 @@ export class ListView {
       onRegisterApi: (gridApi) => {
         this.gridApi = gridApi;
         this.gridApi.edit.on.afterCellEdit(this.$scope, (rowEntity, colDef, newValue, oldValue) => {
-          this.OnCellEdit(this.Beacon, rowEntity);
+          this.onCellEdit(this.Beacon, rowEntity);
         });
       },
       columnDefs: [

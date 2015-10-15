@@ -3,10 +3,10 @@ span {{ 'beacons_list_description' | translate }}
 div(ui-i18n="'de'")
   div.beaconGrid(ui-grid="ctrl.gridOptions" ui-grid-selection ui-grid-edit)
   
-button.btn.btn-primary( ng-click="ctrl.DeleteSelected()" ng-disabled="ctrl.gridApi.selection.getSelectedRows().length <= 0")
+button.btn.btn-primary( ng-click="ctrl.deleteSelected()" ng-disabled="ctrl.gridApi.selection.getSelectedRows().length <= 0")
   i.glyphicon.glyphicon-trash
-  | {{ 'beacons_list_deletebtn' | translate }}
+  | {{ 'beacons_list_delete_btn' | translate }}
 
-button.btn.btn-primary.btn(ng-click='ctrl.SyncWithKontaktIO()') 
+button.btn.btn-primary.btn(ng-click='ctrl.syncWithKontaktIO()') 
   i.glyphicon.glyphicon-download
-  | 
+  | {{ 'beacons_list_sync_btn' | translate }}

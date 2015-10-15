@@ -21,11 +21,11 @@ export function loadContent(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.${componentName}`,
-        RouteUtil.GetMasterRoute('contents', 'Inhalte'))
+        RouteUtil.getMasterRoute('contents', 'Inhalte'))
       .state(`cms.${componentName}.list`,
-        RouteUtil.GetRoute(ContentDetailComponent, 'Bereiche'))
+        RouteUtil.getRoute(ContentDetailComponent, 'Bereiche'))
       .state(`cms.${componentName}.detail`,
-        RouteUtil.GetRoute(ContentDetailComponent,
+        RouteUtil.getRoute(ContentDetailComponent,
           'Bereich {{ctrl.area.name}} Bearbeiten',
           `cms.${componentName}.list`,
           '/{id:[0-9]{1,8}}'));

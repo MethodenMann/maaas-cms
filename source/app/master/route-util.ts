@@ -1,5 +1,5 @@
 export class RouteUtil {
-  public static GetMasterRoute(name, displayName) {
+  public static getMasterRoute(name, displayName) {
     return {
       url: '/' + name,
       abstract: true,
@@ -14,7 +14,7 @@ export class RouteUtil {
   }
 
 
-  public static GetRoute(component, displayName, parent = '', url = '') {
+  public static getRoute(component, displayName, parent = '', url = '') {
     return {
       url: url,
       controller: component,

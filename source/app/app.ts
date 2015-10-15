@@ -71,7 +71,7 @@ leApp.config(function($breadcrumbProvider) {
     $breadcrumbProvider.setOptions({
       //includeAbstract: true
     });
-  })
+  });
 
 
 loadApp(leApp);

@@ -10,24 +10,24 @@ export abstract class DetailAbstract {
     @Inject('$stateParams') protected $stateParams,
     @Inject('Area') protected Area
     ) {
-    this.LoadData();
+    this.loadData();
   }
-  abstract Save(): void;
+  abstract save(): void;
 
-  protected LoadData(): void { }
+  protected loadData(): void { }
 
-  protected IsFormValid(): Boolean {
+  protected isFormValid(): Boolean {
     return this.$scope.areaform.$valid;
   }
 
-  private IsValidAndSubmitted(inputName: string) {
+  private isValidAndSubmitted(inputName: string) {
     if (this.$scope.areaform[inputName]) {
       return this.$scope.areaform[inputName].$invalid && this.$scope.areaform.$submitted;
     }
     return false;
   }
-  
-  protected FocusFirstInputWithError() {
+
+  protected focusFirstInputWithError() {
     $('input.ng-invalid').first().focus();
   }
 }
