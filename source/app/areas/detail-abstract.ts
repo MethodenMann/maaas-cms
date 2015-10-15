@@ -20,9 +20,9 @@ export abstract class DetailAbstract {
       medium.mediumableType = 'Area';
       Medium.update(medium.id, {medium: medium});
       if (data.uploadId == 'backgroundImage') {
-        this.area.backgroundImage = data.medium;
+        this.area.backgroundImageId = data.medium.id;
       } else if (data.uploadId == 'stickerImage') {
-        this.area.stickerImage = data.medium;
+        this.area.stickerImageId = data.medium.id;
       }
     });
   }

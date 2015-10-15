@@ -10,11 +10,15 @@ export class ListView {
 
   constructor(
     @Inject('$location') private $location,
-    @Inject('Area') private Area
+    @Inject('Area') private Area,
+    @Inject('Medium') private Medium
     ) {
 
-    Area.findAll().then((data) => {
-      this.areas = data;
+    // TODO load media differently
+    Medium.findAll().then((data) => {
+      Area.findAll().then((data) => {
+        this.areas = data;
+      });
     });
   }
 }

@@ -1,3 +1,4 @@
 a(href ui-sref='cms.areas.detail.update({areaId: ctrl.area.id})')
-  image-load(image-meta-data='{publicId: ctrl.area.stickerImageId}', height='100')
+  image-load(public-id='{{ctrl.area.stickerImage.publicId}}' height='100')
+  div {{ctrl.area.stickerImage.publicId}}
   div {{ctrl.area.name}}
