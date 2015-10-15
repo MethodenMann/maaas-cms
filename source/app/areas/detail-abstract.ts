@@ -18,7 +18,11 @@ export abstract class DetailAbstract {
     $scope.$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
       this.handleImageDisplay(data.uploadId, data.medium);
     });
+
+    this.constructorHook();
   }
+
+  protected constructorHook() {}
 
   protected handleImageDisplay(uploadId:string, medium:IMedium) {
     if (uploadId == 'backgroundImage') {
