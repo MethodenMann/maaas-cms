@@ -5,7 +5,7 @@ import {RouteUtil} from '../master/route-util';
 
 
 export function loadBeacon(app) {
-  var componentName = 'beacon';
+  var componentName = 'beacons';
 
   app.directive(
     makeSelector(ListView),
@@ -20,14 +20,8 @@ export function loadBeacon(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state(`cms.${componentName}`, RouteUtil.GetMasterRoute(componentName, 'Beacon')
-      )
-      .state(`cms.${componentName}.list`, {
-      url: '/list',
-      template: '<mas-beacon-list-view/>',
-      ncyBreadcrumb: {
-        label: 'asd'
-      }
-    });
+      .state(`cms.${componentName}`, RouteUtil.GetMasterRoute(componentName, 'Beacons'))
+      .state(`cms.${componentName}.list`, RouteUtil.GetRoute(ListView, 'Beacons'))
+
   });
 }

@@ -5,8 +5,6 @@ export function loadMaster(app) {
   app.controller('MasterCtrl', MasterCtrl);
 
 
-
-
   app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/cms');
 

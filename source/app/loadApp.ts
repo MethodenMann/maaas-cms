@@ -1,5 +1,5 @@
-import {loadArea} from './areas/Area';
-import {loadBeacon} from './beacon/Beacon';
+import {loadArea} from './areas/areas';
+import {loadBeacon} from './beacons/beacons';
 import {loadMaster} from './master/Master';
 import {loadJsDataConfig} from './jsDataConfig';
 import {loadImageManagement} from './common/imagemanagement/ImageManagement';
