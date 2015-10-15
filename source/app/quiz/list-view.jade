@@ -1,2 +1,10 @@
 h1 {{ 'quiz_title' | translate }}
 | area: {{ctrl.$stateParams.areaId}}
+
+.row
+  .col-md-4.top30(ng-repeat-start='area in ctrl.areas')
+    mas-area-button(area="area")
+  .clearfix(ng-if='$index%3==2')
+  div(ng-repeat-end='')
+  .col-md-4.top30.text-center
+    mas-new-button(ref="cms.areas.create" text="NEU")
