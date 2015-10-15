@@ -23,6 +23,6 @@ export function loadBeacon(app) {
       .state(`cms.${componentName}`,
         RouteUtil.getAbstractRoute(componentName, 'Beacons'))
       .state(`cms.${componentName}.list`,
-        RouteUtil.getRoute(ListView, 'Beacons'))
+        RouteUtil.getRoute(ListView, 'Beacons'));
   });
 }

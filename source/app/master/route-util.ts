@@ -1,5 +1,5 @@
 export class RouteUtil {
-  public static getAbstractRoute(url, displayName="", parent="cms") {
+  public static getAbstractRoute(url, displayName = '', parent = 'cms') {
     return {
       url: url,
       abstract: true,

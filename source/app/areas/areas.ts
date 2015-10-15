@@ -31,6 +31,6 @@ export function loadArea(app) {
         '{{ctrl.area.name}}', `cms.${componentName}.list`))
       .state(`cms.${componentName}.create`,
       RouteUtil.getRoute(DetailCreateView,
-        'Neuer Bereich', `cms.${componentName}.list`, '/create'))
+        'Neuer Bereich', `cms.${componentName}.list`, '/create'));
   });
 }

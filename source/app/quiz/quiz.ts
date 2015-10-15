@@ -14,14 +14,14 @@ export function loadQuiz(app) {
     $stateProvider
       .state(`cms.areas.detail.quiz`,
       {
-        url: "/quiz",
+        url: '/quiz',
         controller: ListView,
         controllerAs: 'ctrl',
         templateUrl: ListView.templateUrl,
         ncyBreadcrumb: {
-          label: "Quizzer",
-          parent: "cms.areas.detail.update"
+          label: 'Quizzer',
+          parent: 'cms.areas.detail.update'
         }
-      })
+      });
   });
 }
