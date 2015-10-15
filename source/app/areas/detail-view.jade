@@ -32,7 +32,7 @@
         div
           image-upload(upload-id="backgroundImage" required)
           image-load(upload-id="backgroundImage", height='100')
-          input(type="hidden" name="backgroundimageid" ng-model="ctrl.backgroundImageMetaData" required)
+          input(type="hidden" name="backgroundimageid" ng-model="ctrl.area.backgroundImageId" required)
         p.help-block(ng-hide='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_help' | translate  }}
         p.help-block(ng-show='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_error' | translate }}
 
@@ -41,12 +41,11 @@
         div
           image-upload(upload-id="stickerImage")
           image-load(upload-id="stickerImage" height='100')
-          input(type="hidden" name="stickerimageid" ng-model="ctrl.stickerImageMetaData" required)
+          input(type="hidden" name="stickerimageid" ng-model="ctrl.area.stickerImageId" required)
         p.help-block(ng-hide='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_help' | translate  }}
         p.help-block(ng-show='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_error' | translate }}
 
-      button.btn.btn-default(type='submit' ng-click='ctrl.saveArea()') Speichern
+      button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
       a.btn.btn-info(ui-sref="cms.areas.detail.quiz" ) Quiz Erfassen
-      div(ui-view="")
 
 script(src="/libs/tinycolor.js") //TODO: In SystemJS einbinden

@@ -1,6 +1,6 @@
 import {Inject} from '../utils/di';
 import {IContent} from './IContent';
-import {IMediumUploadBroadcast} from '../common/imagemanagement/imedium-upload-broadcast';
+import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 
 declare var tinyMCE: any;
 
@@ -25,7 +25,7 @@ export class ContentDetailComponent {
       Content.find($stateParams.id).then((data) => {
         this.content = data;
 
-        tinyMCE.editors[0].setContent(this.content.data);
+        tinyMCE.editors[0].setContent(this.content.data || '');
 
         var list = [];
         this.content.media.forEach(medium => {

@@ -21,7 +21,7 @@ export function loadContent(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.${componentName}`,
-        RouteUtil.getAbstractRoute('contents', 'Inhalte'))
+        RouteUtil.getAbstractRoute('/contents', 'Inhalte'))
       .state(`cms.${componentName}.list`,
         RouteUtil.getRoute(ContentDetailComponent, 'Bereiche'))
       .state(`cms.${componentName}.detail`,
