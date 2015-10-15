@@ -1,6 +1,6 @@
 import {makeDirective, makeSelector} from '../../utils/component';
-import {ImageLoadDirective} from './ImageLoad';
-import {ImageUploadDirective} from './ImageUpload';
+import {ImageLoadDirective} from './image-load';
+import {ImageUploadDirective} from './image-upload';
 
 export function loadImageManagement(app) {
   $.cloudinary.config({ cloud_name: 'nmsg', api_key: '145367384875325' });

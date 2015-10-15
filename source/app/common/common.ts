@@ -1,5 +1,5 @@
 import {makeDirective, makeSelector} from '../utils/component';
-import {loadImageManagement} from './image-management/ImageManagement';
+import {loadImageManagement} from './image-management/image-management';
 import {NewButton} from './new-button';
 
 export function loadCommon(app) {
