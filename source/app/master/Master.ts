@@ -21,11 +21,10 @@ export function loadMaster(app) {
         var state = $attrs.uiSrefActiveIf;
 
         function update() {
-          console.log(state);
           if ($state.includes(state) || $state.is(state)) {
-            $element.addClass("active");
+            $element.addClass('active');
           } else {
-            $element.removeClass("active");
+            $element.removeClass('active');
           }
         }
 

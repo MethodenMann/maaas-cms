@@ -15,12 +15,12 @@ export class DetailCreateView extends DetailAbstract {
     super($scope, $stateParams, Area);
   }
 
-  Save() {
-    if (this.IsFormValid()) {
+  save() {
+    if (this.isFormValid()) {
       this.Area.create({ area: this.area });
       alert('Gespeichert'); //TODO: make sexy
     } else {
-      this.FocusFirstInputWithError();
+      this.focusFirstInputWithError();
     }
   }
 }
