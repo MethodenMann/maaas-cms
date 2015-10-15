@@ -3,47 +3,29 @@
     |   {{ 'areas_details_title' | translate }}
   .panel-body
     form(name="areaform", role='form' novalidate)
-      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("name") }')
-        label {{ 'areas_details_name_label' | translate }}
+      mas-form-group-component(field-name='name' localization-prefix='areas_details_name')
         input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
-        p.help-block(ng-hide='ctrl.isValidAndSubmitted("name")') {{ 'areas_details_name_help' | translate  }}
-        p.help-block(ng-show='ctrl.isValidAndSubmitted("name")') {{ 'areas_details_name_error' | translate }}
 
-      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("gototext") }')
-        label {{ 'areas_details_gototext_label' | translate }}
-        input.form-control(name="gototext" ng-model='ctrl.area.gotoText' required ng-minlength="5")
-        p.help-block(ng-hide='ctrl.isValidAndSubmitted("gototext")') {{ 'areas_details_gototext_help' | translate  }}
-        p.help-block(ng-show='ctrl.isValidAndSubmitted("gototext")')  {{ 'areas_details_gototext_error' | translate }}
+      mas-form-group-component(field-name='gotoText' localization-prefix='areas_details_gototext')
+        input.form-control(name="gotoText" ng-model='ctrl.area.gotoText' required ng-minlength="5")
 
-      .form-group(ng-class='{ "has-error" :  ctrl.isValidAndSubmitted("primarycolor") }')
-        label {{ 'areas_details_primarycolor_label' | translate }}
-        color-picker(name="primarycolor" ng-model="ctrl.area.primaryColor", color-picker-format='"hex"')
-        p.help-block(ng-hide='ctrl.isValidAndSubmitted("primarycolor")') {{ 'areas_details_primarycolor_help' | translate  }}
-        p.help-block(ng-show='ctrl.isValidAndSubmitted("primarycolor")')  {{ 'areas_details_primarycolor_error' | translate }}
+      mas-form-group-component(field-name='primaryColor' localization-prefix='areas_details_primarycolor')
+        color-picker(name="primaryColor" ng-model="ctrl.area.primaryColor", color-picker-format='"hex"')
 
-      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("secondarycolor")  }')
-        label {{ 'areas_details_secondarycolor_label' | translate }}
-        color-picker(name="secondarycolor" ng-model="ctrl.area.secondaryColor" color-picker-format='"hex"')
-        p.help-block(ng-hide='ctrl.isValidAndSubmitted("secondarycolor") ') {{ 'areas_details_secondarycolor_help' | translate  }}
-        p.help-block(ng-show='ctrl.isValidAndSubmitted("secondarycolor") ')  {{ 'areas_details_secondarycolor_error' | translate }}
+      mas-form-group-component(field-name='secondaryColor' localization-prefix='areas_details_primarycolor')
+        color-picker(name="secondaryColor" ng-model="ctrl.area.secondaryColor", color-picker-format='"hex"')
 
-      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("backgroundimageid")  }')
-        label {{ 'areas_details_backgroundimage_label' | translate }}
+      mas-form-group-component(field-name='backgroundImageId' localization-prefix='areas_details_backgroundimage')
         div
           image-upload(upload-id="backgroundImage" required)
           image-load(upload-id="backgroundImage", height='100')
-          input(type="hidden" name="backgroundimageid" ng-model="ctrl.area.backgroundImageId" required)
-        p.help-block(ng-hide='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_help' | translate  }}
-        p.help-block(ng-show='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_error' | translate }}
+          input(type="hidden" name="backgroundImageId" ng-model="ctrl.area.backgroundImageId" required)
 
-      .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("stickerimageid")  }')
-        label {{ 'areas_details_stickerimage_label' | translate }}
+      mas-form-group-component(field-name='stickerImageId' localization-prefix='areas_details_stickerimage')
         div
-          image-upload(upload-id="stickerImage")
-          image-load(upload-id="stickerImage" height='100')
-          input(type="hidden" name="stickerimageid" ng-model="ctrl.area.stickerImageId" required)
-        p.help-block(ng-hide='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_help' | translate  }}
-        p.help-block(ng-show='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_error' | translate }}
+          image-upload(upload-id="stickerImage" required)
+          image-load(upload-id="stickerImage", height='100')
+          input(type="hidden" name="stickerImageId" ng-model="ctrl.area.stickerImageId" required)
 
       button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
       a.btn.btn-info(ui-sref="cms.areas.detail.quiz.list" ) Quiz Erfassen

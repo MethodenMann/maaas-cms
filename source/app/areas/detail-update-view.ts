@@ -7,16 +7,8 @@ export class DetailUpdateView extends DetailAbstract {
   public static selector = 'mas-area-detail-update-view';
   public static templateUrl = './app/areas/detail-view.html';
 
-
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('$stateParams') protected $stateParams,
-    @Inject('Area') protected Area,
-    @Inject('Medium') protected Medium
-    ) {
-    super($scope, $stateParams, Area, Medium);
-
-    $scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
+  protected constructorHook() {
+    this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
       this.saveImageRelation(data.medium);
       this.handleImageDisplay(data.uploadId, data.medium);
     });

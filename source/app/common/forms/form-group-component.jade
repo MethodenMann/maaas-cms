@@ -1,0 +1,5 @@
+.form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted() }')
+  label {{ ::ctrl.localizedName() | translate }}
+  ng-transclude()
+  p.help-block(ng-hide='ctrl.isValidAndSubmitted()') {{ ctrl.localizedHelp() | translate  }}
+  p.help-block(ng-show='ctrl.isValidAndSubmitted()') {{ ctrl.localizedError() | translate }}
