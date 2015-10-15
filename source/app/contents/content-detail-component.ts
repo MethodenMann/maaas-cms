@@ -25,7 +25,7 @@ export class ContentDetailComponent {
       Content.find($stateParams.id).then((data) => {
         this.content = data;
 
-        tinyMCE.editors[0].setContent(this.content.data);
+        tinyMCE.editors[0].setContent(this.content.data || '');
 
         var list = [];
         this.content.media.forEach(medium => {
