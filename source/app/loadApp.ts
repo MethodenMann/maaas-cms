@@ -1,5 +1,6 @@
 import {loadArea} from './areas/areas';
 import {loadBeacon} from './beacons/beacons';
+import {loadQuiz} from './quiz/quiz';
 import {loadMaster} from './master/master';
 import {loadJsDataConfig} from './jsDataConfig';
 import {loadImageManagement} from './common/imagemanagement/ImageManagement';
@@ -16,4 +17,5 @@ export function loadApp(app) {
   loadRegistration(app);
   loadContent(app);
   loadBeacon(app);
+  loadQuiz(app);
 }
