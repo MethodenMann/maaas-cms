@@ -1,7 +1,7 @@
 import {Inject} from '../../utils/di';
 
 export class FormGroupComponent {
-  private static selector = 'mas-form-group-component';
+  private static selector = 'mas-form-group';
   private static templateUrl = './app/common/forms/form-group-component.html';
 
   private static options = {

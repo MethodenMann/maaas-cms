@@ -3,25 +3,25 @@
     |   {{ 'areas_details_title' | translate }}
   .panel-body
     form(name="areaform", role='form' novalidate)
-      mas-form-group-component(field-name='name' localization-prefix='areas_details_name')
+      mas-form-group(field-name='name' localization-prefix='areas_details_name')
         input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
 
-      mas-form-group-component(field-name='gotoText' localization-prefix='areas_details_gototext')
+      mas-form-group(field-name='gotoText' localization-prefix='areas_details_gototext')
         input.form-control(name="gotoText" ng-model='ctrl.area.gotoText' required ng-minlength="5")
 
-      mas-form-group-component(field-name='primaryColor' localization-prefix='areas_details_primarycolor')
+      mas-form-group(field-name='primaryColor' localization-prefix='areas_details_primarycolor')
         color-picker(name="primaryColor" ng-model="ctrl.area.primaryColor", color-picker-format='"hex"')
 
-      mas-form-group-component(field-name='secondaryColor' localization-prefix='areas_details_primarycolor')
+      mas-form-group(field-name='secondaryColor' localization-prefix='areas_details_primarycolor')
         color-picker(name="secondaryColor" ng-model="ctrl.area.secondaryColor", color-picker-format='"hex"')
 
-      mas-form-group-component(field-name='backgroundImageId' localization-prefix='areas_details_backgroundimage')
+      mas-form-group(field-name='backgroundImageId' localization-prefix='areas_details_backgroundimage')
         div
           image-upload(upload-id="backgroundImage" required)
           image-load(upload-id="backgroundImage", height='100')
           input(type="hidden" name="backgroundImageId" ng-model="ctrl.area.backgroundImageId" required)
 
-      mas-form-group-component(field-name='stickerImageId' localization-prefix='areas_details_stickerimage')
+      mas-form-group(field-name='stickerImageId' localization-prefix='areas_details_stickerimage')
         div
           image-upload(upload-id="stickerImage" required)
           image-load(upload-id="stickerImage", height='100')

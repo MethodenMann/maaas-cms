@@ -47,12 +47,12 @@ export abstract class DetailAbstract {
     return this.$scope.areaform.$valid;
   }
 
-  private isValidAndSubmitted(inputName: string) {
-    if (this.$scope.areaform[inputName]) {
-      return this.$scope.areaform[inputName].$invalid && this.$scope.areaform.$submitted;
-    }
-    return false;
-  }
+  // private isValidAndSubmitted(inputName: string) {
+  //   if (this.$scope.areaform[inputName]) {
+  //     return this.$scope.areaform[inputName].$invalid && this.$scope.areaform.$submitted;
+  //   }
+  //   return false;
+  // }
 
   protected focusFirstInputWithError() {
     $('input.ng-invalid').first().focus();
