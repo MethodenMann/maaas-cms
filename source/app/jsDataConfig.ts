@@ -102,16 +102,7 @@ export function loadJsDataConfig(app) {
 
   app.factory('Medium', function (DS) {
     return DS.defineResource({
-      name: 'media',
-      relations: {
-        belongsTo: {
-          // TODO i think this can be removed
-          content: {
-            localField: 'medium',
-            localKey: 'mediumableId'
-          }
-        }
-      }
+      name: 'media'
     });
   });
 }
