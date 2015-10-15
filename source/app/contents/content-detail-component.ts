@@ -26,15 +26,15 @@ export class ContentDetailComponent {
 
         tinyMCE.editors[0].setContent(this.content.data);
 
-        var list = []
+        var list = [];
         this.content.media.forEach(medium => {
           var url = $.cloudinary.url(medium.publicId, {
             format: 'jpg', width: 100, height: 100, crop: 'thumb'
           });
-          list.push({title: "a", value: url, medium: medium});
+          list.push({title: 'a', value: url, medium: medium});
         });
         this.imageList = list;
-      })
+      });
     });
 
     $scope.$on('imageUploaded', (e, medium) => {

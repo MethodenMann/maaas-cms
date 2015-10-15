@@ -20,40 +20,14 @@ export function loadContent(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state(`cms.${componentName}`, RouteUtil.GetMasterRoute('contents', 'Inhalte'))
-      .state(`cms.${componentName}.list`, RouteUtil.GetRoute(ContentDetailComponent, 'Bereiche'))
+      .state(`cms.${componentName}`,
+        RouteUtil.GetMasterRoute('contents', 'Inhalte'))
+      .state(`cms.${componentName}.list`,
+        RouteUtil.GetRoute(ContentDetailComponent, 'Bereiche'))
       .state(`cms.${componentName}.detail`,
         RouteUtil.GetRoute(ContentDetailComponent,
           'Bereich {{ctrl.area.name}} Bearbeiten',
           `cms.${componentName}.list`,
-          '/{id:[0-9]{1,8}}'))
-      // .state(`cms.${componentName}.create`, RouteUtil.GetRoute(DetailCreateView, 'Neuer Bereich', `cms.${componentName}.list`, '/create'))
+          '/{id:[0-9]{1,8}}'));
   });
-
-  // app.config(function($stateProvider, $urlRouterProvider) {
-  //   $stateProvider
-  //     .state('cms.content', RouteUtil.GetMasterRoute('content', 'Inhalt')
-  //   )
-  //     .state('cms.content.overview', {
-  //     url: '/overview',
-  //     template: '<mas-content-detail-component></mas-content-detail-component>'
-  //   })
-  //     .state('cms.content.detail', {
-  //     url: '/{contentId:[0-9]{1,8}}',
-  //     template: '<mas-content-detail-component></mas-content-detail-component>'
-  //   })
-  //     .state('cms.content.create', {
-  //     url: '/create',
-  //     templateUrl: './app/content/views/detail.html',
-  //     controller: 'ContentCreateCtrl',
-  //     controllerAs: 'ctrl'
-  //   });
-    // $stateProvider
-    //   .state('cms.content', GetMasterRoute('content')
-    // )
-    //   .state('cms.content.overview', {
-    //   url: '/content/overview',
-    //   templateUrl: './app/content/editor.html'
-    // });
-  // });
 }

@@ -3,7 +3,7 @@ declare var tinymce: any;
 
 export class TinyMceComponent {
   private static selector = 'mas-tinymce-component';
-  private static template = '<textarea></textarea>'
+  private static template = '<textarea></textarea>';
 
   private static options = {
     bindToController: {
@@ -12,18 +12,6 @@ export class TinyMceComponent {
   };
 
   private imageList: String[];
-  // private email: String;
-  // private password: String;
-
-  constructor(
-    // @Inject('Auth') private Auth,
-    // @Inject('$state') private $state
-  ) {
-  }
-
-  login() {
-
-  }
 
   getList () {
     return this.imageList;
@@ -40,9 +28,8 @@ export class TinyMceComponent {
     config.height = 400;
 
     config.image_list = (success) => {
-      console.log($scope.ctrl.imageList);
       success($scope.ctrl.imageList);
-    }
+    };
 
     var myEditor = tinymce.init(config);
   }
