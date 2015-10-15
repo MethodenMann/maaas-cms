@@ -22,6 +22,5 @@ export function loadBeacon(app) {
     $stateProvider
       .state(`cms.${componentName}`, RouteUtil.GetMasterRoute(componentName, 'Beacons'))
       .state(`cms.${componentName}.list`, RouteUtil.GetRoute(ListView, 'Beacons'))
-
   });
 }
