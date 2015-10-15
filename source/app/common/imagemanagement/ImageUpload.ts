@@ -1,4 +1,5 @@
 import {Inject} from '../../utils/di';
+import {IMediumUploadBroadcast} from './imedium-upload-broadcast';
 
 export class ImageUploadDirective {
   private static selector = 'image-upload';
@@ -7,24 +8,27 @@ export class ImageUploadDirective {
 
   private static options = {
     bindToController: {
-      imageMetaData: '='
+      uploadId: '@'
     }
   };
 
-  private imageMetaData: any;
+  private uploadId: string;
 
   constructor(
     @Inject('$scope') private $scope,
+    @Inject('$rootScope') private $rootScope,
     @Inject('Medium') private Medium
-  ) {
-
-  }
+  ) {}
 
   private handleSuccessfulUpload(data) {
     this.Medium.create({medium: {publicId: data.result.public_id, url: data.result.url}})
-    .then((data) => {
-      this.$scope.$emit('imageUploaded', data);
-      this.imageMetaData = data;
+    .then((medium) => {
+      var data: IMediumUploadBroadcast = {uploadId: this.uploadId, medium: medium};
+      // TODO we have to use rootScope here, because the ImageLoad directive
+      //      which listenes to the event and usually is on the same level as the
+      //      ImageUpload directive will not hear the event unless it comes from
+      //      a parent scope.
+      this.$rootScope.$broadcast('imageUploaded', data);
     });
   }
 
@@ -33,10 +37,10 @@ export class ImageUploadDirective {
       cloud_name: 'nmsg'
     });
 
-    element.find('#uploadbutton').append(imageTag);
-
     imageTag.bind('cloudinarydone', (e, data) => {
       $scope.ctrl.handleSuccessfulUpload(data);
     });
+
+    element.find('#uploadbutton').append(imageTag);
   }
 }

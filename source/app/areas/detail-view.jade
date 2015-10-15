@@ -30,8 +30,8 @@
       .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("backgroundimageid")  }')
         label {{ 'areas_details_backgroundimage_label' | translate }}
         div
-          image-upload(image-meta-data='ctrl.backgroundImageMetaData' required)
-          image-load(image-meta-data='ctrl.backgroundImageMetaData', height='100')
+          image-upload(upload-id="backgroundImage" required)
+          image-load(upload-id="backgroundImage", height='100')
           input(type="hidden" name="backgroundimageid" ng-model="ctrl.backgroundImageMetaData" required)
         p.help-block(ng-hide='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_help' | translate  }}
         p.help-block(ng-show='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_error' | translate }}
@@ -39,8 +39,8 @@
       .form-group(ng-class='{ "has-error" : ctrl.isValidAndSubmitted("stickerimageid")  }')
         label {{ 'areas_details_stickerimage_label' | translate }}
         div
-          image-upload(image-meta-data='ctrl.stickerImageMetaData')
-          image-load(image-meta-data='ctrl.stickerImageMetaData', height='100')
+          image-upload(upload-id="stickerImage")
+          image-load(upload-id="stickerImage" height='100')
           input(type="hidden" name="stickerimageid" ng-model="ctrl.stickerImageMetaData" required)
         p.help-block(ng-hide='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_help' | translate  }}
         p.help-block(ng-show='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_error' | translate }}
