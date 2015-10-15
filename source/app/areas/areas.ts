@@ -13,17 +13,22 @@ export function loadArea(app) {
     makeSelector(AreaButtonComponent),
     makeDirective(AreaButtonComponent));
 
-
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
-
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state(`cms.${componentName}`, RouteUtil.GetMasterRoute('areas', 'Bereiche'))
-      .state(`cms.${componentName}.list`, RouteUtil.GetRoute(ListView, 'Bereiche'))
-      .state(`cms.${componentName}.detail`, RouteUtil.GetRoute(DetailUpdateView, 'Bereich {{ctrl.area.name}} Bearbeiten', `cms.${componentName}.list`, '/{areaId:[0-9]{1,8}}'))
-      .state(`cms.${componentName}.create`, RouteUtil.GetRoute(DetailCreateView, 'Neuer Bereich', `cms.${componentName}.list`, '/create'))
+      .state(`cms.${componentName}`,
+        RouteUtil.getMasterRoute('areas', 'Bereiche'))
+      .state(`cms.${componentName}.list`,
+        RouteUtil.getRoute(ListView, 'Bereiche'))
+      .state(`cms.${componentName}.detail`,
+        RouteUtil.getRoute(DetailUpdateView,
+           'Bereich {{ctrl.area.name}} Bearbeiten',
+           `cms.${componentName}.list`, '/{areaId:[0-9]{1,8}}'))
+      .state(`cms.${componentName}.create`,
+        RouteUtil.getRoute(DetailCreateView,
+          'Neuer Bereich', `cms.${componentName}.list`, '/create'))
   });
 }

@@ -10,7 +10,7 @@ export function loadMaster(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/cms');
     $stateProvider
-      .state('cms', RouteUtil.GetRoute(MasterView, 'CMS', '', '/cms'))
+      .state('cms', RouteUtil.getRoute(MasterView, 'CMS', '', '/cms'))
   });
 
   //TODO: refactor in own component
