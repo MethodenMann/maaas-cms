@@ -32,7 +32,7 @@ export class ImageLoadDirective {
     // TODO refactor if else logic into separate components?
     if (this.uploadId) {
       this.$scope
-      .$on('imageUploaded', (e, data: IMediumUploadBroadcast) => {
+      .$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
         if (data.uploadId == this.uploadId) {
           this.loadImage(data.medium);
         }

@@ -1,6 +1,7 @@
 import {Inject} from '../utils/di';
 import {IArea} from './IArea';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
+import {IMedium} from '../media/imedium';
 
 export abstract class DetailAbstract {
   protected area: IArea;
@@ -14,17 +15,24 @@ export abstract class DetailAbstract {
     ) {
     this.loadData();
 
-    $scope.$on('imageUploaded', (e, data: IMediumUploadBroadcast) => {
-      var medium = data.medium;
-      medium.mediumableId = this.area.id;
-      medium.mediumableType = 'Area';
-      Medium.update(medium.id, {medium: medium});
-      if (data.uploadId == 'backgroundImage') {
-        this.area.backgroundImageId = data.medium.id;
-      } else if (data.uploadId == 'stickerImage') {
-        this.area.stickerImageId = data.medium.id;
-      }
+    $scope.$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
+      this.handleImageDisplay(data.uploadId, data.medium);
     });
+  }
+
+  protected handleImageDisplay(uploadId:string, medium:IMedium) {
+    if (uploadId == 'backgroundImage') {
+      this.area.backgroundImageId = medium.id;
+    } else if (uploadId == 'stickerImage') {
+      this.area.stickerImageId = medium.id;
+    }
+  }
+
+  protected saveImageRelation(medium:IMedium, id?:number) {
+    var medium = medium;
+    medium.mediumableId = id || this.area.id;
+    medium.mediumableType = 'Area';
+    this.Medium.update(medium.id, {medium: medium});
   }
 
   abstract save(): void;

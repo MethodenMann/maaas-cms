@@ -15,6 +15,11 @@ export class DetailUpdateView extends DetailAbstract {
     @Inject('Medium') protected Medium
     ) {
     super($scope, $stateParams, Area, Medium);
+
+    $scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
+      this.saveImageRelation(data.medium);
+      this.handleImageDisplay(data.uploadId, data.medium);
+    });
   }
 
   loadData() {
@@ -22,9 +27,9 @@ export class DetailUpdateView extends DetailAbstract {
       this.Area.find(this.$stateParams.areaId).then((data) => {
         this.area = data;
         var bdata: IMediumUploadBroadcast = {uploadId: "backgroundImage", medium: this.area.backgroundImage};
-        this.$scope.$broadcast('imageUploaded', bdata);
+        this.$scope.$broadcast('image-management.injectImage', bdata);
         var bdata: IMediumUploadBroadcast = {uploadId: "stickerImage", medium: this.area.stickerImage};
-        this.$scope.$broadcast('imageUploaded', bdata);
+        this.$scope.$broadcast('image-management.injectImage', bdata);
       });
     });
   }

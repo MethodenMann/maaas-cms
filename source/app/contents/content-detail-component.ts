@@ -38,7 +38,7 @@ export class ContentDetailComponent {
       });
     });
 
-    $scope.$on('imageUploaded', (e, data: IMediumUploadBroadcast) => {
+    $scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
       var medium = data.medium;
       medium.mediumableId = this.content.id;
       medium.mediumableType = 'Content';

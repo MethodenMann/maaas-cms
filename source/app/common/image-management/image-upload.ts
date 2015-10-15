@@ -29,11 +29,20 @@ export class ImageUploadDirective {
     this.Medium.create({medium: upload})
     .then((medium) => {
       var data: IMediumUploadBroadcast = {uploadId: this.uploadId, medium: medium};
-      // TODO we have to use rootScope here, because the ImageLoad directive
+      // TODO We have to use rootScope here, because the ImageLoad directive
       //      which listenes to the event and usually is on the same level as the
       //      ImageUpload directive will not hear the event unless it comes from
       //      a parent scope.
-      this.$rootScope.$broadcast('imageUploaded', data);
+      // We need two broadcast, because we need to handle two different things
+      // that might occur separately:
+      // imageUpload needs to be used for the case where a new image was
+      // uploaded. This event is useful for a component where a new model
+      // is created that has references to media, such as the area creation view.
+      // injectImage is needs to be used for the case where an image is already
+      // stored in the DB and only needs to be displayed again, such as the
+      // area update view.
+      this.$rootScope.$broadcast('image-management.imageUploaded', data);
+      this.$rootScope.$broadcast('image-management.injectImage', data);
     });
   }
 
