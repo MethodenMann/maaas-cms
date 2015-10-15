@@ -1,5 +1,6 @@
 import {Inject} from '../utils/di';
 import {IContent} from './IContent';
+import {IMediumUploadBroadcast} from '../common/imagemanagement/imedium-upload-broadcast';
 
 declare var tinyMCE: any;
 
@@ -37,7 +38,8 @@ export class ContentDetailComponent {
       });
     });
 
-    $scope.$on('imageUploaded', (e, medium) => {
+    $scope.$on('imageUploaded', (e, data: IMediumUploadBroadcast) => {
+      var medium = data.medium;
       medium.mediumableId = this.content.id;
       medium.mediumableType = 'Content';
       Medium.update(medium.id, {medium: medium});

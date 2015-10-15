@@ -1,4 +1,6 @@
 import {Inject} from '../../utils/di';
+import {IMedium} from '../../media/imedium';
+import {IMediumUploadBroadcast} from './imedium-upload-broadcast';
 
 export class ImageLoadDirective {
   private static template = '';
@@ -7,39 +9,48 @@ export class ImageLoadDirective {
 
   private static options = {
     bindToController: {
-      imageMetaData: '=',
+      publicId: '@',
       width: '@',
       height: '@'
     }
   };
 
-  private imageMetaData: any;
-  private width: String;
-  private height: String;
+  private width: string;
+  private height: string;
   private element: JQuery;
+  private uploadId: string;
+  private publicId: string;
+  private url: string;
 
-  constructor(
-    @Inject('$scope') private $scope
-    ) {
-    $scope.$watch('ctrl.imageMetaData.publicId', () => {
-      this.loadImage();
-    });
+  constructor(@Inject('$scope') private $scope) {}
+
+  private setup() {
+    // TODO refactor if else logic into separate components?
+    if (this.uploadId) {
+      this.$scope
+      .$on('imageUploaded', (e, data: IMediumUploadBroadcast) => {
+        if (data.uploadId == this.uploadId) {
+          this.loadImage(data.medium);
+        }
+      });
+    } else if (this.publicId) {
+      this.loadImage({publicId: this.publicId})
+    } else {
+      // lol wtf?
+    }
   }
 
-  private loadImage() {
+  private loadImage(medium: IMedium) {
     var thumbnailTag = angular.element('<div></div>');
-    // this.element.html('');
     this.element.append(thumbnailTag);
-
-    if (this.imageMetaData && this.imageMetaData.publicId && this.imageMetaData.publicId !== '') {
-      thumbnailTag.append($.cloudinary.image(this.imageMetaData.publicId, {
-        format: 'jpg', width: this.width, height: this.height,
-        crop: 'thumb'
-      }));
-    }
+    thumbnailTag.append($.cloudinary.image(medium.publicId, {
+      format: 'jpg', width: this.width, height: this.height,
+      crop: 'thumb'
+    }));
   }
 
   private static link($scope, element: JQuery, attributes) {
     $scope.ctrl.element = element;
+    $scope.ctrl.setup();
   }
 }

@@ -23,6 +23,6 @@
             image-upload(image-id='ctrl.backgroundImageId')
             br
             div.pull-left(ng-repeat="image in ctrl.imageList")
-              image-load(image-meta-data='image.medium' height='100')
+              image-load(public-id='{{image.medium.publicId}}' height='100')
 
       button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
