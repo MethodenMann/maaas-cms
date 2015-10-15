@@ -52,6 +52,7 @@ export class KontaktIoService {
 
   private LoadKontaktIoBeacons(): any {
     var config = {
+      //TODO: API Key nicht statisch hinterlegen
       headers: {
         'Accept': 'application/vnd.com.kontakt+json;version=5',
         'Api-Key': 'EKydvSwiljOwVAfpSPzyMPGgPZFTASQu',
