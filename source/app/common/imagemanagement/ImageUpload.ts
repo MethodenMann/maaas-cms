@@ -1,5 +1,6 @@
 import {Inject} from '../../utils/di';
 import {IMediumUploadBroadcast} from './imedium-upload-broadcast';
+import {IMedium} from '../../media/imedium';
 
 export class ImageUploadDirective {
   private static selector = 'image-upload';
@@ -21,7 +22,11 @@ export class ImageUploadDirective {
   ) {}
 
   private handleSuccessfulUpload(data) {
-    this.Medium.create({medium: {publicId: data.result.public_id, url: data.result.url}})
+    var upload: IMedium = {
+      publicId: data.result.public_id,
+      url: data.result.url
+    };
+    this.Medium.create({medium: upload})
     .then((medium) => {
       var data: IMediumUploadBroadcast = {uploadId: this.uploadId, medium: medium};
       // TODO we have to use rootScope here, because the ImageLoad directive

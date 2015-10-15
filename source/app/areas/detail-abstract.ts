@@ -15,6 +15,10 @@ export abstract class DetailAbstract {
     this.loadData();
 
     $scope.$on('imageUploaded', (e, data: IMediumUploadBroadcast) => {
+      var medium = data.medium;
+      medium.mediumableId = this.area.id;
+      medium.mediumableType = 'Area';
+      Medium.update(medium.id, {medium: medium});
       if (data.uploadId == 'backgroundImage') {
         this.area.backgroundImage = data.medium;
       } else if (data.uploadId == 'stickerImage') {
