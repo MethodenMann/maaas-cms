@@ -105,13 +105,9 @@ export function loadJsDataConfig(app) {
       name: 'media',
       relations: {
         belongsTo: {
+          // TODO i think this can be removed
           content: {
             localField: 'medium',
-            localKey: 'mediumableId'
-          },
-          // TODO why
-          area: {
-            localField: 'mediumaa',
             localKey: 'mediumableId'
           }
         }
