@@ -1,22 +1,43 @@
 // import {app} from '../app';
-import {MasterCtrl} from './MasterCrtrl';
+import {MasterView} from './master-view';
+import {RouteUtil} from './route-util';
 
 export function loadMaster(app) {
-  app.controller('MasterCtrl', MasterCtrl);
+
+
+  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart("master");
+  });
 
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/cms');
-
     $stateProvider
-      .state('cms', {
-      url: '/cms',
-      templateUrl: './app/master/view/master.html',
-      controller: 'MasterCtrl',
-      controllerAs: 'ctrl',
-      ncyBreadcrumb: {
-        label: 'CMS'
-      }
-    });
+      .state('cms', RouteUtil.GetRoute(MasterView, 'CMS', '', '/cms'))
   });
+
+
+  app.directive('uiSrefActiveIf', ['$state', function($state) {
+    return {
+      restrict: "A",
+      controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
+        var state = $attrs.uiSrefActiveIf;
+
+        function update() {
+          console.log(state);
+          if ($state.includes(state) || $state.is(state)) {
+            $element.addClass("active");
+          } else {
+            $element.removeClass("active");
+          }
+        }
+
+        $scope.$on('$stateChangeSuccess', update);
+        update();
+      }]
+    };
+  }])
+
+
+
 }
