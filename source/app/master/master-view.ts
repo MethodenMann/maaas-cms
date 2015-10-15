@@ -1,9 +1,14 @@
 import {Inject} from '../utils/di';
 
-export class MasterCtrl {
-  private title = 'maaas';
+export class MasterView {
+  public static selector = 'mas-master-view';
+  public static templateUrl = './app/master/master-view.html';
+
+
+
   constructor(
-    @Inject('$window') private $window
+    @Inject('$window') private $window,
+    @Inject('$state') private $state
     ) {
     $('#side-menu').metisMenu();
 

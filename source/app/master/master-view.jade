@@ -7,7 +7,7 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='#') {{ctrl.title}}
+      a.navbar-brand(href='#')  {{ 'master_title' | translate }}
     // /.navbar-header
     ul.nav.navbar-top-links.navbar-right
       li.dropdown
@@ -79,11 +79,11 @@
                   i.fa.fa-search
             // /input-group
           li
-            a(ui-sref="cms.areas.list")
+            a(ui-sref="cms.areas.list"  ui-sref-active-if="cms.areas")
               i.fa.fa-dashboard.fa-location-arrow
               |  Bereiche
           li
-            a(ui-sref="cms.beacons.list")
+            a(ui-sref="cms.beacons.list"  ui-sref-active-if="cms.beacons")
               i.fa.fa-dashboard.fa-bullseye
               |  Beacons
           li
