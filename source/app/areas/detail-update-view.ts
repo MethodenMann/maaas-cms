@@ -1,7 +1,7 @@
 import {Inject} from '../utils/di';
 import {IArea} from './iarea';
 import {DetailAbstract} from './detail-abstract';
-import {IMediumUploadBroadcast} from '../common/imagemanagement/imedium-upload-broadcast';
+import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 
 export class DetailUpdateView extends DetailAbstract {
   public static selector = 'mas-area-detail-update-view';

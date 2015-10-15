@@ -1,6 +1,6 @@
 import {Inject} from '../utils/di';
 import {IArea} from './IArea';
-import {IMediumUploadBroadcast} from '../common/imagemanagement/imedium-upload-broadcast';
+import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 
 export abstract class DetailAbstract {
   protected area: IArea;

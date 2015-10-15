@@ -6,7 +6,7 @@ export function loadImageManagement(app) {
   $.cloudinary.config({ cloud_name: 'nmsg', api_key: '145367384875325' });
 
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
-    $translatePartialLoaderProvider.addPart('common/imagemanagement');
+    $translatePartialLoaderProvider.addPart('common/image-management');
   });
 
   app
