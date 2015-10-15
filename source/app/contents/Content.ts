@@ -1,7 +1,7 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {TinyMceComponent} from './TinyMceComponent';
-import {ContentDetailComponent} from './ContentDetailComponent';
+import {TinyMceComponent} from './tiny-mce-component';
+import {ContentDetailComponent} from './content-detail-component';
 
 export function loadContent(app) {
   var componentName = 'contents';
