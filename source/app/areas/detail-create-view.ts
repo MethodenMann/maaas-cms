@@ -10,9 +10,10 @@ export class DetailCreateView extends DetailAbstract {
   constructor(
     @Inject('$scope') protected $scope,
     @Inject('$stateParams') protected $stateParams,
-    @Inject('Area') protected Area
+    @Inject('Area') protected Area,
+    @Inject('Medium') protected Medium
     ) {
-    super($scope, $stateParams, Area);
+    super($scope, $stateParams, Area, Medium);
   }
 
   save() {

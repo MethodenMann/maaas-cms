@@ -32,7 +32,8 @@
         div
           image-upload(upload-id="backgroundImage" required)
           image-load(upload-id="backgroundImage", height='100')
-          input(type="hidden" name="backgroundimageid" ng-model="ctrl.backgroundImageMetaData" required)
+          input(type="hidden" name="backgroundimageid" ng-model="ctrl.area.backgroundImageId" required)
+          | {{ctrl.area.backgroundImageId}}
         p.help-block(ng-hide='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_help' | translate  }}
         p.help-block(ng-show='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_error' | translate }}
 
@@ -41,10 +42,11 @@
         div
           image-upload(upload-id="stickerImage")
           image-load(upload-id="stickerImage" height='100')
-          input(type="hidden" name="stickerimageid" ng-model="ctrl.stickerImageMetaData" required)
+          input(type="hidden" name="stickerimageid" ng-model="ctrl.area.stickerImageId" required)
+          | {{ctrl.area.stickerImageId}}
         p.help-block(ng-hide='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_help' | translate  }}
         p.help-block(ng-show='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_error' | translate }}
 
-      button.btn.btn-default(type='submit' ng-click='ctrl.saveArea()') Speichern
+      button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
 
 script(src="/libs/tinycolor.js") //TODO: In SystemJS einbinden

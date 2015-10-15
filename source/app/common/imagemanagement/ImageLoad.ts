@@ -19,6 +19,7 @@ export class ImageLoadDirective {
   private width: string;
   private height: string;
   private element: JQuery;
+  private thumbnailTag: JQuery;
   private uploadId: string;
   private publicId: string;
   private url: string;
@@ -44,9 +45,8 @@ export class ImageLoadDirective {
   }
 
   private loadImage(medium: IMedium) {
-    var thumbnailTag = angular.element('<div></div>');
-    this.element.append(thumbnailTag);
-    thumbnailTag.append($.cloudinary.image(medium.publicId, {
+    this.thumbnailTag.html('')
+    this.thumbnailTag.append($.cloudinary.image(medium.publicId, {
       format: 'jpg', width: this.width, height: this.height,
       crop: 'thumb'
     }));
@@ -54,6 +54,8 @@ export class ImageLoadDirective {
 
   private static link($scope, element: JQuery, attributes) {
     $scope.ctrl.element = element;
+    $scope.ctrl.thumbnailTag = angular.element('<div></div>');
+    $scope.ctrl.element.append($scope.ctrl.thumbnailTag);
     $scope.ctrl.setup();
   }
 }

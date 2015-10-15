@@ -1,5 +1,6 @@
 import {Inject} from '../utils/di';
 import {IArea} from './IArea';
+import {IMediumUploadBroadcast} from '../common/imagemanagement/imedium-upload-broadcast';
 
 export abstract class DetailAbstract {
   protected area: IArea;
@@ -8,10 +9,20 @@ export abstract class DetailAbstract {
   constructor(
     @Inject('$scope') protected $scope,
     @Inject('$stateParams') protected $stateParams,
-    @Inject('Area') protected Area
+    @Inject('Area') protected Area,
+    @Inject('Medium') protected Medium
     ) {
     this.loadData();
+
+    $scope.$on('imageUploaded', (e, data: IMediumUploadBroadcast) => {
+      if (data.uploadId == 'backgroundImage') {
+        this.area.backgroundImage = data.medium;
+      } else if (data.uploadId == 'stickerImage') {
+        this.area.stickerImage = data.medium;
+      }
+    });
   }
+
   abstract save(): void;
 
   protected loadData(): void { }

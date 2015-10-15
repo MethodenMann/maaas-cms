@@ -35,7 +35,26 @@ export function loadJsDataConfig(app) {
           challenges: {
             foreignKey: 'areaId',
             localField: 'challenges'
+          },
+          media: {
+            foreignKey: 'mediumableId',
+            localField: 'media',
+            get: function(Area, relationDef, area, orig) {
+              return DS.filter('media', {
+                mediumableId: area.id,
+                mediumableType: 'Area'
+              });
+            }
           }
+        },
+        hasOne: {
+          media: [{
+            localKey: 'backgroundImageId',
+            localField: 'backgroundImage'
+          }, {
+            localKey: 'stickerImageId',
+            localField: 'stickerImage'
+          }]
         }
       }
     });
@@ -88,6 +107,11 @@ export function loadJsDataConfig(app) {
         belongsTo: {
           content: {
             localField: 'medium',
+            localKey: 'mediumableId'
+          },
+          // TODO why
+          area: {
+            localField: 'mediumaa',
             localKey: 'mediumableId'
           }
         }
