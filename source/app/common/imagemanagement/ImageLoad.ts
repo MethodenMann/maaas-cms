@@ -9,6 +9,7 @@ export class ImageLoadDirective {
 
   private static options = {
     bindToController: {
+      uploadId: '@',
       publicId: '@',
       width: '@',
       height: '@'
@@ -22,7 +23,9 @@ export class ImageLoadDirective {
   private publicId: string;
   private url: string;
 
-  constructor(@Inject('$scope') private $scope) {}
+  constructor(
+    @Inject('$scope') private $scope
+  ) {}
 
   private setup() {
     // TODO refactor if else logic into separate components?

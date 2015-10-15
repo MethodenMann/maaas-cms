@@ -16,6 +16,7 @@ export class ImageUploadDirective {
 
   constructor(
     @Inject('$scope') private $scope,
+    @Inject('$rootScope') private $rootScope,
     @Inject('Medium') private Medium
   ) {}
 
@@ -23,7 +24,11 @@ export class ImageUploadDirective {
     this.Medium.create({medium: {publicId: data.result.public_id, url: data.result.url}})
     .then((medium) => {
       var data: IMediumUploadBroadcast = {uploadId: this.uploadId, medium: medium};
-      this.$scope.$emit('imageUploaded', data);
+      // TODO we have to use rootScope here, because the ImageLoad directive
+      //      which listenes to the event and usually is on the same level as the
+      //      ImageUpload directive will not hear the event unless it comes from
+      //      a parent scope.
+      this.$rootScope.$broadcast('imageUploaded', data);
     });
   }
 
