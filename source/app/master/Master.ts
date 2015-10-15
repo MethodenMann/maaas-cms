@@ -3,12 +3,9 @@ import {MasterView} from './master-view';
 import {RouteUtil} from './route-util';
 
 export function loadMaster(app) {
-
-
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart("master");
   });
-
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/cms');
@@ -16,7 +13,7 @@ export function loadMaster(app) {
       .state('cms', RouteUtil.GetRoute(MasterView, 'CMS', '', '/cms'))
   });
 
-
+  //TODO: refactor in own component
   app.directive('uiSrefActiveIf', ['$state', function($state) {
     return {
       restrict: "A",
