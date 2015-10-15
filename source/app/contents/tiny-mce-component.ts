@@ -19,7 +19,6 @@ export class TinyMceComponent {
     // @Inject('Auth') private Auth,
     // @Inject('$state') private $state
   ) {
-    console.log(this.imageList);
   }
 
   login() {
@@ -37,8 +36,11 @@ export class TinyMceComponent {
     config.menu = {};
     config.toolbar = 'undo redo | bold italic | link image';
     config.plugins = 'image';
+    config.image_dimensions = false;
+    config.height = 400;
 
     config.image_list = (success) => {
+      console.log($scope.ctrl.imageList);
       success($scope.ctrl.imageList);
     }
 

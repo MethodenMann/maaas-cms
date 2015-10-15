@@ -30,21 +30,21 @@
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("backgroundimageid")  }')
         label {{ 'areas_details_backgroundimage_label' | translate }}
         div
-          image-upload(image-id='ctrl.area.backgroundImageId' required)
-          image-load( image-id='ctrl.area.backgroundImageId', height='100')
-          input(type="hidden" name="backgroundimageid" ng-model="ctrl.area.backgroundImageId" required)
-        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_help' | translate  }}
-        p.help-block(ng-show='ctrl.IsValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_error' | translate }}
+          image-upload(image-meta-data='ctrl.backgroundImageMetaData' required)
+          image-load(image-meta-data='ctrl.backgroundImageMetaData', height='100')
+          input(type="hidden" name="backgroundimageid" ng-model="ctrl.backgroundImageMetaData" required)
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_help' | translate  }}
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("backgroundimageid") ') {{ 'areas_details_backgroundimage_error' | translate }}
 
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("stickerimageid")  }')
         label {{ 'areas_details_stickerimage_label' | translate }}
         div
-          image-upload(image-id='ctrl.area.stickerImageId')
-          image-load( image-id='ctrl.area.stickerImageId', height='100')
-          input(type="hidden" name="stickerimageid" ng-model="ctrl.area.stickerImageId" required)
-        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_help' | translate  }}
-        p.help-block(ng-show='ctrl.IsValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_error' | translate }}
+          image-upload(image-meta-data='ctrl.stickerImageMetaData')
+          image-load(image-meta-data='ctrl.stickerImageMetaData', height='100')
+          input(type="hidden" name="stickerimageid" ng-model="ctrl.stickerImageMetaData" required)
+        p.help-block(ng-hide='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_help' | translate  }}
+        p.help-block(ng-show='ctrl.isValidAndSubmitted("stickerimageid") ') {{ 'areas_details_stickerimage_error' | translate }}
 
-      button.btn.btn-default(type='submit', ng-click='ctrl.Save()') Speichern
+      button.btn.btn-default(type='submit' ng-click='ctrl.saveArea()') Speichern
 
 script(src="/libs/tinycolor.js") //TODO: In SystemJS einbinden
