@@ -14,31 +14,28 @@ export function loadQuiz(app) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
-  app
-    .directive(
+  app.directive(
     makeSelector(QuizConfigLoader),
     makeDirective(QuizConfigLoader))
 
-  app
-    .directive(
+  app.directive(
     makeSelector(Multiplechoice),
     makeDirective(Multiplechoice))
 
 
-      app
-        .directive(
-        makeSelector(TrueFalse),
-        makeDirective(TrueFalse))
+  app.directive(
+    makeSelector(TrueFalse),
+    makeDirective(TrueFalse))
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('cms.areas.detail.quiz',
-      RouteUtil.getAbstractRoute('/quiz', 'QuizzeZZ'))
-      .state(`cms.areas.detail.quiz.list`,
+      .state(`cms.areas.detail.${componentName}`,
+      RouteUtil.getAbstractRoute('/${componentName}', 'QuizzeZZ'))
+      .state(`cms.areas.detail.${componentName}.list`,
       RouteUtil.getRoute(ListView, 'Quiz', 'cms.areas.detail.update'))
-      .state(`cms.areas.detail.quiz.create`,
+      .state(`cms.areas.detail.${componentName}.create`,
       RouteUtil.getRoute(CreateView,
-        'Quiz erstellen', `cms.areas.detail.quiz.list`, '/create'));
+        'Quiz erstellen', `cms.areas.detail.${componentName}.list`, '/create'));
 
 
   });

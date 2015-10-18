@@ -1,1 +1,16 @@
-h2 Multiplechoice Config
+h2 Multiplechoice Config wal
+form.form
+  div.form-group
+    label Frage
+    input.form-control(ng-model="ctrl.quizConfig.question")
+    
+h3 Answers
+button.btn(ng-click="ctrl.addAnswer()") +ADD
+div(ng-repeat="answer in ctrl.quizConfig.answers track by $index")
+  label Antwort
+  input.form-control(ng-model="answer.text")
+  div.radio
+    label
+      input(type="radio" value="{{answer.idx}}" ng-model="ctrl.quizConfig.correctAnswer" name="correctAnswer")
+      | Richtige Antwort
+      a.btn(ng-click="ctrl.removeAnswer($index)") Remove

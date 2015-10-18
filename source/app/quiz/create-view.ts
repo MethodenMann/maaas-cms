@@ -17,6 +17,8 @@ export class CreateView {
       this.area = data;
     });
 
+    this.selectedtype = "multiplce-choice";
+
   }
   typeChange() {
     console.log(this.selectedtype);
