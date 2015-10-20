@@ -15,12 +15,16 @@ export class CreateView extends AbstractDetailView {
 
   save() {
     this.Content.create({content: this.content}).then((content) => {
+      var promises : Array<any> = [];
       for (let image of this.imageList) {
         var medium = image.medium;
         medium.mediumableId = content.id;
         medium.mediumableType = 'Content';
-        this.Medium.update(medium.id, {medium: medium});
+        promises.push(this.Medium.update(medium.id, {medium: medium}));
       }
+      this.$q.all(promises).then(() => {
+        this.$state.go("cms.areas.detail.contents.update", {contentId: content.id});
+      })
     })
   }
 }

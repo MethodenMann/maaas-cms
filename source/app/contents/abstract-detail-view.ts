@@ -18,7 +18,9 @@ export class AbstractDetailView {
     @Inject('$scope') protected $scope,
     @Inject('Content') protected Content,
     @Inject('Medium') protected Medium,
-    @Inject('$stateParams') protected $stateParams
+    @Inject('$stateParams') protected $stateParams,
+    @Inject('$state') protected $state,
+    @Inject('$q') protected $q
   ) {
     this.tinymceConfig = {
       selector: 'textarea',
