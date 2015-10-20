@@ -1,11 +1,12 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {KindConfigLoader} from './kind-config-loader';
+import {KindConfigLoader} from './kind-config-loader-component';
 import {Multiplechoice} from './kind-configs/multiple-choice';
 import {TrueFalse} from './kind-configs/true-false';
 
 import {ListView} from './list-view';
 import {CreateView} from './create-view';
+import {ChallengeButtonComponent} from "./challenge-button-component";
 
 export function loadChallenge(app) {
   var componentName = 'challenges';
@@ -13,6 +14,11 @@ export function loadChallenge(app) {
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
+
+  app.directive(
+    makeSelector(ChallengeButtonComponent),
+    makeDirective(ChallengeButtonComponent));
+
 
   app.directive(
     makeSelector(KindConfigLoader),

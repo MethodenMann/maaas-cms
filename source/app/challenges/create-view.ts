@@ -12,19 +12,22 @@ export class CreateView {
   constructor(
     @Inject('$location') private $location,
     @Inject('$stateParams') private $stateParams,
-    @Inject('Area') private Area
+    @Inject('Area') private Area,
+    @Inject('Challenge') private Challenge
     ) {
     this.Area.find(this.$stateParams.areaId).then((data) => {
       this.area = data;
     });
 
     this.challenge.data = {};
+    this.challenge.area_id = this.$stateParams.areaId;
     this.challenge.kind = "multiple-choice";
 
 
   }
 
   save(){
-    console.log('save', this.selectedtype, this.quizConfig )
+    console.log('save', this.challenge)
+    this.Challenge.create({ challenge: this.challenge })
   }
 }
