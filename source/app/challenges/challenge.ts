@@ -5,7 +5,8 @@ import {Multiplechoice} from './kind-configs/multiple-choice';
 import {TrueFalse} from './kind-configs/true-false';
 
 import {ListView} from './list-view';
-import {CreateView} from './create-view';
+import {CreateView} from './detail-create-view';
+import {UpdateView} from './detail-update-view';
 import {ChallengeButtonComponent} from "./challenge-button-component";
 
 export function loadChallenge(app) {
@@ -35,13 +36,15 @@ export function loadChallenge(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.areas.detail.${componentName}`,
-      RouteUtil.getAbstractRoute(`/${componentName}`, 'QuizzeZZ'))
+        RouteUtil.getAbstractRoute(`/${componentName}`, 'QuizzeZZ'))
       .state(`cms.areas.detail.${componentName}.list`,
-      RouteUtil.getRoute(ListView, 'Challenge', 'cms.areas.detail.update'))
+        RouteUtil.getRoute(ListView, 'Challenge', 'cms.areas.detail.update'))
       .state(`cms.areas.detail.${componentName}.create`,
-      RouteUtil.getRoute(CreateView,
-        'Quiz erstellen', `cms.areas.detail.${componentName}.list`, '/create'));
+        RouteUtil.getRoute(CreateView,
+          'Quiz erstellen', `cms.areas.detail.${componentName}.list`, '/create'))
 
-
+      .state(`cms.areas.detail.${componentName}.update`,
+        RouteUtil.getRoute(UpdateView,
+          'Quiz Bearbeiten', `cms.areas.detail.${componentName}.list`, '/{challengeId:[0-9]{1,8}}'));
   });
 }

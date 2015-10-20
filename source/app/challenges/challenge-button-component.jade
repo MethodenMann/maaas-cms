@@ -1,3 +1,3 @@
-a(href ui-sref='cms.areas.detail.challenges.create')
+a(href ui-sref='cms.areas.detail.challenges.update({challengeId: ctrl.challenge.id})')
   img(ng-src="img/challenges/{{ctrl.challenge.kind}}.png")
-  div {{ctrl.challenge.name}} ( {{ctrl.challenge.id}})
+  div {{ctrl.challenge.name}} ({{ctrl.challenge.id}})
