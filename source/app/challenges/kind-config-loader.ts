@@ -1,12 +1,12 @@
 import {Inject} from '../utils/di';
 
-export class QuizConfigLoader {
-  public static selector = 'mas-quiz-config-loader';
+export class KindConfigLoader {
+  public static selector = 'mas-challenges-kind-config-loader';
 
   private static options = {
     bindToController: {
-      quizType: '@',
-      quizConfig: '='
+      kind: '@',
+      data: '='
     }
   };
 
@@ -18,16 +18,15 @@ export class QuizConfigLoader {
 
 
   private static link($scope, element: JQuery, attributes) {
-    console.log("type", attributes)
+    console.log("kind", attributes)
 
 
 
-    attributes.$observe('quizType', function(newVal, oldVal) {
+    attributes.$observe('kind', function() {
       element.html('');
 
-      $scope.data = { name: "test" };
-      console.log(attributes.quizType);
-      var htm = `<mas-quiz-${attributes.quizType} quiz-config="ctrl.quizConfig"/>`;
+      console.log(attributes.type);
+      var htm = `<mas-challenges-${attributes.kind} data="ctrl.data"/>`;
       var compiled = $scope.ctrl.$compile(htm)($scope);
 
       element.append(compiled);

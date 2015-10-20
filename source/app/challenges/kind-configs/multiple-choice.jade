@@ -1,0 +1,16 @@
+h2 Multiplechoice Config
+form.form
+  div.form-group
+    label Frage
+    input.form-control(ng-model="ctrl.data.question")
+    
+h3 Answers
+button.btn(ng-click="ctrl.addAnswer()") +ADD
+div(ng-repeat="answer in ctrl.data.answers track by $index")
+  label Antwort
+  input.form-control(ng-model="answer.text")
+  div.radio
+    label
+      input(type="radio" value="{{answer.idx}}" ng-model="ctrl.data.correctAnswer" name="correctAnswer")
+      | Richtige Antwort
+    a.btn(ng-click="ctrl.removeAnswer($index)") Remove

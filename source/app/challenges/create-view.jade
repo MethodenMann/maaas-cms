@@ -1,0 +1,20 @@
+h1 CREATE Quiz
+
+form
+  .form-group
+    label Name
+    input.form-control(ng-model="ctrl.challenge.name")
+  .form-group
+    label Type
+    select.form-control(ng-model='ctrl.challenge.kind')
+      option(value='multiple-choice') Multiplechoice
+      option(value='true-false') True False
+  .form-group
+    mas-challenges-kind-config-loader(kind="{{ctrl.challenge.kind}}" data="ctrl.challenge.data")
+
+
+div
+   button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
+
+h3 challenge JSON
+| {{ctrl.challenge}}
