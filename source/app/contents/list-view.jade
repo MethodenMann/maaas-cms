@@ -1,5 +1,5 @@
 div(ng-repeat="content in ctrl.area.contents")
-  | {{content}}
+  | {{content.title}}
   a(href ui-sref='cms.areas.detail.contents.update({contentId: content.id})')
     | hingehen
 
