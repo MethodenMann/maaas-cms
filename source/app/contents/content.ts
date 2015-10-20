@@ -3,6 +3,7 @@ import {RouteUtil} from '../master/route-util';
 import {TinyMceComponent} from './tiny-mce-component';
 import {CreateView} from '../contents/create-view';
 import {UpdateView} from '../contents/update-view';
+import {ListView} from '../challenges/list-view';
 
 export function loadContent(app) {
   var componentName = 'contents';
@@ -21,18 +22,16 @@ export function loadContent(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state(`cms.${componentName}`,
-      RouteUtil.getAbstractRoute('/contents', 'Inhalte'))
-      // .state(`cms.${componentName}.list`,
-      // RouteUtil.getRoute(ListView, 'Inhalte'))
-      // .state(`cms.${componentName}.detail`,
-      // RouteUtil.getAbstractRoute(
-      //   '/{contentId:[0-9]{1,8}}', 'Inhalte', 'cms.contents.list'))
-      .state(`cms.${componentName}.detail.update`,
-      RouteUtil.getRoute(UpdateView,
-        '{{ctrl.content.name}}', `cms.${componentName}.list`))
-      .state(`cms.${componentName}.create`,
-      RouteUtil.getRoute(CreateView,
-        'Neuer Inhalt', `cms.${componentName}.list`, '/create'));
+      .state(`cms.areas.detail.${componentName}`,
+        RouteUtil.getAbstractRoute(`/${componentName}`, 'Inhalte Yo'))
+      .state(`cms.areas.detail.${componentName}.list`,
+        RouteUtil.getRoute(ListView, 'Inhalte', 'cms.areas.detail.update'))
+      .state(`cms.areas.detail.${componentName}.create`,
+        RouteUtil.getRoute(CreateView,
+          'Inhalt erstellen', `cms.areas.detail.${componentName}.list`, '/create'))
+
+      .state(`cms.areas.detail.${componentName}.update`,
+        RouteUtil.getRoute(UpdateView,
+          'Inhalt bearbeiten', `cms.areas.detail.${componentName}.list`, '/{contentId:[0-9]{1,8}}'));
   });
 }

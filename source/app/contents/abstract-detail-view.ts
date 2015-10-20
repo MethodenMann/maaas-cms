@@ -12,6 +12,7 @@ export class AbstractDetailView {
   protected imageList: any[] = [];
   protected backgroundImageId: String;
   protected ids: String[] = [];
+  protected area: any = {name: 'abc'};
 
   constructor(
     @Inject('$scope') protected $scope,
@@ -22,7 +23,7 @@ export class AbstractDetailView {
 
     // TODO fetch media differently
     Medium.findAll().then((data) => {
-      Content.find($stateParams.id).then((data) => {
+      Content.find($stateParams.contentId).then((data) => {
         this.content = data;
 
         tinyMCE.editors[0].setContent(this.content.data || '');
