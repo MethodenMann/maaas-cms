@@ -22,7 +22,7 @@ export class Multiplechoice {
     }
   }
 
-  getUnusedAnwerIndex() {
+  getUnusedAnswerIndex() {
     var i = -1;
     var used:boolean;
     do {
@@ -54,7 +54,7 @@ export class Multiplechoice {
     this.data.answers.push(
         {
           text: '',
-          idx: this.getUnusedAnwerIndex()
+          idx: this.getUnusedAnswerIndex()
         }
     );
   }

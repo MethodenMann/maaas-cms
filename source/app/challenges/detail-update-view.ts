@@ -11,7 +11,7 @@ export class UpdateView extends FormView {
   private challenge: IChallenge = <IChallenge>{};
 
   constructor(
-    @Inject('$scope') private $scope,
+    @Inject('$scope') protected $scope,
     @Inject('$location') private $location,
     @Inject('$stateParams') private $stateParams,
     @Inject('Area') private Area,

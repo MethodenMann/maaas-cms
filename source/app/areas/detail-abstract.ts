@@ -12,9 +12,11 @@ export abstract class DetailAbstract extends FormView {
     @Inject('$scope') protected $scope,
     @Inject('$stateParams') protected $stateParams,
     @Inject('Area') protected Area,
-    @Inject('Medium') protected Medium
+    @Inject('Medium') protected Medium,
+    @Inject('$state') protected $state
     ) {
-      super($scope);
+    super($scope);
+
     this.loadData();
 
     $scope.$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
