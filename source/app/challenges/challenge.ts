@@ -7,7 +7,7 @@ import {TrueFalse} from './kind-configs/true-false';
 import {ListView} from './list-view';
 import {CreateView} from './detail-create-view';
 import {UpdateView} from './detail-update-view';
-import {ChallengeButtonComponent} from "./challenge-button-component";
+import {ChallengeButtonComponent} from './challenge-button-component';
 
 export function loadChallenge(app) {
   var componentName = 'challenges';
@@ -19,7 +19,6 @@ export function loadChallenge(app) {
   app.directive(
     makeSelector(ChallengeButtonComponent),
     makeDirective(ChallengeButtonComponent));
-
 
   app.directive(
     makeSelector(KindConfigLoader),
@@ -42,7 +41,6 @@ export function loadChallenge(app) {
       .state(`cms.areas.detail.${componentName}.create`,
         RouteUtil.getRoute(CreateView,
           'Quiz erstellen', `cms.areas.detail.${componentName}.list`, '/create'))
-
       .state(`cms.areas.detail.${componentName}.update`,
         RouteUtil.getRoute(UpdateView,
           'Quiz Bearbeiten', `cms.areas.detail.${componentName}.list`, '/{challengeId:[0-9]{1,8}}'));

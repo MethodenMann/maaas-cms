@@ -1,3 +1,5 @@
 {
-  "quiz_title": "QUIZZ"
+  "challenges_title": "Quiz",
+  "challenges_multiple-choice_name": "Mutiplechoice",
+  "challenges_true_false-choice_name": "Wahr/Falsch"
 }
