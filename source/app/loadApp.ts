@@ -6,7 +6,7 @@ import {loadJsDataConfig} from './js-data-config';
 import {loadCommon} from './common/common';
 import {loadLogin} from './login/Login';
 import {loadRegistration} from './registration/Registration';
-import {loadContent} from './contents/Content';
+import {loadContent} from './contents/content-aaa';
 
 export function loadApp(app) {
   loadJsDataConfig(app);

@@ -4,20 +4,20 @@ import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-
 
 declare var tinyMCE: any;
 
-export class ContentDetailComponent {
-  private static selector = 'mas-content-detail-component';
-  private static templateUrl = './app/contents/content-detail-component.html';
+export class AbstractDetailView {
+  private static selector = 'mas-content-detail-view';
+  private static templateUrl = './app/contents/abstract-detail-view.html';
 
-  private content: IContent;
-  private imageList: any[] = [];
-  private backgroundImageId: String;
-  private ids: String[] = [];
+  protected content: IContent;
+  protected imageList: any[] = [];
+  protected backgroundImageId: String;
+  protected ids: String[] = [];
 
   constructor(
-    @Inject('$scope') private $scope,
-    @Inject('Content') private Content,
-    @Inject('Medium') private Medium,
-    @Inject('$stateParams') private $stateParams
+    @Inject('$scope') protected $scope,
+    @Inject('Content') protected Content,
+    @Inject('Medium') protected Medium,
+    @Inject('$stateParams') protected $stateParams
   ) {
 
     // TODO fetch media differently
@@ -48,10 +48,5 @@ export class ContentDetailComponent {
       });
       this.imageList.push({title: this.imageList.length, value: url, medium: medium});
     });
-  }
-
-  save() {
-    this.content.data = tinyMCE.editors[0].getContent();
-    this.Content.update(this.content.id, {content: this.content});
   }
 }
