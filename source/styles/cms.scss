@@ -1,8 +1,6 @@
 $main-color: #b2df8e;
-
-$dark: #5E5E5E;
-$sec-color: #7C9C63;
-
+$dark: #5e5e5e;
+$sec-color: #7c9c63;
 $gray-darker: lighten(#000, 13.5%);
 $gray-dark: lighten(#000, 20%);
 $gray: lighten(#000, 33.5%);
@@ -53,21 +51,24 @@ a:hover {
 .navbar {
   background-color: $main-color;
 }
-
 .navbar-default {
-  border: 0px;
+  border: 0;
 }
-
 .navbar-brand {
   padding: 5px;
   div {
-    padding-top: 13px;
-    padding-left: 2px;
-    font-size: 25px;
-    float: right;
+    div {
+      padding-top: 13px;
+      padding-left: 2px;
+      font-size: 25px;
+      display: inline-block;
+    }
   }
   img {
-    display: inline;
+    clear: both;
+    float: left;
+    display: block;
+    height: 42px;
   }
 }
 .navbar-top-links {
