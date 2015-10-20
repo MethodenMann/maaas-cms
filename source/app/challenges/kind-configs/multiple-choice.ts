@@ -17,9 +17,9 @@ export class Multiplechoice {
 
   constructor(@Inject('$scope') protected $scope,
               @Inject('Medium') protected Medium) {
-    console.log('data', this.data);
-    this.data.answers = [];
-
+    if (this.data.answers === undefined){
+      this.data.answers = [];
+    }
   }
 
   getUnusedAnwerIndex() {
@@ -48,7 +48,6 @@ export class Multiplechoice {
   }
 
   correctAnswerChanged(index) {
-    console.log('changed', index);
     this.data.correctAnswer = index;
   }
 

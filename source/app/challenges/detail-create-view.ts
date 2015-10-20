@@ -20,7 +20,7 @@ export class CreateView {
     });
 
     this.challenge.data = {};
-    this.challenge.area_id = this.$stateParams.areaId;
+    this.challenge.areaId = this.$stateParams.areaId;
     this.challenge.kind = 'multiple-choice';
 
 

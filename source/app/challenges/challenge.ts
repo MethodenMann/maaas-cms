@@ -20,7 +20,6 @@ export function loadChallenge(app) {
     makeSelector(ChallengeButtonComponent),
     makeDirective(ChallengeButtonComponent));
 
-
   app.directive(
     makeSelector(KindConfigLoader),
     makeDirective(KindConfigLoader));
