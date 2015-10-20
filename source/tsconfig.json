@@ -33,6 +33,7 @@
         "./app/challenges/list-view.ts",
         "./app/common/common.ts",
         "./app/common/forms/form-group-component.ts",
+        "./app/common/forms/form-view.ts",
         "./app/common/image-management/cloudinary.d.ts",
         "./app/common/image-management/image-load.ts",
         "./app/common/image-management/image-management.ts",

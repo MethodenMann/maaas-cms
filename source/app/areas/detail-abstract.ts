@@ -2,8 +2,9 @@ import {Inject} from '../utils/di';
 import {IArea} from './IArea';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 import {IMedium} from '../media/imedium';
+import {FormView} from '../common/forms/form-view';
 
-export abstract class DetailAbstract {
+export abstract class DetailAbstract extends FormView {
   protected area: IArea;
   protected areaform: any;
 
@@ -13,6 +14,7 @@ export abstract class DetailAbstract {
     @Inject('Area') protected Area,
     @Inject('Medium') protected Medium
     ) {
+      super($scope);
     this.loadData();
 
     $scope.$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
@@ -42,19 +44,4 @@ export abstract class DetailAbstract {
   abstract save(): void;
 
   protected loadData(): void { }
-
-  protected isFormValid(): Boolean {
-    return this.$scope.areaform.$valid;
-  }
-
-  // private isValidAndSubmitted(inputName: string) {
-  //   if (this.$scope.areaform[inputName]) {
-  //     return this.$scope.areaform[inputName].$invalid && this.$scope.areaform.$submitted;
-  //   }
-  //   return false;
-  // }
-
-  protected focusFirstInputWithError() {
-    $('input.ng-invalid').first().focus();
-  }
 }
