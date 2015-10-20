@@ -13,4 +13,10 @@ div(ng-repeat="answer in ctrl.quizConfig.answers track by $index")
     label
       input(type="radio" value="{{answer.idx}}" ng-model="ctrl.quizConfig.correctAnswer" name="correctAnswer")
       | Richtige Antwort
-      a.btn(ng-click="ctrl.removeAnswer($index)") Remove
+    a.btn(ng-click="ctrl.removeAnswer($index)") Remove
+    div
+      image-upload(upload-id="stickerImage" required)
+      image-load(upload-id="stickerImage", height='100')
+      input(type="hidden" name="stickerImageId" ng-model="ctrl.area.stickerImageId" required)
+
+

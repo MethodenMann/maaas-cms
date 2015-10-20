@@ -1,7 +1,7 @@
-
 h1 CREATE Quiz
 
-select(ng-model='ctrl.selectedtype' ng-change="ctrl.typeChange()")
+input(ng-model="")
+select(ng-model='ctrl.selectedtype')
    option(value='multiplce-choice') Multiplcechoice
    option(value='true-false') True False
 
@@ -10,8 +10,8 @@ select(ng-model='ctrl.selectedtype' ng-change="ctrl.typeChange()")
 mas-quiz-config-loader(quiz-type="{{ctrl.selectedtype}}" quiz-config="ctrl.quizConfig")
 
 
-
-
+div
+   button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
 
 h3 QuizCOnfig JSON
 | {{ctrl.quizConfig}}

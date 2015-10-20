@@ -16,16 +16,16 @@ export function loadQuiz(app) {
 
   app.directive(
     makeSelector(QuizConfigLoader),
-    makeDirective(QuizConfigLoader))
+    makeDirective(QuizConfigLoader));
 
   app.directive(
     makeSelector(Multiplechoice),
-    makeDirective(Multiplechoice))
+    makeDirective(Multiplechoice));
 
 
   app.directive(
     makeSelector(TrueFalse),
-    makeDirective(TrueFalse))
+    makeDirective(TrueFalse));
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

@@ -20,8 +20,8 @@ export class CreateView {
     this.selectedtype = "multiplce-choice";
 
   }
-  typeChange() {
-    console.log(this.selectedtype);
-  }
 
+  save(){
+    console.log('save', this.selectedtype, this.quizConfig )
+  }
 }
