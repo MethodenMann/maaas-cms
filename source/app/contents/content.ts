@@ -3,7 +3,7 @@ import {RouteUtil} from '../master/route-util';
 import {TinyMceComponent} from './tiny-mce-component';
 import {CreateView} from '../contents/create-view';
 import {UpdateView} from '../contents/update-view';
-import {ListView} from '../challenges/list-view';
+import {ListView} from './list-view';
 
 export function loadContent(app) {
   var componentName = 'contents';
