@@ -2,8 +2,6 @@ import {Inject} from '../utils/di';
 import {IContent} from './IContent';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 
-declare var tinyMCE: any;
-
 export class AbstractDetailView {
   private static selector = 'mas-content-detail-view';
   private static templateUrl = './app/contents/abstract-detail-view.html';
@@ -13,6 +11,7 @@ export class AbstractDetailView {
   protected backgroundImageId: String;
   protected ids: String[] = [];
   protected area: any = {name: 'abc'};
+  protected tinymceConfig: any;
 
   constructor(
     @Inject('$scope') protected $scope,
@@ -30,6 +29,18 @@ export class AbstractDetailView {
       });
       this.imageList.push({title: this.imageList.length, value: url, medium: medium});
     });
+
+    this.tinymceConfig = {
+      selector: 'textarea',
+      menu: {},
+      toolbar: 'undo redo | bold italic | link image',
+      plugins: 'image',
+      image_dimensions: false,
+      height: 400,
+      image_list: (success) => {
+        success(this.imageList);
+      }
+    };
 
     this.constructorHook();
   }
