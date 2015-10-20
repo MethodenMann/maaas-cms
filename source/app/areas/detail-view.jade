@@ -2,7 +2,7 @@
   .panel-heading
     |   {{ 'areas_details_title' | translate }}
   .panel-body
-    form(name="areaform", role='form' novalidate)
+    form(name="areaform" role='form' novalidate)
       mas-form-group(field-name='name' localization-prefix='areas_details_name')
         input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
 

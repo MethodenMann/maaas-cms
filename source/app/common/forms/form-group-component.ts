@@ -22,22 +22,22 @@ export class FormGroupComponent {
   ) {
   }
 
-  private isValidAndSubmitted() {
+  isValidAndSubmitted() {
     if (this.form[this.fieldName]) {
       return this.form[this.fieldName].$invalid && this.form.$submitted;
     }
     return false;
   }
 
-  private localizedName() : string {
+  localizedName() : string {
     return this.localizationPrefix + '_label';
   }
 
-  private localizedHelp() : string {
+  localizedHelp() : string {
     return this.localizationPrefix + '_help';
   }
 
-  private localizedError() : string {
+  localizedError() : string {
     return this.localizationPrefix + '_error';
   }
 
