@@ -1,6 +1,6 @@
 import {Inject} from '../utils/di';
-import {IChallenge} from './ichallenge'
-import {IArea} from '../areas/iarea'
+import {IChallenge} from './ichallenge';
+import {IArea} from '../areas/iarea';
 
 export class UpdateView {
   public static selector = 'mas-challenge-update-view';
@@ -21,12 +21,18 @@ export class UpdateView {
 
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
+      console.log('CH', this.challenge);
+    });
+
+
+    this.Challenge.find(this.$stateParams.challengeId).then((d) => {
+      console.log('LUEG', d);
     });
 
   }
 
-  save(){
-    console.log('update', this.challenge)
-    this.Challenge.update(this.challenge.id, { challenge: this.challenge })
+  save() {
+    console.log('update', this.challenge);
+    this.Challenge.update(this.challenge.id, { challenge: this.challenge });
   }
 }

@@ -17,6 +17,7 @@ export class Multiplechoice {
 
   constructor(@Inject('$scope') protected $scope,
               @Inject('Medium') protected Medium) {
+    console.log('data', this.data);
     this.data.answers = [];
 
   }
@@ -28,7 +29,7 @@ export class Multiplechoice {
       i++;
       used = false;
       this.data.answers.forEach(a => {
-        if (a.idx == i) {
+        if (a.idx === i) {
           used = true;
         }
       });
@@ -39,7 +40,7 @@ export class Multiplechoice {
   removeAnswer(index) {
     console.log(index);
     if (this.data.correctAnswer) {
-      if (this.data.answers[index].idx == this.data.correctAnswer) {
+      if (this.data.answers[index].idx === this.data.correctAnswer) {
         this.data.correctAnswer = undefined;
       }
     }
@@ -47,16 +48,16 @@ export class Multiplechoice {
   }
 
   correctAnswerChanged(index) {
-    console.log("changed", index);
+    console.log('changed', index);
     this.data.correctAnswer = index;
   }
 
   addAnswer() {
     this.data.answers.push(
         {
-          text: "",
+          text: '',
           idx: this.getUnusedAnwerIndex()
         }
-    )
+    );
   }
 }
