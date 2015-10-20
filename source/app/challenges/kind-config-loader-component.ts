@@ -18,7 +18,7 @@ export class KindConfigLoader {
 
 
   private static link($scope, element: JQuery, attributes) {
-    console.log("kind", attributes)
+    console.log('kind', attributes);
 
 
 

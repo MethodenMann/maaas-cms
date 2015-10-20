@@ -3,5 +3,5 @@ export interface IChallenge {
   name: string;
   data: any;
   kind: string;
-  area_id: number;
+  areaId: number;
 }

@@ -1,6 +1,6 @@
 import {Inject} from '../utils/di';
-import {IChallenge} from './ichallenge'
-import {IArea} from '../areas/iarea'
+import {IChallenge} from './ichallenge';
+import {IArea} from '../areas/iarea';
 
 export class CreateView {
   public static selector = 'mas-challenge-create-view';
@@ -20,14 +20,14 @@ export class CreateView {
     });
 
     this.challenge.data = {};
-    this.challenge.area_id = this.$stateParams.areaId;
-    this.challenge.kind = "multiple-choice";
+    this.challenge.areaId = this.$stateParams.areaId;
+    this.challenge.kind = 'multiple-choice';
 
 
   }
 
-  save(){
-    console.log('save', this.challenge)
-    this.Challenge.create({ challenge: this.challenge })
+  save() {
+    console.log('save', this.challenge);
+    this.Challenge.create({ challenge: this.challenge });
   }
 }

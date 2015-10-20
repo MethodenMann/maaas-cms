@@ -1,5 +1,5 @@
 import {Inject} from '../utils/di';
-import {IChallenge} from "./ichallenge";
+import {IChallenge} from './ichallenge';
 
 export class ListView {
   public static selector = 'mas-quiz-list-view';
