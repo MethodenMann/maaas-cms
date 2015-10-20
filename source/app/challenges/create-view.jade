@@ -1,13 +1,14 @@
 h1 CREATE Quiz
 
-input(ng-model="")
+
+
+
 select(ng-model='ctrl.selectedtype')
-   option(value='multiplce-choice') Multiplcechoice
+   option(value='multiple-choice') Multiplechoice
    option(value='true-false') True False
 
 
-
-mas-quiz-config-loader(quiz-type="{{ctrl.selectedtype}}" quiz-config="ctrl.quizConfig")
+mas-challenges-kind-config-loader(type="{{ctrl.selectedtype}}" config="ctrl.quizConfig")
 
 
 div

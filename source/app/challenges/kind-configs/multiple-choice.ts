@@ -4,8 +4,8 @@ import {IMedium} from '../../media/imedium';
 
 
 export class Multiplechoice {
-  public static selector = 'mas-quiz-multiplce-choice';
-  public static templateUrl = './app/quiz/types/multiple-choice.html';
+  public static selector = 'mas-challenges-multiple-choice';
+  public static templateUrl = './app/challenges/kind-configs/multiple-choice.html';
   private quizConfig:any;
   private static options = {
     bindToController: {
@@ -17,10 +17,6 @@ export class Multiplechoice {
               @Inject('Medium') protected Medium) {
     this.quizConfig.answers = [];
 
-    $scope.$on('image-management.injectImage', (e, data:IMediumUploadBroadcast) => {
-      console.log("BC", e, data);
-      this.handleImageDisplay(data.uploadId, data.medium);
-    });
   }
 
   getUnusedAnwerIndex() {

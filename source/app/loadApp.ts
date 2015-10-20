@@ -1,6 +1,6 @@
 import {loadArea} from './areas/areas';
 import {loadBeacon} from './beacons/beacons';
-import {loadQuiz} from './quiz/quiz';
+import {loadChallenge} from './challenges/challenge';
 import {loadMaster} from './master/master';
 import {loadJsDataConfig} from './js-data-config';
 import {loadCommon} from './common/common';
@@ -17,5 +17,5 @@ export function loadApp(app) {
   loadRegistration(app);
   loadContent(app);
   loadBeacon(app);
-  loadQuiz(app);
+  loadChallenge(app);
 }

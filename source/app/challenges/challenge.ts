@@ -1,27 +1,26 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {QuizConfigLoader} from './quiz-config-loader';
-import {Multiplechoice} from './types/multiple-choice';
-import {TrueFalse} from './types/true-false';
+import {KindConfigLoader} from './kind-config-loader';
+import {Multiplechoice} from './kind-configs/multiple-choice';
+import {TrueFalse} from './kind-configs/true-false';
 
 import {ListView} from './list-view';
 import {CreateView} from './create-view';
 
-export function loadQuiz(app) {
-  var componentName = 'quiz';
+export function loadChallenge(app) {
+  var componentName = 'challenges';
 
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
   app.directive(
-    makeSelector(QuizConfigLoader),
-    makeDirective(QuizConfigLoader));
+    makeSelector(KindConfigLoader),
+    makeDirective(KindConfigLoader));
 
   app.directive(
     makeSelector(Multiplechoice),
     makeDirective(Multiplechoice));
-
 
   app.directive(
     makeSelector(TrueFalse),
@@ -30,9 +29,9 @@ export function loadQuiz(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.areas.detail.${componentName}`,
-      RouteUtil.getAbstractRoute('/${componentName}', 'QuizzeZZ'))
+      RouteUtil.getAbstractRoute(`/${componentName}`, 'QuizzeZZ'))
       .state(`cms.areas.detail.${componentName}.list`,
-      RouteUtil.getRoute(ListView, 'Quiz', 'cms.areas.detail.update'))
+      RouteUtil.getRoute(ListView, 'Challenge', 'cms.areas.detail.update'))
       .state(`cms.areas.detail.${componentName}.create`,
       RouteUtil.getRoute(CreateView,
         'Quiz erstellen', `cms.areas.detail.${componentName}.list`, '/create'));

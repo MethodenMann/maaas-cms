@@ -2,7 +2,7 @@ import {Inject} from '../utils/di';
 
 export class CreateView {
   public static selector = 'mas-quiz-create-view';
-  public static templateUrl = './app/quiz/create-view.html';
+  public static templateUrl = './app/challenges/create-view.html';
 
   public area;
   selectedtype: string;
@@ -17,7 +17,7 @@ export class CreateView {
       this.area = data;
     });
 
-    this.selectedtype = "multiplce-choice";
+    this.selectedtype = "multiple-choice";
 
   }
 

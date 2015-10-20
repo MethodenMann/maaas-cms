@@ -2,7 +2,7 @@ import {Inject} from '../utils/di';
 
 export class ListView {
   public static selector = 'mas-quiz-list-view';
-  public static templateUrl = './app/quiz/list-view.html';
+  public static templateUrl = './app/challenges/list-view.html';
   public area;
 
 
