@@ -6,16 +6,18 @@ import {IMedium} from '../../media/imedium';
 export class Multiplechoice {
   public static selector = 'mas-challenges-multiple-choice';
   public static templateUrl = './app/challenges/kind-configs/multiple-choice.html';
-  private quizConfig:any;
+
+
+  private data:any;
   private static options = {
     bindToController: {
-      quizConfig: '='
+      data: '='
     }
   };
 
   constructor(@Inject('$scope') protected $scope,
               @Inject('Medium') protected Medium) {
-    this.quizConfig.answers = [];
+    this.data.answers = [];
 
   }
 
@@ -25,7 +27,7 @@ export class Multiplechoice {
     do {
       i++;
       used = false;
-      this.quizConfig.answers.forEach(a => {
+      this.data.answers.forEach(a => {
         if (a.idx == i) {
           used = true;
         }
@@ -36,21 +38,21 @@ export class Multiplechoice {
 
   removeAnswer(index) {
     console.log(index);
-    if (this.quizConfig.correctAnswer) {
-      if (this.quizConfig.answers[index].idx == this.quizConfig.correctAnswer) {
-        this.quizConfig.correctAnswer = undefined;
+    if (this.data.correctAnswer) {
+      if (this.data.answers[index].idx == this.data.correctAnswer) {
+        this.data.correctAnswer = undefined;
       }
     }
-    this.quizConfig.answers.splice(index, 1);
+    this.data.answers.splice(index, 1);
   }
 
   correctAnswerChanged(index) {
     console.log("changed", index);
-    this.quizConfig.correctAnswer = index;
+    this.data.correctAnswer = index;
   }
 
   addAnswer() {
-    this.quizConfig.answers.push(
+    this.data.answers.push(
         {
           text: "",
           idx: this.getUnusedAnwerIndex()

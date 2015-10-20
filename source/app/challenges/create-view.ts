@@ -1,12 +1,13 @@
 import {Inject} from '../utils/di';
+import {IChallenge} from './ichallenge'
+import {IArea} from '../areas/iarea'
 
 export class CreateView {
   public static selector = 'mas-quiz-create-view';
   public static templateUrl = './app/challenges/create-view.html';
 
-  public area;
-  selectedtype: string;
-  private quizConfig: any = {};
+  public area: IArea;
+  private challenge: IChallenge = <IChallenge>{};
 
   constructor(
     @Inject('$location') private $location,
@@ -17,7 +18,9 @@ export class CreateView {
       this.area = data;
     });
 
-    this.selectedtype = "multiple-choice";
+    this.challenge.data = {};
+    this.challenge.kind = "multiple-choice";
+
 
   }
 

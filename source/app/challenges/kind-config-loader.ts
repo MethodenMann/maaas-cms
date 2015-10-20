@@ -5,8 +5,8 @@ export class KindConfigLoader {
 
   private static options = {
     bindToController: {
-      type: '@',
-      config: '='
+      kind: '@',
+      data: '='
     }
   };
 
@@ -18,15 +18,15 @@ export class KindConfigLoader {
 
 
   private static link($scope, element: JQuery, attributes) {
-    console.log("type", attributes)
+    console.log("kind", attributes)
 
 
 
-    attributes.$observe('type', function() {
+    attributes.$observe('kind', function() {
       element.html('');
 
       console.log(attributes.type);
-      var htm = `<mas-challenges-${attributes.type} quiz-config="ctrl.config"/>`;
+      var htm = `<mas-challenges-${attributes.kind} data="ctrl.data"/>`;
       var compiled = $scope.ctrl.$compile(htm)($scope);
 
       element.append(compiled);
