@@ -1,9 +1,9 @@
 import {Inject} from '../utils/di';
 import {AbstractDetailView} from './abstract-detail-view';
 import {IMedium} from '../media/imedium';
+import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 
 export class UpdateView extends AbstractDetailView {
-
   constructorHook() {
     // TODO fetch media differently
     this.Medium.findAll().then((data) => {
@@ -19,6 +19,17 @@ export class UpdateView extends AbstractDetailView {
         });
         this.imageList = list;
       });
+    });
+
+    this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
+      var medium = data.medium;
+      medium.mediumableId = this.content.id;
+      medium.mediumableType = 'Content';
+      this.Medium.update(medium.id, {medium: medium});
+      var url = $.cloudinary.url(medium.publicId, {
+        format: 'jpg', width: 100, height: 100, crop: 'thumb'
+      });
+      this.imageList.push({title: this.imageList.length, value: url, medium: medium});
     });
   }
 
