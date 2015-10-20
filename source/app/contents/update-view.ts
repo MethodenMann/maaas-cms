@@ -26,10 +26,7 @@ export class UpdateView extends AbstractDetailView {
       medium.mediumableId = this.content.id;
       medium.mediumableType = 'Content';
       this.Medium.update(medium.id, {medium: medium});
-      var url = $.cloudinary.url(medium.publicId, {
-        format: 'jpg', width: 100, height: 100, crop: 'thumb'
-      });
-      this.imageList.push({title: this.imageList.length, value: url, medium: medium});
+      this.addToImageList(medium);
     });
   }
 

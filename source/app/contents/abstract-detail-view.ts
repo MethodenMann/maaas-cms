@@ -1,6 +1,7 @@
 import {Inject} from '../utils/di';
 import {IContent} from './IContent';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
+import {IMedium} from '../media/imedium';
 
 export class AbstractDetailView {
   private static selector = 'mas-content-detail-view';
@@ -35,4 +36,11 @@ export class AbstractDetailView {
   }
 
   protected constructorHook() {}
+
+  protected addToImageList(medium:IMedium) {
+    var url = $.cloudinary.url(medium.publicId, {
+      format: 'jpg', width: 100, height: 100, crop: 'thumb'
+    });
+    this.imageList.push({title: this.imageList.length, value: url, medium: medium});
+  }
 }
