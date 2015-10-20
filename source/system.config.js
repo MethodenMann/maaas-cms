@@ -23,6 +23,7 @@ System.config({
     'angularjs-color-picker': 'libs/angularjs-color-picker.min.js',
     'devise': 'libs/devise-min.js',
     'angular-ui-grid': 'libs/ui-grid.min.js',
-    'angular-breadcrumb': 'libs/angular-breadcrumb.min.js'
+    'angular-breadcrumb': 'libs/angular-breadcrumb.min.js',
+    'angular-ui-tinymce': 'libs/tinymce.js'
   }
 });

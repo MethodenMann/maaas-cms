@@ -1,0 +1,6 @@
+div(ng-repeat="content in ctrl.area.contents")
+  | {{content.title}}
+  a(href ui-sref='cms.areas.detail.contents.update({contentId: content.id})')
+    | hingehen
+
+a(href ui-sref='cms.areas.detail.contents.create') neu machen yeah

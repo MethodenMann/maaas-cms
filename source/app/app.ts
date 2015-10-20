@@ -12,6 +12,7 @@ import 'angular-translate-storage-cookie';
 import 'angular-translate-loader-partial';
 import 'angular-translate-storage-local';
 import 'angular-breadcrumb';
+import 'angular-ui-tinymce';
 
 
 import 'js-data';
@@ -29,7 +30,7 @@ import {loadApp} from './loadApp';
 var leApp = angular.module('maaas', [
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
   'Devise', 'color.picker', 'ui.grid', 'ui.grid.selection', 'ui.grid.edit',
-  'ncy-angular-breadcrumb'
+  'ncy-angular-breadcrumb', 'ui.tinymce'
 ]);
 
 leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {

@@ -108,7 +108,8 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/tinycolor/tinycolor.js',
     config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.js',
     config.bowerPath + '/angular-ui-grid/ui-grid.min.js',
-    config.bowerPath + '/angular-breadcrumb/release/angular-breadcrumb.min.js'
+    config.bowerPath + '/angular-breadcrumb/release/angular-breadcrumb.min.js',
+    config.bowerPath + '/angular-ui-tinymce/src/tinymce.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   gulp.src([

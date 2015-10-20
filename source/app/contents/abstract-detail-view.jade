@@ -18,9 +18,9 @@
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("name") }')
         .row
           .col-md-6
-            mas-tinymce-component(image-list="ctrl.imageList")
+            textarea(ui-tinymce="ctrl.tinymceConfig" ng-model="ctrl.content.data")
           .col-md-4
-            image-upload(image-id='ctrl.backgroundImageId')
+            image-upload(upload-id="contentImage")
             br
             div.pull-left(ng-repeat="image in ctrl.imageList")
               image-load(public-id='{{image.medium.publicId}}' height='100')

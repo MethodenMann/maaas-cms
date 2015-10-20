@@ -1,18 +1,15 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {TinyMceComponent} from './tiny-mce-component';
-import {ContentDetailComponent} from './content-detail-component';
+import {CreateView} from '../contents/create-view';
+import {UpdateView} from '../contents/update-view';
+import {ListView} from './list-view';
 
 export function loadContent(app) {
   var componentName = 'contents';
 
   app.directive(
-    makeSelector(TinyMceComponent),
-    makeDirective(TinyMceComponent));
-
-    app.directive(
-      makeSelector(ContentDetailComponent),
-      makeDirective(ContentDetailComponent));
+    makeSelector(CreateView),
+    makeDirective(CreateView));
 
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
@@ -20,14 +17,15 @@ export function loadContent(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state(`cms.${componentName}`,
-        RouteUtil.getAbstractRoute('/contents', 'Inhalte'))
-      .state(`cms.${componentName}.list`,
-        RouteUtil.getRoute(ContentDetailComponent, 'Bereiche'))
-      .state(`cms.${componentName}.detail`,
-        RouteUtil.getRoute(ContentDetailComponent,
-          'Bereich {{ctrl.area.name}} Bearbeiten',
-          `cms.${componentName}.list`,
-          '/{id:[0-9]{1,8}}'));
+      .state(`cms.areas.detail.${componentName}`,
+        RouteUtil.getAbstractRoute(`/${componentName}`, 'Inhalte Yo'))
+      .state(`cms.areas.detail.${componentName}.list`,
+        RouteUtil.getRoute(ListView, 'Inhalte', 'cms.areas.detail.update'))
+      .state(`cms.areas.detail.${componentName}.create`,
+        RouteUtil.getRoute(CreateView,
+          'Inhalt erstellen', `cms.areas.detail.${componentName}.list`, '/create'))
+      .state(`cms.areas.detail.${componentName}.update`,
+        RouteUtil.getRoute(UpdateView,
+          'Inhalt bearbeiten', `cms.areas.detail.${componentName}.list`, '/{contentId:[0-9]{1,8}}'));
   });
 }
