@@ -1,5 +1,26 @@
 {
   "challenges_title": "Quiz",
+
+
+  "challenges_details_name_label": "Name",
+  "challenges_details_name_help": "Der Name des Quiz, dieser erscheint in der App nicht",
+  "challenges_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
+  "challenges_details_question_label": "Frage",
+  "challenges_details_question_help": "Wählen sie eine Frage aus",
+  "challenges_details_question_error": "Bitte Geben Sie einen gülte Frage ein",
+  "challenges_details_kind_label": "Quiz Typ",
+  "challenges_details_kind_help": "Wählen sie die Art des gwünschten Quiz aus.",
+  "challenges_details_kind_error": "Bitte Geben Sie einen gülten Quiz-Typ ein",
+
   "challenges_multiple-choice_name": "Mutiplechoice",
+  "challenges_multiple-choice_config_title": "Mutiplechoice konfigurieren",
+  "challenges_multiple-choice_answers": "Antworten",
+  "challenges_multiple-choice_answer": "Antwort",
+  "challenges_multiple-choice_answers_add": "Neue Antworten hinzufügen",
+  "challenges_multiple-choice_correctanswer_error": "Mindestens eine Antwort muss als richtig markiert sein.",
+
+
+
+
   "challenges_true_false-choice_name": "Wahr/Falsch"
 }

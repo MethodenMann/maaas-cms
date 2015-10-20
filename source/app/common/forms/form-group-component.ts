@@ -9,13 +9,19 @@ export class FormGroupComponent {
     require: '^form',
     bindToController: {
       fieldName: '@',
-      localizationPrefix: '@'
+      localizationPrefix: '@',
+      hideLabel: '@',
+      hideHelp: '@',
+      hideError: '@'
     }
   }
 
   private form: any;
   private fieldName: string;
   private localizationPrefix: string;
+  private hideLabel: boolean = false;
+  private hideHelp: boolean = false;
+  private hideError: boolean = false;
 
   constructor(
     @Inject('$scope') private $scope

@@ -1,8 +1,9 @@
 import {Inject} from '../utils/di';
 import {IChallenge} from './ichallenge';
 import {IArea} from '../areas/iarea';
+import {FormView} from '../common/forms/form-view';
 
-export class CreateView {
+export class CreateView extends FormView {
   public static selector = 'mas-challenge-create-view';
   public static templateUrl = './app/challenges/detail-view.html';
 
@@ -10,11 +11,13 @@ export class CreateView {
   private challenge: IChallenge = <IChallenge>{};
 
   constructor(
+    @Inject('$scope') private $scope,
     @Inject('$location') private $location,
     @Inject('$stateParams') private $stateParams,
     @Inject('Area') private Area,
     @Inject('Challenge') private Challenge
     ) {
+    super($scope);
     this.Area.find(this.$stateParams.areaId).then((data) => {
       this.area = data;
     });
@@ -27,7 +30,11 @@ export class CreateView {
   }
 
   save() {
-    console.log('save', this.challenge);
-    this.Challenge.create({ challenge: this.challenge });
+    if (this.isFormValid()) {
+      this.Challenge.create({ challenge: this.challenge });
+      alert('Erstellt'); //TODO: make sexy
+    } else {
+      this.focusFirstInputWithError();
+    }
   }
 }

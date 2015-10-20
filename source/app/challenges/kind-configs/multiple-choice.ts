@@ -38,9 +38,8 @@ export class Multiplechoice {
   }
 
   removeAnswer(index) {
-    console.log(index);
     if (this.data.correctAnswer) {
-      if (this.data.answers[index].idx === this.data.correctAnswer) {
+      if (this.data.answers[index].idx == this.data.correctAnswer) {
         this.data.correctAnswer = undefined;
       }
     }
