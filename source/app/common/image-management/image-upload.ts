@@ -48,8 +48,8 @@ export class ImageUploadDirective {
 
   private static link($scope, element: JQuery, attributes) {
     var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
-      cloud_name: 'nmsg'
-    });
+      cloud_name: 'nmsg', folder: 'dev'
+    }); //TODO: Change static dev folder to museum directory
 
     imageTag.bind('cloudinarydone', (e, data) => {
       $scope.ctrl.handleSuccessfulUpload(data);
