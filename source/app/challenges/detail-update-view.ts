@@ -24,14 +24,7 @@ export class UpdateView extends FormView {
 
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
-      console.log('CH', this.challenge);
     });
-
-
-    this.Challenge.find(this.$stateParams.challengeId).then((d) => {
-      console.log('LUEG', d);
-    });
-
   }
 
   save() {
