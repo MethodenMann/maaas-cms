@@ -12,6 +12,8 @@
   "challenges_details_kind_help": "Wählen sie die Art des gwünschten Quiz aus.",
   "challenges_details_kind_error": "Bitte Geben Sie einen gülten Quiz-Typ ein",
 
+
+
   "challenges_multiple-choice_name": "Mutiplechoice",
   "challenges_multiple-choice_config_title": "Mutiplechoice konfigurieren",
   "challenges_multiple-choice_answers": "Antworten",
@@ -20,7 +22,28 @@
   "challenges_multiple-choice_correctanswer_error": "Mindestens eine Antwort muss als richtig markiert sein.",
 
 
+  "challenges_true_false-choice_name": "Wahr/Falsch",
+  "challenges_true-false_config_title" : "Wahr/Falsch Konfiguration",
+  "challenges_true-false_question_add" : "Neue Frage hinzufügen",
 
 
-  "challenges_true_false-choice_name": "Wahr/Falsch"
+  "challenges_true-false_questions": "Fragen",
+
+  "challenges_true-false_option_true_label": "Wahr Antwort",
+  "challenges_true-false_option_true_error": "Sie müssen einen Text für die Antwort 'Wahr' Angeben",
+  "challenges_true-false_option_true_help": "Setzen sie die Antwort für den 'Wahr' Wert der Fragen. z.B Ja",
+
+  "challenges_true-false_option_false_label": "Falsch Antwort",
+  "challenges_true-false_option_false_error": "Sie müssen einen Text für die Antwort 'Falsch' Angeben",
+  "challenges_true-false_option_false_help": "Setzen sie die Antwort für den 'Falsch' Wert der Fragen. z.B Nein",
+
+
+  "challenges_true-false_question_text_label": "Frage Text",
+  "challenges_true-false_question_text_error": "Geben sie eine gültige Frage ein",
+  "challenges_true-false_question_text_help": "Der Frage Text welche der Besucher mit Wahr oder Falsch beantworten muss",
+
+  "challenges_true-false_question_answer_label": "Antwort",
+  "challenges_true-false_question_answer_error": "Wählen sie die passende Antwort aus",
+  "challenges_true-false_question_answer_help": "Wählen sie die passende Antwort aus"
+
 }

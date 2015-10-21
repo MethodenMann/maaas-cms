@@ -1,5 +1,4 @@
 import {Inject} from '../utils/di';
-import {IChallenge} from './ichallenge';
 import {IArea} from '../areas/iarea';
 import {FormView} from '../common/forms/form-view';
 import {IChallenge} from "./ichallenge";
@@ -26,7 +25,7 @@ export class CreateView extends FormView {
 
     this.challenge.data = {};
     this.challenge.areaId = this.$stateParams.areaId;
-    this.challenge.kind = 'multiple-choice';
+    this.challenge.kind = 'true-false';
   }
 
   save() {

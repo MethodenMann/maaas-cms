@@ -8,6 +8,7 @@ import {ListView} from './list-view';
 import {CreateView} from './detail-create-view';
 import {UpdateView} from './detail-update-view';
 import {ChallengeButtonComponent} from './challenge-button-component';
+import {TrueFalseQuestion} from './kind-configs/true-false-question';
 
 export function loadChallenge(app) {
   var componentName = 'challenges';
@@ -31,6 +32,10 @@ export function loadChallenge(app) {
   app.directive(
     makeSelector(TrueFalse),
     makeDirective(TrueFalse));
+
+  app.directive(
+    makeSelector(TrueFalseQuestion),
+    makeDirective(TrueFalseQuestion));
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
