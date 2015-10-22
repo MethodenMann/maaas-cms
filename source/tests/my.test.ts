@@ -1,10 +1,9 @@
-// import 'app/app';
-import {loadContent} from '../app/contents/content';
+import 'angular';
+import 'angular-mocks';
 
 describe("bla", () => {
   it("blabla", () =>{
-    console.log("hello");
-    console.log(loadContent);
+    console.log("ein test");
     // loadContent();
     // console.log(AbstractDetailView);
   });

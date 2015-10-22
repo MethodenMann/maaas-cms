@@ -27,6 +27,8 @@ module.exports = function (config) {
       { pattern: 'out/libs/tinymce.js', served: true, included: false, watched: false },
 
 
+      { pattern: 'bower_components/angular-mocks/angular-mocks.js', served: true, included: false, watched: false },
+
       { pattern: 'node_modules/traceur/bin/traceur-runtime.js', served: true, included: false, watched: false },
       { pattern: 'node_modules/systemjs/dist/system.js', served: true, included: false, watched: false },
       { pattern: 'node_modules/systemjs/dist/system-polyfills.js', served: true, included: false, watched: false },
@@ -41,6 +43,7 @@ module.exports = function (config) {
       config: {
         baseURL: '/out/',
         paths: {
+          'angular-mocks': '../base/bower_components/angular-mocks/angular-mocks.js',
           'traceur': '../node_modules/traceur/bin/traceur-runtime.js',
           'systemjs': '../node_modules/systemjs/dist/system.js',
           'system-polyfills': '../node_modules/systemjs/dist/system-polyfills.js',
