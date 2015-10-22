@@ -42,6 +42,10 @@
   "challenges_true-false_question_text_error": "Geben sie eine gültige Frage ein",
   "challenges_true-false_question_text_help": "Der Frage Text welche der Besucher mit Wahr oder Falsch beantworten muss",
 
+  "challenges_true-false_question_image_label": "Bild",
+  "challenges_true-false_question_image_help": "Optional können sie ein Bild zur Frage hinzufügen",
+
+
   "challenges_true-false_question_answer_label": "Antwort",
   "challenges_true-false_question_answer_error": "Wählen sie die passende Antwort aus",
   "challenges_true-false_question_answer_help": "Wählen sie die passende Antwort aus"

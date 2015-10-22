@@ -29,7 +29,7 @@ export class FormGroupComponent {
   }
 
   isValidAndSubmitted() {
-    if (this.form[this.fieldName]) {
+    if (this.form && this.form[this.fieldName]) {
       return this.form[this.fieldName].$invalid && this.form.$submitted;
     }
     return false;

@@ -9,6 +9,7 @@ export class UpdateView extends FormView {
 
   public area: IArea;
   private challenge: IChallenge = <IChallenge>{};
+  private isUpdate = true;
 
   constructor(
     @Inject('$scope') protected $scope,
@@ -25,7 +26,11 @@ export class UpdateView extends FormView {
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
     });
+
+
   }
+
+
 
   save() {
     if (this.isFormValid()) {

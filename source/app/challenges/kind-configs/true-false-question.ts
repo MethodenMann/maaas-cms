@@ -48,4 +48,10 @@ export class TrueFalseQuestion {
       this.question.imageId = mediumId;
     }
   }
+
+  removeQuestion(){
+    this.$scope.$emit('true-false.removeQuestion', this.index);
+  }
+
+
 }

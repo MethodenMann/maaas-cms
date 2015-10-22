@@ -21,11 +21,8 @@ export class KindConfigLoader {
     console.log('kind', attributes);
 
 
-
     attributes.$observe('kind', function() {
       element.html('');
-
-      console.log(attributes.type);
       var htm = `<mas-challenges-${attributes.kind} data="ctrl.data"/>`;
       var compiled = $scope.ctrl.$compile(htm)($scope);
 
