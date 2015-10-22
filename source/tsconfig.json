@@ -30,6 +30,7 @@
         "./app/challenges/ichallenge.ts",
         "./app/challenges/kind-config-loader-component.ts",
         "./app/challenges/kind-configs/multiple-choice.ts",
+        "./app/challenges/kind-configs/true-false-question.ts",
         "./app/challenges/kind-configs/true-false.ts",
         "./app/challenges/list-view.ts",
         "./app/common/common.ts",
@@ -42,6 +43,7 @@
         "./app/common/image-management/imedium-upload-broadcast.ts",
         "./app/common/new-button.ts",
         "./app/contents/abstract-detail-view.ts",
+        "./app/contents/app.test.ts",
         "./app/contents/content.ts",
         "./app/contents/create-view.ts",
         "./app/contents/icontent.ts",
@@ -62,8 +64,12 @@
         "./typings/angular-ui-router/angular-ui-router.d.ts",
         "./typings/angularjs/angular-resource.d.ts",
         "./typings/angularjs/angular.d.ts",
+        "./typings/assertion-error/assertion-error.d.ts",
+        "./typings/chai/chai.d.ts",
         "./typings/jquery/jquery.d.ts",
         "./typings/metismenu/metismenu.d.ts",
+        "./typings/mocha/mocha.d.ts",
+        "./typings/sinon/sinon.d.ts",
         "./typings/tsd.d.ts"
     ]
 }
