@@ -6,13 +6,11 @@ import {FormView} from '../common/forms/form-view';
 
 export abstract class DetailAbstract extends FormView {
   protected area: IArea;
-  protected areaform: any;
 
   constructor(
     @Inject('$scope') protected $scope,
     @Inject('$stateParams') protected $stateParams,
     @Inject('Area') protected Area,
-    @Inject('Medium') protected Medium,
     @Inject('$state') protected $state
     ) {
     super($scope);
@@ -20,7 +18,7 @@ export abstract class DetailAbstract extends FormView {
     this.loadData();
 
     $scope.$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
-      this.handleImageDisplay(data.uploadId, data.medium);
+      this.persistImageId(data.uploadId, data.mediumId);
     });
 
     this.constructorHook();
@@ -28,20 +26,23 @@ export abstract class DetailAbstract extends FormView {
 
   protected constructorHook() {}
 
-  protected handleImageDisplay(uploadId:string, medium:IMedium) {
+  protected persistImageId(uploadId:string, mediumId) {
     if (uploadId == 'backgroundImage') {
-      this.area.backgroundImageId = medium.id;
+      this.area.backgroundImageId = mediumId;
     } else if (uploadId == 'stickerImage') {
-      this.area.stickerImageId = medium.id;
+      this.area.stickerImageId = mediumId;
     }
   }
 
   protected saveImageRelation(medium:IMedium, id?:number) {
-    var medium = medium;
-    medium.mediumableId = id || this.area.id;
-    medium.mediumableType = 'Area';
-    this.Medium.update(medium.id, {medium: medium});
+    var mediumableUpdateData = {
+      id: medium.id,
+      mediumableId: id || this.area.id,
+      mediumableType: 'Area'
+    };
+    this.$scope.$broadcast("image-management.mediumableUpdate", mediumableUpdateData)
   }
+
 
   abstract save(): void;
 

@@ -29,7 +29,6 @@ export class CreateView extends FormView {
   }
 
 
-
   save() {
     if (this.isFormValid()) {
       this.Challenge.create({ challenge: this.challenge }).then((challenge:IChallenge) => {

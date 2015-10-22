@@ -1,7 +1,6 @@
 import {Inject} from '../../utils/di';
-import {IMediumUploadBroadcast} from "../../common/image-management/imedium-upload-broadcast";
-import {IMedium} from "../../media/imedium";
-
+import {IMediumUploadBroadcast} from '../../common/image-management/imedium-upload-broadcast';
+import {IMediumableUpdateBroadcast} from '../../common/image-management/Imediumable-update-broadcast';
 
 
 export class TrueFalseQuestion {
@@ -10,8 +9,8 @@ export class TrueFalseQuestion {
 
 
   private question:any;
-  private data:any;
   private index:number;
+
   private static options = {
     bindToController: {
       question: '=',
@@ -21,8 +20,7 @@ export class TrueFalseQuestion {
   };
 
   constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('$timeout') protected $timeout
+    @Inject('$scope') protected $scope
   ) {
 
     $scope.$on('image-management.injectImage', (e, data:IMediumUploadBroadcast) => {
@@ -30,25 +28,23 @@ export class TrueFalseQuestion {
     });
 
     $scope.$on('challenge.saved', (e, challenge) => {
-      this.handleMediumableUpdate(challenge.id);
+      this.saveImageRelation(challenge.id);
     });
   }
 
-
-  handleMediumableUpdate(challengeId){
+  saveImageRelation(challengeId){
     if (this.question.imageId){
-      var mediumableUpdateData = {
+      var relationData: IMediumableUpdateBroadcast = {
         id: this.question.imageId,
         mediumableId: challengeId,
         mediumableType: 'challenge'
       };
-      this.$scope.$broadcast("image-management.mediumableUpdate", mediumableUpdateData)
+      this.$scope.$broadcast("image-management.mediumableUpdate", relationData)
     }
   }
 
-
   handleImageDisplay(uploadId:string, mediumId) {
-    if (uploadId.indexOf('_' > -1) && uploadId.split('_')[1] == this.index) {
+    if ((uploadId.indexOf('_') > -1) && (uploadId.split('_')[1] == this.index)) {
       this.question.imageId = mediumId;
     }
   }
