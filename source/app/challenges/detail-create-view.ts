@@ -2,43 +2,20 @@ import {Inject} from '../utils/di';
 import {IArea} from '../areas/iarea';
 import {FormView} from '../common/forms/form-view';
 import {IChallenge} from "./ichallenge";
+import {DetailAbstract} from "./detail-abstract";
 
-export class CreateView extends FormView {
+export class CreateView extends DetailAbstract {
+
   public static selector = 'mas-challenge-create-view';
   public static templateUrl = './app/challenges/detail-view.html';
 
-  public area: IArea;
-  private challenge: IChallenge = <IChallenge>{};
 
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('$location') private $location,
-    @Inject('$stateParams') private $stateParams,
-    @Inject('$state') private $state,
-    @Inject('Area') private Area,
-    @Inject('Challenge') private Challenge
-  ) {
-    super($scope);
-    this.Area.find(this.$stateParams.areaId).then((data) => {
-      this.area = data;
-    });
 
+  protected constructorHook() {
     this.challenge.data = {};
     this.challenge.areaId = this.$stateParams.areaId;
-    this.challenge.kind = 'assign';
   }
 
-  clearData(){
-
-    this.challenge.data = {};
-    for (var prop in this.$scope.form) {
-      if (!(prop.indexOf("$") == 0) && prop !== "name" ) {
-        delete this.$scope.form[prop];
-      }
-    }
-    //TODO: Maybe there is a nicer solution?
-    //http://stackoverflow.com/questions/33283575/re-initialize-angular-form-with-dynamically-generated-input-fields
-  }
 
 
   save() {
@@ -48,7 +25,6 @@ export class CreateView extends FormView {
         this.$scope.$broadcast('challenge.saved', challenge);
         this.$state.go("cms.areas.detail.challenges.update", {challengeId: challenge.id});
       });
-
     } else {
       this.focusFirstInputWithError();
     }
