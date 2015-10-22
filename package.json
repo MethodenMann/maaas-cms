@@ -32,5 +32,22 @@
     "gulp-size": "^2.0.0",
     "systemjs": "^0.19.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "es6-module-loader": "^0.17.8",
+    "karma": "^0.13.10",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-coverage": "^0.5.2",
+    "karma-mocha": "^0.2.0",
+    "karma-mocha-reporter": "^1.1.1",
+    "karma-sinon": "^1.0.4",
+    "karma-systemjs": "^0.7.2",
+    "mocha": "^2.3.3",
+    "selenium-standalone": "^4.7.0",
+    "sinon": "^1.17.1",
+    "sinon-chai": "^2.8.0",
+    "systemjs-builder": "^0.14.6",
+    "traceur": "0.0.91"
+  }
 }
