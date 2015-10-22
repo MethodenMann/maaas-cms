@@ -7,6 +7,7 @@ form(name="form" role='form' novalidate)
     select.form-control(ng-model='ctrl.challenge.kind')
       option(value='multiple-choice') Multiplechoice
       option(value='true-false') True False
+      option(value='assign') Assign
   .form-group.left10
     mas-challenges-kind-config-loader(kind="{{ctrl.challenge.kind}}" data="ctrl.challenge.data")
 

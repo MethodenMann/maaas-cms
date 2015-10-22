@@ -25,7 +25,7 @@ export class CreateView extends FormView {
 
     this.challenge.data = {};
     this.challenge.areaId = this.$stateParams.areaId;
-    this.challenge.kind = 'true-false';
+    this.challenge.kind = 'assign';
   }
 
 

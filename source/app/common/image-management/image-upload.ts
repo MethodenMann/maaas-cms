@@ -11,11 +11,13 @@ export class ImageUploadDirective {
 
   private static options = {
     bindToController: {
-      uploadId: '@'
+      uploadId: '@',
+      mediumId: '='
     }
   };
 
   private uploadId: string;
+  private mediumId: number;
 
   constructor(
     @Inject('$scope') private $scope,
@@ -24,18 +26,11 @@ export class ImageUploadDirective {
   ) {
 
     this.$scope.$on('image-management.mediumableUpdate', (e, data) => {
-      console.log('image-management.mediumableUpdate', data);
       this.handleMediumAbleUpdate(data);
     });
   }
 
   private handleMediumAbleUpdate(data: IMediumableUpdateBroadcast){
-    //var medium = {
-    //  id: data.id,
-    //  mediumableId: data.mediumableId,
-    //  mediumableType: data.mediumableType
-    //};
-
     this.Medium.update(data.id, {medium: data});
   }
 
@@ -61,6 +56,7 @@ export class ImageUploadDirective {
       // area update view.
       this.$rootScope.$broadcast('image-management.imageUploaded', data); //TODO: brauchts das?
       this.$rootScope.$broadcast('image-management.injectImage', data);
+      this.mediumId = medium.id;
     });
   }
 
