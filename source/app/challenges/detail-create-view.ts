@@ -28,12 +28,16 @@ export class CreateView extends FormView {
     this.challenge.kind = 'true-false';
   }
 
+
+
   save() {
     if (this.isFormValid()) {
       this.Challenge.create({ challenge: this.challenge }).then((challenge:IChallenge) => {
+        alert('Erstellt'); //TODO: make sexy
+        this.$scope.$broadcast('challenge.saved', challenge);
         this.$state.go("cms.areas.detail.challenges.update", {challengeId: challenge.id});
       });
-      alert('Erstellt'); //TODO: make sexy
+
     } else {
       this.focusFirstInputWithError();
     }

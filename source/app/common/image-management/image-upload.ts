@@ -19,7 +19,19 @@ export class ImageUploadDirective {
     @Inject('$scope') private $scope,
     @Inject('$rootScope') private $rootScope,
     @Inject('Medium') private Medium
-  ) {}
+  ) {
+
+    this.$scope.$on('image-management.mediumableUpdate', (e, data) => {
+      console.log('image-management.mediumableUpdate', data);
+        var medium = {
+          id: data.id,
+          mediumableId: data.mediumableId,
+          mediumableType: data.mediumableType
+        };
+
+        this.Medium.update(medium.id, {medium: medium});
+    });
+  }
 
   private handleSuccessfulUpload(data) {
     var upload: IMedium = {
@@ -28,7 +40,7 @@ export class ImageUploadDirective {
     };
     this.Medium.create({medium: upload})
     .then((medium) => {
-      var data: IMediumUploadBroadcast = {uploadId: this.uploadId, medium: medium};
+      var data: IMediumUploadBroadcast = {uploadId: this.uploadId, mediumId: medium.id};
       // TODO We have to use rootScope here, because the ImageLoad directive
       //      which listenes to the event and usually is on the same level as the
       //      ImageUpload directive will not hear the event unless it comes from
