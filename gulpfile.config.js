@@ -8,6 +8,7 @@ var GulpConfig = (function() {
     this.cssDestPath = this.baseDestPath + '/css';
 
     this.applicationSrcPath = this.baseSrcPath + '/app';
+    this.testsSrcPath = this.baseSrcPath + '/tests';
     this.applicationDestPath = this.baseDestPath + '/app'
     this.bowerPath = './bower_components';
     this.nodeModulesPath = './node_modules';

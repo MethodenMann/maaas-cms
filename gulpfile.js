@@ -143,6 +143,7 @@ gulp.task('copyassets', function() {
 
 gulp.task('watch', function() {
   gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
+  gulp.watch(config.testsSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
   gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
   gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass']);
   gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets']);
