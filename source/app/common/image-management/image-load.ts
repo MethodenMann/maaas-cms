@@ -11,6 +11,7 @@ export class ImageLoadDirective {
     bindToController: {
       uploadId: '@',
       publicId: '@',
+      initialMediaId: '@',
       width: '@',
       height: '@'
     }
@@ -21,20 +22,25 @@ export class ImageLoadDirective {
   private element: JQuery;
   private thumbnailTag: JQuery;
   private uploadId: string;
+  private initialMediaId: string;
   private publicId: string;
   private url: string;
 
   constructor(
-    @Inject('$scope') private $scope
+    @Inject('$scope') private $scope,
+    @Inject('Medium') private Medium
   ) {}
 
   private setup() {
     // TODO refactor if else logic into separate components?
+    if (this.initialMediaId) {
+      this.loadMedium(this.initialMediaId)
+    }
     if (this.uploadId) {
       this.$scope
       .$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
         if (data.uploadId == this.uploadId) {
-          this.loadImage(data.medium);
+          this.loadMedium(data.mediumId)
         }
       });
     } else if (this.publicId) {
@@ -42,6 +48,12 @@ export class ImageLoadDirective {
     } else {
       // lol wtf?
     }
+  }
+
+  private loadMedium(mediaId){
+    this.Medium.find(mediaId).then((medium) => {
+      this.loadImage(medium);
+    });
   }
 
   private loadImage(medium: IMedium) {

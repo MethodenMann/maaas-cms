@@ -24,20 +24,15 @@ export class UpdateView extends FormView {
 
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
-      console.log('CH', this.challenge);
     });
-
-
-    this.Challenge.find(this.$stateParams.challengeId).then((d) => {
-      console.log('LUEG', d);
-    });
-
   }
 
   save() {
     if (this.isFormValid()) {
-      this.Challenge.update(this.challenge.id, { challenge: this.challenge });
-      alert('Gespeichert'); //TODO: make sexy
+      this.Challenge.update(this.challenge.id, { challenge: this.challenge }).then((challenge) =>{
+        alert('Gespeichert'); //TODO: make sexy
+        this.$scope.$broadcast('challenge.saved', challenge);
+      });
     } else {
       this.focusFirstInputWithError();
     }

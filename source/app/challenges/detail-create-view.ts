@@ -1,5 +1,4 @@
 import {Inject} from '../utils/di';
-import {IChallenge} from './ichallenge';
 import {IArea} from '../areas/iarea';
 import {FormView} from '../common/forms/form-view';
 import {IChallenge} from "./ichallenge";
@@ -26,15 +25,19 @@ export class CreateView extends FormView {
 
     this.challenge.data = {};
     this.challenge.areaId = this.$stateParams.areaId;
-    this.challenge.kind = 'multiple-choice';
+    this.challenge.kind = 'true-false';
   }
+
+
 
   save() {
     if (this.isFormValid()) {
       this.Challenge.create({ challenge: this.challenge }).then((challenge:IChallenge) => {
+        alert('Erstellt'); //TODO: make sexy
+        this.$scope.$broadcast('challenge.saved', challenge);
         this.$state.go("cms.areas.detail.challenges.update", {challengeId: challenge.id});
       });
-      alert('Erstellt'); //TODO: make sexy
+
     } else {
       this.focusFirstInputWithError();
     }

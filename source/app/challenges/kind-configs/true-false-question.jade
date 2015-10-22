@@ -1,0 +1,19 @@
+div(style='background-color: yellow' ng-init="ctrl.onInit()")
+  mas-form-group(field-name='text' localization-prefix='challenges_true-false_question_text')
+    input.form-control(ng-model='ctrl.question.text' name='text' required)
+
+  mas-form-group(field-name='text' localization-prefix='challenges_true-false_question_text')
+    div
+      image-upload(upload-id='{{ "question_"+ ctrl.index }}' )
+      image-load( upload-id='{{ "question_"+ ctrl.index }}' initial-media-id='{{ctrl.question.imageId}}' height='100')
+      |  {{question.imageId}}
+      input(type='hidden' name='imageId' ng-model='ctrl.question.imageId')
+
+  mas-form-group(field-name='answer' localization-prefix='challenges_true-false_question_answer')
+    div
+      input(type='radio' ng-model='ctrl.question.correctAnswer' value='true' name='{{ "answer" + ctrl.index}}' required)
+      | {{ctrl.data.trueAnswerText}}
+      input(type='radio' ng-model='ctrl.question.correctAnswer' value='false' name='{{ "answer" + ctrl.index}}' required)
+      | {{ctrl.data.falseAnswerText}}
+
+

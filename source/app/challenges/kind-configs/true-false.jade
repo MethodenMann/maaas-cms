@@ -1,1 +1,15 @@
-h2 TrueFalse COnfig
+h3 {{ 'challenges_true-false_config_title' | translate }}
+
+mas-form-group(field-name='trueanswer' localization-prefix='challenges_true-false_option_true')
+  input.form-control(ng-model='ctrl.data.trueAnswerText' name='trueanswer' required)
+mas-form-group(field-name='falseanswer' localization-prefix='challenges_true-false_option_false')
+  input.form-control(ng-model='ctrl.data.falseAnswerText' name='falseanswer' required)
+
+
+
+
+h4 {{ 'challenges_true-false_questions' | translate }}
+a.btn(type="button" ng-click="ctrl.addQuestion()") {{ 'challenges_true-false_question_add' | translate }}
+div(ng-repeat="question in ctrl.data.questions track by $index")
+  h4 Frage {{ $index + 1 }}
+  mas-challenges-true-false-question(question="question" data="ctrl.data" index="$index")

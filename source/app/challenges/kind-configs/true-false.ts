@@ -1,8 +1,51 @@
 import {Inject} from '../../utils/di';
 
+interface iTrueFalseConfig{
+  questions: iTrueFalseQuestion[];
+  trueAnswerText: string;
+  falseAnswerText: string;
+}
+
+
+interface iTrueFalseQuestion{
+
+}
+
+
 export class TrueFalse {
-  public static selector = 'mas-quiz-true-false';
+  public static selector = 'mas-challenges-true-false';
   public static templateUrl = './app/challenges/kind-configs/true-false.html';
 
-  constructor() {}
+
+  private data:iTrueFalseConfig;
+
+  private static options = {
+    bindToController: {
+      data: '='
+    }
+  };
+
+
+
+  constructor() {
+    this.init();
+  }
+
+  init()  {
+    if (this.data.questions === undefined){
+      this.data.questions = []
+    }
+
+    if (this.data.trueAnswerText === undefined){
+      this.data.trueAnswerText = 'Ja';
+    }
+
+    if (this.data.falseAnswerText === undefined){
+      this.data.falseAnswerText = 'Nein';
+    }
+  }
+
+  addQuestion(){
+    this.data.questions.push({})
+  }
 }
