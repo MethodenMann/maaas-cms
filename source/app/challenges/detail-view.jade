@@ -4,13 +4,11 @@ form(name="form" role='form' novalidate)
   mas-form-group(field-name='name' localization-prefix='challenges_details_name')
     input.form-control(ng-model='ctrl.challenge.name' name='name' required ng-minlength="2")
   mas-form-group( field-name='kind' localization-prefix='challenges_details_kind')
-    select.form-control(ng-disabled="ctrl.isUpdate " ng-model='ctrl.challenge.kind' ng-change="ctrl.clearData()")
-      option(value='multiple-choice') Multiplechoice
-      option(value='true-false') True False
+    select.form-control(ng-disabled="ctrl.disableKindSelect " ng-model='ctrl.selectedKind' ng-change="ctrl.kindChange()" ng-options="k.name for k in ctrl.kinds")
   .form-group.left10
-    mas-challenges-kind-config-loader(kind="{{ctrl.challenge.kind}}" data="ctrl.challenge.data")
+    div(ng-include="ctrl.selectedKind.url")
 
-  button.btn.btn-success(type='submit' ng-click='ctrl.save()')
+  button.btn.btn-success(ng-disabled="!ctrl.selectedKind" type='submit' ng-click='ctrl.save()')
     i.fa.fa-save
     |  Speichern
 

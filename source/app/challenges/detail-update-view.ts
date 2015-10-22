@@ -2,35 +2,30 @@ import {Inject} from '../utils/di';
 import {IChallenge} from './ichallenge';
 import {IArea} from '../areas/iarea';
 import {FormView} from '../common/forms/form-view';
+import {DetailAbstract} from "./detail-abstract";
 
-export class UpdateView extends FormView {
+export class UpdateView extends DetailAbstract {
   public static selector = 'mas-challenge-update-view';
   public static templateUrl = './app/challenges/detail-view.html';
 
-  public area: IArea;
-  private challenge: IChallenge = <IChallenge>{};
-  private isUpdate = true;
+  private disableKindSelect = true;
 
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('$location') private $location,
-    @Inject('$stateParams') private $stateParams,
-    @Inject('Area') private Area,
-    @Inject('Challenge') private Challenge
-  ) {
-    super($scope);
-    this.Area.find(this.$stateParams.areaId).then((data) => {
-      this.area = data;
-    });
 
+  protected loadData(){
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
+      this.setKind();
+
     });
-
-
   }
 
-
+  private setKind(){
+    this.kinds.forEach((kind) => {
+      if (kind.id == this.challenge.kind){
+        this.selectedKind = kind;
+      }
+    });
+  }
 
   save() {
     if (this.isFormValid()) {
