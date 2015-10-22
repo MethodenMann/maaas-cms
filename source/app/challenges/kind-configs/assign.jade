@@ -1,0 +1,13 @@
+h3 Zuweisen-Quiz
+
+div(ng-repeat='value in ctrl.data.listA.values')
+  .row
+    .col-md-4
+      mas-form-group(field-name='{{"text"+$index}}' localization-prefix='challenges_details_question')
+        input.form-control(ng-model='value.value' name='{{"text"+$index}}' required ng-minlength="4")
+    .col-md-4
+      image-upload(upload-id='{{"assignQuizImage"+$index}}' medium-id='ctrl.data.listB.values[$index].mediumId')
+      image-load(upload-id='{{"assignQuizImage"+$index}}' initial-media-id='{{ctrl.data.listB.values[$index].mediumId}}' height='100')
+  a.btn(type="button" ng-click="ctrl.deletePair($index)") Löschen
+
+a.btn(type="button" ng-click="ctrl.addPair()") Antwortenpaar hinzufügen

@@ -30,7 +30,7 @@
         "./app/challenges/detail-create-view.ts",
         "./app/challenges/detail-update-view.ts",
         "./app/challenges/ichallenge.ts",
-        "./app/challenges/kind-config-loader-component.ts",
+        "./app/challenges/kind-configs/assign.ts",
         "./app/challenges/kind-configs/multiple-choice.ts",
         "./app/challenges/kind-configs/true-false-question.ts",
         "./app/challenges/kind-configs/true-false.ts",

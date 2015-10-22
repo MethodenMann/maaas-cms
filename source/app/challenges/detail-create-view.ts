@@ -12,7 +12,6 @@ export class CreateView extends DetailAbstract {
 
 
   protected constructorHook() {
-    console.log("huug 123")
     this.challenge.data = {};
     this.challenge.areaId = this.$stateParams.areaId;
   }

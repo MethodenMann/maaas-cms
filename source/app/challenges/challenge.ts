@@ -3,6 +3,7 @@ import {RouteUtil} from '../master/route-util';
 import {KindConfigLoader} from './kind-config-loader-component';
 import {Multiplechoice} from './kind-configs/multiple-choice';
 import {TrueFalse} from './kind-configs/true-false';
+import {Assign} from './kind-configs/assign';
 
 import {ListView} from './list-view';
 import {CreateView} from './detail-create-view';
@@ -36,6 +37,10 @@ export function loadChallenge(app) {
   app.directive(
     makeSelector(TrueFalseQuestion),
     makeDirective(TrueFalseQuestion));
+
+  app.directive(
+    makeSelector(Assign),
+    makeDirective(Assign));
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
