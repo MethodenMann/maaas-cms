@@ -20,13 +20,21 @@ export class TrueFalse {
     }
   };
 
-  constructor() {
+  constructor(
+    @Inject('$scope') protected $scope
+  ) {
     this.initializeConfig();
+
+    $scope.$on('true-false.removeQuestion', (e, idx) => {
+      this.removeQuestion(idx);
+    });
+
   }
 
   initializeConfig()  {
     if (this.data.questions === undefined){
       this.data.questions = []
+      this.addQuestion();
     }
 
     if (this.data.trueAnswerText === undefined){
@@ -36,6 +44,11 @@ export class TrueFalse {
     if (this.data.falseAnswerText === undefined){
       this.data.falseAnswerText = 'Nein';
     }
+  }
+
+
+  removeQuestion(idx){
+    this.data.questions.splice(idx, 1);
   }
 
   addQuestion(){

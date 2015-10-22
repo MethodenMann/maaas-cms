@@ -28,6 +28,18 @@ export class CreateView extends FormView {
     this.challenge.kind = 'true-false';
   }
 
+  clearData(){
+
+    this.challenge.data = {};
+    for (var prop in this.$scope.form) {
+      if (!(prop.indexOf("$") == 0) && prop !== "name" ) {
+        delete this.$scope.form[prop];
+      }
+    }
+    //TODO: Maybe there is a nicer solution?
+    //http://stackoverflow.com/questions/33283575/re-initialize-angular-form-with-dynamically-generated-input-fields
+  }
+
 
   save() {
     if (this.isFormValid()) {

@@ -3,14 +3,18 @@ h1 CREATE Quiz
 form(name="form" role='form' novalidate)
   mas-form-group(field-name='name' localization-prefix='challenges_details_name')
     input.form-control(ng-model='ctrl.challenge.name' name='name' required ng-minlength="2")
-  mas-form-group(field-name='kind' localization-prefix='challenges_details_kind')
-    select.form-control(ng-model='ctrl.challenge.kind')
+  mas-form-group( field-name='kind' localization-prefix='challenges_details_kind')
+    select.form-control(ng-disabled="ctrl.isUpdate " ng-model='ctrl.challenge.kind' ng-change="ctrl.clearData()")
       option(value='multiple-choice') Multiplechoice
       option(value='true-false') True False
   .form-group.left10
     mas-challenges-kind-config-loader(kind="{{ctrl.challenge.kind}}" data="ctrl.challenge.data")
 
-  button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
+  button.btn.btn-success(type='submit' ng-click='ctrl.save()')
+    i.fa.fa-save
+    |  Speichern
 
+| {{ctrl.isUpdate}}
 h3 DEV challenge JSON
 | {{ctrl.challenge}}
+
