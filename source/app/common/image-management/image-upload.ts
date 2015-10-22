@@ -1,6 +1,8 @@
 import {Inject} from '../../utils/di';
 import {IMediumUploadBroadcast} from './imedium-upload-broadcast';
+import {IMediumableUpdateBroadcast} from './Imediumable-update-broadcast';
 import {IMedium} from '../../media/imedium';
+
 
 export class ImageUploadDirective {
   private static selector = 'image-upload';
@@ -19,7 +21,23 @@ export class ImageUploadDirective {
     @Inject('$scope') private $scope,
     @Inject('$rootScope') private $rootScope,
     @Inject('Medium') private Medium
-  ) {}
+  ) {
+
+    this.$scope.$on('image-management.mediumableUpdate', (e, data) => {
+      console.log('image-management.mediumableUpdate', data);
+      this.handleMediumAbleUpdate(data);
+    });
+  }
+
+  private handleMediumAbleUpdate(data: IMediumableUpdateBroadcast){
+    //var medium = {
+    //  id: data.id,
+    //  mediumableId: data.mediumableId,
+    //  mediumableType: data.mediumableType
+    //};
+
+    this.Medium.update(data.id, {medium: data});
+  }
 
   private handleSuccessfulUpload(data) {
     var upload: IMedium = {
@@ -28,7 +46,7 @@ export class ImageUploadDirective {
     };
     this.Medium.create({medium: upload})
     .then((medium) => {
-      var data: IMediumUploadBroadcast = {uploadId: this.uploadId, medium: medium};
+      var data: IMediumUploadBroadcast = {uploadId: this.uploadId, mediumId: medium.id};
       // TODO We have to use rootScope here, because the ImageLoad directive
       //      which listenes to the event and usually is on the same level as the
       //      ImageUpload directive will not hear the event unless it comes from
@@ -41,7 +59,7 @@ export class ImageUploadDirective {
       // injectImage is needs to be used for the case where an image is already
       // stored in the DB and only needs to be displayed again, such as the
       // area update view.
-      this.$rootScope.$broadcast('image-management.imageUploaded', data);
+      this.$rootScope.$broadcast('image-management.imageUploaded', data); //TODO: brauchts das?
       this.$rootScope.$broadcast('image-management.injectImage', data);
     });
   }

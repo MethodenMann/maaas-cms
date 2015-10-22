@@ -1,7 +1,6 @@
 import {Inject} from '../../utils/di';
-import {IMediumUploadBroadcast} from "../../common/image-management/imedium-upload-broadcast";
-import {IMedium} from "../../media/imedium";
-
+import {IMediumUploadBroadcast} from '../../common/image-management/imedium-upload-broadcast';
+import {IMediumableUpdateBroadcast} from '../../common/image-management/Imediumable-update-broadcast';
 
 
 export class TrueFalseQuestion {
@@ -10,8 +9,8 @@ export class TrueFalseQuestion {
 
 
   private question:any;
-  private data:any;
   private index:number;
+
   private static options = {
     bindToController: {
       question: '=',
@@ -21,23 +20,32 @@ export class TrueFalseQuestion {
   };
 
   constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('Medium') protected Medium
+    @Inject('$scope') protected $scope
   ) {
+
     $scope.$on('image-management.injectImage', (e, data:IMediumUploadBroadcast) => {
-      this.handleImageDisplay(data.uploadId, data.medium);
+      this.handleImageDisplay(data.uploadId, data.mediumId);
     });
 
-
-    this.Medium.find(this.question.imageId).then((data) => {
-      var bcData: IMediumUploadBroadcast = {uploadId: "question_"+ this.index, medium: data};
-      this.$scope.$broadcast('image-management.injectImage', bcData);
+    $scope.$on('challenge.saved', (e, challenge) => {
+      this.saveImageRelation(challenge.id);
     });
   }
 
-  protected handleImageDisplay(uploadId:string, medium:IMedium) {
-      if (uploadId.indexOf('_' > -1) && uploadId.split('_')[1] == this.index){
-        this.question.imageId = medium.id;
-      }
+  saveImageRelation(challengeId){
+    if (this.question.imageId){
+      var relationData: IMediumableUpdateBroadcast = {
+        id: this.question.imageId,
+        mediumableId: challengeId,
+        mediumableType: 'challenge'
+      };
+      this.$scope.$broadcast("image-management.mediumableUpdate", relationData)
+    }
+  }
+
+  handleImageDisplay(uploadId:string, mediumId) {
+    if ((uploadId.indexOf('_') > -1) && (uploadId.split('_')[1] == this.index)) {
+      this.question.imageId = mediumId;
+    }
   }
 }

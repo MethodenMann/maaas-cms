@@ -9,20 +9,13 @@ export class DetailUpdateView extends DetailAbstract {
 
   protected constructorHook() {
     this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
-      this.saveImageRelation(data.medium);
-      this.handleImageDisplay(data.uploadId, data.medium);
+      this.persistImageId(data.uploadId, data.mediumId);
     });
   }
 
   loadData() {
-    this.Medium.findAll().then((data) => {
-      this.Area.find(this.$stateParams.areaId).then((data) => {
-        this.area = data;
-        var bdata: IMediumUploadBroadcast = {uploadId: "backgroundImage", medium: this.area.backgroundImage};
-        this.$scope.$broadcast('image-management.injectImage', bdata);
-        var bdata: IMediumUploadBroadcast = {uploadId: "stickerImage", medium: this.area.stickerImage};
-        this.$scope.$broadcast('image-management.injectImage', bdata);
-      });
+    this.Area.find(this.$stateParams.areaId).then((data) => {
+      this.area = data;
     });
   }
 
