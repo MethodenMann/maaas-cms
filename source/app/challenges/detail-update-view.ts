@@ -29,8 +29,10 @@ export class UpdateView extends FormView {
 
   save() {
     if (this.isFormValid()) {
-      this.Challenge.update(this.challenge.id, { challenge: this.challenge });
-      alert('Gespeichert'); //TODO: make sexy
+      this.Challenge.update(this.challenge.id, { challenge: this.challenge }).then((challenge) =>{
+        alert('Gespeichert'); //TODO: make sexy
+        this.$scope.$broadcast('challenge.saved', challenge);
+      });
     } else {
       this.focusFirstInputWithError();
     }

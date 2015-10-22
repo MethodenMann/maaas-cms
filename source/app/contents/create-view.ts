@@ -8,7 +8,7 @@ export class CreateView extends AbstractDetailView {
     this.content.areaId = this.$stateParams.areaId;
 
     this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
-      var medium = data.medium;
+      var medium = data.mediumId;
       this.addToImageList(medium);
     });
   }

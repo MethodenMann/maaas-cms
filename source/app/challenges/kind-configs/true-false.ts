@@ -1,14 +1,9 @@
 import {Inject} from '../../utils/di';
 
 interface iTrueFalseConfig{
-  questions: iTrueFalseQuestion[];
+  questions: any;
   trueAnswerText: string;
   falseAnswerText: string;
-}
-
-
-interface iTrueFalseQuestion{
-
 }
 
 
@@ -25,13 +20,11 @@ export class TrueFalse {
     }
   };
 
-
-
   constructor() {
-    this.init();
+    this.initializeConfig();
   }
 
-  init()  {
+  initializeConfig()  {
     if (this.data.questions === undefined){
       this.data.questions = []
     }
