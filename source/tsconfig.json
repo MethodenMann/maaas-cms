@@ -8,6 +8,7 @@
     },
     "filesGlob": [
         "./app/**/*.ts",
+        "./tests/**/*.ts",
         "./typings/**/*.ts"
     ],
     "files": [
@@ -61,6 +62,7 @@
         "./app/registration/RegistrationComponent.ts",
         "./app/utils/component.ts",
         "./app/utils/di.ts",
+        "./tests/my.test.ts",
         "./typings/angular-ui-router/angular-ui-router.d.ts",
         "./typings/angularjs/angular-resource.d.ts",
         "./typings/angularjs/angular.d.ts",

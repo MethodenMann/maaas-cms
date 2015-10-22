@@ -31,7 +31,9 @@ module.exports = function (config) {
       { pattern: 'node_modules/systemjs/dist/system.js', served: true, included: false, watched: false },
       { pattern: 'node_modules/systemjs/dist/system-polyfills.js', served: true, included: false, watched: false },
       { pattern: 'node_modules/es6-module-loader/dist/es6-module-loader.js', served: true, included: false, watched: false },
-      { pattern: 'out/app/**/*.js', served: true, included: false, watched: true }
+
+      { pattern: 'out/app/**/*.js', served: true, included: false, watched: true },
+      { pattern: 'out/tests/**/*.js', served: true, included: false, watched: true }
     ],
 
     systemjs: {

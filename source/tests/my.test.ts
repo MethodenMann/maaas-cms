@@ -1,10 +1,10 @@
 // import 'app/app';
-// import {loadContent} from './content';
+import {loadContent} from '../app/contents/content';
 
 describe("bla", () => {
   it("blabla", () =>{
-    console.log("gaaa");
-    // console.log(loadContent);
+    console.log("hello");
+    console.log(loadContent);
     // loadContent();
     // console.log(AbstractDetailView);
   });
