@@ -48,5 +48,27 @@
 
   "challenges_true-false_question_answer_label": "Antwort",
   "challenges_true-false_question_answer_error": "Wählen sie die passende Antwort aus",
-  "challenges_true-false_question_answer_help": "Wählen sie die passende Antwort aus"
+  "challenges_true-false_question_answer_help": "Wählen sie die passende Antwort aus",
+
+
+
+  "challenges_image-region_config_title": "Bildregion",
+  "challenges_image-region_question_label": "Frage",
+  "challenges_image-region_question_help": "Welche Frage soll gestellt werden",
+  "challenges_image-region_question_error": "Bitte gebne sie eine Frage ein",
+  "challenges_image-region_image_label": "Bild",
+  "challenges_image-region_image_help": "Bild",
+  "challenges_image-region_image_error": "Laden sie ein Bild hoch",
+  "challenges_image-region_image_solved_label": "Gelöst Bild",
+  "challenges_image-region_image_solved_help": "Bild welches angezeigt wird, wenn die richtige Stelle angeklickt wurde",
+  "challenges_image-region_image_solved_error": "Laden sie ein Bild hoch",
+  "challenges_image-region_coords_label": "Koordinaten",
+  "challenges_image-region_coords_help": "Geben sie Komma getrennt die korrekten Koordinaten an",
+  "challenges_image-region_coords_error": "Geben sie mindestens 3 Koordinaten ein.",
+  "challenges_image-region_correct_feedback_label": "Feedback Korrekt",
+  "challenges_image-region_correct_feedback_help": "Geben Sie einen Satz an der angezeigt wird, wenn die richtige Stelle geklickt wurde",
+  "challenges_image-region_correct_feedback_error": "Geben sie ein Feedback ein",
+  "challenges_image-region_wrong_feedback_label": "Feedback Falsch",
+  "challenges_image-region_wrong_feedback_help": "Geben Sie einen Satz an der angezeigt wird, wenn die falsche Stelle geklickt wurde",
+  "challenges_image-region_wrong_feedback_error": "Geben sie ein Feedback ein"
 }
