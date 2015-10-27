@@ -79,12 +79,16 @@
                   i.fa.fa-search
             // /input-group
           li
+             a(ui-sref="cms.museums.detail.update({ museumId: 1 })"  ui-sref-active-if="cms.museums")
+               i.fa.fa-bookmark-o
+               |  Museum
+          li
             a(ui-sref="cms.areas.list"  ui-sref-active-if="cms.areas")
-              i.fa.fa-dashboard.fa-location-arrow
+              i.fa.fa-location-arrow
               |  Bereiche
           li
             a(ui-sref="cms.beacons.list"  ui-sref-active-if="cms.beacons")
-              i.fa.fa-dashboard.fa-bullseye
+              i.fa.fa-bullseye
               |  Beacons
           li
             a(ui-sref="cms.test")
