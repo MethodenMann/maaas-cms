@@ -9,6 +9,7 @@ import {CreateView} from './detail-create-view';
 import {UpdateView} from './detail-update-view';
 import {ChallengeButtonComponent} from './challenge-button-component';
 import {TrueFalseQuestion} from './kind-configs/true-false-question';
+import {ImageRegion} from "./kind-configs/image-region";
 
 export function loadChallenge(app) {
   var componentName = 'challenges';
@@ -36,6 +37,11 @@ export function loadChallenge(app) {
   app.directive(
     makeSelector(Assign),
     makeDirective(Assign));
+
+  app.directive(
+    makeSelector(ImageRegion),
+    makeDirective(ImageRegion));
+
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

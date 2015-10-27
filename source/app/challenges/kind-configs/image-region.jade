@@ -1,0 +1,27 @@
+h3 {{ 'challenges_true-false_config_title' | translate }}
+
+mas-form-group(field-name='question' localization-prefix='challenges_image-region_question')
+  input.form-control(ng-model='ctrl.data.question' name='question' required)
+
+mas-form-group(field-name='image' localization-prefix='challenges_image-region_image')
+  div
+    image-upload(upload-id='imageId' )
+    image-load( upload-id='imageId' initial-media-id='{{ctrl.data.imageId}}' height='300')
+    input(type="hidden" name="imageId" ng-model="ctrl.data.imageId" required)
+
+mas-form-group(field-name='imageSolved' localization-prefix='challenges_image-region_image_solved')
+  div
+    image-upload(upload-id='imageSolvedId' )
+    image-load( upload-id='imageSolvedId' initial-media-id='{{ctrl.data.imageSolvedId}}' height='300')
+    input(type="hidden" name="imageSolvedId" ng-model="ctrl.data.imageSolvedId" required)
+
+mas-form-group(field-name='coords' localization-prefix='challenges_image-region_coords')
+  input.form-control(ng-model='ctrl.data.coords' name='coords' required)
+  a(href='http://imagemap-generator.dariodomi.de' target="_blank") Koordinaten generieren
+
+
+mas-form-group(field-name='correctFeedback' localization-prefix='challenges_image-region_correct_feedback')
+  input.form-control(ng-model='ctrl.data.correctFeedback' name='correctFeedback' required)
+
+mas-form-group(field-name='wrongFeedback' localization-prefix='challenges_image-region_wrong_feedback')
+  input.form-control(ng-model='ctrl.data.wrongFeedback' name='wrongFeedback' required)
