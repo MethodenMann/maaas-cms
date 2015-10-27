@@ -4,7 +4,7 @@ import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-
 
 export class DetailUpdateView extends DetailAbstract {
   public static selector = 'mas-museums-detail-update-view';
-  public static templateUrl = './app/museums/detail-view.html';
+  public static templateUrl = 'app/museums/detail-view.html';
 
   protected constructorHook() {
     this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
