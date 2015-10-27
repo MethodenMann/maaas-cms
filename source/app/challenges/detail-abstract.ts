@@ -15,7 +15,8 @@ export abstract class DetailAbstract extends FormView {
   protected kinds =
     [
       {name: 'multiplechoice', id: 'multiple-choice', url: 'app/challenges/dummies/multiple-choice.html'},
-      {name: 'True False', id: 'true-false', url: 'app/challenges/dummies/true-false.html'}
+      {name: 'True False', id: 'true-false', url: 'app/challenges/dummies/true-false.html'},
+      {name: 'Assign', id: 'assign', url: 'app/challenges/dummies/assign.html'}
     ];
 
 
