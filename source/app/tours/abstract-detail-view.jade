@@ -1,0 +1,38 @@
+.panel.panel-green
+  .panel-heading
+    | {{ 'contents_details_title' | translate }}
+  .panel-body
+    form(name="form" role='form' novalidate)
+      mas-form-group(field-name='name' localization-prefix='areas_details_name')
+        input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
+
+    //- .row
+    //-   .col-md-9
+    //-     select(ng-model="ctrl.areaToAdd" ng-options="area.name for area in ctrl.areas track by area.id")
+    //-     {{ctrl.areaToAdd}}
+    //-     button(ng-click="ctrl.addArea()") Hinzufügen
+    .row
+      {{ctrl.selectedContents}}
+      {{ctrl.selectedChallenges}}
+      .col-md-3
+        .list-group
+          a.list-group-item(ng-repeat="area in ctrl.areas" ng-click="ctrl.selectArea($index)")
+            | {{area.name}}
+      .col-md-3
+        .list-group
+          div.list-group-item(ng-repeat="content in ctrl.selectedArea.contents")
+            input(type="checkbox" ng-click="ctrl.selectContent(content.id, $event)" ng-checked="ctrl.isContentSelected(content.id)")
+            | {{content.title}}
+      .col-md-3
+        .list-group
+          div.list-group-item(ng-repeat="challenge in ctrl.selectedArea.challenges")
+            input(type="checkbox" ng-click="ctrl.selectChallenge(challenge.id, $event)" ng-checked="ctrl.isChallengeSelected(challenge.id)")
+            | {{challenge.name}}
+
+      //- mas-form-group(field-name='backgroundImageId' localization-prefix='areas_details_backgroundimage')
+      //-   div
+      //-     image-upload(upload-id="backgroundImage" required)
+      //-     image-load(upload-id="backgroundImage" ng-if="ctrl.area.backgroundImageId" initial-media-id='{{ctrl.area.backgroundImageId}}' height='100' )
+      //-     input(type="hidden" name="backgroundImageId" ng-model="ctrl.area.backgroundImageId" required)
+
+    button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
