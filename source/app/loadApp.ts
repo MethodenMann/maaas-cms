@@ -7,6 +7,7 @@ import {loadCommon} from './common/common';
 import {loadLogin} from './login/Login';
 import {loadRegistration} from './registration/Registration';
 import {loadContent} from './contents/content';
+import {loadMuseum} from './museums/museums';
 
 export function loadApp(app) {
   loadJsDataConfig(app);
@@ -18,4 +19,5 @@ export function loadApp(app) {
   loadContent(app);
   loadBeacon(app);
   loadChallenge(app);
+  loadMuseum(app);
 }

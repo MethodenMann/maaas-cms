@@ -1,6 +1,5 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {KindConfigLoader} from './kind-config-loader-component';
 import {Multiplechoice} from './kind-configs/multiple-choice';
 import {TrueFalse} from './kind-configs/true-false';
 import {Assign} from './kind-configs/assign';
@@ -21,11 +20,7 @@ export function loadChallenge(app) {
   app.directive(
     makeSelector(ChallengeButtonComponent),
     makeDirective(ChallengeButtonComponent));
-
-  app.directive(
-    makeSelector(KindConfigLoader),
-    makeDirective(KindConfigLoader));
-
+  
   app.directive(
     makeSelector(Multiplechoice),
     makeDirective(Multiplechoice));
