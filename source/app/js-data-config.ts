@@ -105,4 +105,10 @@ export function loadJsDataConfig(app) {
       name: 'media'
     });
   });
+
+  app.factory('Museum', function (DS) {
+    return DS.defineResource({
+      name: 'museums'
+    });
+  });
 }
