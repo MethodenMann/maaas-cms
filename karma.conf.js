@@ -5,7 +5,10 @@ module.exports = function (config) {
       { pattern: 'out/libs/jquery.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/bootstrap.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/metisMenu.min.js', served: true, included: false, watched: false },
+      { pattern: 'out/libs/core.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/widget.js', served: true, included: false, watched: false },
+      { pattern: 'out/libs/mouse.js', served: true, included: false, watched: false },
+      { pattern: 'out/libs/sortable.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/jquery.iframe-transport.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/jquery.fileupload.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/jquery.cloudinary.js', served: true, included: false, watched: false },
@@ -25,6 +28,7 @@ module.exports = function (config) {
       { pattern: 'out/libs/ui-grid.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/angular-breadcrumb.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/tinymce.js', served: true, included: false, watched: false },
+      { pattern: 'out/libs/angular-ui-sortable.js', served: true, included: false, watched: false },
 
 
       { pattern: 'bower_components/angular-mocks/angular-mocks.js', served: true, included: false, watched: false },

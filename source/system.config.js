@@ -5,7 +5,10 @@ System.config({
     'jquery': 'libs/jquery.min.js',
     'bootstrap': 'libs/bootstrap.min.js',
     'metis-menu': 'libs/metisMenu.min.js',
+    'jquery.ui.core': 'libs/core.js',
     'jquery.ui.widget': 'libs/widget.js',
+    'jquery.ui.mouse': 'libs/mouse.js',
+    'jquery.ui.sortable': 'libs/sortable.js',
     'jquery.iframe-transport': 'libs/jquery.iframe-transport.js',
     'jquery.fileupload': 'libs/jquery.fileupload.js',
     'jquery-cloudinary': 'libs/jquery.cloudinary.js',
@@ -24,6 +27,7 @@ System.config({
     'devise': 'libs/devise-min.js',
     'angular-ui-grid': 'libs/ui-grid.min.js',
     'angular-breadcrumb': 'libs/angular-breadcrumb.min.js',
-    'angular-ui-tinymce': 'libs/tinymce.js'
+    'angular-ui-tinymce': 'libs/tinymce.js',
+    'angular-ui-sortable': 'libs/sortable.min.js'
   }
 });

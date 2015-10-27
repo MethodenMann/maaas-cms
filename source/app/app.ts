@@ -2,6 +2,7 @@ import 'jquery';
 import 'bootstrap';
 import 'metis-menu';
 import 'jquery-cloudinary';
+import 'jquery.ui.sortable';
 
 import 'angular';
 import 'angular-ui-router';
@@ -13,6 +14,7 @@ import 'angular-translate-loader-partial';
 import 'angular-translate-storage-local';
 import 'angular-breadcrumb';
 import 'angular-ui-tinymce';
+import 'angular-ui-sortable';
 
 
 import 'js-data';
@@ -30,7 +32,7 @@ import {loadApp} from './loadApp';
 var leApp = angular.module('maaas', [
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
   'Devise', 'color.picker', 'ui.grid', 'ui.grid.selection', 'ui.grid.edit',
-  'ncy-angular-breadcrumb', 'ui.tinymce'
+  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable'
 ]);
 
 leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {

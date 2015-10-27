@@ -32,7 +32,8 @@
     "angular-color-picker": "angularjs-color-picker#~0.6.8",
     "angular-translate-loader-partial": "~2.8.1",
     "angular-translate-storage-local": "~2.8.1",
-    "angular-ui-grid": "~3.0.7"
+    "angular-ui-grid": "~3.0.7",
+    "angular-ui-sortable": "~0.13.4"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.7"

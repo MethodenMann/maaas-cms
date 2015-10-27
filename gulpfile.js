@@ -101,7 +101,10 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/AngularDevise/lib/devise-min.js',
     config.bowerPath + '/bootstrap/dist/js/bootstrap.min.js',
     config.bowerPath + '/metisMenu/dist/metisMenu.min.js',
+    config.bowerPath + '/jquery-ui/ui/core.js',
     config.bowerPath + '/jquery-ui/ui/widget.js',
+    config.bowerPath + '/jquery-ui/ui/mouse.js',
+    config.bowerPath + '/jquery-ui/ui/sortable.js',
     config.bowerPath + '/blueimp-file-upload/js/jquery.iframe-transport.js',
     config.bowerPath + '/blueimp-file-upload/js/jquery.fileupload.js',
     config.bowerPath + '/cloudinary/js/jquery.cloudinary.js',
@@ -109,7 +112,8 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.js',
     config.bowerPath + '/angular-ui-grid/ui-grid.min.js',
     config.bowerPath + '/angular-breadcrumb/release/angular-breadcrumb.min.js',
-    config.bowerPath + '/angular-ui-tinymce/src/tinymce.js'
+    config.bowerPath + '/angular-ui-tinymce/src/tinymce.js',
+    config.bowerPath + '/angular-ui-sortable/sortable.min.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   gulp.src([

@@ -1,0 +1,19 @@
+h3 Reihenfolge-Quiz
+
+ul(ui-sortable="ctrl.options" ng-model="ctrl.data.list")
+  li.mas-challenge-order-entry(ng-repeat='entry in ctrl.data.list')
+    .row
+      .col-md-3
+        mas-form-group(field-name='{{"captionShort"+$index}}' localization-prefix='challenges_details_question')
+          input.form-control(ng-model='entry.captionShort' name='{{"captionShort"+$index}}' required ng-minlength="4")
+      .col-md-3
+        mas-form-group(field-name='{{"captionLong"+$index}}' localization-prefix='challenges_details_question')
+          input.form-control(ng-model='entry.captionLong' name='{{"captionLong"+$index}}' required ng-minlength="4")
+      .col-md-3
+        mas-form-group(field-name='{{"image"+$index}}' localization-prefix='challenges_details_question')
+          image-upload(upload-id='{{"orderQuizImage"+$index}}' medium-id='entry.mediumId')
+          image-load(upload-id='{{"orderQuizImage"+$index}}' initial-media-id='{{entry.mediumId}}' height='50')
+          input.form-control(type='hidden' ng-model='entry.mediumId' name='{{"image"+$index}}' required)
+    a.btn(type="button" ng-click="ctrl.deleteEntry($index)") Löschen
+
+a.btn(type="button" ng-click="ctrl.addEntry()") Antwortenpaar hinzufügen
