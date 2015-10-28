@@ -20,7 +20,7 @@ export function loadTour(app) {
       .state(`cms.${componentName}`,
       RouteUtil.getAbstractRoute('/tours', 'Rundgänge'))
       .state(`cms.${componentName}.list`,
-      RouteUtil.getRoute(ListView, 'Bereiche'))
+      RouteUtil.getRoute(ListView, 'Rundgänge'))
       .state(`cms.${componentName}.detail`,
       RouteUtil.getAbstractRoute(
         '/{tourId:[0-9]{1,8}}', 'Rundgänge', 'cms.tours.list'))

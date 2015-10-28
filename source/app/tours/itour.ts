@@ -1,8 +1,7 @@
 export interface ITour {
-  id?: number;
-  title?: string;
-  description?: string;
-  data?: string;
-  areaId?: number;
-  media?: any;
+  id: number;
+  name: string;
+  description: string;
+  selectedContents: number[];
+  selectedChallenges: number[];
 }

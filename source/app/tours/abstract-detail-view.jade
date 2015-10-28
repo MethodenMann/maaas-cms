@@ -5,18 +5,20 @@
     form(name="form" role='form' novalidate)
       mas-form-group(field-name='name' localization-prefix='areas_details_name')
         input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
-
-    //- .row
-    //-   .col-md-9
-    //-     select(ng-model="ctrl.areaToAdd" ng-options="area.name for area in ctrl.areas track by area.id")
-    //-     {{ctrl.areaToAdd}}
-    //-     button(ng-click="ctrl.addArea()") Hinzufügen
     .row
-      {{ctrl.selectedContents}}
-      {{ctrl.selectedChallenges}}
+      .dropdown
+        button#addArea.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+          | Area hinzufügen
+          span.caret
+        ul.dropdown-menu(aria-labelledby='addArea')
+          li(ng-repeat='area in ctrl.unconfiguredAreas track by $index')
+            a(ng-click='ctrl.addArea($index)') {{area.name}}
+    .row
+      | {{ctrl.tour.selectedContents}}
+      | {{ctrl.tour.selectedChallenges}}
       .col-md-3
         .list-group
-          a.list-group-item(ng-repeat="area in ctrl.areas" ng-click="ctrl.selectArea($index)")
+          a.list-group-item(ng-repeat="area in ctrl.configuredAreas" ng-click="ctrl.selectArea($index)")
             | {{area.name}}
       .col-md-3
         .list-group
