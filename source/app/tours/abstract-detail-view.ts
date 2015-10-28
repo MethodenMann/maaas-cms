@@ -20,7 +20,6 @@ export abstract class AbstractDetailView extends FormView{
 
   protected tour: ITour;
 
-
   constructor(
     @Inject('$scope') protected $scope,
     @Inject('Area') protected Area,
@@ -34,23 +33,20 @@ export abstract class AbstractDetailView extends FormView{
   ) {
     super($scope);
 
-    this.loadData().then(
-      this.$q.all([Content.findAll(), Challenge.findAll()]).then((values) => {
-        this.initDictionaries(values[0], values[1]);
-        this.Area.findAll().then((areas) => {
-          this.areas = areas;
-          this.syncConfiguredAreas();
-        })
-      })
-    );
+    this.$q.all([this.loadData(), Content.findAll(), Challenge.findAll()]).then((values) => {
+      this.initDictionaries(values[0], values[1]);
+      this.Area.findAll().then((areas) => {
+        this.areas = areas;
+        this.syncConfiguredAreas();
+      });
 
-    this.constructorHook();
+      this.constructorHook();
+    });
   }
 
   protected loadData() {}
   abstract save(): void;
-
-
+  
   private initDictionaries(contents, challanges){
     contents.forEach((content) =>{
       this.contentAreaDict[content.id] = content.areaId;
