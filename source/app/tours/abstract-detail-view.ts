@@ -46,7 +46,7 @@ export abstract class AbstractDetailView extends FormView{
 
   protected loadData() {}
   abstract save(): void;
-  
+
   private initDictionaries(contents, challanges){
     contents.forEach((content) =>{
       this.contentAreaDict[content.id] = content.areaId;

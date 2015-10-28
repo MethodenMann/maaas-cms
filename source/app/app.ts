@@ -41,24 +41,9 @@ leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {
   });
 
   AuthProvider.loginPath('http://localhost:3000/users/sign_in.json');
+  AuthProvider.logoutPath('http://localhost:3000/users/sign_out.json');
   AuthProvider.registerPath('http://localhost:3000/users.json');
 });
-
-// leApp.run(function ($rootScope, Auth, $state) {
-//   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-//     if (toState.data && toState.data.ignoreLogin) {
-//       console.log('ignoring login!');
-//     } else {
-//       if (!Auth.isAuthenticated()) {
-//         console.log('user is not authenticated!');
-//         event.preventDefault();
-//         $state.go('login');
-//       } else {
-//         console.log('user is authenticated!');
-//       }
-//     }
-//   });
-// });
 
 leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
   $translateProvider.useLoader('$translatePartialLoader', {
@@ -76,6 +61,34 @@ leApp.config(function($breadcrumbProvider) {
     });
   });
 
+// This is needed so the session is sent back to the backend with
+// every request.
+leApp.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.withCredentials = true;
+  }
+])
+
+leApp.run(function ($rootScope, Auth, $state) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+    console.log(toState.data);
+    if (toState.data && toState.data.ignoreLogin) {
+      console.log('ignoring login!');
+    } else {
+      if (!Auth.isAuthenticated()) {
+        console.log('getting user from memory failed. trying to get user from server session');
+        Auth.currentUser().then((user) => {
+          console.log('user is authenticated!');
+        }, (error) => {
+          console.log('user is not authenticated!');
+          event.preventDefault();
+          $state.go('login');
+        });
+      } else {
+        console.log('user is authenticated!');
+      }
+    }
+  });
+});
 
 loadApp(leApp);
 
