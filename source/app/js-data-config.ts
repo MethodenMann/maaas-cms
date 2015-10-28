@@ -111,4 +111,10 @@ export function loadJsDataConfig(app) {
       name: 'museums'
     });
   });
+
+  app.factory('Tour', function (DS) {
+    return DS.defineResource({
+      name: 'tours'
+    });
+  });
 }
