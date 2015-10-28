@@ -5,7 +5,7 @@ import {IMuseum} from "./imuseum";
 
 export class DetailCreateView extends DetailAbstract {
   public static selector = 'mas-museums-detail-create-view';
-  public static templateUrl = './app/museums/detail-view.html';
+  public static templateUrl = 'app/museums/detail-view.html';
 
   save() {
     if (this.isFormValid()) {

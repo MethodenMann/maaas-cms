@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-
+var templateCache = require('gulp-angular-templatecache');
 var ts = require('gulp-typescript');
 var tslint = require('gulp-tslint');
 var jade = require('gulp-jade');
@@ -74,9 +74,23 @@ gulp.task('views', function() {
     .pipe(gulp.dest(config.baseDestPath))
 });
 
+gulp.task('template-cache', function () {
+  return gulp.src([
+      config.baseDestPath + '/**/*.html',
+    ])
+    .pipe(templateCache('template-cache.js', {
+      module: 'maaas.templates',
+      standalone: true
+    }))
+    .pipe(size({title: 'Template Cache Size:'}))
+    .pipe(gulp.dest(config.applicationDestPath));
+
+});
+
 gulp.task('copyassets', function() {
   //Images
-  gulp.src([config.baseSrcPath + '/img/**/*.*'])
+  gulp.src([
+    config.baseSrcPath + '/img/**/*.*'])
     .pipe(gulp.dest(config.baseDestPath + '/img/'));
 
 
@@ -170,7 +184,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('build', function(callback) {
-  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'systemjs-config'], callback);
+  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'systemjs-config'],  'template-cache', callback);
 });
 
 gulp.task('default', function() {
