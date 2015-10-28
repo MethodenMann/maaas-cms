@@ -8,7 +8,8 @@ export class MasterView {
 
   constructor(
     @Inject('$window') private $window,
-    @Inject('$state') private $state
+    @Inject('$state') private $state,
+    @Inject('Auth') private Auth
     ) {
     $('#side-menu').metisMenu();
 
@@ -38,6 +39,9 @@ export class MasterView {
     }
   }
 
-
+  logout() {
+    this.Auth.logout();
+    this.$state.go('login');
+  }
 
 }
