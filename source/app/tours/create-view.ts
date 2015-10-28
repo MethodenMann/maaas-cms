@@ -27,5 +27,9 @@ export class CreateView extends AbstractDetailView {
       selectedContents: [],
       selectedChallenges:[]
     };
+
+    var deferred = this.$q.defer();
+    deferred.resolve();
+    return deferred.promise;
   }
 }

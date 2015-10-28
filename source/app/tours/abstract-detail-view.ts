@@ -33,7 +33,7 @@ export abstract class AbstractDetailView extends FormView{
   ) {
     super($scope);
 
-    this.$q.all([this.loadData(), Content.findAll(), Challenge.findAll()]).then((values) => {
+    this.$q.all([Content.findAll(), Challenge.findAll(), this.loadData()]).then((values) => {
       this.initDictionaries(values[0], values[1]);
       this.Area.findAll().then((areas) => {
         this.areas = areas;
