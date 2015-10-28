@@ -20,7 +20,7 @@ export class DetailUpdateView extends DetailAbstract {
 
   save() {
     if (this.isFormValid()) {
-      this.Museum.update(this.museum.id, { area: this.museum });
+      this.Museum.update(this.museum.id, { museum: this.museum });
       alert('Gespeichert'); //TODO: make sexy
     } else {
       this.focusFirstInputWithError();

@@ -79,7 +79,7 @@
                   i.fa.fa-search
             // /input-group
           li
-             a(ui-sref="cms.museums.detail.update({ museumId: 1 })"  ui-sref-active-if="cms.museums")
+             a(ng-click="ctrl.goToMuseum()"  ui-sref-active-if="cms.museums")
                i.fa.fa-bookmark-o
                |  Museum
           li

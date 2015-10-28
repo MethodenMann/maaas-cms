@@ -44,4 +44,8 @@ export class MasterView {
     this.$state.go('login');
   }
 
+  goToMuseum() {
+    var museumId = this.Auth._currentUser.museum_id;
+    this.$state.go('cms.museums.detail.update', {museumId: museumId});
+  }
 }
