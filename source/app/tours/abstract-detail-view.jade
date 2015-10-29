@@ -1,43 +1,46 @@
 .panel.panel-green
   .panel-heading
-    | {{ 'contents_details_title' | translate }}
+    | {{ 'tours_details_title' | translate }}
   .panel-body
     form(name="form" role='form' novalidate)
-      mas-form-group(field-name='name' localization-prefix='areas_details_name')
+      mas-form-group(field-name='name' localization-prefix='tours_details_name')
         input.form-control(ng-model='ctrl.tour.name' name='name' required ng-minlength="2")
+      mas-form-group(field-name='description' localization-prefix='tours_details_description')
+        input.form-control(ng-model='ctrl.tour.description' name='description' required ng-minlength="2")
+
+    h3 {{ 'tours_details_compose_title' | translate }}
+    .dropdown
+      button#addArea.btn.btn-default.dropdown-toggle(type='button' ng-disabled='ctrl.unconfiguredAreas.length == 0' data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+        | Area hinzufügen
+        span.caret
+      ul.dropdown-menu(aria-labelledby='addArea')
+        li(ng-repeat='area in ctrl.unconfiguredAreas')
+          a(ng-click='ctrl.addArea($index)') {{area.name}}
     .row
-      .dropdown
-        button#addArea.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
-          | Area hinzufügen
-          span.caret
-        ul.dropdown-menu(aria-labelledby='addArea')
-          li(ng-repeat='area in ctrl.unconfiguredAreas')
-            a(ng-click='ctrl.addArea($index)') {{area.name}}
-    .row
-      | {{ctrl.tour.selectedContents}}
-      | {{ctrl.tour.selectedChallenges}}
       .col-md-3
+        h4 {{ 'tours_details_compose_areas' | translate }}
         .list-group
-          a.list-group-item(ng-repeat="area in ctrl.configuredAreas | orderBy:'name'" ng-click="ctrl.selectArea(area)" ng-class="{ 'active' : ctrl.selectedArea.id == area.id }")
-            | {{area.name}}  Contents: {{ ctrl.countSelectedContents(area) }}
+          a.list-group-item(ng-repeat="area in ctrl.configuredAreas | orderBy:'name'" ng-click="ctrl.selectArea(area)" ng-class="{ 'list-group-item-success' : ctrl.selectedArea.id == area.id }")
+            | {{area.name}} ({{ ctrl.countSelectedContents(area) }} Inhalte)
       div(ng-show="ctrl.selectedArea")
         .col-md-3
+          h4 {{ 'tours_details_compose_contents' | translate }}
           .list-group
             div.list-group-item(ng-repeat="content in ctrl.selectedArea.contents")
               input(type="checkbox" ng-click="ctrl.selectContent(content.id, $event)" ng-checked="ctrl.isContentSelected(content.id)")
               | {{content.title}}
         .col-md-3
+          h4 {{ 'tours_details_compose_challenges' | translate }}
           .list-group
             div.list-group-item(ng-repeat="challenge in ctrl.selectedArea.challenges")
               input(type="checkbox" ng-click="ctrl.selectChallenge(challenge.id, $event)" ng-checked="ctrl.isChallengeSelected(challenge.id)")
               | {{challenge.name}}
         .col-md-3
-          button.btn(ng-show="ctrl.selectedArea" ng-click="ctrl.removeArea(ctrl.selectedArea)") Remove this Area
+          a.btn.btn-warning(ng-click="ctrl.removeArea(ctrl.selectedArea)")
+            | Entfernen
 
-      //- mas-form-group(field-name='backgroundImageId' localization-prefix='areas_details_backgroundimage')
-      //-   div
-      //-     image-upload(upload-id="backgroundImage" required)
-      //-     image-load(upload-id="backgroundImage" ng-if="ctrl.area.backgroundImageId" initial-media-id='{{ctrl.area.backgroundImageId}}' height='100' )
-      //-     input(type="hidden" name="backgroundImageId" ng-model="ctrl.area.backgroundImageId" required)
+    button.btn.btn-success(type='submit' ng-click='ctrl.save()')
+      i.fa.fa-save
+      |  Speichern
 
-    button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
+    div {{ctrl.tour.selectedContents}} {{ctrl.tour.selectedChallenges}}

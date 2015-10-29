@@ -39,6 +39,7 @@ export abstract class AbstractDetailView extends FormView{
       this.Area.findAll().then((areas) => {
         this.areas = areas;
         this.loadConfiguredAreas();
+
       });
 
       this.constructorHook();
@@ -87,6 +88,7 @@ export abstract class AbstractDetailView extends FormView{
           this.unconfiguredAreas.push(area);
         }
       });
+      this.selectFirstArea();
     });
   }
 
@@ -107,27 +109,32 @@ export abstract class AbstractDetailView extends FormView{
     return count;
   }
 
+
   removeArea(area: IArea){
-    area.contents.forEach((content) => {
-      var pos = this.tour.selectedContents.indexOf(content.id);
-      if (pos > -1){
-        this.tour.selectedContents.splice(pos, 1);
-      }
-    });
+    var confirmed = confirm("Sicher?"); //TODO: Make sexy
+    if (confirmed){
+      area.contents.forEach((content) => {
+        var pos = this.tour.selectedContents.indexOf(content.id);
+        if (pos > -1){
+          this.tour.selectedContents.splice(pos, 1);
+        }
+      });
 
-    area.challenges.forEach((challange) => {
-      var pos = this.tour.selectedChallenges.indexOf(challange.id);
-      if (pos > -1){
-        this.tour.selectedChallenges.splice(pos, 1);
-      }
-    });
+      area.challenges.forEach((challange) => {
+        var pos = this.tour.selectedChallenges.indexOf(challange.id);
+        if (pos > -1){
+          this.tour.selectedChallenges.splice(pos, 1);
+        }
+      });
 
 
-    var idx = this.configuredAreas.indexOf(area);
-    this.configuredAreas.splice(idx, 1);
-    this.unconfiguredAreas.push(area);
+      var idx = this.configuredAreas.indexOf(area);
+      this.configuredAreas.splice(idx, 1);
+      this.unconfiguredAreas.push(area);
 
-    this.selectFirstArea();
+      this.selectFirstArea();
+    }
+
   }
 
 
@@ -137,11 +144,7 @@ export abstract class AbstractDetailView extends FormView{
   }
 
   selectFirstArea(){
-    if (this.configuredAreas.length > 0){
       this.selectedArea = this.configuredAreas[0];
-    }else{
-      this.selectedArea = undefined;
-    }
   }
 
   handleCheckboxChecked(id:number, list:Array<number>, event) {
