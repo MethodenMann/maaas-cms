@@ -1,5 +1,5 @@
 import {Inject} from '../utils/di';
-import {ITour} from "./itour";
+import {ITour} from './itour';
 
 export class ListView {
   public static selector = 'mas-tour-list-view';

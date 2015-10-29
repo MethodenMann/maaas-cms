@@ -3,9 +3,9 @@ import {ITour} from './itour';
 import {IArea} from '../areas/iarea';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 import {IMedium} from '../media/imedium';
-import {FormView} from "../common/forms/form-view";
+import {FormView} from '../common/forms/form-view';
 
-export abstract class AbstractDetailView extends FormView{
+export abstract class AbstractDetailView extends FormView {
   private static selector = 'mas-tour-detail-view';
   private static templateUrl = 'app/tours/abstract-detail-view.html';
 
@@ -39,7 +39,6 @@ export abstract class AbstractDetailView extends FormView{
       this.Area.findAll().then((areas) => {
         this.areas = areas;
         this.loadConfiguredAreas();
-
       });
 
       this.constructorHook();
@@ -49,11 +48,11 @@ export abstract class AbstractDetailView extends FormView{
   protected loadData() {}
   abstract save(): void;
 
-  private initDictionaries(contents, challanges){
-    contents.forEach((content) =>{
+  private initDictionaries(contents, challanges) {
+    contents.forEach((content) => {
       this.contentAreaDict[content.id] = content.areaId;
     });
-    challanges.forEach((challange) =>{
+    challanges.forEach((challange) => {
       this.challangeAreaDict[challange.id] = challange.areaId;
     });
 
@@ -63,28 +62,28 @@ export abstract class AbstractDetailView extends FormView{
   protected constructorHook() {}
 
 
-  private loadConfiguredAreas(){
+  private loadConfiguredAreas() {
     var configuredAreaIds: number[] = [];
 
-    this.tour.selectedContents.forEach((contentId) =>{
+    this.tour.selectedContents.forEach((contentId) => {
       var areaId = this.contentAreaDict[contentId];
-      if (configuredAreaIds.indexOf(areaId) == -1){
-        configuredAreaIds.push(this.contentAreaDict[contentId])
+      if (configuredAreaIds.indexOf(areaId) === -1) {
+        configuredAreaIds.push(this.contentAreaDict[contentId]);
       }
     });
 
-    this.tour.selectedChallenges.forEach((challengeId) =>{
+    this.tour.selectedChallenges.forEach((challengeId) => {
       var areaId = this.challangeAreaDict[challengeId];
-      if (configuredAreaIds.indexOf(areaId) == -1) {
-        configuredAreaIds.push(areaId)
+      if (configuredAreaIds.indexOf(areaId) === -1) {
+        configuredAreaIds.push(areaId);
       }
     });
 
     this.Area.findAll().then((areas) => {
-      areas.forEach((area) =>{
-        if (configuredAreaIds.indexOf(area.id) > -1){
+      areas.forEach((area) => {
+        if (configuredAreaIds.indexOf(area.id) > -1) {
           this.configuredAreas.push(area);
-        }else{
+        } else {
           this.unconfiguredAreas.push(area);
         }
       });
@@ -92,17 +91,17 @@ export abstract class AbstractDetailView extends FormView{
     });
   }
 
-  addArea(idx){
+  addArea(idx) {
     var area = this.unconfiguredAreas[idx];
     this.unconfiguredAreas.splice(idx, 1);
     this.configuredAreas.push(area);
     this.selectArea(area);
   }
 
-  countSelectedContents(area:IArea){
+  countSelectedContents(area:IArea) {
     var count = 0;
     area.contents.forEach((content) => {
-      if (this.tour.selectedContents.indexOf(content.id) > -1){
+      if (this.tour.selectedContents.indexOf(content.id) > -1) {
         count++;
       }
     });
@@ -110,19 +109,19 @@ export abstract class AbstractDetailView extends FormView{
   }
 
 
-  removeArea(area: IArea){
-    var confirmed = confirm("Sicher?"); //TODO: Make sexy
-    if (confirmed){
+  removeArea(area: IArea) {
+    var confirmed = confirm('Sicher?'); //TODO: Make sexy
+    if (confirmed) {
       area.contents.forEach((content) => {
         var pos = this.tour.selectedContents.indexOf(content.id);
-        if (pos > -1){
+        if (pos > -1) {
           this.tour.selectedContents.splice(pos, 1);
         }
       });
 
       area.challenges.forEach((challange) => {
         var pos = this.tour.selectedChallenges.indexOf(challange.id);
-        if (pos > -1){
+        if (pos > -1) {
           this.tour.selectedChallenges.splice(pos, 1);
         }
       });
@@ -141,7 +140,7 @@ export abstract class AbstractDetailView extends FormView{
     this.selectedArea = area;
   }
 
-  selectFirstArea(){
+  selectFirstArea() {
       this.selectedArea = this.configuredAreas[0];
   }
 
@@ -169,7 +168,7 @@ export abstract class AbstractDetailView extends FormView{
   }
 
   isSelected(id:number, list:Array<number>) {
-    var idx = list.indexOf(id)
+    var idx = list.indexOf(id);
     return idx < 0 ? false : true;
   }
 
