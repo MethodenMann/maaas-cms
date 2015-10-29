@@ -2,34 +2,34 @@
   .panel-heading
     | {{ 'areas_details_title' | translate }}
   .panel-body
-    form(name="form" role='form' novalidate)
+    form(name='form' role='form' novalidate)
 
       mas-form-group(field-name='name' localization-prefix='areas_details_name')
-        input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength="2")
+        input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength='2')
 
       mas-form-group(field-name='gotoText' localization-prefix='areas_details_gototext')
-        input.form-control(name="gotoText" ng-model='ctrl.area.gotoText' required ng-minlength="5")
+        input.form-control(name='gotoText' ng-model='ctrl.area.gotoText' required ng-minlength='5')
 
       mas-form-group(field-name='primaryColor' localization-prefix='areas_details_primarycolor')
-        color-picker(name="primaryColor" ng-model="ctrl.area.primaryColor", color-picker-format='"hex"')
+        color-picker(name='primaryColor' ng-model='ctrl.area.primaryColor', color-picker-format='"hex"')
 
       mas-form-group(field-name='secondaryColor' localization-prefix='areas_details_primarycolor')
-        color-picker(name="secondaryColor" ng-model="ctrl.area.secondaryColor", color-picker-format='"hex"')
+        color-picker(name='secondaryColor' ng-model='ctrl.area.secondaryColor', color-picker-format='"hex"')
 
       mas-form-group(field-name='backgroundImageId' localization-prefix='areas_details_backgroundimage')
         div
-          image-upload(upload-id="backgroundImage" required)
-          image-load(upload-id="backgroundImage" ng-if="ctrl.area.backgroundImageId" initial-media-id='{{ctrl.area.backgroundImageId}}' height='100' )
-          input(type="hidden" name="backgroundImageId" ng-model="ctrl.area.backgroundImageId" required)
+          image-upload(upload-id='backgroundImage' required)
+          image-load(upload-id='backgroundImage' ng-if='ctrl.area.backgroundImageId' initial-media-id='{{ctrl.area.backgroundImageId}}' height='100' )
+          input(type='hidden' name='backgroundImageId' ng-model='ctrl.area.backgroundImageId' required)
 
       mas-form-group(field-name='stickerImageId' localization-prefix='areas_details_stickerimage')
         div
-          image-upload(upload-id="stickerImage" required)
-          image-load(upload-id="stickerImage" ng-if="ctrl.area.stickerImageId" initial-media-id='{{ctrl.area.stickerImageId}}' height='100')
-          input(type="hidden" name="stickerImageId" ng-model="ctrl.area.stickerImageId" required)
+          image-upload(upload-id='stickerImage' required)
+          image-load(upload-id='stickerImage' ng-if='ctrl.area.stickerImageId' initial-media-id='{{ctrl.area.stickerImageId}}' height='100')
+          input(type='hidden' name='stickerImageId' ng-model='ctrl.area.stickerImageId' required)
 
       button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
-      a.btn.btn-info(ui-sref="cms.areas.detail.challenges.list") Quiz Erfassen
-      a.btn.btn-info(ui-sref="cms.areas.detail.contents.list") Inhalt Erfassen
+      a.btn.btn-info(ui-sref='cms.areas.detail.challenges.list') Quiz Erfassen
+      a.btn.btn-info(ui-sref='cms.areas.detail.contents.list') Inhalt Erfassen
 
-script(src="/libs/tinycolor.js") //TODO: In SystemJS einbinden
+script(src='/libs/tinycolor.js') //TODO: In SystemJS einbinden

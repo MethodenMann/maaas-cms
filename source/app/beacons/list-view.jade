@@ -1,9 +1,9 @@
 h1 {{ 'beacons_list_title' | translate }}
 span {{ 'beacons_list_description' | translate }}
-div(ui-i18n="'de'")
-  div.beaconGrid(ui-grid="ctrl.gridOptions" ui-grid-selection ui-grid-edit)
+div(ui-i18n='"de"')
+  div.beaconGrid(ui-grid='ctrl.gridOptions' ui-grid-selection ui-grid-edit)
   
-button.btn.btn-primary( ng-click="ctrl.deleteSelected()" ng-disabled="ctrl.gridApi.selection.getSelectedRows().length <= 0")
+button.btn.btn-primary( ng-click='ctrl.deleteSelected()' ng-disabled='ctrl.gridApi.selection.getSelectedRows().length <= 0')
   i.glyphicon.glyphicon-trash
   | {{ 'beacons_list_delete_btn' | translate }}
 

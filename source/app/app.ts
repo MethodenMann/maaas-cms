@@ -66,29 +66,29 @@ leApp.config(function($breadcrumbProvider) {
 leApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
   }
-])
+]);
 
-leApp.run(function ($rootScope, Auth, $state) {
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-    console.log(toState.data);
-    if (toState.data && toState.data.ignoreLogin) {
-      console.log('ignoring login!');
-    } else {
-      if (!Auth.isAuthenticated()) {
-        console.log('getting user from memory failed. trying to get user from server session');
-        Auth.currentUser().then((user) => {
-          console.log('user is authenticated!');
-        }, (error) => {
-          console.log('user is not authenticated!');
-          event.preventDefault();
-          $state.go('login');
-        });
-      } else {
-        console.log('user is authenticated!');
-      }
-    }
-  });
-});
+//leApp.run(function ($rootScope, Auth, $state) {
+//  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+//    console.log(toState.data);
+//    if (toState.data && toState.data.ignoreLogin) {
+//      console.log('ignoring login!');
+//    } else {
+//      if (!Auth.isAuthenticated()) {
+//        console.log('getting user from memory failed. trying to get user from server session');
+//        Auth.currentUser().then((user) => {
+//          console.log('user is authenticated!');
+//        }, (error) => {
+//          console.log('user is not authenticated!');
+//          event.preventDefault();
+//          $state.go('login');
+//        });
+//      } else {
+//        console.log('user is authenticated!');
+//      }
+//    }
+//  });
+//});
 
 loadApp(leApp);
 

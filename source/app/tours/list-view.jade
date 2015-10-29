@@ -1,4 +1,4 @@
-div(ng-repeat="tour in ctrl.tours")
+div(ng-repeat='tour in ctrl.tours')
   | {{tour.name}}
   a(href ui-sref='cms.tours.detail.update({tourId: tour.id})')
     | hingehen

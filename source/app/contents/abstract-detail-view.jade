@@ -2,27 +2,27 @@
   .panel-heading
     |   {{ 'contents_details_title' | translate }}
   .panel-body
-    form(name="contentform", role='form' novalidate)
+    form(name='contentform', role='form' novalidate)
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("title") }')
         label {{ 'contents_details_title_label' | translate }}
-        input.form-control(ng-model='ctrl.content.title' name='title' required ng-minlength="2")
+        input.form-control(ng-model='ctrl.content.title' name='title' required ng-minlength='2')
         p.help-block(ng-hide='ctrl.IsValidAndSubmitted("title")') {{ 'contents_details_title_help' | translate  }}
         p.help-block(ng-show='ctrl.IsValidAndSubmitted("title")') {{ 'contents_details_title_error' | translate }}
 
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("description") }')
         label {{ 'contents_details_description_label' | translate }}
-        input.form-control(ng-model='ctrl.content.description' name='description' required ng-minlength="2")
+        input.form-control(ng-model='ctrl.content.description' name='description' required ng-minlength='2')
         p.help-block(ng-hide='ctrl.IsValidAndSubmitted("description")') {{ 'contents_details_description_help' | translate  }}
         p.help-block(ng-show='ctrl.IsValidAndSubmitted("description")') {{ 'contents_details_description_error' | translate }}
 
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("name") }')
         .row
           .col-md-6
-            textarea(ui-tinymce="ctrl.tinymceConfig" ng-model="ctrl.content.data")
+            textarea(ui-tinymce='ctrl.tinymceConfig' ng-model='ctrl.content.data')
           .col-md-4
-            image-upload(upload-id="contentImage")
+            image-upload(upload-id='contentImage')
             br
-            div.pull-left(ng-repeat="image in ctrl.imageList")
+            div.pull-left(ng-repeat='image in ctrl.imageList')
               image-load(public-id='{{image.medium.publicId}}' height='100')
 
       button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
