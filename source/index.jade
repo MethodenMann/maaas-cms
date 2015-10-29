@@ -19,10 +19,9 @@ html(lang='en')
   body
     div(ui-view='')
 
-    script(src="/libs/tinymce/tinymce.js")
-    script(src="/libs/system.js")
-    script(src="/system.config.js")
-    script(type='text/javascript').
-      System.import('app/app.js')
+    script(src='/libs/tinymce/tinymce.js')
+    script(src='/libs/system.js')
+    script(src='/system.config.js')
+    script System.import('app/app.js')
 
     ngc-login-form()
