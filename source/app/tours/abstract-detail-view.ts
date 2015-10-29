@@ -137,8 +137,6 @@ export abstract class AbstractDetailView extends FormView{
 
   }
 
-
-
   selectArea(area: IArea) {
     this.selectedArea = area;
   }
