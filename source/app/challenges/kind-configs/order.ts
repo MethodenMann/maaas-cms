@@ -27,14 +27,14 @@ export class Order {
       stop: () => {
         this.resetIndices();
       }
-    }
-    if(!this.data.list) {
+    };
+    if (!this.data.list) {
       this.data.list = [];
     }
   }
 
   addEntry() {
-    this.data.list.push({idx: this.data.list.length, captionShort: undefined, captionLong: undefined, mediumId: undefined})
+    this.data.list.push({idx: this.data.list.length, captionShort: undefined, captionLong: undefined, mediumId: undefined});
   }
 
   private resetIndices() {
