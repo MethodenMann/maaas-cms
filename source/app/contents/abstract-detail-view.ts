@@ -40,11 +40,11 @@ export class AbstractDetailView {
   protected constructorHook() {}
 
   protected addToImageList(mediumId) {
-    this.Medium.find(mediumId).then(medium =>{
+    this.Medium.find(mediumId).then(medium => {
       var url = $.cloudinary.url(medium.publicId, {
         format: 'jpg', width: 100, height: 100, crop: 'thumb'
       });
       this.imageList.push({title: this.imageList.length, value: url, medium: medium});
-    })
+    });
   }
 }
