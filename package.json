@@ -31,6 +31,7 @@
     "jade": "^1.11.0",
     "run-sequence": "^1.1.4",
     "systemjs": "^0.19.3",
+    "traceur": "0.0.92",
     "tsd": "^0.6.4",
     "typescript": "^1.6.2"
   },
@@ -52,7 +53,6 @@
     "selenium-standalone": "^4.7.0",
     "sinon": "^1.17.1",
     "sinon-chai": "^2.8.0",
-    "systemjs-builder": "^0.14.6",
-    "traceur": "0.0.91"
+    "systemjs-builder": "^0.14.6"
   }
 }
