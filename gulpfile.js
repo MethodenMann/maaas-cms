@@ -194,6 +194,8 @@ gulp.task('build', function(callback) {
   runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'systemjs-config'],  'template-cache', callback);
 });
 
+gulp.task('lint', ['typescript-lint', 'jade-lint']);
+
 gulp.task('default', function() {
   runSequence('build', 'connect', 'watch');
 });

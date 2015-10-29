@@ -8,5 +8,6 @@ before_script:
   - bower install
 
 script:
-  - gulp
+  - gulp lint
+  - gulp build
   - ./node_modules/karma/bin/karma start --single-run --browsers PhantomJS
