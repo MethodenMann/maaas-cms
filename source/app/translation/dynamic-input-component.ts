@@ -41,7 +41,9 @@ export class DynamicInputComponent {
 
     if (this.original) {
       if (this.inputType.indexOf('quiz-') === 0) {
-        this.bindTo = this.quizPreparators[this.inputType](this.original);
+        // TODO this currently clears out existing values and is supposed
+        //      to actually merge existing values.
+        // this.bindTo = this.quizPreparators[this.inputType](this.original);
       }
     }
 

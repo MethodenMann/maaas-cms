@@ -9,7 +9,7 @@ h1 Translations
     br
     button(ng-repeat="locale in ctrl.locales" ng-click='ctrl.currentLanguage=locale') {{locale}}
     //- br
-    //- {{ctrl.values}}
+    {{ctrl.values}}
     //- br
     //- {{ctrl.allModels}}
     .row
@@ -21,6 +21,7 @@ h1 Translations
       .col-md-4
         form(name="form" role='form' novalidate)
           mas-form-group(ng-repeat="field in ctrl.fields" name='{{field.name}}' localization-prefix='{{field.prefix}}')
+            {{ctrl.values[ctrl.currentLanguage][field.name]}}
             mas-dynamic-input-component(input-type="{{field.inputType}}" bind-to="ctrl.values[ctrl.currentLanguage][field.name]" original="ctrl.values[ctrl.mainLanguage][field.name]" name="{{field.name}}")
       .col-md-4
 

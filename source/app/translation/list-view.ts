@@ -26,16 +26,18 @@ export class ListView {
       this.currentModelType = this.Challenge;
       this.currentModelName = 'challenge';
 
-      this.currentModelType.find(10, {locale: this.mainLanguage}).then((areas) => {
+      this.currentModelType.findAll({locale: this.mainLanguage, translations: "yes"}).then((models) => {
         // it is very important that these fields get defined only when the contents
         // are loaded!!
         this.fields.push({name: 'name', prefix: 'areas_details_name', inputType: 'input'});
         this.fields.push({name: 'data', prefix: 'areas_details_gototext', inputType: 'quiz-multiple-choice'});
 
-        // this.allModels = areas;
-        this.allModels = [areas];
+        this.allModels = models;
         this.values = {};
         this.values[this.mainLanguage] = {};
+        for(let locale of this.locales) {
+          this.values[locale] = {};
+        }
         this.loadStuff();
       })
   }
@@ -73,6 +75,9 @@ export class ListView {
     for (let i = 0; i < this.fields.length; i++) {
       var fieldName = this.fields[i].name;
       this.values[this.mainLanguage][fieldName] = this.allModels[this.currentModelIndex][fieldName];
+      for(let locale of this.locales) {
+        this.values[locale][fieldName] = this.allModels[this.currentModelIndex].translations[locale][fieldName];
+      }
     }
   }
 }
