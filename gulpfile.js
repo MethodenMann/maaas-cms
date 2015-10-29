@@ -14,7 +14,8 @@ var Config = require('./gulpfile.config');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var size = require('gulp-size');
-var browserSync = require('browser-sync').create();
+var jadelint = require('gulp-jadelint');
+
 
 var config = new Config();
 
@@ -72,6 +73,12 @@ gulp.task('views', function() {
 
   gulp.src(config.baseSrcPath + '/**/*.html')
     .pipe(gulp.dest(config.baseDestPath))
+});
+
+gulp.task('jade-lint', function () {
+  return gulp
+    .src(config.baseSrcPath + '/**/*.jade')
+    .pipe(jadelint({ 'UseConsistentQuotes': 'warning' }));
 });
 
 gulp.task('template-cache', function () {
