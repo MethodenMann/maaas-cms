@@ -13,7 +13,7 @@ export class DetailCreateView extends DetailAbstract {
         this.saveImageRelation(area.backgroundImage, area.id);
         this.saveImageRelation(area.stickerImage, area.id);
         alert('Gespeichert'); //TODO: make sexy
-        this.$state.go("cms.areas.detail.update", {areaId: area.id});
+        this.$state.go('cms.areas.detail.update', {areaId: area.id});
       });
     } else {
       this.focusFirstInputWithError();
