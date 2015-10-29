@@ -26,7 +26,7 @@ export class UpdateView extends AbstractDetailView {
           mediumId: data.mediumId,
           mediumableId: this.content.id,
           mediumableType: 'Content'
-        }
+        };
 
         this.Medium.update(data.mediumId, {medium: medium});
         this.addToImageList(data.mediumId);
