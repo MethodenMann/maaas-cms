@@ -1,5 +1,4 @@
 import {Inject} from '../utils/di';
-import {IArea} from '../areas/iarea';
 
 export class ListView {
   private static selector = 'mas-translation-list-view';
@@ -7,26 +6,34 @@ export class ListView {
 
   private fields:Array<any> = [];
   private values:{string?:Array<any>};
-  private mainLanguage:string = 'de';
-  private currentLanguage:string = 'en';
-  private locales = ['en', 'de', 'it', 'fr'];
+  private mainLanguage:string = 'en';
+  private currentLanguage:string = 'de';
+  // private locales = ['de', 'it', 'fr'];
+  private locales = ['de', 'it'];
 
   private currentModelIndex:number = 0;
   // private currentModel:any;
   private currentModelType:any;
+  private currentModelName:string;
   private allModels:Array<any>
 
   constructor(
     @Inject('$scope') private $scope,
-    @Inject('Area') private Area
+    @Inject('Area') private Area,
+    @Inject('Challenge') private Challenge
     ) {
-      this.fields.push({name: 'name', prefix: 'areas_details_name', inputType: 'input'});
-      this.fields.push({name: 'gotoText', prefix: 'areas_details_gototext', inputType: 'input'})
 
-      this.currentModelType = this.Area;
+      this.currentModelType = this.Challenge;
+      this.currentModelName = 'challenge';
 
-      this.currentModelType.findAll({locale: this.mainLanguage}).then((areas) => {
-        this.allModels = areas;
+      this.currentModelType.find(10, {locale: this.mainLanguage}).then((areas) => {
+        // it is very important that these fields get defined only when the contents
+        // are loaded!!
+        this.fields.push({name: 'name', prefix: 'areas_details_name', inputType: 'input'});
+        this.fields.push({name: 'data', prefix: 'areas_details_gototext', inputType: 'quiz-multiple-choice'});
+
+        // this.allModels = areas;
+        this.allModels = [areas];
         this.values = {};
         this.values[this.mainLanguage] = {};
         this.loadStuff();
@@ -35,7 +42,10 @@ export class ListView {
 
   save() {
     for (let locale of this.locales) {
-      this.currentModelType.update(this.allModels[this.currentModelIndex].id, {area: this.values[locale], locale: locale});
+      var str = this.currentModelName;
+      var payload = {locale: locale};
+      payload[this.currentModelName] = this.values[locale];
+      this.currentModelType.update(this.allModels[this.currentModelIndex].id, payload);
     }
   }
 
