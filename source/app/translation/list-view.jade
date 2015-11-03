@@ -4,21 +4,31 @@ h1 Translations
   .panel-heading
     | {{ 'areas_details_title' | translate }}
   .panel-body
-    select(ng-model='ctrl.selectedModel' ng-change='ctrl.selectedModelChanged()'
-           ng-options='option.value for option in ctrl.modelConfigs track by option.value')
-    {{ctrl.currentModelIndex}}
-    button(ng-click='ctrl.loadPreviousModel()') Previous
-    button(ng-click='ctrl.loadNextModel()') Next
-    br
-    button(ng-repeat="locale in ctrl.locales" ng-click='ctrl.currentLanguage=locale') {{locale}}
-    {{ctrl.values}}
     .row
-      .col-md-4
-        form(name="form" role='form' novalidate)
+      .col-md-3
+        select.form-control(ng-model='ctrl.selectedModel' ng-change='ctrl.selectedModelChanged()'
+                            ng-options='option.value for option in ctrl.modelConfigs track by option.value')
+      .col-md-1
+        {{ctrl.currentModelIndex + 1}} of {{ctrl.allModels.length}}
+      .col-md-2
+        button.form-control(ng-click='ctrl.loadPreviousModel()') Previous
+      .col-md-2
+        button.form-control(ng-click='ctrl.loadNextModel()') Next
+    br
+    br
+    .row
+      .col-md-6
+        ul.nav.nav-tabs
+          li.active
+            a {{ctrl.mainLanguage}}
+        form(name="form" role='form' novalidate readonly)
           mas-form-group(ng-repeat="field in ctrl.fields" name='{{field.name}}' localization-prefix='{{field.prefix}}')
             mas-dynamic-input-component(input-type="{{field.inputType}}" bind-to="ctrl.currentModel[field.name]" name="{{field.name}}")
 
-      .col-md-4
+      .col-md-6
+        ul.nav.nav-tabs
+          li(ng-repeat="locale in ctrl.locales" ng-class='{active: ctrl.currentLanguage==locale}')
+            a(ng-click='ctrl.currentLanguage=locale') {{locale}}
         form(name="form" role='form' novalidate)
           mas-form-group(ng-repeat="field in ctrl.fields" name='{{field.name}}' localization-prefix='{{field.prefix}}')
             mas-dynamic-input-component(input-type="{{field.inputType}}" bind-to="ctrl.currentModel.translations[ctrl.currentLanguage][field.name]" name="{{field.name}}")

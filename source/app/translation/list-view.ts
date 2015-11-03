@@ -5,9 +5,9 @@ export class ListView {
   private static templateUrl = './app/translation/list-view.html';
 
   private fields:Array<any> = [];
-  private mainLanguage:string = 'en';
-  private currentLanguage:string = 'de';
-  private locales = ['de', 'it'];
+  private mainLanguage:string = 'de';
+  private currentLanguage:string = 'en';
+  private locales = ['en', 'it', 'fr'];
 
   private currentModel:any;
   private allModels:Array<any>
@@ -28,7 +28,7 @@ export class ListView {
     ]},
     'challenge': (currentModel:any) => {
       return [
-        {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
+        {name: 'name', prefix: 'challenges_details_name', inputType: 'input'},
         {name: 'data', prefix: 'areas_details_gototext', inputType: `quiz-${currentModel.kind}`}
       ]
     }
@@ -99,6 +99,7 @@ export class ListView {
   save() {
     var payload = {};
     payload[this.currentModelName] = this.currentModel;
+    payload['locale'] = this.mainLanguage;
     this.currentModelType.update(this.currentModel.id, payload);
   }
 
