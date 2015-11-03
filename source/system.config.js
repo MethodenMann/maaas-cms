@@ -28,6 +28,8 @@ System.config({
     'angular-ui-grid': 'libs/ui-grid.min.js',
     'angular-breadcrumb': 'libs/angular-breadcrumb.min.js',
     'angular-ui-tinymce': 'libs/tinymce.js',
-    'angular-ui-sortable': 'libs/sortable.min.js'
+    'angular-ui-sortable': 'libs/sortable.min.js',
+    'angular-chart': 'libs/angular-chart.min.js',
+    'chart': 'libs/Chart.min.js'
   }
 });
