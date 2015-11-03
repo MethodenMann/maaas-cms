@@ -9,10 +9,12 @@ export class ListView {
   private currentLanguage:string = 'de';
   private locales = ['de', 'it'];
 
-  private currentModelIndex:number = 0;
+  private currentModel:any;
+  private allModels:Array<any>
+
   private currentModelType:any;
   private currentModelName:string;
-  private allModels:Array<any>
+  private currentModelIndex:number;
 
   constructor(
     @Inject('$scope') private $scope,
@@ -28,14 +30,30 @@ export class ListView {
 
       this.currentModelType.findAll({locale: this.mainLanguage, translations: "yes"}).then((models) => {
         this.allModels = models;
+        this.currentModelIndex = 0;
+        this.currentModel = this.allModels[this.currentModelIndex];
       })
+  }
+
+  loadPreviousModel() {
+    this.currentModelIndex = Math.max(0, --this.currentModelIndex);
+    this.loadModel();
+  }
+
+  loadNextModel() {
+    this.currentModelIndex = Math.min(0, ++this.currentModelIndex);
+    this.loadModel();
+  }
+
+  loadModel() {
+    this.currentModel = this.allModels[this.currentModelIndex];
   }
 
   save() {
     for (let locale of this.locales) {
       var payload = {locale: locale};
-      payload[this.currentModelName] = this.allModels[this.currentModelIndex].translations[locale];
-      this.currentModelType.update(this.allModels[this.currentModelIndex].id, payload);
+      payload[this.currentModelName] = this.currentModel.translations[locale];
+      this.currentModelType.update(this.currentModel.id, payload);
     }
   }
 }
