@@ -34,6 +34,36 @@ export class ListView {
     }
   }
 
+  private quizPreparators = {
+    'multiple-choice': (data) => {
+      var clone = jQuery.extend(true, {}, data);
+      for (let answer of clone.answers) {
+        answer.text = '';
+      }
+      return clone;
+    },
+
+    'true-false': (data) => {
+      var clone = jQuery.extend(true, {}, data);
+      for (let question of clone.questions) {
+        question.text = '';
+      }
+      return clone;
+    }
+  }
+
+  private modelPreparators = {
+    'area': () => {}, 'content': () => {},
+    'challenge': (currentModel:any) => {
+      var preparator = this.quizPreparators[currentModel.kind];
+      for (let locale of this.locales) {
+        if (jQuery.isEmptyObject(currentModel.translations[locale].data)) {
+          currentModel.translations[locale].data = preparator(currentModel.data);
+        }
+      }
+    }
+  }
+
   private modelConfigs:Array<{value:string, modelType:any}>;
   private selectedModel:{value:string, modelType:any};
 
@@ -63,6 +93,7 @@ export class ListView {
   loadModel() {
     this.currentModel = this.allModels[this.currentModelIndex];
     this.prepareFieldsForCurrentModel();
+    this.prepareModel();
   }
 
   save() {
@@ -75,6 +106,10 @@ export class ListView {
     this.fields = this.fieldConfigs[this.selectedModel.value](this.currentModel);
   }
 
+  prepareModel() {
+    this.modelPreparators[this.selectedModel.value](this.currentModel);
+  }
+
   selectedModelChanged() {
     this.currentModelType = this.selectedModel.modelType;
     this.currentModelName = this.selectedModel.value;
@@ -82,8 +117,7 @@ export class ListView {
     this.currentModelType.findAll({locale: this.mainLanguage, translations: "yes"}).then((models) => {
       this.allModels = models;
       this.currentModelIndex = 0;
-      this.currentModel = this.allModels[this.currentModelIndex];
-      this.prepareFieldsForCurrentModel();
+      this.loadModel();
     })
   }
 }
