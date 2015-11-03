@@ -43,8 +43,7 @@ gulp.task('typescript', function() {
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
 
-  return tsResult.js
-    .pipe(gulp.dest('out'));
+  return tsResult.js;
 
 });
 
