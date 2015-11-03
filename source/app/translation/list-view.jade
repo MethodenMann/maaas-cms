@@ -8,20 +8,17 @@ h1 Translations
     button(ng-click='ctrl.loadNextModel()') Next
     br
     button(ng-repeat="locale in ctrl.locales" ng-click='ctrl.currentLanguage=locale') {{locale}}
-    //- br
     {{ctrl.values}}
-    //- br
-    //- {{ctrl.allModels}}
     .row
       .col-md-4
         form(name="form" role='form' novalidate)
           mas-form-group(ng-repeat="field in ctrl.fields" name='{{field.name}}' localization-prefix='{{field.prefix}}')
-            mas-dynamic-input-component(input-type="{{field.inputType}}" bind-to="ctrl.values[ctrl.mainLanguage][field.name]" name="{{field.name}}")
+            mas-dynamic-input-component(input-type="{{field.inputType}}" bind-to="ctrl.allModels[ctrl.currentModelIndex][field.name]" name="{{field.name}}")
 
       .col-md-4
         form(name="form" role='form' novalidate)
           mas-form-group(ng-repeat="field in ctrl.fields" name='{{field.name}}' localization-prefix='{{field.prefix}}')
-            mas-dynamic-input-component(input-type="{{field.inputType}}" bind-to="ctrl.values[ctrl.currentLanguage][field.name]" name="{{field.name}}")
+            mas-dynamic-input-component(input-type="{{field.inputType}}" bind-to="ctrl.allModels[ctrl.currentModelIndex].translations[ctrl.currentLanguage][field.name]" name="{{field.name}}")
       .col-md-4
 
 button(ng-click="ctrl.save()") Speich0rn
