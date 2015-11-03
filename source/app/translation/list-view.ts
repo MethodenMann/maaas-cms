@@ -44,7 +44,6 @@ export class ListView {
 
   save() {
     for (let locale of this.locales) {
-      var str = this.currentModelName;
       var payload = {locale: locale};
       payload[this.currentModelName] = this.values[locale];
       this.currentModelType.update(this.allModels[this.currentModelIndex].id, payload);
@@ -71,12 +70,16 @@ export class ListView {
     this.loadStuff();
   }
 
+  loadFromModelsIntoValues(locale:string, fieldName:string, model:any) {
+    this.values[locale][fieldName] = model[fieldName];
+  }
+
   loadStuff() {
     for (let i = 0; i < this.fields.length; i++) {
       var fieldName = this.fields[i].name;
-      this.values[this.mainLanguage][fieldName] = this.allModels[this.currentModelIndex][fieldName];
+      this.loadFromModelsIntoValues(this.mainLanguage, fieldName, this.allModels[this.currentModelIndex]);
       for(let locale of this.locales) {
-        this.values[locale][fieldName] = this.allModels[this.currentModelIndex].translations[locale][fieldName];
+        this.loadFromModelsIntoValues(locale, fieldName, this.allModels[this.currentModelIndex].translations[locale]);
       }
     }
   }

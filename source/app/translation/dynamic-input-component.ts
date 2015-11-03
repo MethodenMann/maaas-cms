@@ -6,8 +6,7 @@ export class DynamicInputComponent {
   private static options = {
     bindToController: {
       bindTo: '=',
-      inputType: '@',
-      original: '='
+      inputType: '@'
     },
     transclude: true
   };
@@ -18,34 +17,25 @@ export class DynamicInputComponent {
     'quiz-multiple-choice': 'app/translation/quiz-multiple-choice.html'
   }
 
-  private quizPreparators = {
-    'quiz-multiple-choice': function(data) {
-      var clone = jQuery.extend(true, {}, data);
-      for (let answer of clone.answers) {
-        answer.text = '';
-      }
-      return clone;
-    }
-  }
+  // private quizPreparators = {
+  //   'quiz-multiple-choice': function(data) {
+  //     var clone = jQuery.extend(true, {}, data);
+  //     for (let answer of clone.answers) {
+  //       answer.text = '';
+  //     }
+  //     return clone;
+  //   }
+  // }
 
   private templateName:string;
   private inputType:string;
   private tinymceConfig:any;
-  private original:any;
   private bindTo:any;
 
   constructor(
     @Inject('$scope') protected $scope
   ) {
     this.templateName = this.typeToTemplate[this.inputType];
-
-    if (this.original) {
-      if (this.inputType.indexOf('quiz-') === 0) {
-        // TODO this currently clears out existing values and is supposed
-        //      to actually merge existing values.
-        // this.bindTo = this.quizPreparators[this.inputType](this.original);
-      }
-    }
 
     this.tinymceConfig = {
       menu: {},
