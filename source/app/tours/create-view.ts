@@ -6,6 +6,8 @@ import {ITour} from './itour';
 import {IArea} from '../areas/iarea';
 
 export class CreateView extends AbstractDetailView {
+  private static selector = 'mas-tour-create-view';
+
   constructorHook() {
   }
 

@@ -6,7 +6,6 @@ import {IMedium} from '../media/imedium';
 import {FormView} from '../common/forms/form-view';
 
 export abstract class AbstractDetailView extends FormView {
-  private static selector = 'mas-tour-detail-view';
   private static templateUrl = 'app/tours/abstract-detail-view.html';
 
   private areas:Array<IArea> = [];

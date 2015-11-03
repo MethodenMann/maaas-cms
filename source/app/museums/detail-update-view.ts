@@ -14,6 +14,7 @@ export class DetailUpdateView extends DetailAbstract {
 
   loadData() {
     this.Museum.find(this.$stateParams.museumId).then((data) => {
+      console.log('FIND MUSEUM', data);
       this.museum = data;
     });
   }

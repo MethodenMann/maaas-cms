@@ -5,6 +5,7 @@ import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-
 import {ITour} from './itour';
 
 export class UpdateView extends AbstractDetailView {
+  private static selector = 'mas-tour-update-view';
   constructorHook() {
   }
 
