@@ -47,7 +47,15 @@
         "./app/common/image-management/image-upload.ts",
         "./app/common/image-management/imedium-upload-broadcast.ts",
         "./app/common/new-button.ts",
-     
+        "./app/contents/abstract-detail-view.ts",
+        "./app/contents/content.ts",
+        "./app/contents/create-view.ts",
+        "./app/contents/icontent.ts",
+        "./app/contents/list-view.ts",
+        "./app/contents/update-view.ts",
+        "./app/js-data-config.ts",
+        "./app/loadApp.ts",
+       
         "./typings/angular-ui-router/angular-ui-router.d.ts",
         "./typings/angularjs/angular-mocks.d.ts",
         "./typings/angularjs/angular-resource.d.ts",
