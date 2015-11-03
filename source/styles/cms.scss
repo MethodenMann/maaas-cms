@@ -1,6 +1,8 @@
 $main-color: #b2df8e;
 $dark: #5e5e5e;
+$light: #F5F5F5;
 $sec-color: #7c9c63;
+
 $gray-darker: lighten(#000, 13.5%);
 $gray-dark: lighten(#000, 20%);
 $gray: lighten(#000, 33.5%);
@@ -19,7 +21,6 @@ $brand-danger: #d9534f;
 
 // Global Styles
 body {
-  background-color: $main-color;
   font-family: 'SourceSansPro-Semibold';
 }
 a,
@@ -49,10 +50,12 @@ a:hover {
 // --Topbar
 .nav,
 .navbar {
-  background-color: $main-color;
+
 }
 .navbar-default {
   border: 0;
+
+  background-color: #fff;
 }
 .navbar-brand {
   padding: 5px;
@@ -70,6 +73,9 @@ a:hover {
     display: block;
     height: 42px;
   }
+}
+.navbar-static-top{
+  background-color: $main-color;
 }
 .navbar-top-links {
   margin-right: 0;
@@ -127,10 +133,14 @@ a:hover {
     padding: 15px;
   }
   ul li {
-    border-bottom: 1px solid $sec-color;
+    border-bottom: 1px solid $light;
     a.active {
-      background-color: white;
+      color: $dark;
+      //background-color: $main-color;
+
     }
+
+
   }
   .arrow {
     float: right;
