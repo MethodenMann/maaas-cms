@@ -6,11 +6,6 @@
         "experimentalDecorators": true,
         "outDir": "./../atom_out/js/"
     },
-    "filesGlob": [
-        "./app/**/*.ts",
-        "./tests/**/*.ts",
-        "./typings/**/*.ts"
-    ],
     "files": [
         "./app/app.ts",
         "./app/areas/area-button-component.ts",
