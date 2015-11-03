@@ -18,16 +18,6 @@ export class DynamicInputComponent {
     'quiz-true-false': 'app/translation/quiz-true-false.html'
   }
 
-  // private quizPreparators = {
-  //   'quiz-multiple-choice': function(data) {
-  //     var clone = jQuery.extend(true, {}, data);
-  //     for (let answer of clone.answers) {
-  //       answer.text = '';
-  //     }
-  //     return clone;
-  //   }
-  // }
-
   private templateName:string;
   private inputType:string;
   private tinymceConfig:any;
