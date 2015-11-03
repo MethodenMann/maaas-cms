@@ -5,13 +5,14 @@
     "node": ">0.11.9"
   },
   "scripts": {
-    "postinstall": "tsd install && bower install && gulp build",
+    "postinstall": "tsd install && bower install && gulp build --production",
     "start": "node app.js"
   },
   "dependencies": {
     "angular": "^1.4.6",
     "bower": "^1.5.2",
     "browser-sync": "^2.9.6",
+    "es6-module-loader": "^0.17.8",
     "express": "3.x",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
@@ -21,6 +22,7 @@
     "gulp-connect": "^2.2.0",
     "gulp-jade": "^1.1.0",
     "gulp-jadelint": "^0.1.0",
+    "gulp-ng-constant": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.0.4",
@@ -31,12 +33,11 @@
     "jade": "^1.11.0",
     "run-sequence": "^1.1.4",
     "systemjs": "^0.19.3",
+    "systemjs-builder": "^0.14.6",
     "traceur": "0.0.92",
     "tsd": "^0.6.4",
     "typescript": "^1.6.2",
-    "systemjs-builder": "^0.14.6",
-    "es6-module-loader": "^0.17.8"
-
+    "yargs": "^3.29.0"
   },
   "devDependencies": {
     "chai": "^3.3.0",
