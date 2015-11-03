@@ -27,7 +27,6 @@ export class ListView {
       {name: 'data', prefix: 'areas_details_gototext', inputType: 'richtext'}
     ]},
     'challenge': (currentModel:any) => {
-      console.log(currentModel.kind);
       return [
         {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
         {name: 'data', prefix: 'areas_details_gototext', inputType: `quiz-${currentModel.kind}`}
