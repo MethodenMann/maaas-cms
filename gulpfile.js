@@ -42,11 +42,8 @@ gulp.task('typescript', function() {
   var tsProject = ts.createProject(config.baseSrcPath + '/tsconfig.json');
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
-  console.log("typescript4");
+
   return tsResult.js
-    .pipe(function () {
-      console.log("typescript5");
-    })
     .pipe(rename(function (path) {
 
       path.dirname = path.dirname.replace('source/app', 'js');
