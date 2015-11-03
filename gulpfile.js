@@ -169,7 +169,8 @@ gulp.task('copyassets', function() {
 
   //Fonts
   gulp.src([config.bowerPath + '/bootstrap/fonts/**/*.*',
-      config.bowerPath + '/font-awesome/fonts/**/*.*'
+      config.bowerPath + '/font-awesome/fonts/**/*.*',
+      config.fontPath + "/**/*.*"
     ])
     .pipe(gulp.dest(config.baseDestPath + '/fonts'));
 });
