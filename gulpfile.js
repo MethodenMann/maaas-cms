@@ -51,7 +51,6 @@ gulp.task('typescript', function() {
     .pipe(size({title: 'JS Size:'}))
     .pipe(sourcemaps.write({sourceRoot: '/'}))
     .pipe(gulp.dest('out'));
-
 });
 
 gulp.task('sass', function() {

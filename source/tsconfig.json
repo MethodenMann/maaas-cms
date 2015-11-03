@@ -57,9 +57,21 @@
         "./app/loadApp.ts",
         "./app/login/Login.ts",
         "./app/login/LoginComponent.ts",
-        "./app/master/master-view.ts",
         "./app/master/master.ts",
+        "./app/master/master-view.ts",
         "./app/master/route-util.ts",
+        "./app/media/imedium.ts",
+        "./app/museums/detail-abstract.ts",
+        "./app/museums/detail-create-view.ts",
+        "./app/museums/detail-update-view.ts",
+        "./app/museums/imuseum.ts",
+        "./app/museums/museums.ts",
+        "./app/registration/Registration.ts",
+        "./app/registration/RegistrationComponent.ts",
+        "./app/utils/component.ts",
+        "./app/utils/di.ts",
+        "./tests/museums.test.ts",
+        "./tests/my.test.ts",
         "./typings/angular-ui-router/angular-ui-router.d.ts",
         "./typings/angularjs/angular-mocks.d.ts",
         "./typings/angularjs/angular-resource.d.ts",
@@ -71,6 +83,5 @@
         "./typings/mocha/mocha.d.ts",
         "./typings/sinon/sinon.d.ts",
         "./typings/tsd.d.ts"
-
     ]
 }
