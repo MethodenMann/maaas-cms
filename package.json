@@ -35,10 +35,7 @@
     "tsd": "^0.6.4",
     "typescript": "^1.6.2",
     "systemjs-builder": "^0.14.6",
-    "es6-module-loader": "^0.17.8"
-
-  },
-  "devDependencies": {
+    "es6-module-loader": "^0.17.8",
     "chai": "^3.3.0",
     "karma": "^0.13.10",
     "karma-chai": "^0.1.0",
