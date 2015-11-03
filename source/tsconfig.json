@@ -57,9 +57,6 @@
         "./app/loadApp.ts",
         "./app/login/Login.ts",
         "./app/login/LoginComponent.ts",
-        "./app/master/master-view.ts",
-        "./app/master/master.ts",
-        "./app/master/route-util.ts",
         "./typings/angular-ui-router/angular-ui-router.d.ts",
         "./typings/angularjs/angular-mocks.d.ts",
         "./typings/angularjs/angular-resource.d.ts",
@@ -71,5 +68,6 @@
         "./typings/mocha/mocha.d.ts",
         "./typings/sinon/sinon.d.ts",
         "./typings/tsd.d.ts"
+
     ]
 }
