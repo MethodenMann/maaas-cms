@@ -4,6 +4,8 @@ h1 Translations
   .panel-heading
     | {{ 'areas_details_title' | translate }}
   .panel-body
+    select(ng-model='ctrl.selectedModel' ng-change='ctrl.selectedModelChanged()'
+           ng-options='option.value for option in ctrl.modelConfigs track by option.value')
     {{ctrl.currentModelIndex}}
     button(ng-click='ctrl.loadPreviousModel()') Previous
     button(ng-click='ctrl.loadNextModel()') Next
