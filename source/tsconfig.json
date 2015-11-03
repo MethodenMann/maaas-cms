@@ -3,8 +3,14 @@
         "module": "amd",
         "target": "es5",
         "sourceMap": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "outDir": "./../atom_out/js/"
     },
+    "filesGlob": [
+        "./app/**/*.ts",
+        "./tests/**/*.ts",
+        "./typings/**/*.ts"
+    ],
     "files": [
         "./typings/angular-ui-router/angular-ui-router.d.ts",
         "./typings/angularjs/angular-mocks.d.ts",

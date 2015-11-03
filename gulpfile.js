@@ -43,7 +43,14 @@ gulp.task('typescript', function() {
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
 
-  return tsResult.js;
+  return tsResult.js
+    .pipe(rename(function (path) {
+      path.dirname = path.dirname.replace('source/app', 'js');
+      path.dirname = path.dirname.replace('source\\app', 'js'); //windows fix
+    }))
+    .pipe(size({title: 'JS Size:'}))
+    .pipe(sourcemaps.write({sourceRoot: '/'}))
+    .pipe(gulp.dest('out'));
 
 });
 
