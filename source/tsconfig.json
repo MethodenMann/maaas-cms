@@ -37,7 +37,17 @@
         "./app/challenges/kind-configs/true-false-question.ts",
         "./app/challenges/kind-configs/true-false.ts",
         "./app/challenges/list-view.ts",
-       
+        "./app/common/common.ts",
+        "./app/common/forms/form-group-component.ts",
+        "./app/common/forms/form-view.ts",
+        "./app/common/image-management/Imediumable-update-broadcast.ts",
+        "./app/common/image-management/cloudinary.d.ts",
+        "./app/common/image-management/image-load.ts",
+        "./app/common/image-management/image-management.ts",
+        "./app/common/image-management/image-upload.ts",
+        "./app/common/image-management/imedium-upload-broadcast.ts",
+        "./app/common/new-button.ts",
+     
         "./typings/angular-ui-router/angular-ui-router.d.ts",
         "./typings/angularjs/angular-mocks.d.ts",
         "./typings/angularjs/angular-resource.d.ts",
