@@ -39,15 +39,13 @@ gulp.task('systemjs-config', function () {
 });
 
 gulp.task('typescript', function() {
-  console.log("typescript1");
   var tsProject = ts.createProject(config.baseSrcPath + '/tsconfig.json');
-  console.log("typescript2");
   var tsResult = tsProject.src()
     .pipe(ts(tsProject));
-  console.log("typescript3");
+
   return tsResult.js
     .pipe(rename(function (path) {
-      console.log("typescript4");
+
       path.dirname = path.dirname.replace('source/app', 'js');
       path.dirname = path.dirname.replace('source\\app', 'js'); //windows fix
     }))
