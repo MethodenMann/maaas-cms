@@ -14,7 +14,8 @@ export class DynamicInputComponent {
   private typeToTemplate = {
     'input': 'app/translation/simple-input-field.html',
     'richtext': 'app/translation/tinymce-input-field.html',
-    'quiz-multiple-choice': 'app/translation/quiz-multiple-choice.html'
+    'quiz-multiple-choice': 'app/translation/quiz-multiple-choice.html',
+    'quiz-true-false': 'app/translation/quiz-true-false.html'
   }
 
   // private quizPreparators = {

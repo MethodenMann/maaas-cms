@@ -1,0 +1,4 @@
+| hier: {{ctrl.bindTo}}
+input.form-control(ng-repeat='question in ctrl.bindTo.questions' ng-model='question.text')
+input.form-control(ng-model='ctrl.bindTo.trueAnswerText')
+input.form-control(ng-model='ctrl.bindTo.falseAnswerText')

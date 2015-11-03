@@ -17,19 +17,22 @@ export class ListView {
   private currentModelIndex:number;
 
   private fieldConfigs = {
-    'area': [
+    'area': () => { return [
       {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
       {name: 'gotoText', prefix: 'areas_details_gototext', inputType: 'input'}
-    ],
-    'content': [
+    ]},
+    'content': () => { return [
       {name: 'title', prefix: 'areas_details_name', inputType: 'input'},
       {name: 'description', prefix: 'areas_details_name', inputType: 'input'},
       {name: 'data', prefix: 'areas_details_gototext', inputType: 'richtext'}
-    ],
-    'challenge': [
-      {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
-      {name: 'data', prefix: 'areas_details_gototext', inputType: 'quiz-multiple-choice'}
-    ]
+    ]},
+    'challenge': (currentModel:any) => {
+      console.log(currentModel.kind);
+      return [
+        {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
+        {name: 'data', prefix: 'areas_details_gototext', inputType: `quiz-${currentModel.kind}`}
+      ]
+    }
   }
 
   private modelConfigs:Array<{value:string, modelType:any}>;
@@ -60,28 +63,28 @@ export class ListView {
 
   loadModel() {
     this.currentModel = this.allModels[this.currentModelIndex];
+    this.prepareFieldsForCurrentModel();
   }
 
   save() {
     var payload = {};
     payload[this.currentModelName] = this.currentModel;
     this.currentModelType.update(this.currentModel.id, payload);
+  }
 
-    // for (let locale of this.locales) {
-    //   var payload = {locale: locale};
-    //   payload[this.currentModelName] = this.currentModel.translations[locale];
-    // }
+  prepareFieldsForCurrentModel() {
+    this.fields = this.fieldConfigs[this.selectedModel.value](this.currentModel);
   }
 
   selectedModelChanged() {
     this.currentModelType = this.selectedModel.modelType;
     this.currentModelName = this.selectedModel.value;
-    this.fields = this.fieldConfigs[this.selectedModel.value];
 
     this.currentModelType.findAll({locale: this.mainLanguage, translations: "yes"}).then((models) => {
       this.allModels = models;
       this.currentModelIndex = 0;
       this.currentModel = this.allModels[this.currentModelIndex];
+      this.prepareFieldsForCurrentModel();
     })
   }
 }
