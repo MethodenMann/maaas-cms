@@ -30,6 +30,7 @@ System.config({
     'angular-ui-tinymce': 'libs/tinymce.js',
     'angular-ui-sortable': 'libs/sortable.min.js',
     'angular-chart': 'libs/angular-chart.min.js',
-    'chart': 'libs/Chart.min.js'
+    'chart': 'libs/Chart.min.js',
+    'maaas-config': 'app/ngConstants.js'
   }
 });

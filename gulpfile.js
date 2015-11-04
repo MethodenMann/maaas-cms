@@ -15,9 +15,17 @@ var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var size = require('gulp-size');
 var jadelint = require('gulp-jadelint');
+var ngConstant = require('gulp-ng-constant');
 
+var argv = require('yargs').argv;
 
 var config = new Config();
+
+var isProduction = (argv.production === undefined) ? false : true;
+
+function getEnvString(){
+  return isProduction ? 'production' : 'development'
+}
 
 function swallowError(error) {
   console.log(error.toString());
@@ -164,9 +172,21 @@ gulp.task('copyassets', function() {
 
   //Fonts
   gulp.src([config.bowerPath + '/bootstrap/fonts/**/*.*',
-      config.bowerPath + '/font-awesome/fonts/**/*.*'
+      config.bowerPath + '/font-awesome/fonts/**/*.*',
+      config.fontPath + "/**/*.*"
     ])
     .pipe(gulp.dest(config.baseDestPath + '/fonts'));
+});
+
+gulp.task('constants', function () {
+  var myConfig = require('./' + config.applicationSrcPath + '/config-consts.json');
+  var consts = myConfig[getEnvString()];
+  return ngConstant({
+    name: 'maaas.config',
+    wrap: 'amd',
+    constants: consts,
+    stream: true
+  }).pipe(gulp.dest(config.applicationDestPath));
 });
 
 gulp.task('watch', function() {
@@ -194,7 +214,7 @@ gulp.task('connect', function() {
 });
 
 gulp.task('build', function(callback) {
-  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'systemjs-config'],  'template-cache', callback);
+  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'constants', 'systemjs-config'],  'template-cache', callback);
 });
 
 gulp.task('lint', ['typescript-lint', 'jade-lint']);
