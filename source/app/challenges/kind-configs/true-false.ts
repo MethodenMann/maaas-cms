@@ -1,6 +1,6 @@
 import {Inject} from '../../utils/di';
 
-interface iTrueFalseConfig{
+interface ITrueFalseConfig {
   questions: any;
   trueAnswerText: string;
   falseAnswerText: string;
@@ -12,7 +12,7 @@ export class TrueFalse {
   public static templateUrl = './app/challenges/kind-configs/true-false.html';
 
 
-  private data:iTrueFalseConfig;
+  private data:ITrueFalseConfig;
 
   private static options = {
     bindToController: {
@@ -32,26 +32,26 @@ export class TrueFalse {
   }
 
   initializeConfig()  {
-    if (this.data.questions === undefined){
-      this.data.questions = []
+    if (this.data.questions === undefined) {
+      this.data.questions = [];
       this.addQuestion();
     }
 
-    if (this.data.trueAnswerText === undefined){
+    if (this.data.trueAnswerText === undefined) {
       this.data.trueAnswerText = 'Ja';
     }
 
-    if (this.data.falseAnswerText === undefined){
+    if (this.data.falseAnswerText === undefined) {
       this.data.falseAnswerText = 'Nein';
     }
   }
 
 
-  removeQuestion(idx){
+  removeQuestion(idx) {
     this.data.questions.splice(idx, 1);
   }
 
-  addQuestion(){
-    this.data.questions.push({})
+  addQuestion() {
+    this.data.questions.push({});
   }
 }

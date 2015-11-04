@@ -11,6 +11,7 @@ var GulpConfig = (function() {
     this.testsSrcPath = this.baseSrcPath + '/tests';
     this.applicationDestPath = this.baseDestPath + '/app'
     this.bowerPath = './bower_components';
+    this.fontPath = this.baseSrcPath + '/fonts';
     this.nodeModulesPath = './node_modules';
     this.libsDestPath = this.baseDestPath + '/libs';
   }

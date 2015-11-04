@@ -22,11 +22,15 @@ export class UpdateView extends AbstractDetailView {
     });
 
     this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
-      var medium = data.medium;
-      medium.mediumableId = this.content.id;
-      medium.mediumableType = 'Content';
-      this.Medium.update(medium.id, {medium: medium});
-      this.addToImageList(medium);
+        var medium = {
+          mediumId: data.mediumId,
+          mediumableId: this.content.id,
+          mediumableType: 'Content'
+        };
+
+        this.Medium.update(data.mediumId, {medium: medium});
+        this.addToImageList(data.mediumId);
+
     });
   }
 

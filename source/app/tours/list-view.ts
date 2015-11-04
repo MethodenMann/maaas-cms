@@ -1,20 +1,18 @@
 import {Inject} from '../utils/di';
+import {ITour} from './itour';
 
 export class ListView {
   public static selector = 'mas-tour-list-view';
   public static templateUrl = './app/tours/list-view.html';
-  private area;
+
+  private tours: ITour[];
 
   constructor(
     @Inject('$stateParams') private $stateParams,
-    @Inject('Area') private Area,
-    @Inject('Content') private Content
-
+    @Inject('Tour') private Tour
     ) {
-    Content.findAll().then((data) => {
-      Area.find(this.$stateParams.areaId).then((data) => {
-        this.area = data;
-      });
+    Tour.findAll().then((data) => {
+      this.tours = data;
     });
   }
 }

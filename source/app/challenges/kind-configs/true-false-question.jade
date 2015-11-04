@@ -1,15 +1,15 @@
 div.well
-  a.btn.btn-warning.btn-circle.pull-right(ng-click="ctrl.removeQuestion()")
+  a.btn.btn-warning.btn-circle.pull-right(ng-click='ctrl.removeQuestion()')
     i.fa.fa-trash-o
 
   h5 Frage {{ ctrl.index + 1 }}
   mas-form-group(field-name='{{ "text"+ ctrl.index }}' localization-prefix='challenges_true-false_question_text')
     input.form-control(ng-model='ctrl.question.text' name='{{ "text"+ ctrl.index }}' required)
 
-  mas-form-group(field-name='text' localization-prefix='challenges_true-false_question_image' hide-error="true")
+  mas-form-group(field-name='text' localization-prefix='challenges_true-false_question_image' hide-error='true')
     div
-      image-upload(upload-id='{{ "question_"+ ctrl.index }}' )
-      image-load( upload-id='{{ "question_"+ ctrl.index }}' initial-media-id='{{ctrl.question.imageId}}' height='100')
+      image-upload(upload-id='{{ "question_" + ctrl.index }}' )
+      image-load( upload-id='{{ "question_" + ctrl.index }}' initial-media-id='{{ctrl.question.imageId}}' height='100')
       |  {{question.imageId}}
 
   mas-form-group(field-name='{{ "answer"+ ctrl.index }}' localization-prefix='challenges_true-false_question_answer')
@@ -18,7 +18,7 @@ div.well
         input(type='radio' ng-model='ctrl.question.correctAnswer' value='true' name='{{ "answer"+ ctrl.index }}' required)
         | {{ctrl.data.trueAnswerText}}
       div
-        input(style="margin-left:100 px" type='radio' ng-model='ctrl.question.correctAnswer' value='false' name='{{ "answer"+ ctrl.index }}' required)
+        input(style='margin-left:100 px' type='radio' ng-model='ctrl.question.correctAnswer' value='false' name='{{ "answer"+ ctrl.index }}' required)
         | {{ctrl.data.falseAnswerText}}
 
 

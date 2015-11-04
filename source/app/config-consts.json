@@ -1,0 +1,8 @@
+{
+  "development": {
+    "BACKEND_BASEURL": "http://localhost:3000"
+  },
+  "production": {
+    "BACKEND_BASEURL": "https://maaas-backend.herokuapp.com"
+  }
+}

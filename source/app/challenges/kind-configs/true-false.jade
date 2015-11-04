@@ -10,10 +10,10 @@ mas-form-group(field-name='falseanswer' localization-prefix='challenges_true-fal
 
 h4 {{ 'challenges_true-false_questions' | translate }}
 
-a.btn.btn-sm.btn-info(ng-click="ctrl.addQuestion()")
+a.btn.btn-sm.btn-info(ng-click='ctrl.addQuestion()')
   i.fa.fa-plus
   |  {{ 'challenges_true-false_question_add' | translate }}
 
 
-div(style="margin-top: 10px" ng-repeat="question in ctrl.data.questions track by $index")
-  mas-challenges-true-false-question(question="question" data="ctrl.data" index="$index")
+div(style='margin-top: 10px' ng-repeat='question in ctrl.data.questions track by $index')
+  mas-challenges-true-false-question(question='question' data='ctrl.data' index='$index')

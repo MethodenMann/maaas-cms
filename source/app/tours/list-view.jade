@@ -1,6 +1,6 @@
-div(ng-repeat="content in ctrl.area.contents")
-  | {{content.title}}
-  a(href ui-sref='cms.areas.detail.contents.update({contentId: content.id})')
+div(ng-repeat='tour in ctrl.tours')
+  | {{tour.name}}
+  a(href ui-sref='cms.tours.detail.update({tourId: tour.id})')
     | hingehen
 
-a(href ui-sref='cms.tours.create') neu machen yeah
+a(href ui-sref='cms.tours.create') Neuer Rundgang

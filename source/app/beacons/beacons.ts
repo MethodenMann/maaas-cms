@@ -21,7 +21,7 @@ export function loadBeacon(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.${componentName}`,
-        RouteUtil.getAbstractRoute(componentName, 'Beacons'))
+        RouteUtil.getAbstractRoute(`/${componentName}`, 'Beacons'))
       .state(`cms.${componentName}.list`,
         RouteUtil.getRoute(ListView, 'Beacons'));
   });

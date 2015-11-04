@@ -2,7 +2,7 @@ import {Inject} from '../utils/di';
 import {IChallenge} from './ichallenge';
 import {IArea} from '../areas/iarea';
 import {FormView} from '../common/forms/form-view';
-import {DetailAbstract} from "./detail-abstract";
+import {DetailAbstract} from './detail-abstract';
 
 export class UpdateView extends DetailAbstract {
   public static selector = 'mas-challenge-update-view';
@@ -11,7 +11,7 @@ export class UpdateView extends DetailAbstract {
   private disableKindSelect = true;
 
 
-  protected loadData(){
+  protected loadData() {
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
       this.setKind();
@@ -19,9 +19,9 @@ export class UpdateView extends DetailAbstract {
     });
   }
 
-  private setKind(){
+  private setKind() {
     this.kinds.forEach((kind) => {
-      if (kind.id == this.challenge.kind){
+      if (kind.id === this.challenge.kind) {
         this.selectedKind = kind;
       }
     });
@@ -29,7 +29,7 @@ export class UpdateView extends DetailAbstract {
 
   save() {
     if (this.isFormValid()) {
-      this.Challenge.update(this.challenge.id, { challenge: this.challenge }).then((challenge) =>{
+      this.Challenge.update(this.challenge.id, { challenge: this.challenge }).then((challenge) => {
         alert('Gespeichert'); //TODO: make sexy
         this.$scope.$broadcast('challenge.saved', challenge);
       });

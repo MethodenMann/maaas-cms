@@ -10,6 +10,7 @@ import {loadContent} from './contents/content';
 import {loadMuseum} from './museums/museums';
 import {loadTour} from './tours/tour';
 import {loadTranslations} from './translation/translations';
+import {loadStatistic} from './statistics/statistics';
 
 export function loadApp(app) {
   loadJsDataConfig(app);
@@ -24,4 +25,5 @@ export function loadApp(app) {
   loadMuseum(app);
   loadTour(app);
   loadTranslations(app);
+  loadStatistic(app);
 }

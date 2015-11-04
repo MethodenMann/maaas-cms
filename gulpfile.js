@@ -14,9 +14,18 @@ var Config = require('./gulpfile.config');
 var rename = require('gulp-rename');
 var replace = require('gulp-replace');
 var size = require('gulp-size');
-var browserSync = require('browser-sync').create();
+var jadelint = require('gulp-jadelint');
+var ngConstant = require('gulp-ng-constant');
+
+var argv = require('yargs').argv;
 
 var config = new Config();
+
+var isProduction = (argv.production === undefined) ? false : true;
+
+function getEnvString(){
+  return isProduction ? 'production' : 'development'
+}
 
 function swallowError(error) {
   console.log(error.toString());
@@ -74,6 +83,12 @@ gulp.task('views', function() {
     .pipe(gulp.dest(config.baseDestPath))
 });
 
+gulp.task('jade-lint', function () {
+  return gulp
+    .src(config.baseSrcPath + '/**/*.jade')
+    .pipe(jadelint({ 'UseConsistentQuotes': 'warning' }));
+});
+
 gulp.task('template-cache', function () {
   return gulp.src([
       config.baseDestPath + '/**/*.html',
@@ -127,7 +142,9 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/angular-ui-grid/ui-grid.min.js',
     config.bowerPath + '/angular-breadcrumb/release/angular-breadcrumb.min.js',
     config.bowerPath + '/angular-ui-tinymce/src/tinymce.js',
-    config.bowerPath + '/angular-ui-sortable/sortable.min.js'
+    config.bowerPath + '/angular-ui-sortable/sortable.min.js',
+    config.bowerPath + '/angular-chart.js/dist/angular-chart.min.js',
+    config.bowerPath + '/Chart.js/Chart.min.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   gulp.src([
@@ -148,21 +165,34 @@ gulp.task('copyassets', function() {
       config.bowerPath + '/angular-ui-grid/ui-grid.min.css',
       config.bowerPath + '/angular-ui-grid/**/*.{ttf,woff,svg}',
       config.bowerPath + '/tinymce/skins/lightgray/content.min.css',
-      config.bowerPath + '/tinymce/skins/lightgray/skin.min.css'
+      config.bowerPath + '/tinymce/skins/lightgray/skin.min.css',
+      config.bowerPath + '/angular-chart.js/dist/angular-chart.css'
     ])
     .pipe(gulp.dest(config.cssDestPath));
 
   //Fonts
   gulp.src([config.bowerPath + '/bootstrap/fonts/**/*.*',
-      config.bowerPath + '/font-awesome/fonts/**/*.*'
+      config.bowerPath + '/font-awesome/fonts/**/*.*',
+      config.fontPath + "/**/*.*"
     ])
     .pipe(gulp.dest(config.baseDestPath + '/fonts'));
+});
+
+gulp.task('constants', function () {
+  var myConfig = require('./' + config.applicationSrcPath + '/config-consts.json');
+  var consts = myConfig[getEnvString()];
+  return ngConstant({
+    name: 'maaas.config',
+    wrap: 'amd',
+    constants: consts,
+    stream: true
+  }).pipe(gulp.dest(config.applicationDestPath));
 });
 
 gulp.task('watch', function() {
   gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
   gulp.watch(config.testsSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
-  gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views']);
+  gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views', 'jade-lint']);
   gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass']);
   gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets']);
   gulp.watch(config.baseSrcPath + '/app/**/*.json', ['copyassets']);
@@ -184,8 +214,10 @@ gulp.task('connect', function() {
 });
 
 gulp.task('build', function(callback) {
-  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'systemjs-config'],  'template-cache', callback);
+  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'constants', 'systemjs-config'],  'template-cache', callback);
 });
+
+gulp.task('lint', ['typescript-lint', 'jade-lint']);
 
 gulp.task('default', function() {
   runSequence('build', 'connect', 'watch');

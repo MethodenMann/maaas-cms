@@ -25,11 +25,13 @@ export abstract class DetailAbstract extends FormView {
   }
 
   protected constructorHook() {}
+  protected loadData(): void {}
+  abstract save(): void;
 
   protected persistImageId(uploadId:string, mediumId) {
-    if (uploadId == 'backgroundImage') {
+    if (uploadId === 'backgroundImage') {
       this.area.backgroundImageId = mediumId;
-    } else if (uploadId == 'stickerImage') {
+    } else if (uploadId === 'stickerImage') {
       this.area.stickerImageId = mediumId;
     }
   }
@@ -40,11 +42,6 @@ export abstract class DetailAbstract extends FormView {
       mediumableId: id || this.area.id,
       mediumableType: 'Area'
     };
-    this.$scope.$broadcast("image-management.mediumableUpdate", mediumableUpdateData)
+    this.$scope.$broadcast('image-management.mediumableUpdate', mediumableUpdateData);
   }
-
-
-  abstract save(): void;
-
-  protected loadData(): void { }
 }

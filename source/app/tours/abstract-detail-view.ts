@@ -3,14 +3,15 @@ import {ITour} from './itour';
 import {IArea} from '../areas/iarea';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 import {IMedium} from '../media/imedium';
-import {FormView} from "../common/forms/form-view";
+import {FormView} from '../common/forms/form-view';
 
-export abstract class AbstractDetailView extends FormView{
+export abstract class AbstractDetailView extends FormView {
   private static selector = 'mas-tour-detail-view';
   private static templateUrl = 'app/tours/abstract-detail-view.html';
 
   private areas:Array<IArea> = [];
   private selectedArea:IArea;
+
 
   private configuredAreas: IArea[] = [];
   private unconfiguredAreas: IArea[] = [];
@@ -37,7 +38,7 @@ export abstract class AbstractDetailView extends FormView{
       this.initDictionaries(values[0], values[1]);
       this.Area.findAll().then((areas) => {
         this.areas = areas;
-        this.syncConfiguredAreas();
+        this.loadConfiguredAreas();
       });
 
       this.constructorHook();
@@ -47,11 +48,11 @@ export abstract class AbstractDetailView extends FormView{
   protected loadData() {}
   abstract save(): void;
 
-  private initDictionaries(contents, challanges){
-    contents.forEach((content) =>{
+  private initDictionaries(contents, challanges) {
+    contents.forEach((content) => {
       this.contentAreaDict[content.id] = content.areaId;
     });
-    challanges.forEach((challange) =>{
+    challanges.forEach((challange) => {
       this.challangeAreaDict[challange.id] = challange.areaId;
     });
 
@@ -61,53 +62,86 @@ export abstract class AbstractDetailView extends FormView{
   protected constructorHook() {}
 
 
-  syncConfiguredAreas(){
+  private loadConfiguredAreas() {
     var configuredAreaIds: number[] = [];
-    this.tour.selectedContents.forEach((contentId) =>{
-      configuredAreaIds.push(this.contentAreaDict[contentId])
-    });
-    this.tour.selectedChallenges.forEach((challengeId) =>{
-      configuredAreaIds.push(this.challangeAreaDict[challengeId])
+
+    this.tour.selectedContents.forEach((contentId) => {
+      var areaId = this.contentAreaDict[contentId];
+      if (configuredAreaIds.indexOf(areaId) === -1) {
+        configuredAreaIds.push(this.contentAreaDict[contentId]);
+      }
     });
 
-
-    configuredAreaIds = this.removeDuplicates(configuredAreaIds);
+    this.tour.selectedChallenges.forEach((challengeId) => {
+      var areaId = this.challangeAreaDict[challengeId];
+      if (configuredAreaIds.indexOf(areaId) === -1) {
+        configuredAreaIds.push(areaId);
+      }
+    });
 
     this.Area.findAll().then((areas) => {
-      areas.forEach((area) =>{
-        if (configuredAreaIds.indexOf(area.id) > -1){
+      areas.forEach((area) => {
+        if (configuredAreaIds.indexOf(area.id) > -1) {
           this.configuredAreas.push(area);
-        }else{
+        } else {
           this.unconfiguredAreas.push(area);
         }
       });
+      this.selectFirstArea();
     });
   }
 
-  private removeDuplicates(arr) {
-    var obj = {};
-    for (var i = 0; i < arr.length; i++) {
-      obj[arr[i]] = true;
-    }
-    arr = [];
-    for (var key in obj) {
-      arr.push(+key);
-    }
-    return arr;
-  }
-
-
-  addArea(idx){
+  addArea(idx) {
     var area = this.unconfiguredAreas[idx];
     this.unconfiguredAreas.splice(idx, 1);
     this.configuredAreas.push(area);
+    this.selectArea(area);
+  }
+
+  countSelectedContents(area:IArea) {
+    var count = 0;
+    area.contents.forEach((content) => {
+      if (this.tour.selectedContents.indexOf(content.id) > -1) {
+        count++;
+      }
+    });
+    return count;
   }
 
 
+  removeArea(area: IArea) {
+    var confirmed = confirm('Sicher?'); //TODO: Make sexy
+    if (confirmed) {
+      area.contents.forEach((content) => {
+        var pos = this.tour.selectedContents.indexOf(content.id);
+        if (pos > -1) {
+          this.tour.selectedContents.splice(pos, 1);
+        }
+      });
+
+      area.challenges.forEach((challange) => {
+        var pos = this.tour.selectedChallenges.indexOf(challange.id);
+        if (pos > -1) {
+          this.tour.selectedChallenges.splice(pos, 1);
+        }
+      });
 
 
-  selectArea(index:number) {
-    this.selectedArea = this.areas[index];
+      var idx = this.configuredAreas.indexOf(area);
+      this.configuredAreas.splice(idx, 1);
+      this.unconfiguredAreas.push(area);
+
+      this.selectFirstArea();
+    }
+
+  }
+
+  selectArea(area: IArea) {
+    this.selectedArea = area;
+  }
+
+  selectFirstArea() {
+      this.selectedArea = this.configuredAreas[0];
   }
 
   handleCheckboxChecked(id:number, list:Array<number>, event) {
@@ -134,7 +168,7 @@ export abstract class AbstractDetailView extends FormView{
   }
 
   isSelected(id:number, list:Array<number>) {
-    var idx = list.indexOf(id)
+    var idx = list.indexOf(id);
     return idx < 0 ? false : true;
   }
 

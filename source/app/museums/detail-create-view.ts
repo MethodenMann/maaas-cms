@@ -1,7 +1,7 @@
 import {Inject} from '../utils/di';
 import {DetailAbstract} from './detail-abstract';
 import {IMedium} from '../media/imedium';
-import {IMuseum} from "./imuseum";
+import {IMuseum} from './imuseum';
 
 export class DetailCreateView extends DetailAbstract {
   public static selector = 'mas-museums-detail-create-view';
@@ -13,7 +13,7 @@ export class DetailCreateView extends DetailAbstract {
         //this.saveImageRelation(museum.imageId, museum.id);
 
         alert('Gespeichert'); //TODO: make sexy
-        this.$state.go("cms.museums.detail.update", {museumId: museum.id});
+        this.$state.go('cms.museums.detail.update', {museumId: museum.id});
       });
     } else {
       this.focusFirstInputWithError();

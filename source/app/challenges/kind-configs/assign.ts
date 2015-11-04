@@ -25,7 +25,7 @@ export class Assign {
 
   constructor(@Inject('$scope') protected $scope,
               @Inject('Medium') protected Medium) {
-    if(!this.data.listA) {
+    if (!this.data.listA) {
       this.data.listA = {kind: 'text', values: []};
       this.data.listB = {kind: 'image', values: []};
     }
@@ -33,7 +33,7 @@ export class Assign {
 
   addPair() {
     var idx = this.data.listA.values.length;
-    this.data.listA.values.push({idx: idx, value: ''})
+    this.data.listA.values.push({idx: idx, value: ''});
     this.data.listB.values.push({idx: idx, mediumId: undefined, label: ''});
   }
 
