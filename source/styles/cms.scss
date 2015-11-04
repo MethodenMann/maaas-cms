@@ -21,7 +21,7 @@ $brand-danger: #d9534f;
 
 // Global Styles
 body {
-  font-family: 'SourceSansPro-Semibold';
+
 }
 a,
 a:hover {
@@ -54,10 +54,11 @@ a:hover {
 }
 .navbar-default {
   border: 0;
-
+  font-size: 12px;
   background-color: #fff;
 }
 .navbar-brand {
+  font-family: 'SourceSansPro-Semibold';
   padding: 5px;
   div {
     div {

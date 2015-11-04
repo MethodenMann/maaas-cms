@@ -14,43 +14,7 @@
         
     // /.navbar-header
     ul.nav.navbar-top-links.navbar-right
-      li.dropdown
-        a.dropdown-toggle(data-toggle='dropdown', href='#')
-          i.fa.fa-envelope.fa-fw
-          i.fa.fa-caret-down
-        ul.dropdown-menu.dropdown-messages
-          li
-            a(href='#')
-              div
-                strong John Smith
-                span.pull-right.text-muted
-                  em Yesterday
-              div
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...
-          li.divider
-          li
-            a(href='#')
-              div
-                strong John Smith
-                span.pull-right.text-muted
-                  em Yesterday
-              div
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...
-          li.divider
-          li
-            a(href='#')
-              div
-                strong John Smith
-                span.pull-right.text-muted
-                  em Yesterday
-              div
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...
-          li.divider
-          li
-            a.text-center(href='#')
-              strong Read All Messages
-              i.fa.fa-angle-right
-      // /.dropdown
+      
       li.dropdown
         a.dropdown-toggle(data-toggle='dropdown', href='#')
           i.fa.fa-user.fa-fw
@@ -84,31 +48,20 @@
             // /input-group
           li
              a(ng-click='ctrl.goToMuseum()'  ui-sref-active-if='cms.museums')
-               i.fa.fa-bookmark-o
+               i.fa.fa-building
                |  Museum
           li
             a(ui-sref='cms.areas.list'  ui-sref-active-if='cms.areas')
-              i.fa.fa-location-arrow
+              i.fa.fa-cubes
               |  Bereiche
           li
             a(ui-sref='cms.tours.list'  ui-sref-active-if='cms.tours')
-              i.fa.fa-location-arrow
+              i.fa.fa-stumbleupon
               |  Rundgänge
           li
             a(ui-sref='cms.beacons.list'  ui-sref-active-if='cms.beacons')
               i.fa.fa-bullseye
               |  Beacons
-          li
-            a(ui-sref='cms.test')
-              i.fa.fa-bar-chart-o.fa-fw
-              | Test
-              span.fa.arrow
-            ul.nav.nav-second-level
-              li
-                a(ui-sref='cms.test') Test
-              li
-                a(ui-sref='cms.test') Test
-            // /.nav-second-level
   // Page Content
   #page-wrapper
     .container-fluid
