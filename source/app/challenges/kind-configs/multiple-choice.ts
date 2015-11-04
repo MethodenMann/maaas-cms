@@ -17,7 +17,7 @@ export class Multiplechoice {
 
   constructor(@Inject('$scope') protected $scope,
               @Inject('Medium') protected Medium) {
-    if (this.data.answers === undefined){
+    if (this.data.answers === undefined) {
       this.data.answers = [];
     }
   }
@@ -39,7 +39,7 @@ export class Multiplechoice {
 
   removeAnswer(index) {
     if (this.data.correctAnswer) {
-      if (this.data.answers[index].idx == this.data.correctAnswer) {
+      if (this.data.answers[index].idx === this.data.correctAnswer) {
         this.data.correctAnswer = undefined;
       }
     }

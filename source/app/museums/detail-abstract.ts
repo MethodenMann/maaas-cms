@@ -1,8 +1,8 @@
 import {Inject} from '../utils/di';
 import {FormView} from '../common/forms/form-view';
-import {IMuseum} from "./imuseum";
-import {IMediumUploadBroadcast} from "../common/image-management/imedium-upload-broadcast";
-import {IMedium} from "../media/imedium";
+import {IMuseum} from './imuseum';
+import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
+import {IMedium} from '../media/imedium';
 
 export abstract class DetailAbstract extends FormView {
   protected museum: IMuseum;
@@ -36,7 +36,7 @@ export abstract class DetailAbstract extends FormView {
       mediumableId: id || this.museum.id,
       mediumableType: 'Museum'
     };
-    this.$scope.$broadcast("image-management.mediumableUpdate", mediumableUpdateData)
+    this.$scope.$broadcast('image-management.mediumableUpdate', mediumableUpdateData);
   }
 
 

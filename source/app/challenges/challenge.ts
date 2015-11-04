@@ -10,7 +10,7 @@ import {CreateView} from './detail-create-view';
 import {UpdateView} from './detail-update-view';
 import {ChallengeButtonComponent} from './challenge-button-component';
 import {TrueFalseQuestion} from './kind-configs/true-false-question';
-import {ImageRegion} from "./kind-configs/image-region";
+import {ImageRegion} from './kind-configs/image-region';
 
 export function loadChallenge(app) {
   var componentName = 'challenges';

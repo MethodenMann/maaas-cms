@@ -14,7 +14,7 @@ export class FormGroupComponent {
       hideHelp: '@',
       hideError: '@'
     }
-  }
+  };
 
   private form: any;
   private fieldName: string;

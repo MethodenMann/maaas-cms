@@ -1,7 +1,7 @@
 import {Inject} from '../../utils/di';
 import {IMediumUploadBroadcast} from '../../common/image-management/imedium-upload-broadcast';
 import {IMedium} from '../../media/imedium';
-import {IMediumableUpdateBroadcast} from "../../common/image-management/Imediumable-update-broadcast";
+import {IMediumableUpdateBroadcast} from '../../common/image-management/Imediumable-update-broadcast';
 
 
 export class ImageRegion {
@@ -30,15 +30,14 @@ export class ImageRegion {
 
   }
 
-
-  saveImageRelation(challengeId, imageId){
-    if (imageId){
+  saveImageRelation(challengeId, imageId) {
+    if (imageId) {
       var relationData: IMediumableUpdateBroadcast = {
         id: imageId,
         mediumableId: challengeId,
         mediumableType: 'challenge'
       };
-      this.$scope.$broadcast("image-management.mediumableUpdate", relationData)
+      this.$scope.$broadcast('image-management.mediumableUpdate', relationData);
     }
   }
 

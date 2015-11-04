@@ -17,6 +17,8 @@ import 'angular-ui-tinymce';
 import 'angular-ui-sortable';
 
 
+import 'angular-chart';
+
 import 'js-data';
 import 'js-data-http';
 import 'js-data-angular';
@@ -24,25 +26,29 @@ import 'js-data-angular';
 import 'devise';
 import 'angularjs-color-picker';
 import 'angular-ui-grid';
+
+import 'maaas-config';
 import {makeDirective, makeSelector} from './utils/component';
+
 
 
 import {loadApp} from './loadApp';
 
-var leApp = angular.module('maaas', [
+var leApp = angular.module('maaas', [ 'maaas.config',
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
   'Devise', 'color.picker', 'ui.grid', 'ui.grid.selection', 'ui.grid.edit',
-  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable'
+  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable', 'chart.js'
 ]);
 
-leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider) {
+leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_BASEURL) {
+
   angular.extend(DSHttpAdapterProvider.defaults, {
-    basePath: 'https://maaas-backend.herokuapp.com'
+    basePath: BACKEND_BASEURL
   });
 
-  AuthProvider.loginPath('http://localhost:3000/users/sign_in.json');
-  AuthProvider.logoutPath('http://localhost:3000/users/sign_out.json');
-  AuthProvider.registerPath('http://localhost:3000/users.json');
+  AuthProvider.loginPath(`${BACKEND_BASEURL}/users/sign_in.json`);
+  AuthProvider.logoutPath(`${BACKEND_BASEURL}/users/sign_out.json`);
+  AuthProvider.registerPath(`${BACKEND_BASEURL}/users.json`);
 });
 
 leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
@@ -66,7 +72,7 @@ leApp.config(function($breadcrumbProvider) {
 leApp.config(['$httpProvider', function($httpProvider) {
     $httpProvider.defaults.withCredentials = true;
   }
-])
+]);
 
 leApp.run(function ($rootScope, Auth, $state) {
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {

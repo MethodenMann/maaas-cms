@@ -1,7 +1,7 @@
 export function loadJsDataConfig(app) {
-  app.config(function (DSProvider, DSHttpAdapterProvider) {
+  app.config(function (DSProvider, DSHttpAdapterProvider, BACKEND_BASEURL) {
     angular.extend(DSHttpAdapterProvider.defaults, {
-      basePath: 'http://localhost:3000'
+      basePath: BACKEND_BASEURL
     });
   });
 

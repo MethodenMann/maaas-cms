@@ -9,10 +9,10 @@ export function loadCommon(app) {
   app
   .directive(
     makeSelector(NewButton),
-    makeDirective(NewButton))
+    makeDirective(NewButton));
 
     app
     .directive(
       makeSelector(FormGroupComponent),
-      makeDirective(FormGroupComponent))
+      makeDirective(FormGroupComponent));
 }

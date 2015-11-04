@@ -23,8 +23,8 @@ export class CreateView extends AbstractDetailView {
         promises.push(this.Medium.update(medium.id, {medium: medium}));
       }
       this.$q.all(promises).then(() => {
-        this.$state.go("cms.areas.detail.contents.update", {contentId: content.id});
-      })
-    })
+        this.$state.go('cms.areas.detail.contents.update', {contentId: content.id});
+      });
+    });
   }
 }

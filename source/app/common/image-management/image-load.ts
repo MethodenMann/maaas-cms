@@ -34,30 +34,30 @@ export class ImageLoadDirective {
   private setup() {
     // TODO refactor if else logic into separate components?
     if (this.initialMediaId) {
-      this.loadMedium(this.initialMediaId)
+      this.loadMedium(this.initialMediaId);
     }
     if (this.uploadId) {
       this.$scope
       .$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
-        if (data.uploadId == this.uploadId) {
-          this.loadMedium(data.mediumId)
+        if (data.uploadId === this.uploadId) {
+          this.loadMedium(data.mediumId);
         }
       });
     } else if (this.publicId) {
-      this.loadImage({publicId: this.publicId})
+      this.loadImage({publicId: this.publicId});
     } else {
       // lol wtf?
     }
   }
 
-  private loadMedium(mediaId){
+  private loadMedium(mediaId) {
     this.Medium.find(mediaId).then((medium) => {
       this.loadImage(medium);
     });
   }
 
   private loadImage(medium: IMedium) {
-    this.thumbnailTag.html('')
+    this.thumbnailTag.html('');
     this.thumbnailTag.append($.cloudinary.image(medium.publicId, {
       format: 'jpg', width: this.width, height: this.height,
       crop: 'thumb'

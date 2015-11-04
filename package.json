@@ -5,13 +5,14 @@
     "node": ">0.11.9"
   },
   "scripts": {
-    "postinstall": "tsd install && bower install && gulp build",
+    "postinstall": "tsd install && bower install && gulp build --production",
     "start": "node app.js"
   },
   "dependencies": {
     "angular": "^1.4.6",
     "bower": "^1.5.2",
     "browser-sync": "^2.9.6",
+    "es6-module-loader": "^0.17.8",
     "express": "3.x",
     "gulp": "^3.9.0",
     "gulp-angular-templatecache": "^1.8.0",
@@ -20,35 +21,40 @@
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^2.2.0",
     "gulp-jade": "^1.1.0",
+    "gulp-jadelint": "^0.1.0",
+    "gulp-ng-constant": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.0.4",
     "gulp-size": "^2.0.0",
     "gulp-sourcemaps": "^1.5.2",
-    "gulp-tslint": "^3.2.0",
+    "gulp-tslint": "^3.4.0",
     "gulp-typescript": "^2.9.0",
     "jade": "^1.11.0",
     "run-sequence": "^1.1.4",
     "systemjs": "^0.19.3",
+    "systemjs-builder": "^0.14.6",
+    "traceur": "0.0.92",
     "tsd": "^0.6.4",
-    "typescript": "^1.6.2"
+    "typescript": "^1.6.2",
+    "yargs": "^3.29.0"
   },
   "devDependencies": {
     "chai": "^3.3.0",
-    "es6-module-loader": "^0.17.8",
     "karma": "^0.13.10",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.2.0",
     "karma-coverage": "^0.5.2",
     "karma-mocha": "^0.2.0",
     "karma-mocha-reporter": "^1.1.1",
+    "karma-phantomjs-launcher": "^0.2.1",
     "karma-sinon": "^1.0.4",
     "karma-systemjs": "^0.7.2",
     "mocha": "^2.3.3",
+    "phantomjs": "^1.9.18",
+    "phantomjs-polyfill": "0.0.1",
     "selenium-standalone": "^4.7.0",
     "sinon": "^1.17.1",
-    "sinon-chai": "^2.8.0",
-    "systemjs-builder": "^0.14.6",
-    "traceur": "0.0.91"
+    "sinon-chai": "^2.8.0"
   }
 }

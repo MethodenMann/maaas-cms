@@ -1,7 +1,7 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {DetailCreateView} from "./detail-create-view";
-import {DetailUpdateView} from "./detail-update-view";
+import {DetailCreateView} from './detail-create-view';
+import {DetailUpdateView} from './detail-update-view';
 
 
 export function loadMuseum(app) {

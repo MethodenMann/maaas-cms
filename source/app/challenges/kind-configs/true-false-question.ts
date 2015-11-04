@@ -32,24 +32,24 @@ export class TrueFalseQuestion {
     });
   }
 
-  saveImageRelation(challengeId){
-    if (this.question.imageId){
+  saveImageRelation(challengeId) {
+    if (this.question.imageId) {
       var relationData: IMediumableUpdateBroadcast = {
         id: this.question.imageId,
         mediumableId: challengeId,
         mediumableType: 'challenge'
       };
-      this.$scope.$broadcast("image-management.mediumableUpdate", relationData)
+      this.$scope.$broadcast('image-management.mediumableUpdate', relationData);
     }
   }
 
   handleImageDisplay(uploadId:string, mediumId) {
-    if ((uploadId.indexOf('_') > -1) && (uploadId.split('_')[1] == this.index)) {
+    if ((uploadId.indexOf('_') > -1) && (uploadId.split('_')[1] === this.index.toString())) {
       this.question.imageId = mediumId;
     }
   }
 
-  removeQuestion(){
+  removeQuestion() {
     this.$scope.$emit('true-false.removeQuestion', this.index);
   }
 
