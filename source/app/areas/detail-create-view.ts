@@ -7,6 +7,8 @@ export class DetailCreateView extends DetailAbstract {
   public static selector = 'mas-area-detail-create-view';
   public static templateUrl = './app/areas/detail-view.html';
 
+  private createMode = true;
+
   save() {
     if (this.isFormValid()) {
       this.Area.create({ area: this.area }).then((area:IArea) => {

@@ -28,8 +28,16 @@
           image-load(upload-id='stickerImage' ng-if='ctrl.area.stickerImageId' initial-media-id='{{ctrl.area.stickerImageId}}' height='100')
           input(type='hidden' name='stickerImageId' ng-model='ctrl.area.stickerImageId' required)
 
-      button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
-      a.btn.btn-info(ui-sref='cms.areas.detail.challenges.list') Quiz Erfassen
-      a.btn.btn-info(ui-sref='cms.areas.detail.contents.list') Inhalt Erfassen
+      button.btn.btn-success(type='submit' ng-click='ctrl.save()')
+        i.fa.fa-save
+        |  Speichern
+
+      div.top10(ng-hide='ctrl.createMode')
+        button.btn.btn-default(ui-sref='cms.areas.detail.challenges.list')
+          i.fa.fa-plus
+          |  Quiz Erfassen
+        button.btn.btn-default(ui-sref='cms.areas.detail.contents.list')
+          i.fa.fa-plus
+          |  Inhalt Erfassen
 
 script(src='/libs/tinycolor.js') //TODO: In SystemJS einbinden
