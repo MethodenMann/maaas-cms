@@ -5,7 +5,7 @@ export class ListView {
   private static templateUrl = './app/statistics/list-view.html';
 
 
-  dlabels = ["Fertig gelöst", "Unfertig"];
+  dlabels = ['Fertig gelöst', 'Unfertig'];
   ddata = [420, 280];
 
   blabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
@@ -19,7 +19,7 @@ export class ListView {
   //http://jtblin.github.io/angular-chart.js/
 
 
-  slabels =["Wolf", "Bär", "Frosch", "Frisch", "Bock", "Dino", "Ameise"];
+  slabels = ['Wolf', 'Bär', 'Frosch', 'Frisch', 'Bock', 'Dino', 'Ameise'];
 
   sdata = [
   [65, 59, 90, 81, 56, 55, 40],
