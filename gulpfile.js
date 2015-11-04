@@ -142,7 +142,9 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/angular-ui-grid/ui-grid.min.js',
     config.bowerPath + '/angular-breadcrumb/release/angular-breadcrumb.min.js',
     config.bowerPath + '/angular-ui-tinymce/src/tinymce.js',
-    config.bowerPath + '/angular-ui-sortable/sortable.min.js'
+    config.bowerPath + '/angular-ui-sortable/sortable.min.js',
+    config.bowerPath + '/angular-chart.js/dist/angular-chart.min.js',
+    config.bowerPath + '/Chart.js/Chart.min.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   gulp.src([
@@ -163,7 +165,8 @@ gulp.task('copyassets', function() {
       config.bowerPath + '/angular-ui-grid/ui-grid.min.css',
       config.bowerPath + '/angular-ui-grid/**/*.{ttf,woff,svg}',
       config.bowerPath + '/tinymce/skins/lightgray/content.min.css',
-      config.bowerPath + '/tinymce/skins/lightgray/skin.min.css'
+      config.bowerPath + '/tinymce/skins/lightgray/skin.min.css',
+      config.bowerPath + '/angular-chart.js/dist/angular-chart.css'
     ])
     .pipe(gulp.dest(config.cssDestPath));
 

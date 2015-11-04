@@ -9,6 +9,7 @@ import {loadRegistration} from './registration/Registration';
 import {loadContent} from './contents/content';
 import {loadMuseum} from './museums/museums';
 import {loadTour} from './tours/tour';
+import {loadStatistic} from './statistics/statistics';
 
 export function loadApp(app) {
   loadJsDataConfig(app);
@@ -22,4 +23,5 @@ export function loadApp(app) {
   loadChallenge(app);
   loadMuseum(app);
   loadTour(app);
+  loadStatistic(app);
 }

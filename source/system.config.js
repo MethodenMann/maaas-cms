@@ -29,6 +29,8 @@ System.config({
     'angular-breadcrumb': 'libs/angular-breadcrumb.min.js',
     'angular-ui-tinymce': 'libs/tinymce.js',
     'angular-ui-sortable': 'libs/sortable.min.js',
+    'angular-chart': 'libs/angular-chart.min.js',
+    'chart': 'libs/Chart.min.js',
     'maaas-config': 'app/ngConstants.js'
   }
 });

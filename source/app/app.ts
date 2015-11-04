@@ -17,6 +17,8 @@ import 'angular-ui-tinymce';
 import 'angular-ui-sortable';
 
 
+import 'angular-chart';
+
 import 'js-data';
 import 'js-data-http';
 import 'js-data-angular';
@@ -35,7 +37,7 @@ import {loadApp} from './loadApp';
 var leApp = angular.module('maaas', [ 'maaas.config',
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
   'Devise', 'color.picker', 'ui.grid', 'ui.grid.selection', 'ui.grid.edit',
-  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable'
+  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable', 'chart.js'
 ]);
 
 leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_BASEURL) {
