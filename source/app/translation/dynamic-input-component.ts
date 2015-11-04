@@ -16,7 +16,7 @@ export class DynamicInputComponent {
     'richtext': 'app/translation/tinymce-input-field.html',
     'quiz-multiple-choice': 'app/translation/quiz-multiple-choice.html',
     'quiz-true-false': 'app/translation/quiz-true-false.html'
-  }
+  };
 
   private templateName:string;
   private inputType:string;
@@ -33,6 +33,6 @@ export class DynamicInputComponent {
       toolbar: 'undo redo | bold italic | link image',
       image_dimensions: false,
       height: 400
-    }
+    };
   }
 }

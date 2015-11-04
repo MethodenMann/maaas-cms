@@ -3,7 +3,6 @@ import {DynamicInputComponent} from './dynamic-input-component';
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
 
-
 export function loadTranslations(app) {
   var componentName = 'translations';
 

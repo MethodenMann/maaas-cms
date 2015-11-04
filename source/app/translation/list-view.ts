@@ -10,29 +10,33 @@ export class ListView {
   private locales = ['en', 'it', 'fr'];
 
   private currentModel:any;
-  private allModels:Array<any>
+  private allModels:Array<any>;
 
   private currentModelType:any;
   private currentModelName:string;
   private currentModelIndex:number;
 
   private fieldConfigs = {
-    'area': () => { return [
-      {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
-      {name: 'gotoText', prefix: 'areas_details_gototext', inputType: 'input'}
-    ]},
-    'content': () => { return [
-      {name: 'title', prefix: 'areas_details_name', inputType: 'input'},
-      {name: 'description', prefix: 'areas_details_name', inputType: 'input'},
-      {name: 'data', prefix: 'areas_details_gototext', inputType: 'richtext'}
-    ]},
+    'area': () => {
+      return [
+        {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
+        {name: 'gotoText', prefix: 'areas_details_gototext', inputType: 'input'}
+      ];
+    },
+    'content': () => {
+      return [
+        {name: 'title', prefix: 'areas_details_name', inputType: 'input'},
+        {name: 'description', prefix: 'areas_details_name', inputType: 'input'},
+        {name: 'data', prefix: 'areas_details_gototext', inputType: 'richtext'}
+      ];
+    },
     'challenge': (currentModel:any) => {
       return [
         {name: 'name', prefix: 'challenges_details_name', inputType: 'input'},
         {name: 'data', prefix: 'areas_details_gototext', inputType: `quiz-${currentModel.kind}`}
-      ]
+      ];
     }
-  }
+  };
 
   private quizPreparators = {
     'multiple-choice': (data) => {
@@ -50,7 +54,7 @@ export class ListView {
       }
       return clone;
     }
-  }
+  };
 
   private modelPreparators = {
     'area': () => {}, 'content': () => {},
@@ -62,7 +66,7 @@ export class ListView {
         }
       }
     }
-  }
+  };
 
   private modelConfigs:Array<{value:string, modelType:any}>;
   private selectedModel:{value:string, modelType:any};
@@ -115,10 +119,10 @@ export class ListView {
     this.currentModelType = this.selectedModel.modelType;
     this.currentModelName = this.selectedModel.value;
 
-    this.currentModelType.findAll({locale: this.mainLanguage, translations: "yes"}).then((models) => {
+    this.currentModelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
       this.allModels = models;
       this.currentModelIndex = 0;
       this.loadModel();
-    })
+    });
   }
 }
