@@ -31,8 +31,9 @@
 }
 
 .col-centered{
-  float: none;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  float: none !important;
 }
 
 

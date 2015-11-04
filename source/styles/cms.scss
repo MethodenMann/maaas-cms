@@ -21,7 +21,7 @@ $brand-danger: #d9534f;
 
 // Global Styles
 body {
-
+  height:100%;
 }
 a,
 a:hover {
@@ -237,10 +237,7 @@ a:hover {
   overflow-y: scroll;
 }
 
-// Login Page
-.login-panel {
-  margin-top: 25%;
-}
+
 
 // Flot Charts Containers
 .flot-chart {
