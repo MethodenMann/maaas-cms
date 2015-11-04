@@ -1,0 +1,12 @@
+image-upload(upload-id='{{ctrl.imageId}}')
+
+div.top15.left15
+  div(ng-if='ctrl.model')
+    image-load(upload-id='{{ctrl.imageId}}' ng-if='ctrl.model' initial-media-id='{{ctrl.model}}'
+              height='{{ctrl.height}}')
+  div(ng-if='!ctrl.model')
+    img( src='img/placeholder.svg' style='height: {{ctrl.height}}px; width: {{ctrl.width}}px')
+
+input(type='hidden' name='{{ctrl.imageId}}' ng-model='ctrl.model' ng-required='ctrl.isRequired')
+
+
