@@ -31,6 +31,7 @@ System.config({
     'angular-ui-sortable': 'libs/sortable.min.js',
     'angular-chart': 'libs/angular-chart.min.js',
     'chart': 'libs/Chart.min.js',
-    'maaas-config': 'app/ngConstants.js'
+    'maaas-config': 'app/ngConstants.js',
+    'angular-animate': 'libs/angular-animate.min.js'
   }
 });

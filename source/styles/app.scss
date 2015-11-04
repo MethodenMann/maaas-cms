@@ -2,6 +2,10 @@
   margin-left: 10px;
 }
 
+.left15 {
+  margin-left: 15px;
+}
+
 .top5 {
   margin-top: 5px;
 }
@@ -29,13 +33,6 @@
 .table > tbody > tr > td {
      vertical-align: middle;
 }
-
-.col-centered{
-  margin-left: auto;
-  margin-right: auto;
-  float: none !important;
-}
-
 
 // Cloudinary Fileupload
 .fileUpload {
