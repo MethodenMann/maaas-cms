@@ -32,6 +32,7 @@ System.config({
     'angular-chart': 'libs/angular-chart.min.js',
     'chart': 'libs/Chart.min.js',
     'maaas-config': 'app/ngConstants.js',
-    'angular-animate': 'libs/angular-animate.min.js'
+    'angular-animate': 'libs/angular-animate.min.js',
+    'angular-bootstrap': 'libs/ui-bootstrap.min.js'
   }
 });

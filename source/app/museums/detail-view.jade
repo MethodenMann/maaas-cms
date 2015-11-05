@@ -8,15 +8,12 @@
         input.form-control(ng-model='ctrl.museum.name' name='name' required ng-minlength='2')
 
       mas-form-group(field-name='description' localization-prefix='museums_details_description')
-        input.form-control(name='description' ng-model='ctrl.museum.description' required ng-minlength='10')
+        textarea.form-control(type='text' rows='3' name='description' ng-model='ctrl.museum.description' required ng-minlength='5')
 
       mas-form-group(field-name='address' localization-prefix='museums_details_address')
-        textarea.form-control(type='text' rows='4' name='address' ng-model='ctrl.museum.address' required ng-minlength='5')
+        textarea.form-control(type='text' rows='3' name='address' ng-model='ctrl.museum.address' required ng-minlength='5')
 
-      //mas-form-group(field-name='imageId' localization-prefix='museums_details_imageId')
-      //    div
-      //      image-upload(upload-id='image' required)
-      //      image-load(upload-id='image' ng-if='ctrl.area.stickerImageId' initial-media-id='{{ctrl.museum.imageId}}' height='100')
-      //      input(type='hidden' name='imageId' ng-model='ctrl.museum.imageId' required)
+      mas-form-group(field-name='logo' localization-prefix='museums_details_logo')
+        mas-image-form-wrapper(image-id='logo' model='ctrl.museum.logoId' height='150'  is-required='true')
 
-      mas-save-button(ng-click='ctrl.save()')
+    mas-save-button(ng-click='ctrl.save()')

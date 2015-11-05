@@ -5,6 +5,7 @@ import 'jquery-cloudinary';
 import 'jquery.ui.sortable';
 
 import 'angular';
+import 'angular-bootstrap';
 import 'angular-animate'
 import 'angular-ui-router';
 import 'angular-cookies';
@@ -38,7 +39,7 @@ import {loadApp} from './loadApp';
 var leApp = angular.module('maaas', [ 'maaas.config',
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
   'Devise', 'color.picker', 'ui.grid', 'ui.grid.selection', 'ui.grid.edit',
-  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable', 'chart.js', 'ngAnimate'
+  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable', 'chart.js', 'ngAnimate', 'ui.bootstrap'
 ]);
 
 leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_BASEURL) {
