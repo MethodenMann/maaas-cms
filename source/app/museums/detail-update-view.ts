@@ -19,11 +19,18 @@ export class DetailUpdateView extends DetailAbstract {
   }
 
   save() {
+    //send in progress
+    this.$scope.$broadcast('mas.saveprogess', 'in-progress');
     if (this.isFormValid()) {
-      this.Museum.update(this.museum.id, { museum: this.museum });
-      alert('Gespeichert'); //TODO: make sexy
+      this.Museum.update(this.museum.id, { museum: this.museum }).then( () =>{
+        this.$scope.$broadcast('mas.saveprogess', 'successfully');
+      });
     } else {
+      this.$scope.$broadcast('mas.saveprogess', 'rejected');
       this.focusFirstInputWithError();
     }
+
   }
+
+
 }
