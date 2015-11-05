@@ -22,6 +22,7 @@ export class UpdateView extends AbstractDetailView {
     });
 
     this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
+      if (data.uploadId != "previewImage") {
         var medium = {
           mediumId: data.mediumId,
           mediumableId: this.content.id,
@@ -30,11 +31,15 @@ export class UpdateView extends AbstractDetailView {
 
         this.Medium.update(data.mediumId, {medium: medium});
         this.addToImageList(data.mediumId);
-
+      }
     });
+
   }
 
-  save() {
-    this.Content.update(this.content.id, {content: this.content});
+  saveHook() {
+    this.Content.update(this.content.id, {content: this.content}).then(() => {
+      this.$scope.$broadcast('save', {id: this.area.id, type: 'Content'});
+      this.$scope.$broadcast('mas.saveprogess', 'successfully');
+    });
   }
 }

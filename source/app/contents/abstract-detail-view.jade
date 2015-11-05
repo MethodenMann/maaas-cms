@@ -2,20 +2,18 @@
   .panel-heading
     |   {{ 'contents_details_title' | translate }}
   .panel-body
-    form(name='contentform', role='form' novalidate)
-      .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("title") }')
-        label {{ 'contents_details_title_label' | translate }}
+    form(name='form' role='form' novalidate)
+      mas-form-group(field-name='title' localization-prefix='contents_details_title')
         input.form-control(ng-model='ctrl.content.title' name='title' required ng-minlength='2')
-        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("title")') {{ 'contents_details_title_help' | translate  }}
-        p.help-block(ng-show='ctrl.IsValidAndSubmitted("title")') {{ 'contents_details_title_error' | translate }}
 
-      .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("description") }')
-        label {{ 'contents_details_description_label' | translate }}
+      mas-form-group(field-name='description' localization-prefix='contents_details_description')
         input.form-control(ng-model='ctrl.content.description' name='description' required ng-minlength='2')
-        p.help-block(ng-hide='ctrl.IsValidAndSubmitted("description")') {{ 'contents_details_description_help' | translate  }}
-        p.help-block(ng-show='ctrl.IsValidAndSubmitted("description")') {{ 'contents_details_description_error' | translate }}
+
+      mas-form-group(field-name='previewImage' localization-prefix='contents_details_previewimage')
+        mas-image-form-wrapper(image-id='previewImage' model='ctrl.content.previewImageId' height='80' is-required='true')
 
       .form-group(ng-class='{ "has-error" : ctrl.IsValidAndSubmitted("name") }')
+        label {{ 'contents_details_Text_label' | translate }}
         .row
           .col-md-6
             textarea(ui-tinymce='ctrl.tinymceConfig' ng-model='ctrl.content.data')
@@ -25,4 +23,4 @@
             div.pull-left(ng-repeat='image in ctrl.imageList')
               image-load(public-id='{{image.medium.publicId}}' height='100')
 
-      button.btn.btn-default(type='submit' ng-click='ctrl.save()') Speichern
+      mas-save-button(ng-click='ctrl.save()')

@@ -9,7 +9,7 @@ export class DetailCreateView extends DetailAbstract {
   private createMode = true; //needed in view
 
   saveHook() {
-    return this.Area.create({area: this.area}).then((area:IArea) => {
+    this.Area.create({area: this.area}).then((area:IArea) => {
       this.$scope.$broadcast('save', {id: area.id, type: 'Area'});
       this.$scope.$broadcast('mas.saveprogess', 'successfully');
       this.$state.go('cms.areas.detail.update', {areaId: area.id});
