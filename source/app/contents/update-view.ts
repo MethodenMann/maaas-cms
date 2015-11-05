@@ -12,9 +12,7 @@ export class UpdateView extends AbstractDetailView {
 
         var list = [];
         this.content.media.forEach(medium => {
-          var url = $.cloudinary.url(medium.publicId, {
-            format: 'jpg', width: 100, height: 100, crop: 'thumb'
-          });
+          var url = this.getCloudinaryUrl(medium);
           list.push({title: 'a', value: url, medium: medium});
         });
         this.imageList = list;

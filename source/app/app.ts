@@ -6,7 +6,7 @@ import 'jquery.ui.sortable';
 
 import 'angular';
 import 'angular-bootstrap';
-import 'angular-animate'
+import 'angular-animate';
 import 'angular-ui-router';
 import 'angular-cookies';
 import 'angular-resource';
@@ -85,7 +85,7 @@ leApp.run(function ($rootScope, Auth, $state) {
   // Auth.login(credentials).then((user) => {
   //   $state.go('cms');
   // });
-  // 
+  //
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     console.log(toState.data);
     if (toState.data && toState.data.ignoreLogin) {
