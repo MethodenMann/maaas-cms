@@ -28,7 +28,7 @@ export abstract class AbstractDetailView extends FormView {
       selector: 'textarea',
       menu: {},
       toolbar: 'undo redo | bold italic | link image',
-      plugins: 'image',
+      plugins: 'image paste',
       image_dimensions: false,
       height: 400,
       image_list: (success) => {
