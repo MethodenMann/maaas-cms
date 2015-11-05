@@ -9,6 +9,7 @@ import {loadRegistration} from './registration/Registration';
 import {loadContent} from './contents/content';
 import {loadMuseum} from './museums/museums';
 import {loadTour} from './tours/tour';
+import {loadTranslations} from './translation/translations';
 import {loadStatistic} from './statistics/statistics';
 
 export function loadApp(app) {
@@ -23,5 +24,6 @@ export function loadApp(app) {
   loadChallenge(app);
   loadMuseum(app);
   loadTour(app);
+  loadTranslations(app);
   loadStatistic(app);
 }
