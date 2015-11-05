@@ -6,19 +6,14 @@ import {ITour} from './itour';
 import {IArea} from '../areas/iarea';
 
 export class CreateView extends AbstractDetailView {
-  constructorHook() {
-  }
 
-  save() {
-    if (this.isFormValid()) {
+
+  saveHook() {
       this.Tour.create({ tour: this.tour }).then((tour:ITour) => {
-        alert('Gespeichert'); //TODO: make sexy
+        this.$scope.$broadcast('save', {id: tour.id, type: 'Tour'});
+        this.$scope.$broadcast('mas.saveprogess', 'successfully');
         this.$state.go('cms.tours.detail.update', {tourId: tour.id});
       });
-    } else {
-      this.focusFirstInputWithError();
-    }
-
   }
 
 
@@ -28,8 +23,6 @@ export class CreateView extends AbstractDetailView {
       selectedChallenges:[]
     };
 
-    var deferred = this.$q.defer();
-    deferred.resolve();
-    return deferred.promise;
+    return this.$q.when();
   }
 }

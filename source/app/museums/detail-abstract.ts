@@ -16,30 +16,19 @@ export abstract class DetailAbstract extends FormView {
     super($scope);
 
     this.loadData();
-
-    $scope.$on('image-management.injectImage', (e, data: IMediumUploadBroadcast) => {
-      this.persistImageId(data.uploadId, data.mediumId);
-    });
-
-    this.constructorHook();
   }
 
-  protected constructorHook() {}
+  abstract saveHook(): void;
 
-  protected persistImageId(uploadId:string, mediumId) {
-      this.museum[uploadId] = mediumId;
+  protected save() {
+    this.$scope.$broadcast('mas.saveprogess', 'in-progress');
+    if (this.isFormValid()) {
+      this.saveHook();
+    } else {
+      this.$scope.$broadcast('mas.saveprogess', 'rejected');
+      this.focusFirstInputWithError();
+    }
   }
 
-  protected saveImageRelation(medium:IMedium, id?:number) {
-    var mediumableUpdateData = {
-      id: medium.id,
-      mediumableId: id || this.museum.id,
-      mediumableType: 'Museum'
-    };
-    this.$scope.$broadcast('image-management.mediumableUpdate', mediumableUpdateData);
-  }
-
-
-  abstract save(): void;
   protected loadData(): void { }
 }

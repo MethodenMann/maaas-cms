@@ -57,7 +57,7 @@ export class ImageFormWrapper {
       var mediumableUpdateData = {
         id: this.model,
         mediumableId: data.id ,
-        mediumableType: data.id
+        mediumableType: data.type
       };
       this.$scope.$broadcast('image-management.mediumableUpdate', mediumableUpdateData);
     }

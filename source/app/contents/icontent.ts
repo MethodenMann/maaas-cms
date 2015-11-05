@@ -5,4 +5,5 @@ export interface IContent {
   data?: string;
   areaId?: number;
   media?: any;
+  previewImageId: number;
 }

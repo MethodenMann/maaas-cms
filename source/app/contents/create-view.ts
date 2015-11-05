@@ -8,12 +8,14 @@ export class CreateView extends AbstractDetailView {
     this.content.areaId = this.$stateParams.areaId;
 
     this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
-      var medium = data.mediumId;
-      this.addToImageList(medium);
+      if (data.uploadId !== "previewImage") {
+        var medium = data.mediumId;
+        this.addToImageList(medium);
+      }
     });
   }
 
-  save() {
+  saveHook() {
     this.Content.create({content: this.content}).then((content) => {
       var promises : Array<any> = [];
       for (let image of this.imageList) {
@@ -23,6 +25,8 @@ export class CreateView extends AbstractDetailView {
         promises.push(this.Medium.update(medium.id, {medium: medium}));
       }
       this.$q.all(promises).then(() => {
+        this.$scope.$broadcast('save', {id: content.id, type: 'Content'});
+        this.$scope.$broadcast('mas.saveprogess', 'successfully');
         this.$state.go('cms.areas.detail.contents.update', {contentId: content.id});
       });
     });

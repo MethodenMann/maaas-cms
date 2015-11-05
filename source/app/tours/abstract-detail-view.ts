@@ -40,13 +40,21 @@ export abstract class AbstractDetailView extends FormView {
         this.areas = areas;
         this.loadConfiguredAreas();
       });
-
-      this.constructorHook();
     });
   }
 
   protected loadData() {}
-  abstract save(): void;
+
+  abstract saveHook(): void;
+  protected save() {
+    this.$scope.$broadcast('mas.saveprogess', 'in-progress');
+    if (this.isFormValid()) {
+      this.saveHook();
+    } else {
+      this.$scope.$broadcast('mas.saveprogess', 'rejected');
+      this.focusFirstInputWithError();
+    }
+  }
 
   private initDictionaries(contents, challanges) {
     contents.forEach((content) => {
@@ -57,10 +65,6 @@ export abstract class AbstractDetailView extends FormView {
     });
 
   }
-
-
-  protected constructorHook() {}
-
 
   private loadConfiguredAreas() {
     var configuredAreaIds: number[] = [];
@@ -110,7 +114,7 @@ export abstract class AbstractDetailView extends FormView {
 
 
   removeArea(area: IArea) {
-    var confirmed = confirm('Sicher?'); //TODO: Make sexy
+    var confirmed = confirm('Sind die sicher, dass Sie diesen Bereich aus dem Rundgang entfernen möchten?'); //TODO: Make nicer
     if (confirmed) {
       area.contents.forEach((content) => {
         var pos = this.tour.selectedContents.indexOf(content.id);

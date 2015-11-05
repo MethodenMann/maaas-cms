@@ -1,3 +1,4 @@
-button.btn.mas-save-btn(type='submit' ng-click='ctrl.save()')
-  i.fa.fa-save
+button.btn.mas-save-btn(type='submit' ng-disabled='ctrl.disabled')
+  i.fa(ng-class='[ctrl.iconClass, ctrl.animationClass]' )
   |  Speichern
+div.top10(style='color: #737373;') {{ ctrl.feedbackMessage }}

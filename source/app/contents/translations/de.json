@@ -6,5 +6,9 @@
   "contents_details_title_error": "Bitte Geben Sie einen gülten Titel ein",
   "contents_details_description_label": "Zusammenfassung",
   "contents_details_description_help": "Eine Kurze Zusammenfassung des Inhalts.",
-  "contents_details_description_error": "Bitte Geben Sie eine gülte Zusammenfassung ein"
+  "contents_details_description_error": "Bitte Geben Sie eine gülte Zusammenfassung ein",
+  "contents_details_previewimage_label": "Vorschaubild",
+  "contents_details_previewimage_help": "Dieses Bild wird in der Inhaltsübersicht angezeigt",
+  "contents_details_previewimage_error": "Bitte laden Sie ein Bild hoch.",
+  "contents_details_Text_label": "Text"
 }

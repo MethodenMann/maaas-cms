@@ -12,12 +12,20 @@ export abstract class DetailAbstract extends FormView {
     @Inject('$state') protected $state
     ) {
     super($scope);
-
     this.loadData();
-    this.constructorHook();
   }
 
-  protected constructorHook() {}
   protected loadData(): void {}
-  abstract save(): void;
+  abstract saveHook(): void;
+
+
+  protected save() {
+    this.$scope.$broadcast('mas.saveprogess', 'in-progress');
+    if (this.isFormValid()) {
+      this.saveHook();
+    } else {
+      this.$scope.$broadcast('mas.saveprogess', 'rejected');
+      this.focusFirstInputWithError();
+    }
+  }
 }

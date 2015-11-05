@@ -23,6 +23,22 @@
   width: 150px;
 }
 
+.mas-remove-btn{
+  color: $gray-light;
+  background-color: $warning;
+  border-color: $warning;
+  width: 150px;
+}
+
+
+.spinning {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg); }
+  to { transform: scale(1) rotate(360deg); }
+}
 
 .mas-image-upload-btn{
   color: #fff;

@@ -6,11 +6,6 @@ export class DetailUpdateView extends DetailAbstract {
   public static selector = 'mas-museums-detail-update-view';
   public static templateUrl = 'app/museums/detail-view.html';
 
-  protected constructorHook() {
-    this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
-      this.persistImageId(data.uploadId, data.mediumId);
-    });
-  }
 
   loadData() {
     this.Museum.find(this.$stateParams.museumId).then((data) => {
@@ -18,12 +13,12 @@ export class DetailUpdateView extends DetailAbstract {
     });
   }
 
-  save() {
-    if (this.isFormValid()) {
-      this.Museum.update(this.museum.id, { museum: this.museum });
-      alert('Gespeichert'); //TODO: make sexy
-    } else {
-      this.focusFirstInputWithError();
-    }
+  saveHook() {
+      this.Museum.update(this.museum.id, { museum: this.museum }).then( () => {
+        this.$scope.$broadcast('save', {id: this.museum.id, type: 'Museum'});
+        this.$scope.$broadcast('mas.saveprogess', 'successfully');
+      });
   }
+
+
 }
