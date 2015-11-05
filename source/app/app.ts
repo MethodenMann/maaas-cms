@@ -85,7 +85,7 @@ leApp.run(function ($rootScope, Auth, $state) {
   // Auth.login(credentials).then((user) => {
   //   $state.go('cms');
   // });
-  // 
+  //
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     console.log(toState.data);
     if (toState.data && toState.data.ignoreLogin) {
