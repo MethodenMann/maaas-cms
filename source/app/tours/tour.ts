@@ -22,7 +22,7 @@ export function loadTour(app) {
         '/{tourId:[0-9]{1,8}}', 'Rundgänge', 'cms.tours.list'))
       .state(`cms.${componentName}.detail.update`,
       RouteUtil.getRoute(UpdateView,
-        '{{ctrl.area.name}}', `cms.${componentName}.list`))
+        '{{ctrl.tour.name}}', `cms.${componentName}.list`))
       .state(`cms.${componentName}.create`,
       RouteUtil.getRoute(CreateView,
         'Neuer Bereich', `cms.${componentName}.list`, '/create'));
