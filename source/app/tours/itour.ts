@@ -4,4 +4,5 @@ export interface ITour {
   description: string;
   selectedContents: number[];
   selectedChallenges: number[];
+  imageId: number;
 }

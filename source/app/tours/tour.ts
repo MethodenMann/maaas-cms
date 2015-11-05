@@ -1,15 +1,11 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {CreateView} from '../tours/create-view';
-import {UpdateView} from '../tours/update-view';
+import {CreateView} from './detail-create-view';
+import {UpdateView} from './detail-update-view';
 import {ListView} from './list-view';
 
 export function loadTour(app) {
   var componentName = 'tours';
-
-  // app.directive(
-  //   makeSelector(CreateView),
-  //   makeDirective(CreateView));
 
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);

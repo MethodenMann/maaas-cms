@@ -1,9 +1,10 @@
 h1 {{ 'tours_title' | translate }}
 .area-list
   .row
-    .col-md-4.top30(ng-repeat-start='tours in ctrl.tours')
-      a(href ui-sref='cms.tours.detail.update({tourId: tour.id})')
-        | hingehen
+    .col-md-4.top30(ng-repeat-start='tour in ctrl.tours')
+      a(style='text-align: center;' href ui-sref='cms.tours.detail.update({tourId: tour.id})')
+        image-load(initial-media-id='{{tour.imageId}}' height='100')
+        div {{tour.name}}
     .clearfix(ng-if='$index%3==2')
     div(ng-repeat-end='')
     .col-md-4.top30.text-center

@@ -10,7 +10,7 @@
   "museums_details_address_label": "Adresse",
   "museums_details_address_help": "Die Adresse des Museums",
   "museums_details_address_error": "Bitte Geben Sie eine gültige Adresse ein",
-  "museums_details_logo_label": "Logo",
-  "museums_details_logo_help": "Das Logo wird in der App an diversen Orten angezeigt. Als SVG",
-  "museums_details_logo_error": "BItte laden sie ein Logo hoch"
+  "museums_details_image_label": "Logo",
+  "museums_details_image_help": "Das Logo wird in der App an diversen Orten angezeigt. Als SVG",
+  "museums_details_image_error": "BItte laden sie ein Logo hoch"
 }

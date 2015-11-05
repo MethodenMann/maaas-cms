@@ -2,7 +2,7 @@ div
   image-upload(upload-id='{{ctrl.imageId}}')
 
   div.top15.left15
-    div(ng-if='ctrl.model' style='min-height:{{ctrl.height}}')
+    div(ng-if='ctrl.model' style='height:{{ctrl.height}}px;')
       image-load(upload-id='{{ctrl.imageId}}' ng-if='ctrl.model' initial-media-id='{{ctrl.model}}'
                 height='{{ctrl.height}}')
     div(ng-if='!ctrl.model')

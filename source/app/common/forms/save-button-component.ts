@@ -18,15 +18,15 @@ export class SaveButtonComponent {
     this.showDefault();
 
     $scope.$on('mas.saveprogess', (e, status) => {
-      if (status === 'in-progress'){
-       this.showInProgress()
+      if (status === 'in-progress') {
+       this.showInProgress();
       }
-      else if (status === 'rejected'){
-        this.showRejected()
+      if (status === 'rejected') {
+        this.showRejected();
       }
-      else if (status === 'successfully'){
+      if (status === 'successfully') {
         $timeout(() => {
-          this.showSuccessfully()
+          this.showSuccessfully();
         }, 500);
 
       }
@@ -34,29 +34,29 @@ export class SaveButtonComponent {
   }
 
 
-  showDefault(){
+  showDefault() {
     this.animationClass = '';
     this.iconClass = 'fa-save';
     this.disabled = false;
   }
 
-  showSuccessfully(){
+  showSuccessfully() {
     this.showDefault();
 
     var currentdate = new Date();
-    var time = `${currentdate.getHours()}:${currentdate.getMinutes()}`;
+    var time = `${currentdate.getHours()}:${currentdate.getMinutes() < 10 ? '0' : ''}${currentdate.getMinutes()}`;
 
 
     this.feedbackMessage = 'Zuletzt gespeichert um ' + time + ' Uhr';
   }
 
-  showInProgress(){
+  showInProgress() {
     this.animationClass = 'spinning';
     this.iconClass = 'fa-spinner';
     this.disabled = true;
   }
 
-  showRejected(){
+  showRejected() {
     this.showDefault();
   }
 }

@@ -6,7 +6,7 @@ import 'jquery.ui.sortable';
 
 import 'angular';
 import 'angular-bootstrap';
-import 'angular-animate'
+import 'angular-animate';
 import 'angular-ui-router';
 import 'angular-cookies';
 import 'angular-resource';

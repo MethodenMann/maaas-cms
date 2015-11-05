@@ -7,16 +7,11 @@ export class DetailCreateView extends DetailAbstract {
   public static selector = 'mas-museums-detail-create-view';
   public static templateUrl = 'app/museums/detail-view.html';
 
-  save() {
-    if (this.isFormValid()) {
+  saveHook() {
       this.Museum.create({ museum: this.museum }).then((museum:IMuseum) => {
-        //this.saveImageRelation(museum.imageId, museum.id);
-
-        alert('Gespeichert'); //TODO: make sexy
+        this.$scope.$broadcast('save', {id: museum.id, type: 'Area'});
+        this.$scope.$broadcast('mas.saveprogess', 'successfully');
         this.$state.go('cms.museums.detail.update', {museumId: museum.id});
       });
-    } else {
-      this.focusFirstInputWithError();
-    }
   }
 }

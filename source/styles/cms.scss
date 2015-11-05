@@ -321,6 +321,17 @@ table.dataTable thead {
   }
 }
 
+.list-group-item-gray.active{
+  background-color: $gray-light;
+  border-color: #ddd;
+  color: $gray-dark;
+}
+
+.list-group-item-gray.active:hover{
+  background-color: $gray-light;
+  border-color: #ddd;
+  color: $gray-dark;
+}
 
 
 //.slidr.ng-enter, .slidr.ng-leave {
