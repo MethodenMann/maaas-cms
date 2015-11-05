@@ -144,7 +144,9 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/angular-ui-tinymce/src/tinymce.js',
     config.bowerPath + '/angular-ui-sortable/sortable.min.js',
     config.bowerPath + '/angular-chart.js/dist/angular-chart.min.js',
-    config.bowerPath + '/Chart.js/Chart.min.js'
+    config.bowerPath + '/Chart.js/Chart.min.js',
+    config.bowerPath + '/angular-animate/angular-animate.min.js',
+    config.bowerPath + '/angular-bootstrap/ui-bootstrap.min.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   gulp.src([

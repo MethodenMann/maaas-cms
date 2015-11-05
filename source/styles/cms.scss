@@ -1,19 +1,5 @@
-$main-color: #b2df8e;
-$dark: #5e5e5e;
-$light: #F5F5F5;
-$sec-color: #7c9c63;
+@import "vars";
 
-$gray-darker: lighten(#000, 13.5%);
-$gray-dark: lighten(#000, 20%);
-$gray: lighten(#000, 33.5%);
-$gray-light: lighten(#000, 60%);
-$gray-lighter: lighten(#000, 93.5%);
-$gray-lightest: lighten(#000, 97.25%);
-$brand-primary: #428bca;
-$brand-success: $main-color;
-$brand-info: #5bc0de;
-$brand-warning: #f0ad4e;
-$brand-danger: #d9534f;
 @font-face {
   font-family: "SourceSansPro-Semibold";
   src: url("./../fonts/sourcesanspro-semibold.otf") format('opentype');
@@ -21,11 +7,11 @@ $brand-danger: #d9534f;
 
 // Global Styles
 body {
-
+  height:100%;
 }
 a,
 a:hover {
-  color: $dark;
+  color: $gray-dark;
 }
 
 // Wrappers
@@ -42,7 +28,7 @@ a:hover {
     position: inherit;
     margin: 0 0 0 250px;
     padding: 5px 30px;
-    border-left: 1px solid darken($gray-lightest, 6.5%);
+    border-left: 1px solid $gray;
   }
 }
 
@@ -134,10 +120,10 @@ a:hover {
     padding: 15px;
   }
   ul li {
-    border-bottom: 1px solid $light;
+    border-bottom: 1px solid $gray;
     a.active {
-      color: $dark;
-      //background-color: $main-color;
+      color: $gray-dark;
+      background-color: $gray-light;
 
     }
 
@@ -186,19 +172,19 @@ a:hover {
   transition: all 0.5s;
 }
 .btn-primary.btn-outline {
-  color: $brand-primary;
+  color: $primary;
 }
 .btn-success.btn-outline {
-  color: $brand-success;
+  color: $success;
 }
 .btn-info.btn-outline {
-  color: $brand-info;
+  color: $info;
 }
 .btn-warning.btn-outline {
-  color: $brand-warning;
+  color: $warning;
 }
 .btn-danger.btn-outline {
-  color: $brand-danger;
+  color: $danger;
 }
 .btn-primary.btn-outline:hover,
 .btn-success.btn-outline:hover,
@@ -237,10 +223,7 @@ a:hover {
   overflow-y: scroll;
 }
 
-// Login Page
-.login-panel {
-  margin-top: 25%;
-}
+
 
 // Flot Charts Containers
 .flot-chart {
@@ -312,7 +295,7 @@ table.dataTable thead {
     padding-top: 10px;
     padding-bottom: 10px;
     border: 1px solid #ddd;
-    background-color: $gray-lighter !important;
+    background-color: $gray-light !important;
   }
   margin: 15px 0;
 }
@@ -322,46 +305,33 @@ table.dataTable thead {
   font-size: 40px;
 }
 .panel-green {
-  border-color: $brand-success;
+  border-color: $main-color;
   .panel-heading {
-    border-color: $brand-success;
+    border-color: $main-color;
     font-family: "SourceSansPro-Semibold";
     font-size: 15px;
-    color: $dark;
-    background-color: $brand-success;
+    color: $gray-dark;
+    background-color: $main-color;
   }
   a {
-    color: $brand-success;
+    color: $main-color;
     &:hover {
-      color: darken($brand-success, 15%);
+      color: darken($main-color, 15%);
     }
   }
 }
-.panel-red {
-  border-color: $brand-danger;
-  .panel-heading {
-    border-color: $brand-danger;
-    color: white;
-    background-color: $brand-danger;
-  }
-  a {
-    color: $brand-danger;
-    &:hover {
-      color: darken($brand-danger, 15%);
-    }
-  }
-}
-.panel-yellow {
-  border-color: $brand-warning;
-  .panel-heading {
-    border-color: $brand-warning;
-    color: white;
-    background-color: $brand-warning;
-  }
-  a {
-    color: $brand-warning;
-    &:hover {
-      color: darken($brand-warning, 15%);
-    }
-  }
-}
+
+
+
+//.slidr.ng-enter, .slidr.ng-leave {
+//  transition: 300ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+//}
+//
+//.slidr.ng-enter {
+//  left: 100%;
+//}
+//
+//.slidr.ng-leave {
+//  left: 0;
+//}
+

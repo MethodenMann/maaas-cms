@@ -1,3 +1,5 @@
+@import "vars";
+
 .mas-new-btn {
   position:relative;
   .circle-btn{
@@ -7,8 +9,31 @@
     border-radius: 50px;
     font-size: 30px;
     line-height: 1.33;
+    background-color: $primary;
   }
   .text-label{
    text-align: center;
   }
+}
+
+.mas-save-btn{
+  color: $gray-light;
+  background-color: $sec-color;
+  border-color: $gray-dark;
+  width: 150px;
+}
+
+
+.mas-image-upload-btn{
+  color: #fff;
+  background-color: lighten($primary, 10%);
+  border-color: $gray-dark;
+  width: 150px;
+}
+
+.mas-navigation-btn{
+  color: #fff;
+  background-color: $primary;
+  border-color: $gray-dark;
+  width: 200px;
 }

@@ -7,6 +7,9 @@
         input.form-control(ng-model='ctrl.tour.name' name='name' required ng-minlength='2')
       mas-form-group(field-name='description' localization-prefix='tours_details_description')
         input.form-control(ng-model='ctrl.tour.description' name='description' required ng-minlength='2')
+      mas-form-group(field-name='image' localization-prefix='tours_details_image')
+        mas-image-form-wrapper(image-id='image' model='ctrl.tour.imageId' height='100'  is-required='true')
+
 
     h3 {{ 'tours_details_compose_title' | translate }}
     .dropdown

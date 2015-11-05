@@ -1,6 +1,10 @@
-div(ng-repeat='tour in ctrl.tours')
-  | {{tour.name}}
-  a(href ui-sref='cms.tours.detail.update({tourId: tour.id})')
-    | hingehen
-
-a(href ui-sref='cms.tours.create') Neuer Rundgang
+h1 {{ 'tours_title' | translate }}
+.area-list
+  .row
+    .col-md-4.top30(ng-repeat-start='tours in ctrl.tours')
+      a(href ui-sref='cms.tours.detail.update({tourId: tour.id})')
+        | hingehen
+    .clearfix(ng-if='$index%3==2')
+    div(ng-repeat-end='')
+    .col-md-4.top30.text-center
+      mas-new-button(ref='cms.tours.create' text='Neu')

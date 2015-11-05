@@ -8,9 +8,7 @@ form(name='form' role='form' novalidate)
   .form-group.left10
     div(ng-include='ctrl.selectedKind.url')
 
-  button.btn.btn-success(ng-disabled='!ctrl.selectedKind' type='submit' ng-click='ctrl.save()')
-    i.fa.fa-save
-    |  Speichern
+  mas-save-button(ng-disabled='!ctrl.selectedKind'  ng-click='ctrl.save()')
 
 | {{ctrl.isUpdate}}
 h3 DEV challenge JSON
