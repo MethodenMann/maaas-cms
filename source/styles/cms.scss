@@ -6,14 +6,19 @@
 }
 
 // Global Styles
-body {
+html, body {
   height:100%;
+  overflow: hidden
 }
+
 a,
 a:hover {
   color: $gray-dark;
 }
-
+#main-view{
+  height:100%;
+  overflow: auto;
+}
 // Wrappers
 #wrapper {
   width: 100%;
@@ -346,3 +351,32 @@ table.dataTable thead {
 //  left: 0;
 //}
 
+
+
+
+
+
+
+#main-view.ng-enter, #main-view.ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  transition: 900ms cubic-bezier(0.420, 0.000, 0.580, 1.000) all;
+}
+
+#main-view.ng-enter {
+  top: 100%;
+}
+
+#main-view.ng-enter-active {
+  top: 0;
+}
+
+#main-view.ng-leave {
+  top: 0;
+}
+
+#main-view.ng-leave-active {
+  top: -100%;
+}

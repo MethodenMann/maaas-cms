@@ -17,9 +17,8 @@ html(lang='en')
     link(href='css/ui-grid.min.css', rel='stylesheet', type='text/css')
     link(href='css/angular-chart.css', rel='stylesheet', type='text/css')
     link(href='css/styles.css', rel='stylesheet')
-  body(style='height: 100%')
-    div(ui-view='')
-
+  body
+    div#main-view(ui-view='')
     script(src='/libs/tinymce/tinymce.js')
     script(src='/libs/system.js')
     script(src='/system.config.js')
