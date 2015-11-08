@@ -20,7 +20,7 @@ export class UpdateView extends AbstractDetailView {
     });
 
     this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
-      if (data.uploadId !== "previewImage") {
+      if (data.uploadId !== 'previewImage') {
         var medium = {
           mediumId: data.mediumId,
           mediumableId: this.content.id,
