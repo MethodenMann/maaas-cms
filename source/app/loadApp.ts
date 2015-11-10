@@ -4,7 +4,7 @@ import {loadChallenge} from './challenges/challenge';
 import {loadMaster} from './master/master';
 import {loadJsDataConfig} from './js-data-config';
 import {loadCommon} from './common/common';
-import {loadLogin} from './login/Login';
+import {loadLogin} from './login/login';
 import {loadRegistration} from './registration/Registration';
 import {loadContent} from './contents/content';
 import {loadMuseum} from './museums/museums';

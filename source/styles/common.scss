@@ -38,12 +38,18 @@
   }
 }
 
-.mas-save-btn{
+.mas-login-btn{
   color: $gray-light;
   background-color: $sec-color;
   border-color: $gray-dark;
-  width: 150px;
 }
+
+.mas-save-btn{
+   color: $gray-light;
+   background-color: $sec-color;
+   border-color: $gray-dark;
+   width: 150px;
+ }
 
 .mas-remove-btn{
   color: $gray-light;
@@ -74,4 +80,8 @@
   background-color: $primary;
   border-color: $gray-dark;
   width: 200px;
+}
+
+.error{
+  color: $danger;
 }

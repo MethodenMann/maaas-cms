@@ -1,0 +1,5 @@
+{
+  "login_mail": "E-Mail",
+  "login_password": "Passwort",
+  "login_failed": "Der eingegebene Benutzername oder das Kennwort ist ungültig. Wiederholen Sie die Eingabe, und versuchen Sie es noch mal"
+}

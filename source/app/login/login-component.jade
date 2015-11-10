@@ -1,0 +1,10 @@
+div.top30
+  div(style='width: 400px;margin: 0 auto;')
+    form(role='form' ng-submit='ctrl.login()')
+      fieldset
+        .form-group
+          input.form-control(ng-model='ctrl.email' placeholder='{{ "login_mail" | translate }}', type='email', autofocus='')
+        .form-group
+          input.form-control(ng-model='ctrl.password' placeholder='{{ "login_password" | translate }}', type='password')
+        a.btn.mas-login-btn.btn-block(ng-click='ctrl.login()') Login
+        div.error.top10.center-text {{ctrl.feedback}}
