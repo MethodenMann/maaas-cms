@@ -1,7 +1,13 @@
 h1 {{ 'beacons_list_title' | translate }}
 p {{ 'beacons_list_description' | translate }}
 
-table.table.table-striped
+.input-group.pull-right(style='width:200px; margin-bottom: 15px;')
+  input.form-control( type='text' placeholder='Filtern...' ng-model='ctrl.search')
+  span.input-group-btn
+    button.btn.btn-default(type='button')
+      i.fa.fa-search
+
+table.table.table-striped.top15
   tr
     th
     th UniqueId
@@ -11,7 +17,7 @@ table.table.table-striped
     th Minor
     th UUID
     th
-  tr.hover-row(ng-repeat='beacon in ctrl.beacons | orderBy:["major","minor"]')
+  tr.hover-row(ng-repeat='beacon in ctrl.beacons | filter:ctrl.search  |orderBy:["major","minor"]')
     td
       .ico-ibeacon
     td {{beacon.uniqueId}}
@@ -20,9 +26,8 @@ table.table.table-striped
       span.editable-label {{beacon.description}}
       input.editable-text(ng-model='beacon.description' ng-model-options='{ debounce: 1000 }' ng-change='ctrl.editBeacon(beacon)')
     td
-      select(ng-options='parseInt(area.id) as area.name for area in ctrl.areas track by area.id' ng-model='beacon.areaId' ng-change='ctrl.editBeacon(beacon)')
-
-
+      span.editable-label {{  ctrl.getAreaNameById(beacon.areaId) }}
+      select.editable-text(ng-options='area.id as area.name for area in ctrl.areas' ng-model='beacon.areaId' ng-change='ctrl.editBeacon(beacon)')
     td {{beacon.major}}
     td {{beacon.minor}}
     td {{beacon.uuid}}
@@ -31,7 +36,6 @@ table.table.table-striped
         a.btn.btn-warning.btn-circle.pull-right.hover-btn(ng-click='ctrl.removeBeacon(beacon)')
           i.fa.fa-trash-o
 
-div  {{ ctrl.beacons }}
 
 button.btn.btn-primary.btn(ng-click='ctrl.syncWithKontaktIO()') 
   i.glyphicon.glyphicon-download

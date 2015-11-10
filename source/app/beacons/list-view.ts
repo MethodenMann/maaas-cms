@@ -36,12 +36,22 @@ export class ListView {
 
 
   private editBeacon(beacon:IBeacon) {
-    this.Beacon.update(beacon.id, {beacon: beacon})
+    this.Beacon.update(beacon.id, {beacon: beacon});
   }
 
   private removeBeacon(beacon:IBeacon) {
     this.Beacon.destroy(beacon.id);
     this.beacons.splice(this.beacons.indexOf(beacon), 1);
+  }
+
+  private getAreaNameById(areaId:number){
+    var res = '';
+    this.areas.forEach((area:IArea) =>{
+      if (area.id === areaId) {
+        res = area.name;
+      }
+    });
+    return res;
   }
 
 
@@ -50,8 +60,12 @@ export class ListView {
       var conf = confirm(beacons.length + ' Beacon(s) werden hinzugefügt'); //Todo: Make more sexy
       if (conf) {
         beacons.forEach((b) => {
-          this.Beacon.create({ beacon: b });
+          this.Beacon.create({ beacon: b }).then( (createdBeacon) =>{
+            this.beacons.push(createdBeacon);
+          });
+
         });
+
       }
     });
   }
