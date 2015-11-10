@@ -27,8 +27,6 @@ import 'js-data-angular';
 
 import 'devise';
 import 'angularjs-color-picker';
-import 'angular-ui-grid';
-
 import 'maaas-config';
 import {makeDirective, makeSelector} from './utils/component';
 
@@ -38,7 +36,7 @@ import {loadApp} from './loadApp';
 
 var leApp = angular.module('maaas', [ 'maaas.config',
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
-  'Devise', 'color.picker', 'ui.grid', 'ui.grid.selection', 'ui.grid.edit',
+  'Devise', 'color.picker',
   'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable', 'chart.js', 'ngAnimate', 'ui.bootstrap'
 ]);
 

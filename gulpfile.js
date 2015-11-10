@@ -139,7 +139,6 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/cloudinary/js/jquery.cloudinary.js',
     config.bowerPath + '/tinycolor/tinycolor.js',
     config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.js',
-    config.bowerPath + '/angular-ui-grid/ui-grid.min.js',
     config.bowerPath + '/angular-breadcrumb/release/angular-breadcrumb.min.js',
     config.bowerPath + '/angular-ui-tinymce/src/tinymce.js',
     config.bowerPath + '/angular-ui-sortable/sortable.min.js',
@@ -164,8 +163,6 @@ gulp.task('copyassets', function() {
       config.bowerPath + '/metisMenu/dist/metisMenu.min.css',
       config.bowerPath + '/font-awesome/css/font-awesome.min.css',
       config.bowerPath + '/angular-color-picker/angularjs-color-picker.min.css',
-      config.bowerPath + '/angular-ui-grid/ui-grid.min.css',
-      config.bowerPath + '/angular-ui-grid/**/*.{ttf,woff,svg}',
       config.bowerPath + '/tinymce/skins/lightgray/content.min.css',
       config.bowerPath + '/tinymce/skins/lightgray/skin.min.css',
       config.bowerPath + '/angular-chart.js/dist/angular-chart.css'
