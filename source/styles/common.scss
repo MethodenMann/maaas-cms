@@ -30,6 +30,12 @@
     line-height: 1.33;
     background-color: $primary;
   }
+  a{
+
+  }
+  a:hover{
+    text-decoration: none;
+  }
 }
 
 .mas-save-btn{

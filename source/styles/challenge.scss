@@ -14,7 +14,10 @@
 }
 
 .mas-challenge-order-entry {
-  background-color: white;
-  border: dotted 1px;
-  height: 160px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: $gray-light;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  cursor: all-scroll;
 }

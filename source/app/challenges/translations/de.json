@@ -13,7 +13,25 @@
   "challenges_details_kind_error": "Bitte Geben Sie einen gülten Quiz-Typ ein",
 
   "challenges_details_assign_pairs" : "Antwort-Paare",
-  "challenges_details_assign_add" : "Antwort Paar hinzufügen",
+  "challenges_details_assign_add" : "Antwort-Paar hinzufügen",
+
+  "challenges_details_order_add":  "Antwort-Paar hinzufügen",
+
+  "challenges_details_order_title_label":  "Titel",
+  "challenges_details_order_title_help":  "Der Titel des Items",
+  "challenges_details_order_title_error":  "Bitte geben Sie einen Titel an",
+
+  "challenges_details_order_description_label":  "Beschreibung",
+  "challenges_details_order_description_help":  "Eine kurze Beschreibung des Items",
+  "challenges_details_order_description_error":  "Bitte geben sie eine Beschreiung an",
+
+  "challenges_details_order_image_label":  "Bild",
+  "challenges_details_order_image_help":  "Ein Bild das zum Item passt",
+  "challenges_details_order_image_error":  "Bitte laden Sie ein passendes Bild hoch",
+
+
+
+
 
   "challenges_details_assign_text_label" : "Text",
   "challenges_details_assign_text_help" : "Der Text steht auf der Linken Seite und muss dem Bild zugeordnet werden",
