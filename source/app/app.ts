@@ -53,6 +53,8 @@ leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_B
   AuthProvider.registerPath(`${BACKEND_BASEURL}/users.json`);
 });
 
+
+
 leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: 'app/{part}/translations/{lang}.json'

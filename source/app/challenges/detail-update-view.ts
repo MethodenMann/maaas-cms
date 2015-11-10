@@ -27,15 +27,12 @@ export class UpdateView extends DetailAbstract {
     });
   }
 
-  save() {
-    if (this.isFormValid()) {
-      this.Challenge.update(this.challenge.id, { challenge: this.challenge }).then((challenge) => {
-        alert('Gespeichert'); //TODO: make sexy
-        this.$scope.$broadcast('challenge.saved', challenge);
-      });
-    } else {
-      this.focusFirstInputWithError();
-    }
 
+  saveHook() {
+    this.Challenge.update(this.challenge.id, { challenge: this.challenge }).then((challenge) => {
+      this.$scope.$broadcast('challenge.saved', challenge); //TODO: Make obsolete
+      this.$scope.$broadcast('save', {id: challenge.id, type: 'Challenge'});
+      this.$scope.$broadcast('mas.saveprogess', 'successfully');
+    });
   }
 }

@@ -9,6 +9,7 @@ export class Multiplechoice {
 
 
   private data:any;
+
   private static options = {
     bindToController: {
       data: '='
@@ -20,6 +21,11 @@ export class Multiplechoice {
     if (this.data.answers === undefined) {
       this.data.answers = [];
     }
+
+    if (this.data.type === undefined){
+      this.data.type = 'text';
+    }
+
   }
 
   getUnusedAnswerIndex() {
@@ -44,10 +50,6 @@ export class Multiplechoice {
       }
     }
     this.data.answers.splice(index, 1);
-  }
-
-  correctAnswerChanged(index) {
-    this.data.correctAnswer = index;
   }
 
   addAnswer() {

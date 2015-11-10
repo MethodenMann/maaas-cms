@@ -48,6 +48,7 @@
         "./app/common/image-management/image-upload.ts",
         "./app/common/image-management/imedium-upload-broadcast.ts",
         "./app/common/image-management/Imediumable-update-broadcast.ts",
+        "./app/common/new-button-sm.ts",
         "./app/common/new-button.ts",
         "./app/contents/abstract-detail-view.ts",
         "./app/contents/content.ts",

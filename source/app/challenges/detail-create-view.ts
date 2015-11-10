@@ -17,16 +17,14 @@ export class CreateView extends DetailAbstract {
   }
 
 
-
-  save() {
-    if (this.isFormValid()) {
-      this.Challenge.create({ challenge: this.challenge }).then((challenge:IChallenge) => {
-        alert('Erstellt'); //TODO: make sexy
-        this.$scope.$broadcast('challenge.saved', challenge);
-        this.$state.go('cms.areas.detail.challenges.update', {challengeId: challenge.id});
-      });
-    } else {
-      this.focusFirstInputWithError();
-    }
+  saveHook() {
+    this.Challenge.create({ challenge: this.challenge }).then((challenge:IChallenge) => {
+      this.$scope.$broadcast('save', {id: challenge.id, type: 'Challenge'});
+      this.$scope.$broadcast('challenge.saved', challenge);
+      this.$scope.$broadcast('mas.saveprogess', 'successfully');
+      this.$state.go('cms.areas.detail.challenges.update', {challengeId: challenge.id});
+    });
   }
+
+
 }

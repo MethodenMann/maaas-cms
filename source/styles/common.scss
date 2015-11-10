@@ -16,6 +16,22 @@
   }
 }
 
+
+.mas-new-btn-sm {
+  position:relative;
+  cursor: hand;
+  text-decoration: none;
+  .circle-btn{
+    width: 30px;
+    height: 30px;
+    padding: 5px 5px;
+    border-radius: 15px;
+    font-size: 10px;
+    line-height: 1.33;
+    background-color: $primary;
+  }
+}
+
 .mas-save-btn{
   color: $gray-light;
   background-color: $sec-color;

@@ -21,6 +21,13 @@
   "challenges_multiple-choice_answers_add": "Neue Antworten hinzufügen",
   "challenges_multiple-choice_correctanswer_error": "Mindestens eine Antwort muss als richtig markiert sein.",
 
+  "challenges_multiple-choice_type_label": "Antwort-Typ",
+  "challenges_multiple-choice_type_help": "Entscheiden Sie, ob die Antworten Bilder oder Texte sein sollen",
+  "challenges_multiple-choice_type_error": "Bitte wählen sie einen Wert aus",
+
+  "challenges_details_successfullymessage_label" : "Korrekt Feedback",
+  "challenges_details_successfullymessage_help" : "Optional können Sie einen kurzen Text angeben, welcher bei richtigem Beantworten angezeigt wird.",
+
 
   "challenges_true-false_name": "Wahr/Falsch",
   "challenges_true-false_config_title" : "Wahr/Falsch Konfiguration",

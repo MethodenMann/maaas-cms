@@ -2,17 +2,39 @@ h3 {{ 'challenges_multiple-choice_config_title' | translate }}
 
 mas-form-group(field-name='question' localization-prefix='challenges_details_question')
   input.form-control(ng-model='ctrl.data.question' name='question' required ng-minlength='4')
+mas-form-group(field-name='type' localization-prefix='challenges_multiple-choice_type')
+  select.form-control(ng-model='ctrl.data.type')
+    option(value='text') Text
+    option(value='image') Bild
+mas-form-group(field-name='successfullyMessage' localization-prefix='challenges_details_successfullymessage')
+  input.form-control(ng-model='ctrl.data.successfullyMessage' name='successfullyMessage')
 
-    
+
 h4 {{ 'challenges_multiple-choice_answers' | translate }}
-a.btn(type='button' ng-click='ctrl.addAnswer()') {{ 'challenges_multiple-choice_answers_add' | translate }}
-div(ng-repeat='answer in ctrl.data.answers track by $index')
-  label {{ 'challenges_multiple-choice_answer' | translate }} {{$index+1}}
-  input.form-control(ng-model='answer.text')
+mas-new-button-sm(ng-click='ctrl.addAnswer()' text="{{ 'challenges_multiple-choice_answers_add' | translate }}")
 
-  mas-form-group(field-name='correctAnswer'  localization-prefix='challenges_multiple-choice_correctanswer' hide-help='true' hide-label='true')
-    input(type='radio' value='{{answer.idx}}' ng-model='ctrl.data.correctAnswer' name='correctAnswer' required)
-    | Richtige Antwort
 
-  a.btn(ng-click='ctrl.removeAnswer($index)') Remove
+div.top10(ng-repeat='answer in ctrl.data.answers track by $index')
+  div.well
+    a.btn.btn-warning.btn-circle.pull-right(ng-click='ctrl.removeAnswer($index)')
+      i.fa.fa-trash-o
+    label {{ 'challenges_multiple-choice_answer' | translate }} {{ $index + 1 }}
+    .form-group(ng-hide='ctrl.data.type === "image"')
+      input.form-control(ng-model='answer.text')
+      | {{ ctrl.data.type }}
+
+    mas-form-group(ng-hide='ctrl.data.type === "text"' field-name='stickerImage' hide-label='true' hide-error='true' hide-help='true')
+      mas-image-form-wrapper(image-id='{{ "image" + $index}}' model='answer.imageId' height='100' is-required='false')
+
+
+    mas-form-group(field-name='correctAnswer'  localization-prefix='challenges_multiple-choice_correctanswer' hide-help='true' hide-label='true')
+      input(type='radio' ng-value='answer.idx' ng-model='ctrl.data.correctAnswer' name='correctAnswer' required)
+      span Richtige Antwort
+
+
+
+
+
+
+
 

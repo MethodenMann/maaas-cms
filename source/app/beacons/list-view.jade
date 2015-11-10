@@ -1,12 +1,33 @@
 h1 {{ 'beacons_list_title' | translate }}
-span {{ 'beacons_list_description' | translate }}
-div(ui-i18n='"de"')
-  div.beaconGrid(ui-grid='ctrl.gridOptions' ui-grid-selection ui-grid-edit)
-  
-button.btn.btn-primary( ng-click='ctrl.deleteSelected()' ng-disabled='ctrl.gridApi.selection.getSelectedRows().length <= 0')
-  i.glyphicon.glyphicon-trash
-  | {{ 'beacons_list_delete_btn' | translate }}
+p {{ 'beacons_list_description' | translate }}
+
+table.table.table-striped
+  tr
+    th
+    th UniqueId
+    th Beschreibung
+    th Major
+    th Minor
+    th UUID
+    th
+  tr.hover-row(ng-repeat='beacon in ctrl.beacons')
+    td
+      .ico-ibeacon
+    td {{beacon.uniqueId}}
+    td
+
+      span.editable-label {{beacon.description}}
+      input.editable-text(ng-model='beacon.description')
+    td {{beacon.major}}
+    td {{beacon.minor}}
+    td {{beacon.uuid}}
+    td
+      div(style='width: 20px;')
+        a.btn.btn-warning.btn-circle.pull-right.hover-btn(ng-click='ctrl.removeBeacon($index)')
+          i.fa.fa-trash-o
+
+
 
 button.btn.btn-primary.btn(ng-click='ctrl.syncWithKontaktIO()') 
   i.glyphicon.glyphicon-download
-  | {{ 'beacons_list_sync_btn' | translate }}
+  |  {{ 'beacons_list_sync_btn' | translate }}

@@ -19,29 +19,28 @@ export class ListView {
 
     ) {
 
-    this.initializeGrid();
-    this.retrieveAndBindBeacons();
+    this.loadData();
   }
 
-  private retrieveAndBindBeacons() {
-    this.Beacon.findAll().then(() => {
-      this.$scope.$watch(() => {
-        return this.Beacon.lastModified();
-      }, () => {
-          this.beacons = this.Beacon.getAll();
-          this.gridOptions.data = this.beacons;
-        });
+  private loadData() {
+    this.Beacon.findAll().then((beacons) => {
+      this.beacons = beacons;
     });
   }
 
-  private deleteSelected() {
-    var conf = confirm('really?'); //Todo: Make more sexy
-    if (conf) {
-      this.gridApi.selection.getSelectedRows().forEach((b) => {
-        this.Beacon.destroy(b.id);
-      });
-    }
+  private removeBeacon(idx) {
+    this.beacons.splice(idx, 1);
   }
+
+
+  //private deleteSelected() {
+  //  var conf = confirm('really?'); //Todo: Make more sexy
+  //  if (conf) {
+  //    this.gridApi.selection.getSelectedRows().forEach((b) => {
+  //      this.Beacon.destroy(b.id);
+  //    });
+  //  }
+  //}
 
   private syncWithKontaktIO() {
     this.KontaktIoService.GetNewBeacons(this.beacons).then(beacons => {
@@ -54,29 +53,29 @@ export class ListView {
     });
   }
 
-  private onCellEdit(Beacon, rowEntity) {
-    Beacon.update(rowEntity.id, { beacon: rowEntity });
-  }
-
-  private initializeGrid() {
-    this.gridOptions = {
-      enableSorting: true,
-      enableHorizontalScrollbar: 0,
-      enableRowSelection: true,
-      onRegisterApi: (gridApi) => {
-        this.gridApi = gridApi;
-        this.gridApi.edit.on.afterCellEdit(this.$scope, (rowEntity, colDef, newValue, oldValue) => {
-          this.onCellEdit(this.Beacon, rowEntity);
-        });
-      },
-      columnDefs: [
-        { name: this.$filter('translate')('beacons_list_columnheader_name'), field: 'uniqueId', enableCellEdit: false },
-        { name: this.$filter('translate')('beacons_list_columnheader_alias'), field: 'description' },
-        { name: 'Major', field: 'major', enableCellEdit: false },
-        { name: 'Minor', field: 'minor', enableCellEdit: false },
-        { name: 'uuid', field: 'uuid' }
-      ]
-    };
-  }
+  //private onCellEdit(Beacon, rowEntity) {
+  //  Beacon.update(rowEntity.id, { beacon: rowEntity });
+  //}
+  //
+  //private initializeGrid() {
+  //  this.gridOptions = {
+  //    enableSorting: true,
+  //    enableHorizontalScrollbar: 0,
+  //    enableRowSelection: true,
+  //    onRegisterApi: (gridApi) => {
+  //      this.gridApi = gridApi;
+  //      this.gridApi.edit.on.afterCellEdit(this.$scope, (rowEntity, colDef, newValue, oldValue) => {
+  //        this.onCellEdit(this.Beacon, rowEntity);
+  //      });
+  //    },
+  //    columnDefs: [
+  //      { name: this.$filter('translate')('beacons_list_columnheader_name'), field: 'uniqueId', enableCellEdit: false },
+  //      { name: this.$filter('translate')('beacons_list_columnheader_alias'), field: 'description' },
+  //      { name: 'Major', field: 'major', enableCellEdit: false },
+  //      { name: 'Minor', field: 'minor', enableCellEdit: false },
+  //      { name: 'uuid', field: 'uuid' }
+  //    ]
+  //  };
+  //}
 
 }

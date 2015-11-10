@@ -18,6 +18,5 @@ export class DetailUpdateView extends DetailAbstract {
       this.$scope.$broadcast('save', {id: this.area.id, type: 'Area'});
       this.$scope.$broadcast('mas.saveprogess', 'successfully');
     });
-
   }
 }

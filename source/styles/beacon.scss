@@ -4,6 +4,34 @@
 }
 
 
+.hover-btn {
+  display: none;
+}
+
+.editable-label {
+  width: 200px;
+  display: block;
+}
+
+.editable-text {
+  width: 200px;
+  display: none;
+}
+
+.hover-row:hover .hover-btn {
+  display: block;
+}
+
+.hover-row:hover .editable-label{
+  display: none;
+}
+
+.hover-row:hover .editable-text{
+  display: block;
+}
+
+
+
 .ico-ibeacon:before {
   content: "";
   display: block;
