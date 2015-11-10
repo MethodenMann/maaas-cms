@@ -55,12 +55,11 @@ export class KontaktIoService {
       headers: {
         'Accept': 'application/vnd.com.kontakt+json',
         'Api-Key': 'EKydvSwiljOwVAfpSPzyMPGgPZFTASQu',
-        'Access-Control-Allow-Credentials': 'false'
-      }
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      withCredentials: false
     };
 
     return this.$http.get('https://api.kontakt.io/device', config);
-
   }
-
 }
