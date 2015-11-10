@@ -25,4 +25,10 @@ export function loadBeacon(app) {
       .state(`cms.${componentName}.list`,
         RouteUtil.getRoute(ListView, 'Beacons'));
   });
+
+  app.filter('number', [function() {
+    return function(input) {
+      return parseInt(input, 10);
+    };
+  }]);
 }
