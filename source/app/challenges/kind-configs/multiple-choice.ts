@@ -22,7 +22,7 @@ export class Multiplechoice {
       this.data.answers = [];
     }
 
-    if (this.data.type === undefined){
+    if (this.data.type === undefined) {
       this.data.type = 'text';
     }
 

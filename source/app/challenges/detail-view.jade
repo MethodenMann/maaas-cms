@@ -1,16 +1,18 @@
-h1 CREATE Quiz
+.panel.panel-green
+  .panel-heading
+    | {{ 'challenge_details_title' | translate }}
+  .panel-body
+    form(name='form' role='form' novalidate)
+      mas-form-group(field-name='name' localization-prefix='challenges_details_name')
+        input.form-control(ng-model='ctrl.challenge.name' name='name' required ng-minlength='2')
+      mas-form-group( field-name='kind' localization-prefix='challenges_details_kind')
+        select.form-control(ng-disabled='ctrl.disableKindSelect' ng-model='ctrl.selectedKind' ng-change='ctrl.kindChange()' ng-options='k.name for k in ctrl.kinds')
+      .form-group.left10
+        div(ng-include='ctrl.selectedKind.url')
 
-form(name='form' role='form' novalidate)
-  mas-form-group(field-name='name' localization-prefix='challenges_details_name')
-    input.form-control(ng-model='ctrl.challenge.name' name='name' required ng-minlength='2')
-  mas-form-group( field-name='kind' localization-prefix='challenges_details_kind')
-    select.form-control(ng-disabled='ctrl.disableKindSelect' ng-model='ctrl.selectedKind' ng-change='ctrl.kindChange()' ng-options='k.name for k in ctrl.kinds')
-  .form-group.left10
-    div(ng-include='ctrl.selectedKind.url')
+      mas-save-button(ng-disabled='!ctrl.selectedKind'  ng-click='ctrl.save()')
 
-  mas-save-button(ng-disabled='!ctrl.selectedKind'  ng-click='ctrl.save()')
-
-| {{ctrl.isUpdate}}
-h3 DEV challenge JSON
-| {{ctrl.challenge}}
+    | {{ctrl.isUpdate}}
+    h3 DEV challenge JSON
+    | {{ctrl.challenge}}
 

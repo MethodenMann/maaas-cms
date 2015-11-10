@@ -21,9 +21,8 @@ div.top10(ng-repeat='answer in ctrl.data.answers track by $index')
     label {{ 'challenges_multiple-choice_answer' | translate }} {{ $index + 1 }}
     .form-group(ng-hide='ctrl.data.type === "image"')
       input.form-control(ng-model='answer.text')
-      | {{ ctrl.data.type }}
 
-    mas-form-group(ng-hide='ctrl.data.type === "text"' field-name='stickerImage' hide-label='true' hide-error='true' hide-help='true')
+    mas-form-group(ng-hide='ctrl.data.type === "text"' field-name='{{ "image" + $index}}' hide-label='true' hide-error='true' hide-help='true')
       mas-image-form-wrapper(image-id='{{ "image" + $index}}' model='answer.imageId' height='100' is-required='false')
 
 

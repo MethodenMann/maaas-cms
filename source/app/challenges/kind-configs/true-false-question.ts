@@ -22,31 +22,6 @@ export class TrueFalseQuestion {
   constructor(
     @Inject('$scope') protected $scope
   ) {
-
-    $scope.$on('image-management.injectImage', (e, data:IMediumUploadBroadcast) => {
-      this.handleImageDisplay(data.uploadId, data.mediumId);
-    });
-
-    $scope.$on('challenge.saved', (e, challenge) => {
-      this.saveImageRelation(challenge.id);
-    });
-  }
-
-  saveImageRelation(challengeId) {
-    if (this.question.imageId) {
-      var relationData: IMediumableUpdateBroadcast = {
-        id: this.question.imageId,
-        mediumableId: challengeId,
-        mediumableType: 'challenge'
-      };
-      this.$scope.$broadcast('image-management.mediumableUpdate', relationData);
-    }
-  }
-
-  handleImageDisplay(uploadId:string, mediumId) {
-    if ((uploadId.indexOf('_') > -1) && (uploadId.split('_')[1] === this.index.toString())) {
-      this.question.imageId = mediumId;
-    }
   }
 
   removeQuestion() {

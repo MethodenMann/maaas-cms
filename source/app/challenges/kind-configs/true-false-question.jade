@@ -6,12 +6,11 @@ div.well
   mas-form-group(field-name='{{ "text"+ ctrl.index }}' localization-prefix='challenges_true-false_question_text')
     input.form-control(ng-model='ctrl.question.text' name='{{ "text"+ ctrl.index }}' required)
 
-  mas-form-group(field-name='text' localization-prefix='challenges_true-false_question_image' hide-error='true')
-    div
-      image-upload(upload-id='{{ "question_" + ctrl.index }}' )
-      image-load( upload-id='{{ "question_" + ctrl.index }}' initial-media-id='{{ctrl.question.imageId}}' height='100')
-      |  {{question.imageId}}
 
+  mas-form-group(field-name='{{ "question_" + ctrl.index }}' localization-prefix='challenges_true-false_question_image' hide-error='true')
+    mas-image-form-wrapper(image-id='{{ "question_" + ctrl.index }}' model='ctrl.question.imageId' height='100' is-required='false')
+
+    
   mas-form-group(field-name='{{ "answer"+ ctrl.index }}' localization-prefix='challenges_true-false_question_answer')
     div
       div

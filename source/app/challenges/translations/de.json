@@ -1,6 +1,6 @@
 {
   "challenges_title": "Quiz",
-
+  "challenge_details_title": "Quiz Details",
 
   "challenges_details_name_label": "Name",
   "challenges_details_name_help": "Der Name des Quiz, dieser erscheint in der App nicht",
@@ -11,6 +11,16 @@
   "challenges_details_kind_label": "Quiz Typ",
   "challenges_details_kind_help": "Wählen sie die Art des gwünschten Quiz aus.",
   "challenges_details_kind_error": "Bitte Geben Sie einen gülten Quiz-Typ ein",
+
+  "challenges_details_assign_pairs" : "Antwort-Paare",
+  "challenges_details_assign_add" : "Antwort Paar hinzufügen",
+
+  "challenges_details_assign_text_label" : "Text",
+  "challenges_details_assign_text_help" : "Der Text steht auf der Linken Seite und muss dem Bild zugeordnet werden",
+  "challenges_details_assign_text_error" : "Bitte geben Sie einen Text ein.",
+  "challenges_details_assign_image_label" : "Bild",
+  "challenges_details_assign_image_help" : "Das Bild erscheint auf der Rechten Seite",
+  "challenges_details_assign_image_error" : "Bitte laden Sie ein Bild hoch",
 
 
 

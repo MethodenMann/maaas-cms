@@ -25,7 +25,7 @@ export class Assign {
 
   constructor(@Inject('$scope') protected $scope,
               @Inject('Medium') protected Medium) {
-    if (!this.data.listA) {
+    if (!this.data.listA || this.data.listA.values === null) {
       this.data.listA = {kind: 'text', values: []};
       this.data.listB = {kind: 'image', values: []};
     }

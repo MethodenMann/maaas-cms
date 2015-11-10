@@ -318,12 +318,6 @@ table.dataTable thead {
     color: $gray-dark;
     background-color: $main-color;
   }
-  a {
-    color: $main-color;
-    &:hover {
-      color: darken($main-color, 15%);
-    }
-  }
 }
 
 .list-group-item-gray.active{
