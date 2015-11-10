@@ -30,11 +30,9 @@ export class LoginComponent {
   }
 
   private static link($scope, element: JQuery, attributes) {
-    element.bind("keydown keypress", function (event) {
-      if(event.which === 13) {
+    element.bind('keydown keypress', (event) => {
+      if (event.which === 13) {
         $scope.ctrl.login();
-
-
       }
     });
   }
