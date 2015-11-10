@@ -6,9 +6,6 @@ mas-form-group(field-name='question' localization-prefix='challenges_details_que
 
 
 h4 {{ 'challenges_details_assign_pairs' | translate }}
-mas-new-button-sm(ng-click='ctrl.addPair()' text="{{ 'challenges_details_assign_add' | translate }}")
-
-
 div.top10(ng-repeat='value in ctrl.data.listA.values')
   div.well
     a.btn.btn-warning.btn-circle.pull-right(ng-click='ctrl.deletePair($index)')
@@ -21,14 +18,6 @@ div.top10(ng-repeat='value in ctrl.data.listA.values')
     mas-form-group(field-name='{{"image" + $index}}' localization-prefix='challenges_details_assign_image')
       mas-image-form-wrapper(image-id='{{"image" + $index}}' model='ctrl.data.listB.values[$index].mediumId' height='100' is-required='true')
 
-//
-//mas-form-group(field-name='{{"image"+$index}}' )
-//  image-upload(upload-id='{{"assignQuizImage"+$index}}' medium-id='ctrl.data.listB.values[$index].mediumId')
-//  image-load(upload-id='{{"assignQuizImage"+$index}}' initial-media-id='{{ctrl.data.listB.values[$index].mediumId}}' height='100')
-//  input.form-control(type='hidden' ng-model='ctrl.data.listB.values[$index].mediumId' name='{{"image"+$index}}' required)
-//
-//
-
-
+mas-new-button-sm(ng-click='ctrl.addPair()' text="{{ 'challenges_details_assign_add' | translate }}")
 
 

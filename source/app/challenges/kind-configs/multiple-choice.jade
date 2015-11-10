@@ -11,8 +11,6 @@ mas-form-group(field-name='successfullyMessage' localization-prefix='challenges_
 
 
 h4 {{ 'challenges_multiple-choice_answers' | translate }}
-mas-new-button-sm(ng-click='ctrl.addAnswer()' text="{{ 'challenges_multiple-choice_answers_add' | translate }}")
-
 
 div.top10(ng-repeat='answer in ctrl.data.answers track by $index')
   div.well
@@ -30,6 +28,8 @@ div.top10(ng-repeat='answer in ctrl.data.answers track by $index')
       input(type='radio' ng-value='answer.idx' ng-model='ctrl.data.correctAnswer' name='correctAnswer' required)
       span Richtige Antwort
 
+
+mas-new-button-sm(ng-click='ctrl.addAnswer()' text="{{ 'challenges_multiple-choice_answers_add' | translate }}")
 
 
 

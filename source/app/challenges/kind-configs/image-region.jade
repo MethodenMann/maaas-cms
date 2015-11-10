@@ -4,16 +4,11 @@ mas-form-group(field-name='question' localization-prefix='challenges_image-regio
   input.form-control(ng-model='ctrl.data.question' name='question' required)
 
 mas-form-group(field-name='image' localization-prefix='challenges_image-region_image')
-  div
-    image-upload(upload-id='imageId' )
-    image-load( upload-id='imageId' initial-media-id='{{ctrl.data.imageId}}' height='300')
-    input(type='hidden' name='imageId' ng-model='ctrl.data.imageId' required)
+  mas-image-form-wrapper(image-id='image' model='ctrl.data.imageId' height='300' is-required='true')
 
 mas-form-group(field-name='imageSolved' localization-prefix='challenges_image-region_image_solved')
-  div
-    image-upload(upload-id='imageSolvedId' )
-    image-load( upload-id='imageSolvedId' initial-media-id='{{ctrl.data.imageSolvedId}}' height='300')
-    input(type='hidden' name='imageSolvedId' ng-model='ctrl.data.imageSolvedId' required)
+  mas-image-form-wrapper(image-id='imageSolved' model='ctrl.data.imageSolvedId' height='300' is-required='true')
+
 
 mas-form-group(field-name='coords' localization-prefix='challenges_image-region_coords')
   input.form-control(ng-model='ctrl.data.coords' name='coords' required)
