@@ -3,6 +3,7 @@ import {IContent} from './IContent';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 import {IMedium} from '../media/imedium';
 import {FormView} from '../common/forms/form-view';
+import {IArea} from '../areas/iarea';
 
 export abstract class AbstractDetailView extends FormView {
   private static selector = 'mas-content-detail-view';
@@ -12,13 +13,14 @@ export abstract class AbstractDetailView extends FormView {
   protected imageList: any[] = [];
   protected backgroundImageId: String;
   protected ids: String[] = [];
-  protected area: any = {name: 'abc'};
+  protected area: IArea;
   protected tinymceConfig: any;
 
   constructor(
     @Inject('$scope') protected $scope,
     @Inject('Content') protected Content,
     @Inject('Medium') protected Medium,
+    @Inject('Area') protected Area,
     @Inject('$stateParams') protected $stateParams,
     @Inject('$state') protected $state,
     @Inject('$q') protected $q
@@ -41,6 +43,10 @@ export abstract class AbstractDetailView extends FormView {
       }
     };
 
+    this.Area.find(this.$stateParams.areaId).then((data) => {
+      this.area = data;
+    });
+    
     this.constructorHook();
   }
 

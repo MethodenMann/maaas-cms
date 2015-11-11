@@ -18,7 +18,7 @@ export function loadContent(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.areas.detail.${componentName}`,
-        RouteUtil.getAbstractRoute(`/${componentName}`, 'Inhalte Yo'))
+        RouteUtil.getAbstractRoute(`/${componentName}`))
       .state(`cms.areas.detail.${componentName}.list`,
         RouteUtil.getRoute(ListView, 'Inhalte', 'cms.areas.detail.update'))
       .state(`cms.areas.detail.${componentName}.create`,
