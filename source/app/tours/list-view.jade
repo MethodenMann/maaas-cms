@@ -3,8 +3,8 @@ h1 {{ 'tours_title' | translate }}
   .row
     .col-md-4.top30(ng-repeat-start='tour in ctrl.tours')
       a(style='text-align: center;' href ui-sref='cms.tours.detail.update({tourId: tour.id})')
-        image-load(initial-media-id='{{tour.imageId}}' height='100')
-        div {{tour.name}}
+        image-load.mas-round-img(initial-media-id='{{tour.imageId}}' height='100')
+        div.center-text {{tour.name}}
     .clearfix(ng-if='$index%3==2')
     div(ng-repeat-end='')
     .col-md-4.top30.text-center

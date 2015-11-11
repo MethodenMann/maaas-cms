@@ -3,8 +3,8 @@ h1 {{ 'contents_title' | translate }}
   .row
     .col-md-4.top30(ng-repeat='content in ctrl.area.contents')
       a(style='text-align: center;' href ui-sref='cms.areas.detail.contents.update({contentId: content.id})')
-        image-load(initial-media-id='{{content.previewImageId}}' height='100')
-        div {{content.title}}
+          image-load.mas-round-img(initial-media-id='{{content.previewImageId}}' height='100')
+        div.center-text {{content.title}}
     .clearfix(ng-if='$index%3==2')
     div(ng-repeat-end='')
     .col-md-4.top30.text-center

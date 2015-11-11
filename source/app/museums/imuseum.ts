@@ -4,4 +4,5 @@ export interface IMuseum {
   description: string;
   address: string;
   imageId: number;
+  kontaktIoApiKey: string;
 }

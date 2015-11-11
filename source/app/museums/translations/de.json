@@ -12,5 +12,8 @@
   "museums_details_address_error": "Bitte Geben Sie eine gültige Adresse ein",
   "museums_details_image_label": "Logo",
   "museums_details_image_help": "Das Logo wird in der App an diversen Orten angezeigt. Als SVG",
-  "museums_details_image_error": "BItte laden sie ein Logo hoch"
+  "museums_details_image_error": "BItte laden sie ein Logo hoch",
+  "museums_details_kontaktkey_label": "Kontakt.io API-Key",
+  "museums_details_kontaktkey_help": "Wird für die Beacon synchronisation verwerden. Kann von https://panel.kontakt.io kopiert werden"
+
 }

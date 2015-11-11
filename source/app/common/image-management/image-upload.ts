@@ -24,7 +24,9 @@ export class ImageUploadDirective {
   constructor(
     @Inject('$scope') private $scope,
     @Inject('$rootScope') private $rootScope,
-    @Inject('Medium') private Medium
+    @Inject('Medium') private Medium,
+    @Inject('Auth') private Auth,
+    @Inject('Museum') private Museum
   ) {
 
     this.$scope.$on('image-management.mediumableUpdate', (e, data) => {
@@ -63,14 +65,23 @@ export class ImageUploadDirective {
   }
 
   private static link($scope, element: JQuery, attributes) {
-    var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
-      cloud_name: 'nmsg', folder: 'dev'
-    }); //TODO: Change static dev folder to museum directory
+    var museumId = $scope.ctrl.Auth._currentUser.museum_id;
 
-    imageTag.bind('cloudinarydone', (e, data) => {
-      $scope.ctrl.handleSuccessfulUpload(data);
-    });
+    $scope.ctrl.Museum.find(museumId).then((museum) => { //TODO: Own Service for this  authentication
+       var museumFolder = museum.name.replace(/[^A-Z0-9]/ig, "").toLowerCase();
 
-    element.find('#uploadbutton').append(imageTag);
+      console.log('museumFolder',museumFolder );
+      var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
+        cloud_name: 'nmsg', folder: museumFolder
+      }); //TODO: Change static dev folder to museum directory
+
+      imageTag.bind('cloudinarydone', (e, data) => {
+        $scope.ctrl.handleSuccessfulUpload(data);
+      });
+
+      element.find('#uploadbutton').append(imageTag);
+    })
+
+
   }
 }

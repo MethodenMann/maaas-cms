@@ -16,4 +16,8 @@
       mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
         mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
 
+      mas-form-group(field-name='kontaktioapikey' localization-prefix='museums_details_kontaktkey')
+        input.form-control(ng-model='ctrl.museum.kontaktIoApiKey' name='name')
+
+
       mas-save-button(ng-click='ctrl.save()')

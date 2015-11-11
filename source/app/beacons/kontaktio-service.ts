@@ -9,7 +9,7 @@ export class KontaktIoService {
     ) { }
 
 
-  private GetBeaconById(beacons: IBeacon[], uniqueId: string): IBeacon {
+  private getBeaconById(beacons: IBeacon[], uniqueId: string): IBeacon {
     var result = null;
     beacons.forEach(beacon => {
       if (beacon.uniqueId === uniqueId) {
@@ -19,7 +19,7 @@ export class KontaktIoService {
     return result;
   }
 
-  private ConvertKontaktBeacon(kontaktBeacon): IBeacon {
+  private convertKontaktBeacon(kontaktBeacon): IBeacon {
     var beacon = <IBeacon>{};
 
     beacon.uuid = kontaktBeacon.proximity;
@@ -31,15 +31,15 @@ export class KontaktIoService {
     return beacon;
   }
 
-  public GetNewBeacons(beacons: Array<IBeacon>) {
+  public getNewBeacons(apiKey:string, beacons: Array<IBeacon>) {
     var defer = this.$q.defer();
     var result: IBeacon[] = [];
-    this.LoadKontaktIoBeacons().then(response => {
+    this.loadKontaktIoBeacons(apiKey).then(response => {
       var kontaktBeacons = response.data.devices;
       angular.forEach(kontaktBeacons, kontaktBeacon => {
-        var b = this.GetBeaconById(beacons, kontaktBeacon.uniqueId);
+        var b = this.getBeaconById(beacons, kontaktBeacon.uniqueId);
         if (b == null) {
-          result.push(this.ConvertKontaktBeacon(kontaktBeacon));
+          result.push(this.convertKontaktBeacon(kontaktBeacon));
         }
       });
       return defer.resolve(result);
@@ -49,12 +49,12 @@ export class KontaktIoService {
   }
 
 
-  private LoadKontaktIoBeacons(): any {
+  private loadKontaktIoBeacons(apiKey:string): any {
     var config = {
       //TODO: API Key nicht statisch hinterlegen
       headers: {
         'Accept': 'application/vnd.com.kontakt+json',
-        'Api-Key': 'EKydvSwiljOwVAfpSPzyMPGgPZFTASQu',
+        'Api-Key': apiKey,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       withCredentials: false
