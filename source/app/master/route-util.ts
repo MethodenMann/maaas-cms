@@ -14,16 +14,16 @@ export class RouteUtil {
     };
   }
 
-  public static getDetailRoute(url, parent) {
-    return {
-      url: url,
-      abstract: true,
-      template: '<div ui-view=""></div>',
-      ncyBreadcrumb: {
-        parent: parent
-      }
-    };
-  }
+  //public static getDetailRoute(url, parent) {
+  //  return {
+  //    url: url,
+  //    abstract: true,
+  //    template: '<div ui-view=""></div>',
+  //    ncyBreadcrumb: {
+  //      parent: parent
+  //    }
+  //  };
+  //}
 
   public static getRoute(component, displayName, parent = '', url = '') {
     return {

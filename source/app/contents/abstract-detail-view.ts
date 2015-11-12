@@ -46,7 +46,7 @@ export abstract class AbstractDetailView extends FormView {
     this.Area.find(this.$stateParams.areaId).then((data) => {
       this.area = data;
     });
-    
+
     this.constructorHook();
   }
 

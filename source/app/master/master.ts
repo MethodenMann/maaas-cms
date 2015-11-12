@@ -1,5 +1,6 @@
 // import {app} from '../app';
 import {MasterView} from './master-view';
+import {WelcomeView} from './welcome-view';
 import {RouteUtil} from './route-util';
 
 export function loadMaster(app) {
@@ -8,9 +9,16 @@ export function loadMaster(app) {
   });
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/cms');
+    $urlRouterProvider.otherwise('cms/welcome');
+
     $stateProvider
-      .state('cms', RouteUtil.getRoute(MasterView, 'CMS', '', '/cms'));
+      .state('cms', RouteUtil.getRoute(MasterView, 'CMS', '', '/cms'))
+
+      .state('cms.welcome', RouteUtil.getRoute(WelcomeView, 'Wikommen', 'cms', '/welcome'));
+
+
+
+
   });
 
   //TODO: refactor in own component

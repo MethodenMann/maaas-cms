@@ -63,6 +63,7 @@
         "./app/master/master-view.ts",
         "./app/master/master.ts",
         "./app/master/route-util.ts",
+        "./app/master/welcome-view.ts",
         "./app/media/imedium.ts",
         "./app/museums/detail-abstract.ts",
         "./app/museums/detail-create-view.ts",

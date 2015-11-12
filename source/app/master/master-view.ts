@@ -16,6 +16,9 @@ export class MasterView {
 
     angular.element($window).bind('load resize', this.resizeHandler);
     this.resizeHandler();
+
+
+    this.$state.go('cms.welcome');
   }
 
 

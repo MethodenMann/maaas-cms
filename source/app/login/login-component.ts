@@ -23,7 +23,7 @@ export class LoginComponent {
 
 
     this.Auth.login(credentials).then((user) => {
-      this.$state.go('cms');
+      this.$state.go('cms.welcome');
     }, (error) => {
       this.feedback = this.$filter('translate')('login_failed');
     });
