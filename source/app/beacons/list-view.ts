@@ -40,7 +40,7 @@ export class ListView {
 
     this.Museum.find(museumId).then((museum) => {
       this.museum = museum;
-    })
+    });
   }
 
 
