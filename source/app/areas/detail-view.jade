@@ -18,8 +18,12 @@
 
       mas-form-group(field-name='backgroundImage' localization-prefix='areas_details_backgroundimage')
           mas-image-form-wrapper(image-id='backgroundImage' model='ctrl.area.backgroundImageId' height='200' is-required='true')
+
       mas-form-group(field-name='stickerImage' localization-prefix='areas_details_stickerimage')
           mas-image-form-wrapper(image-id='stickerImage' model='ctrl.area.stickerImageId' height='100' is-required='true')
+
+      mas-form-group(field-name='gotoImage' localization-prefix='areas_details_gotoimage')
+          mas-image-form-wrapper(image-id='gotoImage' model='ctrl.area.gotoImageId' height='100' is-required='true')
 
       mas-save-button(ng-click='ctrl.save()')
 
