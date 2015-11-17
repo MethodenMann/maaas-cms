@@ -1,5 +1,9 @@
 import {Inject} from '../utils/di';
 
+class Translatable {
+  constructor(public fieldConfig:any, public model:any, public modelName:string) {}
+}
+
 export class ListView {
   private static selector = 'mas-translation-list-view';
   private static templateUrl = './app/translation/list-view.html';
@@ -16,6 +20,8 @@ export class ListView {
 
   private modelConfigs:Array<{name:string, modelType:any}>;
   private selectedModelConfig:{name:string, modelType:any};
+
+  private translatables:Array<Translatable> = [];
 
   private fieldConfigs = {
     'area': () => {
@@ -87,9 +93,17 @@ export class ListView {
       ((modelConfig) => {
         modelConfig.modelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
           this.modelStore[modelConfig.name] = models;
+          for (let model of models) {
+            var fieldConfig = this.fieldConfigs[modelConfig.name](model);
+            this.translatables.push(new Translatable(fieldConfig, model, modelConfig.name));
+          }
         });
       })(modelConfig);
     }
+  }
+
+  getTranslatable() {
+    return this.translatables[0];
   }
 
   loadPreviousModel() {
@@ -127,5 +141,9 @@ export class ListView {
     this.allModels = this.modelStore[this.selectedModelConfig.name];
     this.currentModelIndex = 0;
     this.loadModel();
+  }
+
+  getTranslationProgressForModel(model:any) {
+
   }
 }
