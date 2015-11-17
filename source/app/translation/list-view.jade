@@ -33,6 +33,11 @@ h1 Translations
     //-       mas-form-group(ng-repeat='field in ctrl.fields' name='{{field.name}}' localization-prefix='{{field.prefix}}')
     //-         mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.currentModel.translations[ctrl.currentLanguage][field.name]' name='{{field.name}}')
     //-   .col-md-4
+    .row
+      .col-md-12
+        .progress
+          .progress-bar(ng-style='ctrl.getProgressBarStyle()')
+            span {{(ctrl.currentTranslationProgress*100).toFixed(0)}}% Complete
 
     .row
       .col-md-6
@@ -46,7 +51,9 @@ h1 Translations
       .col-md-6
         ul.nav.nav-tabs
           li(ng-repeat='locale in ctrl.locales' ng-class='{active: ctrl.currentLanguage==locale}')
-            a(ng-click='ctrl.currentLanguage=locale') {{locale}}
+            a(ng-click='ctrl.currentLanguage=locale')
+              | {{locale}}
+              mas-percentage-ribbon(percentage="ctrl.getTranslatable().getTranslationProgress()[1][locale]")
         form(name='form' role='form' novalidate)
           mas-form-group(ng-repeat='field in ctrl.getTranslatable().fieldConfig' name='{{field.name}}' localization-prefix='{{field.prefix}}')
             mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.getTranslatable().model.translations[ctrl.currentLanguage][field.name]' name='{{field.name}}')

@@ -82,6 +82,7 @@
         "./app/tours/tour.ts",
         "./app/translation/dynamic-input-component.ts",
         "./app/translation/list-view.ts",
+        "./app/translation/percentage-ribbon.ts",
         "./app/translation/translatable.ts",
         "./app/translation/translations.ts",
         "./app/utils/component.ts",

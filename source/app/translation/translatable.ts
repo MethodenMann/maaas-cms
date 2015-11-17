@@ -1,5 +1,6 @@
 export class Translatable {
   private locales = ['en', 'it', 'fr'];
+  private mainLocale = 'de';
   public fieldConfig:any;
 
   constructor(public modelConfig:any, public model:any) {
@@ -8,6 +9,30 @@ export class Translatable {
 
   prepareModel() {
     modelPreparators[this.modelConfig.name](this.model);
+  }
+
+  getTranslationProgress() : [number, {}] {
+    var translationsPerLocale = {}
+    var total = 0;
+    var progress = this.getTranslationProgressFor(this.model, this.fieldConfig);
+    translationsPerLocale[this.mainLocale] = progress;
+    total += progress;
+    for (let locale of this.locales) {
+      progress = this.getTranslationProgressFor(this.model.translations[locale], this.fieldConfig);
+      translationsPerLocale[locale] = progress;
+      total += progress;
+    }
+    return [total / (1 + this.locales.length), translationsPerLocale];
+  }
+
+  getTranslationProgressFor(model, fields) {
+    var defined = 0;
+    for (let field of fields) {
+      if (model[field.name] != undefined && model[field.name] != null && model[field.name] != "") {
+        defined++;
+      }
+    }
+    return defined / fields.length;
   }
 }
 

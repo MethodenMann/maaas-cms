@@ -15,6 +15,8 @@ export class ListView {
 
   private translatables:Array<Translatable> = [];
 
+  private currentTranslationProgress = 0;
+
   constructor(
     @Inject('$scope') private $scope,
     @Inject('Area') private Area,
@@ -50,6 +52,7 @@ export class ListView {
 
   loadNextModel() {
     this.currentModelIndex = Math.min(this.translatables.length - 1, ++this.currentModelIndex);
+    this.updateTranslationProgress();
   }
 
   save() {
@@ -60,7 +63,17 @@ export class ListView {
     translatable.modelConfig.modelType.update(translatable.model.id, payload);
   }
 
-  getTranslationProgressForModel(model:any) {
+  updateTranslationProgress() {
+    var allTotal = 0;
+    for (let translatable of this.translatables) {
+      var [total, perLocale] = translatable.getTranslationProgress();
+      allTotal += total;
+    }
+    this.currentTranslationProgress = (allTotal / this.translatables.length);
+  }
 
+  getProgressBarStyle() {
+    var n = this.currentTranslationProgress * 100;
+    return {width: `${n}%`}
   }
 }

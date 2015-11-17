@@ -1,4 +1,5 @@
 import {ListView} from './list-view';
+import {PercentageRibbon} from './percentage-ribbon';
 import {DynamicInputComponent} from './dynamic-input-component';
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
@@ -9,6 +10,10 @@ export function loadTranslations(app) {
   app.directive(
     makeSelector(ListView),
     makeDirective(ListView));
+
+  app.directive(
+    makeSelector(PercentageRibbon),
+    makeDirective(PercentageRibbon));
 
   app.directive(
     makeSelector(DynamicInputComponent),
