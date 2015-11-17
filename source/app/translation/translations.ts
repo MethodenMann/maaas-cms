@@ -1,5 +1,6 @@
 import {ListView} from './list-view';
 import {PercentageRibbon} from './percentage-ribbon';
+import {WizardModeView} from './wizard-mode-view';
 import {DynamicInputComponent} from './dynamic-input-component';
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
@@ -14,6 +15,10 @@ export function loadTranslations(app) {
   app.directive(
     makeSelector(PercentageRibbon),
     makeDirective(PercentageRibbon));
+
+  app.directive(
+    makeSelector(WizardModeView),
+    makeDirective(WizardModeView));
 
   app.directive(
     makeSelector(DynamicInputComponent),

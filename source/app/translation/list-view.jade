@@ -6,57 +6,17 @@ h1 Translations
   .panel-body
     .row
       .col-md-3
-        select.form-control(ng-model='ctrl.selectedModelConfig' ng-change='ctrl.selectedModelConfigChanged()'
-                            ng-options='option.name for option in ctrl.modelConfigs track by option.name')
-      .col-md-1
-        | {{ctrl.currentModelIndex + 1}} of {{ctrl.translatables.length}}
-      .col-md-2
-        button.form-control(ng-click='ctrl.loadPreviousModel()') Previous
-      .col-md-2
-        button.form-control(ng-click='ctrl.loadNextModel()') Next
+        select.form-control(ng-model="ctrl.selectedMode" ng-change="ctrl.selectedModeChanged()")
+          option(value="wizard") Wizard Modus
+          option(value="all") Alles aufs Mal
+          option(value="category") Nach Kategorie
     br
-    br
-    //- .row
-    //-   .col-md-6
-    //-     ul.nav.nav-tabs
-    //-       li.active
-    //-         a {{ctrl.mainLanguage}}
-    //-     form(name='form' role='form' novalidate readonly)
-    //-       mas-form-group(ng-repeat='field in ctrl.fields' name='{{field.name}}' localization-prefix='{{field.prefix}}')
-    //-         mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.currentModel[field.name]' name='{{field.name}}')
-    //-
-    //-   .col-md-6
-    //-     ul.nav.nav-tabs
-    //-       li(ng-repeat='locale in ctrl.locales' ng-class='{active: ctrl.currentLanguage==locale}')
-    //-         a(ng-click='ctrl.currentLanguage=locale') {{locale}}
-    //-     form(name='form' role='form' novalidate)
-    //-       mas-form-group(ng-repeat='field in ctrl.fields' name='{{field.name}}' localization-prefix='{{field.prefix}}')
-    //-         mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.currentModel.translations[ctrl.currentLanguage][field.name]' name='{{field.name}}')
-    //-   .col-md-4
     .row
       .col-md-12
         .progress
           .progress-bar.progress-bar-success(ng-style='ctrl.getProgressBarStyle()')
             span {{(ctrl.currentTranslationProgress*100).toFixed(0)}}% Complete
 
-    .row
-      .col-md-6
-        ul.nav.nav-tabs
-          li.active
-            a {{ctrl.mainLanguage}}
-        form(name='form' role='form' novalidate readonly)
-          mas-form-group(ng-repeat='field in ctrl.getTranslatable().fieldConfig' name='{{field.name}}' localization-prefix='{{field.prefix}}')
-            mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.getTranslatable().model[field.name]' name='{{field.name}}')
-
-      .col-md-6
-        ul.nav.nav-tabs
-          li(ng-repeat='locale in ctrl.locales' ng-class='{active: ctrl.currentLanguage==locale}')
-            a(ng-click='ctrl.currentLanguage=locale')
-              | {{locale}}
-              mas-percentage-ribbon(percentage="ctrl.getTranslatable().getTranslationProgress()[1][locale]")
-        form(name='form' role='form' novalidate)
-          mas-form-group(ng-repeat='field in ctrl.getTranslatable().fieldConfig' name='{{field.name}}' localization-prefix='{{field.prefix}}')
-            mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.getTranslatable().model.translations[ctrl.currentLanguage][field.name]' name='{{field.name}}')
-      .col-md-4
+    mas-wizard-mode-view(translatables="ctrl.translatables")
 
 mas-save-button(ng-click='ctrl.save()')

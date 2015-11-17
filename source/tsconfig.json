@@ -85,6 +85,7 @@
         "./app/translation/percentage-ribbon.ts",
         "./app/translation/translatable.ts",
         "./app/translation/translations.ts",
+        "./app/translation/wizard-mode-view.ts",
         "./app/utils/component.ts",
         "./app/utils/di.ts",
         "./tests/museums.test.ts",

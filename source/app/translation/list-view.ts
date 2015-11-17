@@ -14,8 +14,11 @@ export class ListView {
   private modelConfigs:Array<{name:string, modelType:any}>;
 
   private translatables:Array<Translatable> = [];
+  private filteredTranslatables:Array<Translatable> = [];
 
   private currentTranslationProgress = 0;
+
+  private selectedMode:string;
 
   constructor(
     @Inject('$scope') private $scope,
