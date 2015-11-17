@@ -9,12 +9,12 @@ export class ListView {
   private currentLanguage:string = 'en';
   private locales = ['en', 'it', 'fr'];
 
-  private currentModel:any;
   private allModels:Array<any>;
-
-  private currentModelType:any;
-  private currentModelName:string;
+  private currentModel:any;
   private currentModelIndex:number;
+
+  private modelConfigs:Array<{name:string, modelType:any}>;
+  private selectedModelConfig:{name:string, modelType:any};
 
   private fieldConfigs = {
     'area': () => {
@@ -68,9 +68,6 @@ export class ListView {
     }
   };
 
-  private modelConfigs:Array<{value:string, modelType:any}>;
-  private selectedModel:{value:string, modelType:any};
-
   constructor(
     @Inject('$scope') private $scope,
     @Inject('Area') private Area,
@@ -79,9 +76,9 @@ export class ListView {
     ) {
 
     this.modelConfigs = [];
-    this.modelConfigs.push({value: 'area', modelType: Area});
-    this.modelConfigs.push({value: 'content', modelType: Content});
-    this.modelConfigs.push({value: 'challenge', modelType: Challenge});
+    this.modelConfigs.push({name: 'area', modelType: Area});
+    this.modelConfigs.push({name: 'content', modelType: Content});
+    this.modelConfigs.push({name: 'challenge', modelType: Challenge});
   }
 
   loadPreviousModel() {
@@ -102,24 +99,21 @@ export class ListView {
 
   save() {
     var payload = {};
-    payload[this.currentModelName] = this.currentModel;
+    payload[this.selectedModelConfig.name] = this.currentModel;
     payload['locale'] = this.mainLanguage;
-    this.currentModelType.update(this.currentModel.id, payload);
+    this.selectedModelConfig.modelType.update(this.currentModel.id, payload);
   }
 
   prepareFieldsForCurrentModel() {
-    this.fields = this.fieldConfigs[this.selectedModel.value](this.currentModel);
+    this.fields = this.fieldConfigs[this.selectedModelConfig.name](this.currentModel);
   }
 
   prepareModel() {
-    this.modelPreparators[this.selectedModel.value](this.currentModel);
+    this.modelPreparators[this.selectedModelConfig.name](this.currentModel);
   }
 
-  selectedModelChanged() {
-    this.currentModelType = this.selectedModel.modelType;
-    this.currentModelName = this.selectedModel.value;
-
-    this.currentModelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
+  selectedModelConfigChanged() {
+    this.selectedModelConfig.modelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
       this.allModels = models;
       this.currentModelIndex = 0;
       this.loadModel();
