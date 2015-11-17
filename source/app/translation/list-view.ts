@@ -51,32 +51,10 @@ export class ListView {
     $q.all(promises).then(() => {
       this.updateTranslationProgress();
     })
-  }
 
-  getTranslatable() {
-    return this.translatables[this.currentModelIndex];
-  }
-
-  loadPreviousModel() {
-    this.save();
-    this.currentModelIndex = Math.max(0, --this.currentModelIndex);
-  }
-
-  loadNextModel() {
-    this.save();
-    this.currentModelIndex = Math.min(this.translatables.length - 1, ++this.currentModelIndex);
-  }
-
-  save() {
-    this.$scope.$broadcast('mas.saveprogess', 'in-progress');
-    var payload = {};
-    var translatable = this.getTranslatable();
-    payload[translatable.modelConfig.name] = translatable.model;
-    payload['locale'] = this.mainLanguage;
-    translatable.modelConfig.modelType.update(translatable.model.id, payload).then(() => {
-      this.$scope.$broadcast('mas.saveprogess', 'successfully');
-    });
-    this.updateTranslationProgress();
+    $scope.$on('mas.request-translation-progress-update', () => {
+      this.updateTranslationProgress();
+    })
   }
 
   updateTranslationProgress() {

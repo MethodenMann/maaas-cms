@@ -84,6 +84,7 @@
         "./app/translation/list-view.ts",
         "./app/translation/percentage-ribbon.ts",
         "./app/translation/translatable.ts",
+        "./app/translation/translation-panel.ts",
         "./app/translation/translations.ts",
         "./app/translation/wizard-mode-view.ts",
         "./app/utils/component.ts",

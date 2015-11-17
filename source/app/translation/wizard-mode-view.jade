@@ -5,22 +5,7 @@
     button.form-control(ng-click='ctrl.loadPreviousModel()') Previous
   .col-md-2
     button.form-control(ng-click='ctrl.loadNextModel()') Next
-.row
-  .col-md-6
-    ul.nav.nav-tabs
-      li.active
-        a {{ctrl.mainLanguage}}
-    form(name='form' role='form' novalidate readonly)
-      mas-form-group(ng-repeat='field in ctrl.getTranslatable().fieldConfig' name='{{field.name}}' localization-prefix='{{field.prefix}}')
-        mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.getTranslatable().model[field.name]' name='{{field.name}}')
 
-  .col-md-6
-    ul.nav.nav-tabs
-      li(ng-repeat='locale in ctrl.locales' ng-class='{active: ctrl.currentLanguage==locale}')
-        a(ng-click='ctrl.currentLanguage=locale')
-          | {{locale}}
-          mas-percentage-ribbon(percentage="ctrl.getTranslatable().getTranslationProgress()[1][locale]")
-    form(name='form' role='form' novalidate)
-      mas-form-group(ng-repeat='field in ctrl.getTranslatable().fieldConfig' name='{{field.name}}' localization-prefix='{{field.prefix}}')
-        mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.getTranslatable().model.translations[ctrl.currentLanguage][field.name]' name='{{field.name}}')
-  .col-md-4
+mas-translation-panel(translatable='ctrl.getTranslatable()')
+
+mas-save-button(ng-click='ctrl.save()')
