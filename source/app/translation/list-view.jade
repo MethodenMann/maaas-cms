@@ -36,7 +36,7 @@ h1 Translations
     .row
       .col-md-12
         .progress
-          .progress-bar(ng-style='ctrl.getProgressBarStyle()')
+          .progress-bar.progress-bar-success(ng-style='ctrl.getProgressBarStyle()')
             span {{(ctrl.currentTranslationProgress*100).toFixed(0)}}% Complete
 
     .row
@@ -59,4 +59,4 @@ h1 Translations
             mas-dynamic-input-component(input-type='{{field.inputType}}' bind-to='ctrl.getTranslatable().model.translations[ctrl.currentLanguage][field.name]' name='{{field.name}}')
       .col-md-4
 
-button(ng-click='ctrl.save()') Speich0rn
+mas-save-button(ng-click='ctrl.save()')
