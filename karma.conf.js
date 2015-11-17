@@ -25,7 +25,6 @@ module.exports = function (config) {
       { pattern: 'out/libs/js-data-angular.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/angularjs-color-picker.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/devise-min.js', served: true, included: false, watched: false },
-      { pattern: 'out/libs/ui-grid.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/angular-breadcrumb.min.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/tinymce.js', served: true, included: false, watched: false },
       { pattern: 'out/libs/angular-ui-sortable.js', served: true, included: false, watched: false },
