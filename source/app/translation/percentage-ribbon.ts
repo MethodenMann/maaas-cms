@@ -2,8 +2,7 @@ import {Inject} from '../utils/di';
 
 export class PercentageRibbon {
   private static selector = 'mas-percentage-ribbon';
-  // private static template = '<div>{{ctrl.percentage*100}}%</div>'
-  private static template = '<span ng-class="ctrl.getClass()">{{(ctrl.percentage*100).toFixed(2)}}%</span>'
+  private static template = '<span ng-class="ctrl.getClass()">{{(ctrl.percentage*100).toFixed(0)}}%</span>'
 
   private percentage:number;
 
