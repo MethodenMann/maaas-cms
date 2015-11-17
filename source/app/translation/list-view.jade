@@ -17,6 +17,6 @@ h1 Translations
           .progress-bar.progress-bar-success(ng-style='ctrl.getProgressBarStyle()')
             span {{(ctrl.currentTranslationProgress*100).toFixed(0)}}% Complete
 
-    mas-wizard-mode-view(translatables="ctrl.translatables")
+    div(ng-include="'app/translation/wizard-mode-dummy.html'")
 
 mas-save-button(ng-click='ctrl.save()')
