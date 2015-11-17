@@ -13,12 +13,7 @@ export function loadMaster(app) {
 
     $stateProvider
       .state('cms', RouteUtil.getRoute(MasterView, 'CMS', '', '/cms'))
-
       .state('cms.welcome', RouteUtil.getRoute(WelcomeView, 'Wilkommen', 'cms', '/welcome'));
-
-
-
-
   });
 
   //TODO: refactor in own component

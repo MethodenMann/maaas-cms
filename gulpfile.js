@@ -146,7 +146,8 @@ gulp.task('copyassets', function() {
     config.bowerPath + '/Chart.js/Chart.min.js',
     config.bowerPath + '/angular-animate/angular-animate.min.js',
     config.bowerPath + '/angular-bootstrap/ui-bootstrap.min.js',
-    config.bowerPath + '/angular-bootstrap/ui-bootstrap-tpls.min.js'
+    config.bowerPath + '/angular-bootstrap/ui-bootstrap-tpls.min.js',
+    config.bowerPath + '/angular-socket-io/socket.js'
   ]).pipe(gulp.dest(config.libsDestPath));
 
   gulp.src([

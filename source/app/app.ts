@@ -18,6 +18,7 @@ import 'angular-translate-storage-local';
 import 'angular-breadcrumb';
 import 'angular-ui-tinymce';
 import 'angular-ui-sortable';
+import 'angular-socket-io';
 
 
 import 'angular-chart';
@@ -37,7 +38,7 @@ import {loadApp} from './loadApp';
 
 var leApp = angular.module('maaas', [ 'maaas.config',
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
-  'Devise', 'color.picker',
+  'Devise', 'color.picker', 'btford.socket-io',
   'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable', 'chart.js', 'ngAnimate', 'ui.bootstrap'
 ]);
 

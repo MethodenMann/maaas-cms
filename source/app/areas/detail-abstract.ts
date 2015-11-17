@@ -11,7 +11,9 @@ export abstract class DetailAbstract extends FormView {
     @Inject('Area') protected Area,
     @Inject('$state') protected $state,
     @Inject('AlertService') protected AlertService,
-    @Inject('$filter') protected $filter
+    @Inject('$filter') protected $filter,
+    @Inject('mySocket') protected mySocket
+
     ) {
     super($scope);
     this.loadData();
