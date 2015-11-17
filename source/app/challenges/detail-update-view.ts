@@ -15,7 +15,6 @@ export class UpdateView extends DetailAbstract {
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
       this.setKind();
-
     });
   }
 

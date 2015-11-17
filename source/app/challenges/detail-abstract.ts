@@ -12,6 +12,7 @@ export abstract class DetailAbstract extends FormView {
   protected selectedKind;
 
 
+
   protected kinds =
     [
       {name: 'Multiplechoice', id: 'multiple-choice', url: 'app/challenges/dummies/multiple-choice.html'},
@@ -25,7 +26,9 @@ export abstract class DetailAbstract extends FormView {
               @Inject('$stateParams') protected $stateParams,
               @Inject('$state') protected $state,
               @Inject('Area') protected Area,
-              @Inject('Challenge') protected Challenge) {
+              @Inject('Challenge') protected Challenge,
+              @Inject('AlertService') protected AlertService
+  ) {
     super($scope);
 
     this.Area.find(this.$stateParams.areaId).then((data) => {

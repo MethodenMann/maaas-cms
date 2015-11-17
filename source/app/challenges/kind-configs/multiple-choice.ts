@@ -18,7 +18,7 @@ export class Multiplechoice {
 
   constructor(@Inject('$scope') protected $scope,
               @Inject('Medium') protected Medium) {
-    if (this.data.answers === undefined) {
+    if (!this.data.answers) {
       this.data.answers = [];
     }
 

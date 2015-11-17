@@ -12,13 +12,13 @@ export abstract class AbstractDetailView extends FormView {
   private areas:Array<IArea> = [];
   private selectedArea:IArea;
 
+  public isPopOverOpen = false;
 
   private configuredAreas: IArea[] = [];
   private unconfiguredAreas: IArea[] = [];
 
   private contentAreaDict: { [id: string] : number; } = {};
   private challangeAreaDict: { [id: string] : number; } = {};
-
   protected tour: ITour;
 
   constructor(
@@ -30,7 +30,8 @@ export abstract class AbstractDetailView extends FormView {
     @Inject('Medium') protected Medium,
     @Inject('$stateParams') protected $stateParams,
     @Inject('$state') protected $state,
-    @Inject('$q') protected $q
+    @Inject('$q') protected $q,
+    @Inject('AlertService') protected AlertService
   ) {
     super($scope);
 
@@ -114,8 +115,6 @@ export abstract class AbstractDetailView extends FormView {
 
 
   removeArea(area: IArea) {
-    var confirmed = confirm('Sind die sicher, dass Sie diesen Bereich aus dem Rundgang entfernen möchten?'); //TODO: Make nicer
-    if (confirmed) {
       area.contents.forEach((content) => {
         var pos = this.tour.selectedContents.indexOf(content.id);
         if (pos > -1) {
@@ -136,8 +135,8 @@ export abstract class AbstractDetailView extends FormView {
       this.unconfiguredAreas.push(area);
 
       this.selectFirstArea();
-    }
 
+      this.isPopOverOpen = false;
   }
 
   selectArea(area: IArea) {

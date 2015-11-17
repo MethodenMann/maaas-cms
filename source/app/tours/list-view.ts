@@ -11,6 +11,7 @@ export class ListView {
     @Inject('$stateParams') private $stateParams,
     @Inject('Tour') private Tour
     ) {
+    Tour.refreshAll();
     Tour.findAll().then((data) => {
       this.tours = data;
     });

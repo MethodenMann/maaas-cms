@@ -77,8 +77,5 @@
         .col-lg-12
           div(ncy-breadcrumb)
           div.slidr(ui-view='')
-        // /.col-lg-12
-      // /.row
-    // /.container-fluid
-  // /#page-wrapper
-// /#wrapper
+
+uib-alert.alert-box(style='bottom: {{ 5 + $index*90 }}px;' ng-repeat='alert in ctrl.alerts' type='{{alert.type}}' close='ctrl.closeAlert($index)') {{alert.msg}}

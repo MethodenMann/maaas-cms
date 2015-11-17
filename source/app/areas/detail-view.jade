@@ -22,6 +22,7 @@
           mas-image-form-wrapper(image-id='stickerImage' model='ctrl.area.stickerImageId' height='100' is-required='true')
 
       mas-save-button(ng-click='ctrl.save()')
+      uib-alert#alertbox(ng-repeat='alert in ctrl.alerts' type='{{alert.type}}' close='ctrl.closeAlert($index)') {{alert.msg}}
 
       div.well.top30(ng-hide='ctrl.createMode')
         button.btn.mas-navigation-btn(ui-sref='cms.areas.detail.challenges.list')

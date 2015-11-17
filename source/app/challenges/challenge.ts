@@ -50,9 +50,9 @@ export function loadChallenge(app) {
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.areas.detail.${componentName}`,
-        RouteUtil.getAbstractRoute(`/${componentName}`, 'QuizzeZZ'))
+        RouteUtil.getAbstractRoute(`/${componentName}`, ''))
       .state(`cms.areas.detail.${componentName}.list`,
-        RouteUtil.getRoute(ListView, 'Challenge', 'cms.areas.detail.update'))
+        RouteUtil.getRoute(ListView, 'Quiz', 'cms.areas.detail.update'))
       .state(`cms.areas.detail.${componentName}.create`,
         RouteUtil.getRoute(CreateView,
           'Quiz erstellen', `cms.areas.detail.${componentName}.list`, '/create'))

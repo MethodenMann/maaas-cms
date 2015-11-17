@@ -18,5 +18,6 @@
   "areas_details_backgroundimage_error": "Bitte laden sie ein Bild hoch",
   "areas_details_stickerimage_label": "Sticker Bild",
   "areas_details_stickerimage_help": "Das Stickerbild. Sollte rund Sein im SVG Format.",
-  "areas_details_stickerimage_error": "Bitte laden sie ein Bild hoch"
+  "areas_details_stickerimage_error": "Bitte laden sie ein Bild hoch",
+  "areas_details_save_successfullyalert": "Der Bereich wurde erfolgreich erstellt. Sie können nun Quiz und Inhalte dafür erfassen"
 }

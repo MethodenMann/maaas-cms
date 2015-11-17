@@ -22,6 +22,7 @@ export class CreateView extends DetailAbstract {
       this.$scope.$broadcast('save', {id: challenge.id, type: 'Challenge'});
       this.$scope.$broadcast('challenge.saved', challenge);
       this.$scope.$broadcast('mas.saveprogess', 'successfully');
+      this.AlertService.addAlert({ type: 'success', msg: 'Das Quiz wurde erfolgreich erstellt!' });
       this.$state.go('cms.areas.detail.challenges.update', {challengeId: challenge.id});
     });
   }

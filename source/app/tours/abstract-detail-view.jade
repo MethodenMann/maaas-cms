@@ -1,3 +1,6 @@
+
+
+
 .panel.panel-green
   .panel-heading
     | {{ 'tours_details_title' | translate }}
@@ -19,7 +22,7 @@
         ul.dropdown-menu(aria-labelledby='addArea')
           li(ng-repeat='area in ctrl.unconfiguredAreas')
             a(ng-click='ctrl.addArea($index)') {{area.name}}
-      .row
+      .row(style='min-height:200px')
 
 
         .col-md-3
@@ -30,24 +33,27 @@
         div(ng-show='ctrl.selectedArea')
 
 
-          .col-md-3
-            h4 {{ 'tours_details_compose_contents' | translate }}
-            .list-group
-              div.list-group-item(ng-repeat='content in ctrl.selectedArea.contents')
-                input(type='checkbox' ng-click='ctrl.selectContent(content.id, $event)' ng-checked='ctrl.isContentSelected(content.id)')
-                |  {{content.title}}
+          .col-md-8
+            .row.mas-tourcomposition-box
+              a.btn.btn-warning.btn-circle.pull-right.top10.right10(title='Bereich entfernen' popover-placement='left' popover-is-open='ctrl.isPopOverOpen'  uib-popover-template='"removeTemplate.html"' )
+                i.fa.fa-remove
 
-
-          .col-md-3
-            h4 {{ 'tours_details_compose_challenges' | translate }}
-            .list-group
-              div.list-group-item(ng-repeat='challenge in ctrl.selectedArea.challenges')
-                input(type='checkbox' ng-click='ctrl.selectChallenge(challenge.id, $event)' ng-checked='ctrl.isChallengeSelected(challenge.id)')
-                |  {{challenge.name}}
-
-
-          .col-md-3
-            button.btn.mas-remove-btn(ng-click='ctrl.removeArea(ctrl.selectedArea)')
-              i.fa.fa-times
-              |  Entfernen
+              .col-md-4
+                h4 {{ 'tours_details_compose_contents' | translate }}
+                .list-group
+                  div.list-group-item(ng-repeat='content in ctrl.selectedArea.contents')
+                    input(type='checkbox' ng-click='ctrl.selectContent(content.id, $event)' ng-checked='ctrl.isContentSelected(content.id)')
+                    |  {{content.title}}
+              .col-md-4
+                h4 {{ 'tours_details_compose_challenges' | translate }}
+                .list-group
+                  div.list-group-item(ng-repeat='challenge in ctrl.selectedArea.challenges')
+                    input(type='checkbox' ng-click='ctrl.selectChallenge(challenge.id, $event)' ng-checked='ctrl.isChallengeSelected(challenge.id)')
+                    |  {{challenge.name}}
       mas-save-button(ng-click='ctrl.save()')
+
+
+script(type='text/ng-template', id='removeTemplate.html').
+  <div>{{ 'tours_details_removearea_confirm' | translate }}</div>
+  <input type='button' ng-click='ctrl.removeArea(ctrl.selectedArea)' value='Ok' class='btn btn-default'>
+  <input type='button' ng-click='ctrl.isPopOverOpen = false' value='Abbrechen' class='btn btn-default'>

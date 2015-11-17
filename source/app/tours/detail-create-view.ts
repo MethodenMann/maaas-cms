@@ -12,6 +12,7 @@ export class CreateView extends AbstractDetailView {
       this.Tour.create({ tour: this.tour }).then((tour:ITour) => {
         this.$scope.$broadcast('save', {id: tour.id, type: 'Tour'});
         this.$scope.$broadcast('mas.saveprogess', 'successfully');
+        this.AlertService.addAlert({ type: 'success', msg: 'Der Rundgang wurde erfolgreich erstellt!' });
         this.$state.go('cms.tours.detail.update', {tourId: tour.id});
       });
   }

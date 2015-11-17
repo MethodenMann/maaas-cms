@@ -9,12 +9,12 @@ export function loadMaster(app) {
   });
 
   app.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('cms/welcome');
+    $urlRouterProvider.otherwise('/cms');
 
     $stateProvider
       .state('cms', RouteUtil.getRoute(MasterView, 'CMS', '', '/cms'))
 
-      .state('cms.welcome', RouteUtil.getRoute(WelcomeView, 'Wikommen', 'cms', '/welcome'));
+      .state('cms.welcome', RouteUtil.getRoute(WelcomeView, 'Wilkommen', 'cms', '/welcome'));
 
 
 

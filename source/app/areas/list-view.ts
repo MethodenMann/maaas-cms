@@ -13,8 +13,8 @@ export class ListView {
     @Inject('Area') private Area,
     @Inject('Medium') private Medium
     ) {
-
     // TODO load media differently
+    Area.refreshAll();
     Medium.findAll().then((data) => {
       Area.findAll().then((data) => {
         this.areas = data;

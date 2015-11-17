@@ -9,7 +9,9 @@ export abstract class DetailAbstract extends FormView {
     @Inject('$scope') protected $scope,
     @Inject('$stateParams') protected $stateParams,
     @Inject('Area') protected Area,
-    @Inject('$state') protected $state
+    @Inject('$state') protected $state,
+    @Inject('AlertService') protected AlertService,
+    @Inject('$filter') protected $filter
     ) {
     super($scope);
     this.loadData();
