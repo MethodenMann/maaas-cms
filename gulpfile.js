@@ -213,8 +213,14 @@ gulp.task('connect', function() {
   });
 });
 
+
+gulp.task('copy-ionicapp', function() {
+  gulp.src([config.appPath + '/**/*.*'])
+    .pipe(gulp.dest(config.baseDestPath + '/ionic-app/'));
+});
+
 gulp.task('build', function(callback) {
-  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'constants', 'systemjs-config'],  'template-cache', callback);
+  runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'constants', 'systemjs-config', 'copy-ionicapp'],  'template-cache', callback);
 });
 
 gulp.task('lint', ['typescript-lint', 'jade-lint']);
