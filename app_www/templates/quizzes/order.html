@@ -1,0 +1,12 @@
+
+<div class="pap-quiz-order">
+  <div class="pap-quiz-order-question">{{question}}</div>
+  <div>
+    <ul ui-sortable="options" ng-model="list">
+      <li ng-repeat="item in list" ng-click="openModal(item)" ng-class="{'pap-wrong-answer' : getCorrectAnswerIndicator($index)}"><span>{{ item.caption_short }}</span><i class="ion-navicon"></i>
+        <div style="background-image: url('img/{{item.image}}')" class="pap-order-quiz-image"></div>
+      </li>
+    </ul>
+  </div>
+  <pap-quiz-check-answer-button button-state="buttonState" check-quiz-callback="checkAnswer" give-second-chance="true"></pap-quiz-check-answer-button>
+</div>

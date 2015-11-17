@@ -1,0 +1,18 @@
+
+<ion-view title="{{::title}}" hide-back-button="true" class="pap-logo-background">
+  <ion-content height="100%" class="pap-home">
+    <header><img src="img/logo.svg"/></header>
+    <ion-list>
+      <ion-item ng-click="navigateToStickerbook()" class="item-icon-left"><i class="icon ion-ios-keypad-outline"></i>Stickerheft</ion-item>
+      <ion-item ng-click="navigateToHelp()" class="item-icon-left"><i class="icon ion-help"></i>Hilfe</ion-item>
+      <ion-item ng-click="navigateToSettings()" class="item-icon-left"><i class="icon ion-settings"></i>Einstellungen</ion-item>
+      <ion-item ng-show="DevMode.isOn()" ng-click="resetScore()">Reset Score</ion-item>
+      <ion-item ng-show="DevMode.isOn()" ng-click="navigateToQuickNavigation()">Schnellnavigation</ion-item>
+      <ion-item ng-show="DevMode.isOn()" ng-click="showBeaconSimulator()">Beacon Simulator</ion-item>
+      <ion-item ng-show="DevMode.isOn()" href="#/app/beacontracker">BeaconTracker</ion-item>
+    </ion-list>
+  </ion-content>
+  <div>
+    <area-slider current-area-key="home"></area-slider>
+  </div>
+</ion-view>

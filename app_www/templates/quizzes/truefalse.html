@@ -1,0 +1,8 @@
+
+<ion-slide-box does-continue="true" style="height:100%" show-pager="{{showPager}}">
+  <ion-slide ng-repeat="question in questions" ng-init="updateSlider()">
+    <div style="height:100%">
+      <pap-quiz-truefalse-question question="question"></pap-quiz-truefalse-question>
+    </div>
+  </ion-slide>
+</ion-slide-box>

@@ -1,0 +1,17 @@
+
+<ion-nav-bar class="bar-stable">
+  <ion-nav-back-button></ion-nav-back-button>
+</ion-nav-bar>
+<ion-nav-view name="partial">
+  <!--ion-side-menu(side="left")-->
+  <!--  header.bar.bar-header.bar-stable-->
+  <!--    h1.title Menu-->
+  <!--  ion-content.has-header-->
+  <!--    ion-list-->
+  <!--      ion-item(nav-clear="", menu-close="", ng-click="showBeaconSimulator()") Beacon Simulator-->
+  <!--      ion-item(menu-close="", href="#/app/beacontracker") BeaconTracker-->
+</ion-nav-view>
+<div style="position: absolute; top: 0px; right: 0px; z-index: 1000;">
+  <button ng-show="DevMode.isOn()" ng-click="sendARandomBeaconData()" class="button button-small button-light">Sim a Beacon</button>
+  <button ng-show="DevMode.isOn()" ng-click="openBeaconSimulator()" class="button button-small button-light">B-Sim</button>
+</div>

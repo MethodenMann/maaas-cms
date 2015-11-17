@@ -1,0 +1,14 @@
+
+<div class="pap-truefalse">
+  <div class="pap-truefalse-question-container">
+    <div ng-class="questionClass">{{question.questionText}}</div>
+    <div ng-show="question.questionImageSrc"><img ng-src="{{question.questionImageSrc}}"/></div>
+  </div>
+  <div class="pap-truefalse-answerbutton-container">
+    <div ng-click="submitAnswer(true)" ng-class="trueButtonClass" class="button answerbutton">{{question.trueAnswer}}</div>
+    <div ng-click="submitAnswer(false)" ng-class="falseButtonClass" class="button answerbutton">{{question.falseAnswer}}</div>
+  </div>
+  <div ng-show="isSolved" class="feedback"><img ng-src="./img/{{correct? 'correct' : 'wrong'}}.svg" style="height:30px"/>
+    <div ng-class="correct? 'correct' : 'wrong'">{{feedbackText}}</div>
+  </div>
+</div>

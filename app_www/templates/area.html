@@ -1,0 +1,43 @@
+
+<ion-view title="{{::currentArea.title}}" cache-view="false">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button ng-click="navigateToHome()">{{::backButtonLabel}}</ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content scroll="false" style="margin: 0px;">
+    <div ng-class="contentClass">
+      <div class="pap-area-view">
+        <header>
+          <h1>{{currentArea.title}}</h1>
+        </header>
+        <ion-scroll>
+          <div ng-repeat="content in currentArea.contents">
+            <article ng-click="navigateToContent(content.id)">
+              <div style="background-image: url('{{content.thumbnail}}');" class="pap-content-thumbnail"></div>
+              <h4 class="pap-content-title">{{content.title}}</h4><span class="pap-content-description">{{content.description}}</span>
+            </article>
+          </div>
+        </ion-scroll>
+        <div ng-class="{'pap-hide': !searchingForSticker}" class="pap-overlay"></div>
+        <div ng-class="{'pap-hide': !searchingForSticker}" class="pap-hint-text">{{currentArea.hintText}}</div>
+        <footer>
+          <div>
+            <area-slider current-area-key="{{areaKey}}"></area-slider>
+          </div>
+          <div class="pap-sticker-container">
+            <div ng-click="toggleSticker()" ng-class="{'pap-magnified': searchingForSticker}" class="pap-sticker">
+              <div ng-class="solvedClass" class="pap-front"></div>
+              <div class="pap-back">
+                <div class="pap-sonar"></div>
+                <div ng-class="questFoundClass" class="pap-loader-circle"></div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <overlay></overlay>
+    <div style="position: absolute; bottom: 0; left: 0; z-index: 1000;">
+      <button ng-show="DevMode.isOn()" ng-click="navigateToQuiz()" class="button button-small button-light">Go to quiz</button>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,10 @@
+
+<div class="pap-imageregion">
+  <div class="question">{{data.question}}</div><img ng-src="{{showCorrect? data.imageSolved : data.image}}" alt="" usemap="#Map" width="{{data.width}}" height="{{data.height}}"/><map id="Map" name="Map">
+    <area ng-repeat="area in data.areas" ng-click="areaClick(area.idx)" shape="{{area.shape}}" coords="{{area.coords}}"/>
+    <area ng-click="areaClick(-1)" shape="default"/></map>
+  <div ng-show="showWrong || showCorrect" class="feedback">
+    <div ng-show="showCorrect" ng-class="fadeOut" class="correct">{{data.correctFeedback}}</div>
+    <div ng-show="showWrong" class="wrong">{{data.wrongFeedback}}</div>
+  </div>
+</div>
