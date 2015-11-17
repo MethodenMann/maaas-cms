@@ -10,6 +10,7 @@ export class ListView {
   private locales = ['en', 'it', 'fr'];
 
   private allModels:Array<any>;
+  private modelStore:{[id: string]: Array<any>} = {};
   private currentModel:any;
   private currentModelIndex:number;
 
@@ -79,6 +80,16 @@ export class ListView {
     this.modelConfigs.push({name: 'area', modelType: Area});
     this.modelConfigs.push({name: 'content', modelType: Content});
     this.modelConfigs.push({name: 'challenge', modelType: Challenge});
+
+    for (let modelConfig of this.modelConfigs) {
+      // this needs to be called in a self executing function, otherwise
+      // the modelConfig variable gets overridden for other promises
+      ((modelConfig) => {
+        modelConfig.modelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
+          this.modelStore[modelConfig.name] = models;
+        });
+      })(modelConfig);
+    }
   }
 
   loadPreviousModel() {
@@ -113,10 +124,8 @@ export class ListView {
   }
 
   selectedModelConfigChanged() {
-    this.selectedModelConfig.modelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
-      this.allModels = models;
-      this.currentModelIndex = 0;
-      this.loadModel();
-    });
+    this.allModels = this.modelStore[this.selectedModelConfig.name];
+    this.currentModelIndex = 0;
+    this.loadModel();
   }
 }
