@@ -74,4 +74,8 @@ export class ListView {
     var n = this.currentTranslationProgress * 100;
     return {width: `${n}%`}
   }
+
+  getModeTemplate() {
+    return `app/translation/${this.selectedMode}-mode-dummy.html`;
+  }
 }
