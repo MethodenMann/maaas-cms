@@ -15,7 +15,8 @@ export class DynamicInputComponent {
     'input': 'app/translation/dynamic-input-component/simple-input-field.html',
     'richtext': 'app/translation/dynamic-input-component/tinymce-input-field.html',
     'quiz-multiple-choice': 'app/translation/dynamic-input-component/quiz-multiple-choice.html',
-    'quiz-true-false': 'app/translation/dynamic-input-component/quiz-true-false.html'
+    'quiz-true-false': 'app/translation/dynamic-input-component/quiz-true-false.html',
+    'quiz-assign': 'app/translation/dynamic-input-component/quiz-assign.html'
   };
 
   private templateName:string;
