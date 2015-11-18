@@ -7,7 +7,7 @@
 
   window.PaperChaseBeaconSimulator = angular.module("PaperChaseBeaconSimulator", []);
 
-  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation) {
+  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase", "btford.socket-io"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation) {
     $ionicPlatform.ready(function() {
       var alertPopUp, areaKey, areaKeys, _i, _len, _results;
       if (typeof cordova !== "undefined" && cordova !== null) {
@@ -209,7 +209,6 @@
 
   starter.controller("AppCtrl", function($scope, $rootScope, NavigationService, RandomBeaconData, DataStore, $ionicModal, DevMode) {
     $scope.DevMode = DevMode;
-    DevMode.switchDevModeOn();
     $ionicModal.fromTemplateUrl("templates/beacon-simulator-modal.html", {
       scope: $scope
     }).then(function(modal) {
@@ -2186,8 +2185,24 @@
 (function() {
   var f;
 
-  f = function($q, RestApi, Beacon, Area) {
+  f = function($q, RestApi, Beacon, Area, PreviewSocket) {
     var areas, beacons, deferred, images, initialize, loadCompleted, loadIntoModel;
+    PreviewSocket.on("publishPreviewData", function(data) {
+      var area, _i, _len, _results;
+      console.log("publishPreviewData 4", data);
+      if (data.type === "area") {
+        _results = [];
+        for (_i = 0, _len = areas.length; _i < _len; _i++) {
+          area = areas[_i];
+          if (area.key === data.id + "") {
+            _results.push(area.title = data.data.name);
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
+      }
+    });
     deferred = $q.defer();
     loadCompleted = false;
     areas = void 0;
@@ -2312,7 +2327,11 @@
     };
   };
 
-  PaperChase.service("DataStore", ["$q", "RestApi", "Beacon", "Area", f]);
+  PaperChase.service("DataStore", ["$q", "RestApi", "Beacon", "Area", "PreviewSocket", f]);
+
+  PaperChase.factory('PreviewSocket', function(socketFactory) {
+    return socketFactory();
+  });
 
 }).call(this);
 
