@@ -57,6 +57,18 @@ var fieldConfigs = {
       {name: 'name', prefix: 'challenges_details_name', inputType: 'simple-input-field'},
       {name: 'data', prefix: 'translations_quiz_configuration_empty', inputType: `quiz-${currentModel.kind}`}
     ];
+  },
+  'museum': (currentModel:any) => {
+    return [
+      {name: 'name', prefix: 'museums_details_name', inputType: 'simple-input-field'},
+      {name: 'description', prefix: 'museums_details_description', inputType: 'simple-input-field'}
+    ];
+  },
+  'tour': (currentModel:any) => {
+    return [
+      {name: 'name', prefix: 'tours_details_name', inputType: 'simple-input-field'},
+      {name: 'description', prefix: 'tours_details_description', inputType: 'simple-input-field'}
+    ];
   }
 };
 
@@ -103,7 +115,7 @@ var quizPreparators = {
 };
 
 var modelPreparators = {
-  'area': () => {}, 'content': () => {},
+  'area': () => {}, 'content': () => {}, 'museum': () => {}, 'tour': () => {},
   'challenge': (currentModel:any) => {
     var preparator = quizPreparators[currentModel.kind];
     for (let locale of locales) {
