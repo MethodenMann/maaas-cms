@@ -4,7 +4,7 @@
   <div>
     <ul ui-sortable="options" ng-model="list">
       <li ng-repeat="item in list" ng-click="openModal(item)" ng-class="{'pap-wrong-answer' : getCorrectAnswerIndicator($index)}"><span>{{ item.caption_short }}</span><i class="ion-navicon"></i>
-        <div style="background-image: url('img/{{item.image}}')" class="pap-order-quiz-image"></div>
+        <div ng-style="::getBgImageFor(item)" class="pap-order-quiz-image"></div>
       </li>
     </ul>
   </div>

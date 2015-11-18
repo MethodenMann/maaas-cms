@@ -7,7 +7,7 @@
 
   window.PaperChaseBeaconSimulator = angular.module("PaperChaseBeaconSimulator", []);
 
-  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation, Analytics) {
+  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation) {
     $ionicPlatform.ready(function() {
       var alertPopUp, areaKey, areaKeys, _i, _len, _results;
       if (typeof cordova !== "undefined" && cordova !== null) {
@@ -55,7 +55,6 @@
           });
         }
       }
-      Analytics.initialize();
       DataStore.initialize();
       DataStore.awaitLoadCompletion().then(function() {
         var areaBeacons, beacon, questBeacons, _i, _len, _ref;
@@ -210,6 +209,7 @@
 
   starter.controller("AppCtrl", function($scope, $rootScope, NavigationService, RandomBeaconData, DataStore, $ionicModal, DevMode) {
     $scope.DevMode = DevMode;
+    DevMode.switchDevModeOn();
     $ionicModal.fromTemplateUrl("templates/beacon-simulator-modal.html", {
       scope: $scope
     }).then(function(modal) {
@@ -240,7 +240,7 @@
 (function() {
   var f;
 
-  f = function($scope, $timeout, $stateParams, $ionicPopup, NavigationService, DataStore, BeaconManager, Dictionary, AppData, DevMode, Analytics) {
+  f = function($scope, $timeout, $stateParams, $ionicPopup, NavigationService, DataStore, BeaconManager, Dictionary, AppData, DevMode) {
     var accuracyToOwnProximity, activateSearchForSticker, areaCtrl, collectedImmediates, deactivateSearchForSticker, questSolved;
     $scope.DevMode = DevMode;
     questSolved = false;
@@ -249,7 +249,6 @@
       return $scope.show = "pap-show";
     });
     areaCtrl = function() {
-      Analytics.trackView("Area: " + $scope.areaKey);
       $scope.show = "";
       $scope.areaKey = $stateParams.areaKey;
       $scope.contentClass = "pap-content-" + $scope.areaKey;
@@ -264,7 +263,22 @@
     DataStore.awaitLoadCompletion().then(function() {
       var currentArea;
       currentArea = DataStore.getAreaByKey($scope.areaKey);
-      return $scope.currentArea = currentArea;
+      $scope.currentArea = currentArea;
+      $scope.backgroundImageStyle = function() {
+        return {
+          "background-image": "url('" + currentArea.styles.backgroundImageUrl + "')"
+        };
+      };
+      $scope.buttonFrontStyle = function() {
+        return {
+          "background-image": "url('" + currentArea.styles.stickerImageUrl + "')"
+        };
+      };
+      return $scope.primaryColorStyle = function() {
+        return {
+          "color": currentArea.styles.primaryColor
+        };
+      };
     });
     $scope.navigateToQuiz = function() {
       return NavigationService.navigateToQuiz($scope.areaKey);
@@ -344,7 +358,7 @@
     };
   };
 
-  PaperChase.controller("AreaCtrl", ["$scope", "$timeout", "$stateParams", "$ionicPopup", "NavigationService", "DataStore", "BeaconManager", "Dictionary", "AppData", "DevMode", "Analytics", f]);
+  PaperChase.controller("AreaCtrl", ["$scope", "$timeout", "$stateParams", "$ionicPopup", "NavigationService", "DataStore", "BeaconManager", "Dictionary", "AppData", "DevMode", f]);
 
 }).call(this);
 
@@ -384,18 +398,17 @@
 (function() {
   var f;
 
-  f = function($scope, $location, $stateParams, $ionicModal, $sce, DataStore, NavigationService, Analytics) {
+  f = function($scope, $location, $stateParams, $ionicModal, $sce, DataStore, NavigationService) {
     var areaKey, contentId;
     if (screen.unlockOrientation != null) {
       screen.unlockOrientation();
     }
-    Analytics.trackView("Content " + areaKey + " " + contentId);
     contentId = parseInt($stateParams.contentId);
     areaKey = $stateParams.areaKey;
     $scope.contentClass = "pap-content-" + areaKey;
     DataStore.awaitLoadCompletion().then(function() {
       $scope.content = DataStore.getContent(areaKey, contentId);
-      return $scope.html = $sce.trustAsHtml($scope.enhanceHtml($scope.content.data));
+      return $scope.html = $sce.trustAsHtml($scope.content.data);
     });
     $scope.navigateToArea = function() {
       return NavigationService.navigateToArea(areaKey, "back");
@@ -419,24 +432,6 @@
       $scope.imageSrc = $event.toElement.src;
       $scope.openModal();
     };
-    $scope.enhanceHtml = function(html) {
-      var beginTag, endTag, tag, tagsToShowModal, tagsToWrapInCenter, _i, _j, _len, _len1;
-      tagsToWrapInCenter = ["img", "iframe"];
-      tagsToShowModal = ["img"];
-      for (_i = 0, _len = tagsToWrapInCenter.length; _i < _len; _i++) {
-        tag = tagsToWrapInCenter[_i];
-        beginTag = "<" + tag;
-        endTag = "</" + tag + ">";
-        html = html.replace(new RegExp(beginTag, 'g'), "<div class='imagecontainer'><" + tag);
-        html = html.replace(new RegExp(endTag, 'g'), "</" + tag + "></div>");
-      }
-      for (_j = 0, _len1 = tagsToShowModal.length; _j < _len1; _j++) {
-        tag = tagsToShowModal[_j];
-        beginTag = "<" + tag;
-        html = html.replace(new RegExp(beginTag, 'g'), "<" + tag + " ng-click=\"showImage($event)\"");
-      }
-      return html;
-    };
     $scope.$on('$ionicView.leave', function() {
       if (screen.unlockOrientation != null) {
         return screen.lockOrientation('portrait');
@@ -444,14 +439,14 @@
     });
   };
 
-  PaperChase.controller("ContentCtrl", ["$scope", "$location", "$stateParams", "$ionicModal", "$sce", "DataStore", "NavigationService", "Analytics", f]);
+  PaperChase.controller("ContentCtrl", ["$scope", "$location", "$stateParams", "$ionicModal", "$sce", "DataStore", "NavigationService", f]);
 
 }).call(this);
 
 (function() {
   var f;
 
-  f = function($scope, $ionicPopup, NavigationService, DevMode, Analytics) {
+  f = function($scope, $ionicPopup, NavigationService, DevMode) {
     $scope.navigateToHome = function() {
       return NavigationService.navigateToHome();
     };
@@ -480,17 +475,16 @@
     };
   };
 
-  PaperChase.controller("HelpCtrl", ["$scope", "$ionicPopup", "NavigationService", "DevMode", "Analytics", f]);
+  PaperChase.controller("HelpCtrl", ["$scope", "$ionicPopup", "NavigationService", "DevMode", f]);
 
 }).call(this);
 
 (function() {
   var f;
 
-  f = function($scope, $ionicModal, DataStore, AppData, NavigationService, Dictionary, DevMode, Analytics) {
+  f = function($scope, $ionicModal, DataStore, AppData, NavigationService, Dictionary, DevMode) {
     $scope.nearestArea = void 0;
     $scope.DevMode = DevMode;
-    Analytics.trackView("Home");
     $ionicModal.fromTemplateUrl("templates/beacon-simulator-modal.html", {
       scope: $scope
     }).then(function(modal) {
@@ -523,21 +517,24 @@
     };
   };
 
-  PaperChase.controller("HomeCtrl", ["$scope", "$ionicModal", "DataStore", "AppData", "NavigationService", "Dictionary", "DevMode", "Analytics", f]);
+  PaperChase.controller("HomeCtrl", ["$scope", "$ionicModal", "DataStore", "AppData", "NavigationService", "Dictionary", "DevMode", f]);
 
 }).call(this);
 
 (function() {
   var f;
 
-  f = function($scope, NavigationService) {
-    $scope.areas = ["ant", "bear", "beaver", "butterfly", "dino", "eagle", "fish", "frog", "mineral", "mouse", "ram", "wolf"];
+  f = function($scope, NavigationService, DataStore) {
+    $scope.areas = [];
+    DataStore.awaitLoadCompletion().then(function() {
+      return $scope.areas = DataStore.getAreas();
+    });
     return $scope.navigateToArea = function(area) {
-      return NavigationService.navigateToArea(area);
+      return NavigationService.navigateToArea(area.key);
     };
   };
 
-  PaperChase.controller("QuickNavigationCtrl", ["$scope", "NavigationService", f]);
+  PaperChase.controller("QuickNavigationCtrl", ["$scope", "NavigationService", "DataStore", f]);
 
 }).call(this);
 
@@ -545,8 +542,8 @@
   var assignQuizPreparer, f, imageregionQuizPreparer, kindToDirectiveMapping, multiplechoiceQuizPreparer, orderQuizPreparer, quizLoader, truefalseQuizPreparer;
 
   assignQuizPreparer = function($scope, $element, area) {
-    $scope.listA = area.challenge.data.list_a;
-    $scope.listB = area.challenge.data.list_b;
+    $scope.listA = area.challenge.data.listA;
+    $scope.listB = area.challenge.data.listB;
     $scope.question = area.challenge.data.question;
     return $element.html("<pap-quiz-assign list-a='listA' list-b='listB' question='question'></pap-quiz-assign>");
   };
@@ -579,18 +576,18 @@
     "order": {
       prepare: orderQuizPreparer
     },
-    "truefalse": {
+    "true-false": {
       prepare: truefalseQuizPreparer
     },
-    "multiplechoice": {
+    "multiple-choice": {
       prepare: multiplechoiceQuizPreparer
     },
-    "imageregion": {
+    "image-region": {
       prepare: imageregionQuizPreparer
     }
   };
 
-  quizLoader = function(DataStore, $compile, Analytics) {
+  quizLoader = function(DataStore, $compile) {
     return {
       restrict: "E",
       replace: true,
@@ -602,10 +599,8 @@
         return DataStore.awaitLoadCompletion().then(function() {
           var area, areaKey, directiveConfig;
           areaKey = $scope.areaKey;
-          Analytics.trackView("Quiz: " + areaKey);
-          Analytics.trackEvent('Quiz', 'Started', 'Label', '');
           area = DataStore.getAreaByKey(areaKey);
-          directiveConfig = kindToDirectiveMapping[area.challenge.data.kind];
+          directiveConfig = kindToDirectiveMapping[area.challenge.kind];
           directiveConfig.prepare($scope, $element, area);
           return $compile($element)($scope);
         });
@@ -613,9 +608,9 @@
     };
   };
 
-  PaperChase.directive("papQuizLoader", ["DataStore", "$compile", "Analytics", quizLoader]);
+  PaperChase.directive("papQuizLoader", ["DataStore", "$compile", quizLoader]);
 
-  f = function($scope, $location, $ionicSideMenuDelegate, $ionicPopup, NavigationService, AppData, DataStore, DevMode, Analytics) {
+  f = function($scope, $location, $ionicSideMenuDelegate, $ionicPopup, NavigationService, AppData, DataStore, DevMode) {
     var areaKey, completeQuiz, failQuiz;
     $scope.DevMode = DevMode;
     areaKey = $location.path().replace("/app/quiz/", "");
@@ -666,7 +661,6 @@
       return completeQuiz();
     };
     return $scope.$on("quizCompleted", function(event, args) {
-      Analytics.trackEvent('Quiz', 'Completed', 'Label', args.successfully);
       if (args.successfully) {
         return completeQuiz(args.customSuccessfulMessage);
       } else {
@@ -675,15 +669,7 @@
     });
   };
 
-  PaperChase.controller("QuizCtrl", ["$scope", "$location", "$ionicSideMenuDelegate", "$ionicPopup", "NavigationService", "AppData", "DataStore", "DevMode", "Analytics", f]);
-
-  PaperChase.factory('$exceptionHandler', function() {
-    return function(exception, cause) {
-      exception.message += ' (caused by "' + cause + '")';
-      console.log("TEST");
-      throw exception;
-    };
-  });
+  PaperChase.controller("QuizCtrl", ["$scope", "$location", "$ionicSideMenuDelegate", "$ionicPopup", "NavigationService", "AppData", "DataStore", "DevMode", f]);
 
 }).call(this);
 
@@ -800,9 +786,8 @@
 
   PaperChase.directive("papStickerbookSubCtrl", ["$timeout", subCtrl]);
 
-  f = function($scope, $timeout, $ionicConfig, $ionicPopup, $ionicHistory, AppData, DataStore, NavigationService, StickerbookNavigation, Analytics) {
+  f = function($scope, $timeout, $ionicConfig, $ionicPopup, $ionicHistory, AppData, DataStore, NavigationService, StickerbookNavigation) {
     var completedQuests;
-    Analytics.trackView("Stickerbook");
     completedQuests = AppData.getCompletedQuests();
     $scope.backButtonLabel = StickerbookNavigation.getBackButtonLabel();
     $scope.goBack = function() {
@@ -811,11 +796,17 @@
     $scope.getClasses = function(areaKey) {
       var classes;
       classes = [];
-      classes.push("pap-sticker-" + areaKey);
       if (!completedQuests[areaKey]) {
         classes.push("pap-sticker-transparent");
       }
       return classes;
+    };
+    $scope.getStyle = function(areaKey) {
+      var area;
+      area = DataStore.getAreaByKey(areaKey);
+      return {
+        "background-image": "url('" + area.styles.stickerImageUrl + "')"
+      };
     };
     $scope.loadStickers = function() {
       return DataStore.awaitLoadCompletion().then(function() {
@@ -840,7 +831,7 @@
     return $scope.checkForFinish();
   };
 
-  PaperChase.controller("StickerbookCtrl", ["$scope", "$timeout", "$ionicConfig", "$ionicPopup", "$ionicHistory", "AppData", "DataStore", "NavigationService", "StickerbookNavigation", "Analytics", f]);
+  PaperChase.controller("StickerbookCtrl", ["$scope", "$timeout", "$ionicConfig", "$ionicPopup", "$ionicHistory", "AppData", "DataStore", "NavigationService", "StickerbookNavigation", f]);
 
 }).call(this);
 
@@ -863,6 +854,10 @@
           if ($scope.areaToNavigate.key !== "home") {
             return NavigationService.navigateToArea($scope.areaToNavigate.key);
           }
+        };
+        $scope.getGotoImageSrc = function() {
+          var _ref;
+          return (_ref = $scope.areaToNavigate) != null ? _ref.styles.gotoImageUrl : void 0;
         };
         $scope.$on('areaBeaconUpdate', function(event, beaconDatas) {
           var newAreaToNavigateTo;
@@ -1196,6 +1191,30 @@
 (function() {
   var f;
 
+  f = function(DataStore) {
+    return {
+      restrict: "E",
+      template: "<img ng-src='{{::getImageUrl()}}'>",
+      scope: {
+        imageId: "@"
+      },
+      link: function($scope) {
+        return $scope.getImageUrl = function() {
+          if ($scope.imageId) {
+            return DataStore.getImages()[parseInt($scope.imageId)];
+          }
+        };
+      }
+    };
+  };
+
+  PaperChase.directive("imageLoad", ["DataStore", f]);
+
+}).call(this);
+
+(function() {
+  var f;
+
   f = function($rootScope) {
     return {
       restrict: 'E',
@@ -1278,7 +1297,7 @@
 
 (function() {
   PaperChase.directive("papQuizImageregion", [
-    "$timeout", function($timeout) {
+    "$timeout", "DataStore", function($timeout, DataStore) {
       return {
         restrict: 'E',
         templateUrl: 'templates/quizzes/imageregion.html',
@@ -1290,9 +1309,21 @@
           $timeout(function() {
             return $('img[usemap]').rwdImageMaps();
           });
+          $scope.areas = [
+            {
+              coords: $scope.data.coords
+            }
+          ];
+          $scope.getImageSrc = function() {
+            if ($scope.showCorrect) {
+              return DataStore.getImages()[$scope.data.imageSolvedId];
+            } else {
+              return DataStore.getImages()[$scope.data.imageId];
+            }
+          };
           $scope.areaClick = function(idx) {
             if (!$scope.showCorrect) {
-              if ($scope.data.correctAnswer.indexOf(idx) !== -1) {
+              if (idx !== -1) {
                 $scope.showCorrect = true;
                 $scope.showWrong = false;
                 return $timeout(quizFinished, 2000);
@@ -1320,7 +1351,7 @@
 
 (function() {
   PaperChase.directive("papQuizMultiplechoice", [
-    "$http", "$ionicSlideBoxDelegate", "$ionicPopup", "$timeout", "NavigationService", function($http) {
+    "$http", "DataStore", function($http, DataStore) {
       return {
         restrict: 'E',
         templateUrl: 'templates/quizzes/multiplechoice.html',
@@ -1333,19 +1364,19 @@
             var v, _i, _len, _ref, _results;
             $scope.options = [];
             $scope.question = $scope.data.question;
-            _ref = $scope.data.options;
+            _ref = $scope.data.answers;
             _results = [];
             for (_i = 0, _len = _ref.length; _i < _len; _i++) {
               v = _ref[_i];
-              if (v.kind === "text") {
+              if ($scope.data.type === "text") {
                 _results.push($scope.options.push({
                   idx: v.idx,
-                  data: v.data
+                  data: v.text
                 }));
-              } else if (v.kind === "image") {
+              } else if ($scope.data.type === "image") {
                 _results.push($scope.options.push({
                   idx: v.idx,
-                  data: "<img style='width:100px' src='" + v.data + "'/>"
+                  data: "<image-load image-id='" + v.imageId + "'/>"
                 }));
               } else {
                 _results.push(void 0);
@@ -1355,7 +1386,7 @@
           };
           prepareData();
           return $scope.checkAnswer = function() {
-            return $scope.choice === $scope.data.correctAnswer;
+            return parseInt($scope.choice) === parseInt($scope.data.correctAnswer);
           };
         }
       };
@@ -1446,7 +1477,7 @@
 
   PaperChase.directive("papWidth", [papWidth]);
 
-  subCtrl = function($window) {
+  subCtrl = function($window, DataStore) {
     return {
       restrict: "E",
       require: "^papDraggablesContainer",
@@ -1509,8 +1540,10 @@
           return true;
         };
         $scope.getBgImageFor = function(index) {
+          var url;
+          url = DataStore.getImages()[$scope.listB.values[index].mediumId];
           return {
-            'background-image': "url('img/" + $scope.listB.values[index].path + "')"
+            "background-image": "url('" + url + "')"
           };
         };
         $scope.calculateRowHeight = function() {
@@ -1543,7 +1576,7 @@
     };
   };
 
-  PaperChase.directive("papQuizAssignSubCtrl", ["$window", subCtrl]);
+  PaperChase.directive("papQuizAssignSubCtrl", ["$window", "DataStore", subCtrl]);
 
   f = function($compile) {
     return {
@@ -1569,7 +1602,7 @@
 (function() {
   var f;
 
-  f = function($ionicModal, Util) {
+  f = function($ionicModal, Util, DataStore) {
     return {
       restrict: "E",
       replace: true,
@@ -1601,10 +1634,10 @@
           _ref = $scope.list;
           for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
             entry = _ref[i];
-            if (entry.idx !== (i + 1)) {
+            if (entry.idx !== i) {
               somethingIsWrong = true;
             }
-            correctAnswers[i] = entry.idx === (i + 1);
+            correctAnswers[i] = entry.idx === i;
             previousValue = entry.idx;
           }
           return !somethingIsWrong;
@@ -1623,21 +1656,30 @@
           return $scope.modal = modal;
         });
         $scope.openModal = function(item) {
-          $scope.imageSrc = "img/quizzes/example2/" + item.idx + ".jpg";
-          $scope.caption_long = item.caption_long;
+          var url;
+          url = DataStore.getImages()[item.mediumId];
+          $scope.imageSrc = url;
+          $scope.caption_long = item.captionLong;
           return $scope.modal.show();
         };
         $scope.closeModal = function() {
           return $scope.modal.hide();
         };
-        return $scope.getCorrectAnswerIndicator = function(index) {
+        $scope.getCorrectAnswerIndicator = function(index) {
           return !correctAnswers[index];
+        };
+        return $scope.getBgImageFor = function(item) {
+          var url;
+          url = DataStore.getImages()[item.mediumId];
+          return {
+            "background-image": "url('" + url + "')"
+          };
         };
       }
     };
   };
 
-  PaperChase.directive("papQuizOrder", ["$ionicModal", "Util", f]);
+  PaperChase.directive("papQuizOrder", ["$ionicModal", "Util", "DataStore", f]);
 
 }).call(this);
 
@@ -1702,10 +1744,10 @@
                 question.questionText = rawQuestionData.defaultQuestionText;
               }
               if (question.trueAnswer == null) {
-                question.trueAnswer = rawQuestionData.defaultTrueAnswer;
+                question.trueAnswer = rawQuestionData.trueAnswerText;
               }
               if (question.falseAnswer == null) {
-                question.falseAnswer = rawQuestionData.defaultFalseAnswer;
+                question.falseAnswer = rawQuestionData.falseAnswerText;
               }
               if (question.wrongFeedback == null) {
                 if (rawQuestionData.defaultWrongFeedback != null) {
@@ -1761,7 +1803,7 @@
           $scope.submitAnswer = function(answer) {
             var emitCall;
             $scope.isSolved = true;
-            $scope.correct = answer === $scope.question.answer;
+            $scope.correct = answer === JSON.parse($scope.question.correctAnswer);
             setFeedbackText($scope.correct);
             disableButtons(answer);
             emitCall = function() {
@@ -1816,13 +1858,14 @@
         this.id = rawData.id;
         this.key = rawData.key;
         this.title = rawData.title;
-        this.gotoMessage = rawData.goto_message;
-        this.hintText = rawData.hint_text;
-        this.hintImagePath = rawData.hint_image_path;
-        this.areaBeaconId = rawData.area_beacon_id;
-        this.questBeaconId = rawData.quest_beacon_id;
+        this.gotoMessage = rawData.gotoMessage;
+        this.hintText = rawData.hintText;
+        this.hintImagePath = rawData.hintImagePath;
+        this.areaBeaconId = rawData.areaBeaconId;
+        this.questBeaconId = rawData.questBeaconId;
         this.challenge = rawData.challenge;
         this.contents = rawData.contents;
+        this.styles = rawData.styles;
       }
 
       return Area;
@@ -1839,7 +1882,7 @@
       function Beacon(rawData) {
         this.uuid = rawData.uuid;
         this.id = rawData.id;
-        this.device_id = rawData.device_id;
+        this.device_id = rawData.deviceId;
         this.major = rawData.major;
         this.minor = rawData.minor;
         this.kind = rawData.kind;
@@ -1941,48 +1984,6 @@
   };
 
   PaperChase.service("AccuracyFilter", [f]);
-
-}).call(this);
-
-(function() {
-  var f;
-
-  f = function() {
-    var analyticsAvailable;
-    analyticsAvailable = false;
-    return {
-      initialize: function() {
-        if ((typeof analytics !== "undefined" && analytics !== null)) {
-          analytics.startTrackerWithId("UA-70020231-3");
-          console.log("start tracking");
-          analytics.debugMode();
-          return analyticsAvailable = true;
-        } else {
-          return console.log("Google Analytics Unavailable");
-        }
-      },
-      trackView: function(name) {
-        console.log("trackView");
-        if (analyticsAvailable) {
-          return analytics.trackView(name);
-        }
-      },
-      trackEvent: function(category, action, label, value) {
-        console.log("trackEvent");
-        if (analyticsAvailable) {
-          return analytics.trackEvent(category, action, label, value);
-        }
-      },
-      trackException: function(exception) {
-        console.log("trackException");
-        if (analyticsAvailable) {
-          return analytics.trackException(exception, true);
-        }
-      }
-    };
-  };
-
-  PaperChase.service("Analytics", [f]);
 
 }).call(this);
 
@@ -2186,11 +2187,12 @@
   var f;
 
   f = function($q, RestApi, Beacon, Area) {
-    var areas, beacons, deferred, initialize, loadCompleted, loadIntoModel;
+    var areas, beacons, deferred, images, initialize, loadCompleted, loadIntoModel;
     deferred = $q.defer();
     loadCompleted = false;
     areas = void 0;
     beacons = void 0;
+    images = void 0;
     loadIntoModel = function(list, Model) {
       var item, _i, _len, _results;
       _results = [];
@@ -2206,8 +2208,12 @@
       }).then(function() {
         return RestApi.getAreas().then(function(data) {
           areas = loadIntoModel(data, Area);
-          deferred.resolve();
-          loadCompleted = true;
+        }).then(function() {
+          return RestApi.getImages().then(function(data) {
+            images = data;
+            deferred.resolve();
+            loadCompleted = true;
+          });
         });
       });
     };
@@ -2223,6 +2229,9 @@
       },
       getAreas: function() {
         return areas;
+      },
+      getImages: function() {
+        return images;
       },
       getAreaKeys: function() {
         var area, _i, _len, _results;
@@ -2312,7 +2321,7 @@
 
   f = function() {
     var _on;
-    _on = true;
+    _on = false;
     return {
       isOn: function() {
         return _on;
@@ -2339,21 +2348,6 @@
   };
 
   PaperChase.service("Dictionary", [f]);
-
-}).call(this);
-
-(function() {
-  var f;
-
-  f = function(Analytics) {
-    return function(exception, cause) {
-      exception.message += ' (caused by "' + cause + '")';
-      Analytics.trackException(exception.message);
-      return console.log(exception);
-    };
-  };
-
-  PaperChase.factory('$exceptionHandler', ["Analytics", f]);
 
 }).call(this);
 
@@ -2420,7 +2414,7 @@
 }).call(this);
 
 (function() {
-  var Beacon, Counter, Point, beaconLocations, bigAnomalyRange, bigAnomalyRangeHalf, f, smallAnomalyRange, smallAnomalyRangeHalf;
+  var Beacon, Counter, Point, bigAnomalyRange, bigAnomalyRangeHalf, f, smallAnomalyRange, smallAnomalyRangeHalf;
 
   Point = (function() {
     function Point(x, y) {
@@ -2469,23 +2463,8 @@
 
   bigAnomalyRangeHalf = bigAnomalyRange / 2.0;
 
-  beaconLocations = {
-    ant: [new Point(32, 40), new Point(32, 41)],
-    bear: [new Point(30, 30), new Point(30, 31)],
-    beaver: [new Point(7, 26), new Point(7, 27)],
-    butterfly: [new Point(51, 24), new Point(51, 25)],
-    dino: [new Point(51, 27), new Point(51, 28)],
-    eagle: [new Point(54, 24), new Point(54, 25)],
-    fish: [new Point(14, 20), new Point(14, 21)],
-    frog: [new Point(16, 20), new Point(16, 21)],
-    mineral: [new Point(18, 30), new Point(18, 31)],
-    mouse: [new Point(18, 20), new Point(18, 21)],
-    ram: [new Point(16, 20), new Point(16, 21)],
-    wolf: [new Point(10, 20), new Point(10, 21)]
-  };
-
   f = function($q, DataStore) {
-    var addBeacon, addBigAnomaly, addSmallAnomaly, beacons, calculateDistance, clientPosition, counter, deferred, getProximityForDistance, getRandomFloat, getRandomInt, randomizeDistance;
+    var addBeacon, addBigAnomaly, addSmallAnomaly, beacons, calculateDistance, clientPosition, counter, deferred, getProximityForDistance, getRandomBeaconLocation, getRandomFloat, getRandomInt, randomizeDistance;
     beacons = [];
     deferred = $q.defer();
     clientPosition = null;
@@ -2532,24 +2511,29 @@
     addBeacon = function(beacon) {
       return beacons.push(beacon);
     };
+    getRandomBeaconLocation = function() {
+      var x, y;
+      x = getRandomInt(0, 50);
+      y = getRandomInt(0, 50);
+      return new Point(x, y);
+    };
     return {
       initialize: function(_beacons) {
-        var area, beacon, location, _i, _len;
+        var area, beacon, _i, _len;
         clientPosition = new Point(8, 9);
-        counter = new Counter(_beacons.length);
         for (_i = 0, _len = _beacons.length; _i < _len; _i++) {
           beacon = _beacons[_i];
           area = void 0;
-          location = void 0;
           if (beacon.kind === "area_beacon") {
             area = DataStore.getAreaByBeacon(beacon);
-            location = beaconLocations[area.key][0];
           } else {
             area = DataStore.getAreaByQuestBeacon(beacon);
-            location = beaconLocations[area.key][1];
           }
-          addBeacon(new Beacon(beacon.id, beacon.uuid, beacon.major, beacon.minor, beacon.kind, location, area.key));
+          if (area) {
+            addBeacon(new Beacon(beacon.id, beacon.uuid, beacon.major, beacon.minor, beacon.kind, getRandomBeaconLocation(), area.title));
+          }
         }
+        counter = new Counter(beacons.length);
         return deferred.resolve(beacons);
       },
       getClientPosition: function() {
@@ -2586,16 +2570,20 @@
   var f;
 
   f = function($resource, $q) {
-    var areaResource, baseUrl, beaconResource;
-    baseUrl = "data/json";
+    var areaResource, baseUrl, beaconResource, imageResource;
+    baseUrl = "http://localhost:3000/consume";
     beaconResource = $resource("" + baseUrl + "/beacons.json");
-    areaResource = $resource("" + baseUrl + "/areas.json");
+    areaResource = $resource("" + baseUrl + "/areas.json?locale=de");
+    imageResource = $resource("" + baseUrl + "/images.json");
     return {
       getBeacons: function() {
         return beaconResource.query().$promise;
       },
       getAreas: function() {
         return areaResource.query().$promise;
+      },
+      getImages: function() {
+        return imageResource.get().$promise;
       }
     };
   };

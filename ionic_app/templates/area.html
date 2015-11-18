@@ -5,9 +5,9 @@
   </ion-nav-bar>
   <ion-content scroll="false" style="margin: 0px;">
     <div ng-class="contentClass">
-      <div class="pap-area-view">
+      <div ng-style="::backgroundImageStyle()" class="pap-area-view">
         <header>
-          <h1>{{currentArea.title}}</h1>
+          <h1 ng-style="::primaryColorStyle()">{{currentArea.title}}</h1>
         </header>
         <ion-scroll>
           <div ng-repeat="content in currentArea.contents">
@@ -25,7 +25,7 @@
           </div>
           <div class="pap-sticker-container">
             <div ng-click="toggleSticker()" ng-class="{'pap-magnified': searchingForSticker}" class="pap-sticker">
-              <div ng-class="solvedClass" class="pap-front"></div>
+              <div ng-style="::buttonFrontStyle()" ng-class="solvedClass" class="pap-front"></div>
               <div class="pap-back">
                 <div class="pap-sonar"></div>
                 <div ng-class="questFoundClass" class="pap-loader-circle"></div>
