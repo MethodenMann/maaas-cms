@@ -1,0 +1,8 @@
+div(ng-repeat='question in ctrl.bindTo.list')
+  .form-group
+    label {{ 'challenges_details_order_title_label' | translate }} {{ $index + 1 }}
+    input.form-control(ng-model='question.captionShort')
+
+  .form-group
+    label {{ 'challenges_details_order_description_label' | translate }} {{ $index + 1 }}
+    input.form-control(ng-model='question.captionLong')

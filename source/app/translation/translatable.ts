@@ -83,6 +83,14 @@ var quizPreparators = {
     //   question.text = '';
     // }
     return clone;
+  },
+
+  'order': (data) => {
+    var clone = jQuery.extend(true, {}, data);
+    // for (let question of clone.questions) {
+    //   question.text = '';
+    // }
+    return clone;
   }
 };
 
