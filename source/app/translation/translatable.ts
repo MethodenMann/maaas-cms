@@ -41,20 +41,20 @@ var mainLocale = 'de';
 var fieldConfigs = {
   'area': () => {
     return [
-      {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
-      {name: 'gotoText', prefix: 'areas_details_gototext', inputType: 'input'}
+      {name: 'name', prefix: 'areas_details_name', inputType: 'simple-input-field'},
+      {name: 'gotoText', prefix: 'areas_details_gototext', inputType: 'simple-input-field'}
     ];
   },
   'content': () => {
     return [
-      {name: 'title', prefix: 'areas_details_name', inputType: 'input'},
-      {name: 'description', prefix: 'areas_details_name', inputType: 'input'},
-      {name: 'data', prefix: 'areas_details_gototext', inputType: 'richtext'}
+      {name: 'title', prefix: 'areas_details_name', inputType: 'simple-input-field'},
+      {name: 'description', prefix: 'areas_details_name', inputType: 'simple-input-field'},
+      {name: 'data', prefix: 'areas_details_gototext', inputType: 'tinymce-input-field'}
     ];
   },
   'challenge': (currentModel:any) => {
     return [
-      {name: 'name', prefix: 'challenges_details_name', inputType: 'input'},
+      {name: 'name', prefix: 'challenges_details_name', inputType: 'simple-input-field'},
       {name: 'data', prefix: 'translations_quiz_configuration_empty', inputType: `quiz-${currentModel.kind}`}
     ];
   }

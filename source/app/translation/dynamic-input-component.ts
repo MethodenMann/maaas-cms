@@ -11,15 +11,6 @@ export class DynamicInputComponent {
     transclude: true
   };
 
-  private typeToTemplate = {
-    'input': 'app/translation/dynamic-input-component/simple-input-field.html',
-    'richtext': 'app/translation/dynamic-input-component/tinymce-input-field.html',
-    'quiz-multiple-choice': 'app/translation/dynamic-input-component/quiz-multiple-choice.html',
-    'quiz-true-false': 'app/translation/dynamic-input-component/quiz-true-false.html',
-    'quiz-assign': 'app/translation/dynamic-input-component/quiz-assign.html',
-    'quiz-order': 'app/translation/dynamic-input-component/quiz-order.html'
-  };
-
   private templateName:string;
   private inputType:string;
   private tinymceConfig:any;
@@ -28,7 +19,7 @@ export class DynamicInputComponent {
   constructor(
     @Inject('$scope') protected $scope
   ) {
-    this.templateName = this.typeToTemplate[this.inputType];
+    this.templateName = `app/translation/dynamic-input-component/${this.inputType}.html`
 
     this.tinymceConfig = {
       menu: {},
