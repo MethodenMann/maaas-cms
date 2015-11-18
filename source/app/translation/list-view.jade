@@ -6,9 +6,9 @@ h1 Translations
   .panel-body
     .row
       .col-md-3
-        select.form-control(ng-model="ctrl.selectedMode" ng-change="ctrl.selectedModeChanged()")
-          option(value="wizard") Wizard Modus
-          option(value="edit-all") Alles
+        select.form-control(ng-model='ctrl.selectedMode' ng-change='ctrl.selectedModeChanged()')
+          option(value='wizard') Wizard Modus
+          option(value='edit-all') Alles
     br
     .row
       .col-md-12
@@ -16,4 +16,4 @@ h1 Translations
           .progress-bar.progress-bar-success(ng-style='ctrl.getProgressBarStyle()')
             span {{(ctrl.currentTranslationProgress*100).toFixed(0)}}% Complete
 
-    div(ng-include="ctrl.getModeTemplate()")
+    div(ng-include='ctrl.getModeTemplate()')
