@@ -54,11 +54,11 @@ export class ListView {
 
     $q.all(promises).then(() => {
       this.updateTranslationProgress();
-    })
+    });
 
     $scope.$on('mas.request-translation-progress-update', () => {
       this.updateTranslationProgress();
-    })
+    });
   }
 
   updateTranslationProgress() {
@@ -72,7 +72,7 @@ export class ListView {
 
   getProgressBarStyle() {
     var n = this.currentTranslationProgress * 100;
-    return {width: `${n}%`}
+    return {width: `${n}%`};
   }
 
   getModeTemplate() {

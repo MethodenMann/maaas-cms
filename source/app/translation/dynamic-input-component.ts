@@ -19,7 +19,7 @@ export class DynamicInputComponent {
   constructor(
     @Inject('$scope') protected $scope
   ) {
-    this.templateName = `app/translation/dynamic-input-component/${this.inputType}.html`
+    this.templateName = `app/translation/dynamic-input-component/${this.inputType}.html`;
 
     this.tinymceConfig = {
       menu: {},

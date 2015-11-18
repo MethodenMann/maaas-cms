@@ -1,40 +1,3 @@
-export class Translatable {
-  public fieldConfig:any;
-
-  constructor(public modelConfig:any, public model:any) {
-    this.fieldConfig = fieldConfigs[modelConfig.name](model);
-    this.prepareModel();
-  }
-
-  prepareModel() {
-    modelPreparators[this.modelConfig.name](this.model);
-  }
-
-  getTranslationProgress() : [number, {}] {
-    var translationsPerLocale = {}
-    var total = 0;
-    var progress = this.getTranslationProgressFor(this.model, this.fieldConfig);
-    translationsPerLocale[mainLocale] = progress;
-    total += progress;
-    for (let locale of locales) {
-      progress = this.getTranslationProgressFor(this.model.translations[locale], this.fieldConfig);
-      translationsPerLocale[locale] = progress;
-      total += progress;
-    }
-    return [total / (1 + locales.length), translationsPerLocale];
-  }
-
-  getTranslationProgressFor(model, fields) {
-    var defined = 0;
-    for (let field of fields) {
-      if (model[field.name] != undefined && model[field.name] != null && model[field.name] != "") {
-        defined++;
-      }
-    }
-    return defined / fields.length;
-  }
-}
-
 var locales = ['en', 'it', 'fr'];
 var mainLocale = 'de';
 
@@ -125,3 +88,40 @@ var modelPreparators = {
     }
   }
 };
+
+export class Translatable {
+  public fieldConfig:any;
+
+  constructor(public modelConfig:any, public model:any) {
+    this.fieldConfig = fieldConfigs[modelConfig.name](model);
+    this.prepareModel();
+  }
+
+  prepareModel() {
+    modelPreparators[this.modelConfig.name](this.model);
+  }
+
+  getTranslationProgress() : [number, {}] {
+    var translationsPerLocale = {};
+    var total = 0;
+    var progress = this.getTranslationProgressFor(this.model, this.fieldConfig);
+    translationsPerLocale[mainLocale] = progress;
+    total += progress;
+    for (let locale of locales) {
+      progress = this.getTranslationProgressFor(this.model.translations[locale], this.fieldConfig);
+      translationsPerLocale[locale] = progress;
+      total += progress;
+    }
+    return [total / (1 + locales.length), translationsPerLocale];
+  }
+
+  getTranslationProgressFor(model, fields) {
+    var defined = 0;
+    for (let field of fields) {
+      if (model[field.name] !== undefined && model[field.name] !== null && model[field.name] !== '') {
+        defined++;
+      }
+    }
+    return defined / fields.length;
+  }
+}
