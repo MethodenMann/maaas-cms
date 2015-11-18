@@ -26,6 +26,7 @@ var addSession = function(client, socketId){
       socketStore[client].push(socketId);
     }
   }
+  console.log("---------------------------add to STore", JSON.stringify(socketStore))
 };
 
 var removeSession = function(client, socketId){
@@ -39,6 +40,8 @@ var removeSession = function(client, socketId){
       }
     }
   }
+
+  console.log("------------------------------REMOVE to STore", JSON.stringify(socketStore))
 };
 
 var getSocketsOfClient = function(client){
@@ -56,7 +59,7 @@ io.on('connection', function(socket){
     removeSession(socket.handshake.address, socket.id);
   });
 
-  
+
   socket.on('publishPreview', function(data){
     console.log('publishPreview', data.type, data.id, data.data);
     var sockets = getSocketsOfClient(socket.handshake.address);
