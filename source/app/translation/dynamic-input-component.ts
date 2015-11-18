@@ -12,10 +12,10 @@ export class DynamicInputComponent {
   };
 
   private typeToTemplate = {
-    'input': 'app/translation/simple-input-field.html',
-    'richtext': 'app/translation/tinymce-input-field.html',
-    'quiz-multiple-choice': 'app/translation/quiz-multiple-choice.html',
-    'quiz-true-false': 'app/translation/quiz-true-false.html'
+    'input': 'app/translation/dynamic-input-component/simple-input-field.html',
+    'richtext': 'app/translation/dynamic-input-component/tinymce-input-field.html',
+    'quiz-multiple-choice': 'app/translation/dynamic-input-component/quiz-multiple-choice.html',
+    'quiz-true-false': 'app/translation/dynamic-input-component/quiz-true-false.html'
   };
 
   private templateName:string;
