@@ -91,6 +91,14 @@ var quizPreparators = {
     //   question.text = '';
     // }
     return clone;
+  },
+
+  'image-region': (data) => {
+    var clone = jQuery.extend(true, {}, data);
+    // for (let question of clone.questions) {
+    //   question.text = '';
+    // }
+    return clone;
   }
 };
 
