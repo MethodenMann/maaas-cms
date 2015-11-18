@@ -7,7 +7,6 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
-var connect = require('gulp-connect');
 var clean = require('gulp-clean');
 var runSequence = require('run-sequence');
 var Config = require('./gulpfile.config');
@@ -16,6 +15,8 @@ var replace = require('gulp-replace');
 var size = require('gulp-size');
 var jadelint = require('gulp-jadelint');
 var ngConstant = require('gulp-ng-constant');
+var server = require( 'gulp-develop-server' );
+var bowerSync = require( 'browser-sync' );
 
 var argv = require('yargs').argv;
 
@@ -191,41 +192,62 @@ gulp.task('constants', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
-  gulp.watch(config.testsSrcPath + '/**/*.ts', ['typescript-lint', 'typescript']);
-  gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views', 'jade-lint']);
-  gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass']);
-  gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets']);
-  gulp.watch(config.baseSrcPath + '/app/**/*.json', ['copyassets']);
+  gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript', 'bowerSyncReload']);
+  gulp.watch(config.testsSrcPath + '/**/*.ts', ['typescript-lint', 'typescript', 'bowerSyncReload']);
+  gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views', 'jade-lint', 'bowerSyncReload']);
+  gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass', 'bowerSyncReload']);
+  gulp.watch(config.baseSrcPath + '/img/**/*.*', ['copyassets', 'bowerSyncReload']);
+  gulp.watch(config.baseSrcPath + '/app/**/*.json', ['copyassets', 'bowerSyncReload']);
 
-  gulp.watch([
-    config.baseDestPath + '/**/*.*'
-  ]).on('change', function(file) {
-    gulp.src(file.path)
-      .pipe(connect.reload());
-  });
+  gulp.watch( devServerOptions.server.path, [ 'server:restart' ] )
 });
-
-gulp.task('connect', function() {
-  connect.server({
-    port: 1337,
-    root: config.baseDestPath,
-    livereload: true
-  });
-});
-
 
 gulp.task('copy-ionicapp', function() {
   gulp.src([config.appPath + '/**/*.*'])
     .pipe(gulp.dest(config.baseDestPath + '/ionic-app/'));
 });
 
+
+gulp.task('bowerSyncReload', function() {
+  bowerSync.reload();
+});
+
+
+var devServerOptions = {
+  server: {
+    path: './app.js'
+  },
+  bs: {
+    port: 3001,
+    ghostMode: false,
+    proxy: 'http://localhost:1338',
+    ui: {
+      port: 3002
+    }
+  }
+};
+
+
+gulp.task('server:start', function() {
+  server.listen( devServerOptions.server, function(error ) {
+    if( ! error ) bowerSync( devServerOptions.bs );
+  });
+});
+
+
+gulp.task('server:restart', function() {
+  server.restart( function( error ) {
+    if( ! error ) bowerSync.reload();
+  });
+});
+
+
+gulp.task('lint', ['typescript-lint', 'jade-lint']);
+
 gulp.task('build', function(callback) {
   runSequence('clean', ['copyassets', 'views', 'sass', 'typescript', 'constants', 'systemjs-config', 'copy-ionicapp'],  'template-cache', callback);
 });
 
-gulp.task('lint', ['typescript-lint', 'jade-lint']);
-
 gulp.task('default', function() {
-  runSequence('build', 'connect', 'watch');
+  runSequence('build', 'server:start', 'watch');
 });

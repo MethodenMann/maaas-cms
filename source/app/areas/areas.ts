@@ -13,12 +13,6 @@ export function loadArea(app) {
     makeSelector(AreaButtonComponent),
     makeDirective(AreaButtonComponent));
 
-
-  app.factory('mySocket', function (socketFactory) {
-    return socketFactory();
-  });
-
-
   app.config(function($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });

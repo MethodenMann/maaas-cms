@@ -8,22 +8,14 @@ export class PreviewView {
   private url = "ionic-app/index.html"
 
   constructor(
-    @Inject('mySocket') private mySocket
+    @Inject('PreviewSocket') private PreviewSocket
     ) {
 
-
-
-    mySocket.on('navigateTo', (data) => {
+    PreviewSocket.on('navigateTo', (data) => {
       if (data.type === 'area') {
-        if (data.id === "Bär") {
-          this.url = 'ionic-app/#/app/area/bear'
-        }
-        if (data.id === "Ameisen") {
-          this.url = 'ionic-app/#/app/area/ant'
-        }
+          this.url = 'ionic-app/#/app/area/' + data.id
       }
-    }
-    );
+    });
 
   }
 }
