@@ -29,9 +29,9 @@ export function loadTranslations(app) {
     makeSelector(DynamicInputComponent),
     makeDirective(DynamicInputComponent));
 
-  // app.config(function($translateProvider, $translatePartialLoaderProvider) {
-  //   $translatePartialLoaderProvider.addPart(componentName);
-  // });
+  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart('translation');
+  });
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider

@@ -29,8 +29,8 @@ export class ListView {
     ) {
 
     this.modelConfigs = [];
-    this.modelConfigs.push({name: 'area', modelType: Area});
-    this.modelConfigs.push({name: 'content', modelType: Content});
+    // this.modelConfigs.push({name: 'area', modelType: Area});
+    // this.modelConfigs.push({name: 'content', modelType: Content});
     this.modelConfigs.push({name: 'challenge', modelType: Challenge});
 
     var promises = [];

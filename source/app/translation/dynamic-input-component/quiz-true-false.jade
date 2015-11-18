@@ -1,4 +1,5 @@
 .form-group(ng-repeat='question in ctrl.bindTo.questions')
+  label {{ 'challenges_true-false_question_answer_label' | translate }} {{ $index + 1 }}
   input.form-control(ng-model='question.text')
 
 mas-form-group(name='' localization-prefix='challenges_true-false_option_true')
