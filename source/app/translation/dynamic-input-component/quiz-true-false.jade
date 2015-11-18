@@ -1,3 +1,8 @@
-input.form-control(ng-repeat='question in ctrl.bindTo.questions' ng-model='question.text')
-input.form-control(ng-model='ctrl.bindTo.trueAnswerText')
-input.form-control(ng-model='ctrl.bindTo.falseAnswerText')
+.form-group(ng-repeat='question in ctrl.bindTo.questions')
+  input.form-control(ng-model='question.text')
+
+mas-form-group(name='' localization-prefix='challenges_true-false_option_true')
+  input.form-control(ng-model='ctrl.bindTo.trueAnswerText')
+
+mas-form-group(name='' localization-prefix='challenges_true-false_option_false')
+  input.form-control(ng-model='ctrl.bindTo.falseAnswerText')

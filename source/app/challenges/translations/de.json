@@ -73,6 +73,7 @@
   "challenges_true-false_question_image_label": "Bild",
   "challenges_true-false_question_image_help": "Optional können sie ein Bild zur Frage hinzufügen",
   "challenges_true-false_question_answer_label": "Antwort",
+  "challenges_true-false_question_answers_label": "Antworten",
   "challenges_true-false_question_answer_error": "Wählen sie die passende Antwort aus",
   "challenges_true-false_question_answer_help": "Wählen sie die passende Antwort aus",
 

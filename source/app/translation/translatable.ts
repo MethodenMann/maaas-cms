@@ -53,7 +53,7 @@ var fieldConfigs = {
   'challenge': (currentModel:any) => {
     return [
       {name: 'name', prefix: 'challenges_details_name', inputType: 'input'},
-      {name: 'data', prefix: 'areas_details_gototext', inputType: `quiz-${currentModel.kind}`}
+      {name: 'data', prefix: 'challenges_true-false_question_answers', inputType: `quiz-${currentModel.kind}`}
     ];
   }
 };
