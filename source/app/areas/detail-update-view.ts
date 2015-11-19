@@ -11,6 +11,8 @@ export class DetailUpdateView extends DetailAbstract {
     this.Area.find(this.$stateParams.areaId).then((data) => {
       this.area = data;
     });
+
+
   }
 
   saveHook() {

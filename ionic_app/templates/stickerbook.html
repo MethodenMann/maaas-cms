@@ -10,7 +10,7 @@
       <pap-draggables-container>
         <pap-stickerbook-sub-ctrl>
           <div class="pap-stickers-container">
-            <pap-draggable id="{{$index}}" ng-repeat="quest in quests" ng-class="::getClasses(quest)" class="pap-sticker"></pap-draggable>
+            <pap-draggable id="{{$index}}" ng-repeat="quest in quests" ng-class="::getClasses(quest)" ng-style="::getStyle(quest)" class="pap-sticker"></pap-draggable>
           </div>
         </pap-stickerbook-sub-ctrl>
       </pap-draggables-container>

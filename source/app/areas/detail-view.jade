@@ -26,7 +26,7 @@
           mas-image-form-wrapper(image-id='gotoImage' model='ctrl.area.gotoImageId' height='100' is-required='true')
 
       mas-save-button(ng-click='ctrl.save()')
-      uib-alert#alertbox(ng-repeat='alert in ctrl.alerts' type='{{alert.type}}' close='ctrl.closeAlert($index)') {{alert.msg}}
+      a.btn.btn-default(ng-click='ctrl.publishPreview()') Preview
 
       div.well.top30(ng-hide='ctrl.createMode')
         button.btn.mas-navigation-btn(ui-sref='cms.areas.detail.challenges.list')

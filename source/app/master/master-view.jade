@@ -70,6 +70,10 @@
             a(ui-sref='cms.translations.list'  ui-sref-active-if='cms.translations')
               i.fa.fa-flag
               |  Übersetzen
+          li
+            a(onClick='MyWindow=window.open("#/preview","MyWindow",width=600,height=300)')
+              i.fa.fa-mobile
+              |  Vorschau
     // Page Content
   #page-wrapper
     .container-fluid

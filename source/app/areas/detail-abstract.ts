@@ -11,7 +11,8 @@ export abstract class DetailAbstract extends FormView {
     @Inject('Area') protected Area,
     @Inject('$state') protected $state,
     @Inject('AlertService') protected AlertService,
-    @Inject('$filter') protected $filter
+    @Inject('$filter') protected $filter,
+    @Inject('PreviewService') protected PreviewService
     ) {
     super($scope);
     this.loadData();
@@ -20,6 +21,10 @@ export abstract class DetailAbstract extends FormView {
   protected loadData(): void {}
   abstract saveHook(): void;
 
+
+  protected publishPreview() {
+    this.PreviewService.publishPreview('area', this.area.id, this.area);
+  }
 
   protected save() {
     this.$scope.$broadcast('mas.saveprogess', 'in-progress');

@@ -1,0 +1,39 @@
+@import "vars";
+
+.preview-view{
+  background-color: $main-color;
+  height:100%;
+
+  h1{
+    color: $gray-dark;
+  }
+}
+
+.linkbox{
+  border-radius: 10px;
+  padding-top: 10px;
+  border: 1px solid #ddd;
+  background-color: $gray-light;
+
+  a:hover{
+    cursor: pointer;
+  }
+
+}
+
+.sizebox{
+  margin-top:10px;
+  width: 120px;
+
+  input{
+    width: 50px;
+  }
+}
+
+.phoneframe{
+  border: 20px solid black;
+  border-bottom-width: 30px;
+  border-radius: 10px;
+}
+
+
