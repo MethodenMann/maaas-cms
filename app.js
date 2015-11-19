@@ -12,57 +12,66 @@ server.listen(port);
 console.log("Listen on port "+ port)
 
 
-var socketStore = {};
+var museumSocketStore = {};
+var socketMuseumMapping = {};
 
-
-var addSession = function(client, socketId){
-  if (!socketStore[client]){
-    socketStore[client] = [];
-    socketStore[client].push(socketId);
+var addSocketToMuseum = function(museumId, socketId){
+  socketMuseumMapping[socketId] = museumId;
+  if (!museumSocketStore[museumId]){
+    museumSocketStore[museumId] = [];
+    museumSocketStore[museumId].push(socketId);
   }
   else
   {
-    if (socketStore[client].indexOf(socketId) == -1){
-      socketStore[client].push(socketId);
+    if (museumSocketStore[museumId].indexOf(socketId) == -1){
+      museumSocketStore[museumId].push(socketId);
     }
   }
-  console.log("---------------------------add to STore", JSON.stringify(socketStore))
+
+  //console.log('Store after ADD:', museumSocketStore);
+  //console.log('socketMuseumMapping after ADD:', socketMuseumMapping);
 };
 
-var removeSession = function(client, socketId){
-  if (socketStore[client]){
-    var idx = socketStore[client].indexOf(socketId);
+var removeSocketFromMuseum = function(museumId, socketId){
+  delete socketMuseumMapping[socketId];
+  if (museumSocketStore[museumId]){
+    var idx = museumSocketStore[museumId].indexOf(socketId);
     if (idx > -1){
-      socketStore[client].splice(idx, 1);
+      museumSocketStore[museumId].splice(idx, 1);
 
-      if (socketStore[client].length == 0){
-        socketStore[client] = undefined;
+      if (museumSocketStore[museumId].length == 0){
+        museumSocketStore[museumId] = undefined;
       }
     }
   }
 
-  console.log("------------------------------REMOVE to STore", JSON.stringify(socketStore))
+  //console.log('Store after REMOVE:', museumSocketStore);
+  //console.log('socketMuseumMapping after REMOVE:', socketMuseumMapping);
 };
 
-var getSocketsOfClient = function(client){
-  if (socketStore[client]){
-    return socketStore[client];
+var getSocketsOfMuseum = function(museumId){
+  if (museumSocketStore[museumId]){
+    return museumSocketStore[museumId];
   }
 };
 
 io.on('connection', function(socket){
-  console.log('a user connected  ', socket.handshake.address, socket.id);
+  console.log('a user connected..  ', socket.id);
 
-  addSession(socket.handshake.address, socket.id);
 
   socket.on('disconnect', function () {
-    removeSession(socket.handshake.address, socket.id);
+    removeSocketFromMuseum(socketMuseumMapping[socket.id], socket.id);
   });
 
+  socket.on('setMuseum', function(data) {
+    console.log('setMuseum', data);
+    addSocketToMuseum(data.museumId, socket.id);
+  });
 
   socket.on('publishPreview', function(data){
     console.log('publishPreview', data.type, data.id, data.data);
-    var sockets = getSocketsOfClient(socket.handshake.address);
+    var sockets = getSocketsOfMuseum(socketMuseumMapping[socket.id]);
+    console.log("SEND TO: ", JSON.stringify(sockets));
     sockets.forEach(function(socketId) {
       io.sockets.connected[socketId].emit('navigateTo', {'type': data.type, 'id': data.id});
       io.sockets.connected[socketId].emit('publishPreviewData', data);

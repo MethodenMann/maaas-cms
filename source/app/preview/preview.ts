@@ -5,6 +5,11 @@ export function loadPreview(app) {
 
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('cms.preview', RouteUtil.getRoute(PreviewView, 'Vorschau', 'cms', '/preview'));
+      .state('preview', {
+        url: '/preview',
+        templateUrl: './app/preview/preview-view.html',
+        controller: PreviewView,
+        controllerAs: 'ctrl'
+      });
   });
 }

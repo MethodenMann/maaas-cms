@@ -23,7 +23,7 @@ export abstract class DetailAbstract extends FormView {
 
 
   protected publishPreview() {
-    this.PreviewService.publishPreview('area', this.area.id, this.area)
+    this.PreviewService.publishPreview('area', this.area.id, this.area);
   }
 
   protected save() {
