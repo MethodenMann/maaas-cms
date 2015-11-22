@@ -35,6 +35,7 @@ import {makeDirective, makeSelector} from './utils/component';
 
 
 import {loadApp} from './loadApp';
+import {AuthUtil} from './common/auth-util-service';
 
 var leApp = angular.module('maaas', [ 'maaas.config',
   'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
@@ -78,7 +79,7 @@ leApp.config(['$httpProvider', function($httpProvider) {
   }
 ]);
 
-leApp.run(function ($rootScope, Auth, $state) {
+leApp.run(function ($rootScope, AuthUtil, $state) {
   // var credentials = {
   //   email: 'regula@gmail.com',
   //   password: 'Biberbau15'
@@ -90,21 +91,20 @@ leApp.run(function ($rootScope, Auth, $state) {
   //
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     console.log(toState.data);
+
     if (toState.data && toState.data.ignoreLogin) {
       console.log('ignoring login!');
     } else {
-      if (!Auth.isAuthenticated()) {
-        console.log('getting user from memory failed. trying to get user from server session');
-        Auth.currentUser().then((user) => {
+
+      AuthUtil.checkAuth().then(isAuthenticated => {
+        if (isAuthenticated) {
           console.log('user is authenticated!');
-        }, (error) => {
+        } else {
           console.log('user is not authenticated!');
           event.preventDefault();
           $state.go('login');
-        });
-      } else {
-        console.log('user is authenticated!');
-      }
+        }
+      });
     }
   });
 });

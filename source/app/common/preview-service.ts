@@ -6,11 +6,14 @@ export class PreviewService {
 
   constructor(
     @Inject('PreviewSocket') protected previewSocket,
-    @Inject('Auth') protected Auth,
+    @Inject('AuthUtil') protected AuthUtil,
     @Inject('$timeout') protected $timeout
     ) {
 
-    this.previewSocket.emit('setMuseum', {'museumId': 1});
+
+    AuthUtil.getMuseumId().then( (id) => {
+      this.previewSocket.emit('setMuseum', {'museumId': id});
+    });
 
     this.previewSocket.on('navigateTo', (data) => {
       this.navigateToCallbacks.forEach((cb) => {

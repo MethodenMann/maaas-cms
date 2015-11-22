@@ -6,10 +6,12 @@ import {SaveButtonComponent} from './forms/save-button-component';
 import {NewButtonSmall} from './new-button-sm';
 import {AlertService} from './alert-service';
 import {PreviewService} from './preview-service';
+import {AuthUtil} from './auth-util-service';
 
 export function loadCommon(app) {
   loadImageManagement(app);
 
+  app.service('AuthUtil', AuthUtil);
 
   app.service('AlertService', AlertService);
 

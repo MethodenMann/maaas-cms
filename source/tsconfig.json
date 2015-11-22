@@ -38,6 +38,7 @@
         "./app/challenges/kind-configs/true-false.ts",
         "./app/challenges/list-view.ts",
         "./app/common/alert-service.ts",
+        "./app/common/auth-util-service.ts",
         "./app/common/common.ts",
         "./app/common/forms/form-group-component.ts",
         "./app/common/forms/form-view.ts",
