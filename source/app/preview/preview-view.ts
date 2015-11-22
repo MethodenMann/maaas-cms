@@ -1,5 +1,6 @@
 import {Inject} from '../utils/di';
 import {IArea} from '../areas/iarea';
+import {AuthUtil} from '../common/auth-util-service';
 
 
 export class PreviewView {
@@ -11,37 +12,28 @@ export class PreviewView {
   private frameHeight = 600;
   private areas: IArea[] = [];
 
+  private code :string = '';
   constructor(
     @Inject('$q') private $q,
     @Inject('PreviewService') private PreviewService,
     @Inject('Area') private Area,
     @Inject('Challenge') private Challenge,
-    @Inject('Content') private Content
+    @Inject('Content') private Content,
+    @Inject('AuthUtil') private AuthUtil
     ) {
 
-    PreviewService.registerNavigateTo((data) => {
-      if (data.type === 'area') {
-        this.navigateToArea(data.id);
-      }
+    this.code = PreviewService.getCode();
+
+    AuthUtil.getMuseumId().then( (museumId) => {
+      parent.document['museumId'] = museumId;
     });
+
 
     this.$q.all([Content.findAll(), Challenge.findAll()]).then((values) => {
       this.Area.findAll().then((areas) => {
         this.areas = areas;
       });
     });
-  }
-
-  public navigateToArea(id) {
-    this.url = 'ionic-app/#/app/area/' + id;
-  }
-
-  public navigateToContent(areaid, contentId) {
-    this.url = `ionic-app/#/app/area/${areaid}/content/${contentId}`;
-  }
-
-  public navigateToChallenge(areaid, challengeId) {
-    this.url = `ionic-app/#/app/quiz/${areaid}`;
   }
 }
 

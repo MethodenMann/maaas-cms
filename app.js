@@ -12,8 +12,10 @@ server.listen(port);
 console.log("Listen on port "+ port)
 
 
+var codeStore = {};
 var museumSocketStore = {};
 var socketMuseumMapping = {};
+
 
 var addSocketToMuseum = function(museumId, socketId){
   socketMuseumMapping[socketId] = museumId;
@@ -27,9 +29,6 @@ var addSocketToMuseum = function(museumId, socketId){
       museumSocketStore[museumId].push(socketId);
     }
   }
-
-  //console.log('Store after ADD:', museumSocketStore);
-  //console.log('socketMuseumMapping after ADD:', socketMuseumMapping);
 };
 
 var removeSocketFromMuseum = function(museumId, socketId){
@@ -44,9 +43,6 @@ var removeSocketFromMuseum = function(museumId, socketId){
       }
     }
   }
-
-  //console.log('Store after REMOVE:', museumSocketStore);
-  //console.log('socketMuseumMapping after REMOVE:', socketMuseumMapping);
 };
 
 var getSocketsOfMuseum = function(museumId){
@@ -54,6 +50,8 @@ var getSocketsOfMuseum = function(museumId){
     return museumSocketStore[museumId];
   }
 };
+
+
 
 io.on('connection', function(socket){
   console.log('a user connected..  ', socket.id);
@@ -63,9 +61,21 @@ io.on('connection', function(socket){
     removeSocketFromMuseum(socketMuseumMapping[socket.id], socket.id);
   });
 
+
+  socket.on('registerCode', function(data) {
+    console.log('registerCode', data);
+    codeStore[data.code] = data.museumId;
+  });
+
   socket.on('setMuseum', function(data) {
     console.log('setMuseum', data);
-    addSocketToMuseum(data.museumId, socket.id);
+    if (data.museumId){
+      addSocketToMuseum(data.museumId, socket.id);
+    } else if (data.code){
+      console.log('set with code',data.code,  codeStore[data.code], socket.id);
+      addSocketToMuseum(codeStore[data.code], socket.id);
+    }
+
   });
 
   socket.on('publishPreview', function(data){
