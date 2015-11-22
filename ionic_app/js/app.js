@@ -7,9 +7,12 @@
 
   window.PaperChaseBeaconSimulator = angular.module("PaperChaseBeaconSimulator", []);
 
-  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase", "btford.socket-io"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation) {
+  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase", "btford.socket-io"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation, PreviewService) {
     $ionicPlatform.ready(function() {
       var alertPopUp, areaKey, areaKeys, _i, _len, _results;
+      if (typeof cordova === "undefined" || cordova === null) {
+        PreviewService.init();
+      }
       if (typeof cordova !== "undefined" && cordova !== null) {
         if (window.cordova && window.cordova.plugins.Keyboard) {
           cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -2185,24 +2188,8 @@
 (function() {
   var f;
 
-  f = function($q, RestApi, Beacon, Area, PreviewSocket) {
+  f = function($q, RestApi, Beacon, Area) {
     var areas, beacons, deferred, images, initialize, loadCompleted, loadIntoModel;
-    PreviewSocket.on("publishPreviewData", function(data) {
-      var area, _i, _len, _results;
-      console.log("publishPreviewData 4", data);
-      if (data.type === "area") {
-        _results = [];
-        for (_i = 0, _len = areas.length; _i < _len; _i++) {
-          area = areas[_i];
-          if (area.key === data.id + "") {
-            _results.push(area.title = data.data.name);
-          } else {
-            _results.push(void 0);
-          }
-        }
-        return _results;
-      }
-    });
     deferred = $q.defer();
     loadCompleted = false;
     areas = void 0;
@@ -2327,11 +2314,7 @@
     };
   };
 
-  PaperChase.service("DataStore", ["$q", "RestApi", "Beacon", "Area", "PreviewSocket", f]);
-
-  PaperChase.factory('PreviewSocket', function(socketFactory) {
-    return socketFactory();
-  });
+  PaperChase.service("DataStore", ["$q", "RestApi", "Beacon", "Area", f]);
 
 }).call(this);
 
@@ -2429,6 +2412,66 @@
   };
 
   PaperChase.service("NavigationService", ["$location", "$ionicViewSwitcher", f]);
+
+}).call(this);
+
+(function() {
+  var f;
+
+  f = function(DataStore, PreviewSocket, $ionicPopup, $state) {
+    var openCodeDialog;
+    openCodeDialog = function() {
+      return $ionicPopup.show({
+        template: '<input type="text" id="code">',
+        title: 'Code eingeben',
+        subTitle: '',
+        buttons: [
+          {
+            text: 'Cancel'
+          }, {
+            text: '<b>Bestätigen</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+              return PreviewSocket.emit("setMuseum", {
+                "code": e.view.document.getElementById("code").value
+              });
+            }
+          }
+        ]
+      });
+    };
+    return {
+      init: function() {
+        if (parent && parent.document && parent.document.museumId) {
+          console.log("set museum", parent.document.museumId);
+          PreviewSocket.emit("setMuseum", {
+            "museumId": parent.document.museumId
+          });
+        } else {
+          openCodeDialog();
+        }
+        return PreviewSocket.on("publishPreviewData", function(data) {
+          var area;
+          if (data.type === "area") {
+            area = DataStore.getAreaByKey(data.id + "");
+            area.title = data.data.name;
+            area.styles.primaryColor = data.data.primaryColor;
+            return $state.go("app.area", {
+              "areaKey": data.id
+            }, {
+              reload: true
+            });
+          }
+        });
+      }
+    };
+  };
+
+  PaperChase.service("PreviewService", ["DataStore", "PreviewSocket", "$ionicPopup", "$state", f]);
+
+  PaperChase.factory('PreviewSocket', function(DataStore, socketFactory) {
+    return socketFactory();
+  });
 
 }).call(this);
 
