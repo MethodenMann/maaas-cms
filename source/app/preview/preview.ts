@@ -3,6 +3,10 @@ import {PreviewView} from './preview-view';
 
 export function loadPreview(app) {
 
+  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+    $translatePartialLoaderProvider.addPart('preview');
+  });
+
   app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('preview', {

@@ -1,7 +1,7 @@
 .preview-view
   h1 App Vorschau
-  | {{ ctrl.code }}
-  .container-fluid
+  p(translate='{{ "preview_gotourl" }}' translate-values='{code: ctrl.code}')
+  .container-fluid.top15
     .row
       .col-md-5
 
