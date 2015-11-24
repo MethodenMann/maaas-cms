@@ -10,7 +10,7 @@
   starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase", "btford.socket-io"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation, PreviewService) {
     $ionicPlatform.ready(function() {
       var alertPopUp, areaKey, areaKeys, _i, _len, _results;
-      if (typeof cordova === "undefined" || cordova === null) {
+      if ((typeof cordova === "undefined" || cordova === null) && (typeof io !== "undefined" && io !== null)) {
         PreviewService.init();
       }
       if (typeof cordova !== "undefined" && cordova !== null) {
@@ -59,26 +59,6 @@
         }
       }
       DataStore.initialize();
-      DataStore.awaitLoadCompletion().then(function() {
-        var areaBeacons, beacon, questBeacons, _i, _len, _ref;
-        areaBeacons = [];
-        questBeacons = [];
-        _ref = DataStore.getBeacons();
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          beacon = _ref[_i];
-          if (beacon.kind === "area_beacon") {
-            areaBeacons.push(beacon);
-          } else {
-            questBeacons.push(beacon);
-          }
-        }
-        BeaconManager.registerBeacons("area", areaBeacons, true);
-        BeaconManager.registerBeacons("quest", questBeacons, false);
-        BeaconManager.start();
-        try {
-          return $cordovaSplashscreen.hide();
-        } catch (_error) {}
-      });
       areaKeys = [];
       _results = [];
       for (_i = 0, _len = areaKeys.length; _i < _len; _i++) {
@@ -205,6 +185,14 @@
         partial: {
           templateUrl: "templates/stickerbook.html",
           controller: "StickerbookCtrl"
+        }
+      }
+    }).state("app.tourselection", {
+      url: "/tourselection",
+      views: {
+        partial: {
+          templateUrl: "templates/tourselection.html",
+          controller: "TourSelectionCtrl"
         }
       }
     });
@@ -498,6 +486,9 @@
     $scope.title = Dictionary.getHomeTitle();
     $scope.navigateToQuickNavigation = function() {
       return NavigationService.navigateTo('app/quicknavigation');
+    };
+    $scope.navigateToTourSelection = function() {
+      return NavigationService.navigateToTourSelection();
     };
     $scope.navigateToStickerbook = function() {
       return NavigationService.navigateToStickerbook();
@@ -834,6 +825,47 @@
   };
 
   PaperChase.controller("StickerbookCtrl", ["$scope", "$timeout", "$ionicConfig", "$ionicPopup", "$ionicHistory", "AppData", "DataStore", "NavigationService", "StickerbookNavigation", f]);
+
+}).call(this);
+
+(function() {
+  var f;
+
+  f = function($scope, AppData, DataStore, NavigationService, BeaconManager) {
+    $scope.museums = [];
+    DataStore.awaitLoadCompletion().then(function() {
+      $scope.museums = DataStore.getMuseums();
+      return $scope.data.selectedMuseum = $scope.museums[1];
+    });
+    $scope.data = {};
+    return $scope.start = function() {
+      if ($scope.data.selectedTour != null) {
+        return DataStore.awaitLoadCompletion().then(function() {
+          var areaBeacons, beacon, questBeacons, _i, _len, _ref;
+          areaBeacons = [];
+          questBeacons = [];
+          _ref = $scope.data.selectedTour.beacons;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            beacon = _ref[_i];
+            if (beacon.kind === "area_beacon") {
+              areaBeacons.push(beacon);
+            } else {
+              questBeacons.push(beacon);
+            }
+          }
+          BeaconManager.registerBeacons("area", areaBeacons, true);
+          BeaconManager.registerBeacons("quest", questBeacons, false);
+          BeaconManager.start();
+          NavigationService.navigateToHome();
+          try {
+            return $cordovaSplashscreen.hide();
+          } catch (_error) {}
+        });
+      }
+    };
+  };
+
+  PaperChase.controller("TourSelectionCtrl", ["$scope", "AppData", "DataStore", "NavigationService", "BeaconManager", f]);
 
 }).call(this);
 
@@ -2189,12 +2221,13 @@
   var f;
 
   f = function($q, RestApi, Beacon, Area) {
-    var areas, beacons, deferred, images, initialize, loadCompleted, loadIntoModel;
+    var areas, beacons, deferred, images, initialize, loadCompleted, loadIntoModel, museums;
     deferred = $q.defer();
     loadCompleted = false;
     areas = void 0;
     beacons = void 0;
     images = void 0;
+    museums = void 0;
     loadIntoModel = function(list, Model) {
       var item, _i, _len, _results;
       _results = [];
@@ -2205,18 +2238,23 @@
       return _results;
     };
     initialize = function() {
-      RestApi.getBeacons().then(function(data) {
-        beacons = loadIntoModel(data, Beacon);
-      }).then(function() {
-        return RestApi.getAreas().then(function(data) {
-          areas = loadIntoModel(data, Area);
-        }).then(function() {
-          return RestApi.getImages().then(function(data) {
-            images = data;
-            deferred.resolve();
-            loadCompleted = true;
-          });
-        });
+      var promises;
+      promises = [];
+      promises.push(RestApi.getBeacons().then(function(data) {
+        return beacons = loadIntoModel(data, Beacon);
+      }));
+      promises.push(RestApi.getAreas().then(function(data) {
+        return areas = loadIntoModel(data, Area);
+      }));
+      promises.push(RestApi.getImages().then(function(data) {
+        return images = data;
+      }));
+      promises.push(RestApi.getMuseums().then(function(data) {
+        return museums = data;
+      }));
+      $q.all(promises).then(function() {
+        deferred.resolve();
+        return loadCompleted = true;
       });
     };
     return {
@@ -2234,6 +2272,9 @@
       },
       getImages: function() {
         return images;
+      },
+      getMuseums: function() {
+        return museums;
       },
       getAreaKeys: function() {
         var area, _i, _len, _results;
@@ -2385,6 +2426,9 @@
       navigateTo: function(path) {
         return $location.path(decodeURIComponent(path));
       },
+      navigateToTourSelection: function() {
+        return this.navigateTo("/app/tourselection");
+      },
       navigateToStickerbook: function() {
         return this.navigateTo("/app/stickerbook");
       },
@@ -2470,7 +2514,11 @@
   PaperChase.service("PreviewService", ["DataStore", "PreviewSocket", "$ionicPopup", "$state", f]);
 
   PaperChase.factory('PreviewSocket', function(DataStore, socketFactory) {
-    return socketFactory();
+    if (typeof io !== "undefined" && io !== null) {
+      return socketFactory();
+    } else {
+      return null;
+    }
   });
 
 }).call(this);
@@ -2632,11 +2680,12 @@
   var f;
 
   f = function($resource, $q) {
-    var areaResource, baseUrl, beaconResource, imageResource;
+    var areaResource, baseUrl, beaconResource, imageResource, museumResource;
     baseUrl = "http://localhost:3000/consume";
     beaconResource = $resource("" + baseUrl + "/beacons.json");
     areaResource = $resource("" + baseUrl + "/areas.json?locale=de");
     imageResource = $resource("" + baseUrl + "/images.json");
+    museumResource = $resource("" + baseUrl + "/museums.json?locale=de");
     return {
       getBeacons: function() {
         return beaconResource.query().$promise;
@@ -2646,6 +2695,9 @@
       },
       getImages: function() {
         return imageResource.get().$promise;
+      },
+      getMuseums: function() {
+        return museumResource.query().$promise;
       }
     };
   };
