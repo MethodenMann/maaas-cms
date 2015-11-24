@@ -80,23 +80,13 @@ leApp.config(['$httpProvider', function($httpProvider) {
 ]);
 
 leApp.run(function ($rootScope, AuthUtil, $state) {
-  // var credentials = {
-  //   email: 'regula@gmail.com',
-  //   password: 'Biberbau15'
-  // };
-  //
-  // Auth.login(credentials).then((user) => {
-  //   $state.go('cms');
-  // });
-  //
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     console.log(toState.data);
 
     if (toState.data && toState.data.ignoreLogin) {
       console.log('ignoring login!');
     } else {
-
-      AuthUtil.checkAuth().then(isAuthenticated => {
+      AuthUtil.isAuthenticated().then(isAuthenticated => {
         if (isAuthenticated) {
           console.log('user is authenticated!');
         } else {

@@ -25,7 +25,7 @@ export class ImageUploadDirective {
     @Inject('$scope') private $scope,
     @Inject('$rootScope') private $rootScope,
     @Inject('Medium') private Medium,
-    @Inject('Auth') private Auth,
+    @Inject('AuthUtil') private AuthUtil,
     @Inject('Museum') private Museum
   ) {
 
@@ -65,22 +65,24 @@ export class ImageUploadDirective {
   }
 
   private static link($scope, element: JQuery, attributes) {
-    var museumId = $scope.ctrl.Auth._currentUser.museum_id;
 
-    $scope.ctrl.Museum.find(museumId).then((museum) => { //TODO: Own Service for this  authentication
-       var museumFolder = museum.name.replace(/[^A-Z0-9]/ig, '').toLowerCase();
+    $scope.ctrl.AuthUtil.getMuseumId().then( (museumId) => {
+      $scope.ctrl.Museum.find(museumId).then((museum) => { //TODO: Own Service for this  authentication
+        var museumFolder = museum.name.replace(/[^A-Z0-9]/ig, '').toLowerCase();
 
-      console.log('museumFolder', museumFolder);
-      var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
-        cloud_name: 'nmsg', folder: museumFolder
-      }); //TODO: Change static dev folder to museum directory
+        console.log('museumFolder', museumFolder);
+        var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
+          cloud_name: 'nmsg', folder: museumFolder
+        }); //TODO: Change static dev folder to museum directory
 
-      imageTag.bind('cloudinarydone', (e, data) => {
-        $scope.ctrl.handleSuccessfulUpload(data);
+        imageTag.bind('cloudinarydone', (e, data) => {
+          $scope.ctrl.handleSuccessfulUpload(data);
+        });
+
+        element.find('#uploadbutton').append(imageTag);
       });
-
-      element.find('#uploadbutton').append(imageTag);
     });
+
 
 
   }

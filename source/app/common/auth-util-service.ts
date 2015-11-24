@@ -4,15 +4,18 @@ import {IAlert} from './ialert';
 
 export class AuthUtil {
 
+  private isAuthenticatedDeferred;
+
   constructor(
     @Inject('$q') protected $q,
     @Inject('Auth') protected Auth
     ) {
+    this.isAuthenticatedDeferred = this.$q.defer();
   }
 
   public getMuseumId() {
     var deferred = this.$q.defer();
-    this.checkAuth().then((auth) => {
+    this.isAuthenticatedDeferred.promise.then((auth) => {
       if (auth) {
         deferred.resolve(this.Auth._currentUser.museum_id);
       }
@@ -21,22 +24,18 @@ export class AuthUtil {
     return deferred.promise;
   }
 
-
-  public checkAuth() {
-    var deferred = this.$q.defer();
-
+  public isAuthenticated() {
     if (!this.Auth.isAuthenticated()) {
       console.log('getting user from memory failed. trying to get user from server session');
       this.Auth.currentUser().then((user) => {
-        deferred.resolve(true);
+        this.isAuthenticatedDeferred.resolve(true);
       }, (error) => {
-        deferred.resolve(false);
+        this.isAuthenticatedDeferred.resolve(false);
       });
     } else {
-      deferred.resolve(true);
+      this.isAuthenticatedDeferred.resolve(true);
     }
-
-    return deferred.promise;
+    return this.isAuthenticatedDeferred.promise;
   }
 
 
