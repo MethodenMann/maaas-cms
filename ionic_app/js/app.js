@@ -228,6 +228,13 @@
 }).call(this);
 
 (function() {
+  PaperChase.constant("maaasConfig", {
+    "backendUrl": "https://maaas-backend.herokuapp.com"
+  });
+
+}).call(this);
+
+(function() {
   var f;
 
   f = function($scope, $timeout, $stateParams, $ionicPopup, NavigationService, DataStore, BeaconManager, Dictionary, AppData, DevMode) {
@@ -2074,21 +2081,47 @@
 }).call(this);
 
 (function() {
-  var mockedBeaconListener;
+  var realBeaconListener;
 
-  mockedBeaconListener = function($interval, RandomBeaconData) {
-    var interval, monitoringCallbacks, rangingCallbacks;
+  realBeaconListener = function() {
+    var checkCordovaPlugin, createDelegate, monitoringCallbacks, rangingCallbacks;
+    checkCordovaPlugin = function() {
+      if ((typeof cordova === "undefined" || cordova === null) || (cordova.plugins == null) || (cordova.plugins.locationManager == null)) {
+        console.log("Cordova beacon plugin not loaded!");
+      }
+      if (cordova.plugins.locationManager.requestWhenInUseAuthorization) {
+        return cordova.plugins.locationManager.requestWhenInUseAuthorization();
+      }
+    };
+    createDelegate = function() {
+      var delegate;
+      delegate = new cordova.plugins.locationManager.Delegate();
+      delegate.didDetermineStateForRegion = function(data) {
+        var monitoringCallback, state, _i, _len;
+        state = "";
+        if (data.state === "CLRegionStateOutside") {
+          state = "OUT";
+        }
+        if (data.state === "CLRegionStateInside") {
+          state = "IN";
+        }
+        for (_i = 0, _len = monitoringCallbacks.length; _i < _len; _i++) {
+          monitoringCallback = monitoringCallbacks[_i];
+          monitoringCallback(data.region, state);
+        }
+      };
+      delegate.didStartMonitoringForRegion = function(data) {};
+      delegate.didRangeBeaconsInRegion = function(data) {
+        var rangingCallback, _i, _len;
+        for (_i = 0, _len = rangingCallbacks.length; _i < _len; _i++) {
+          rangingCallback = rangingCallbacks[_i];
+          rangingCallback(data.beacons);
+        }
+      };
+      return delegate;
+    };
     rangingCallbacks = [];
     monitoringCallbacks = [];
-    interval = function() {
-      var callback, _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = rangingCallbacks.length; _i < _len; _i++) {
-        callback = rangingCallbacks[_i];
-        _results.push(callback(RandomBeaconData.getData()));
-      }
-      return _results;
-    };
     return {
       registerForRanging: function(rangingCallback) {
         return rangingCallbacks.push(rangingCallback);
@@ -2097,13 +2130,44 @@
         return monitoringCallbacks.push(monitoringCallback);
       },
       startRanging: function(beacons) {
-        RandomBeaconData.initialize(beacons);
-        return $interval(interval, 50);
+        var beacon, e, k, region, uuidRegions, v, _i, _len;
+        checkCordovaPlugin();
+        cordova.plugins.locationManager.setDelegate(createDelegate());
+        try {
+          uuidRegions = {};
+          for (_i = 0, _len = beacons.length; _i < _len; _i++) {
+            beacon = beacons[_i];
+            if (uuidRegions[beacon.uuid] == null) {
+              region = new cordova.plugins.locationManager.BeaconRegion("RegionByUUID", beacon.uuid);
+              uuidRegions[beacon.uuid] = region;
+            }
+          }
+          for (k in uuidRegions) {
+            v = uuidRegions[k];
+            cordova.plugins.locationManager.startRangingBeaconsInRegion(v).fail(console.error).done();
+          }
+        } catch (_error) {
+          e = _error;
+          return alert(e);
+        }
+      },
+      startMonitoring: function(beacons) {
+        var beacon, e, regionFull, _i, _len;
+        try {
+          for (_i = 0, _len = beacons.length; _i < _len; _i++) {
+            beacon = beacons[_i];
+            regionFull = new cordova.plugins.locationManager.BeaconRegion("RegionFullID", beacon.uuid, beacon.major, beacon.minor);
+            cordova.plugins.locationManager.startMonitoringForRegion(regionFull).fail(console.error).done();
+          }
+        } catch (_error) {
+          e = _error;
+          return alert(e);
+        }
       }
     };
   };
 
-  PaperChase.service("BeaconListener", ["$interval", "RandomBeaconData", mockedBeaconListener]);
+  PaperChase.service("BeaconListener", [realBeaconListener]);
 
 }).call(this);
 
@@ -2679,9 +2743,9 @@
 (function() {
   var f;
 
-  f = function($resource, $q) {
+  f = function($resource, $q, maaasConfig) {
     var areaResource, baseUrl, beaconResource, imageResource, museumResource;
-    baseUrl = "http://localhost:3000/consume";
+    baseUrl = maaasConfig.backendUrl + "/consume";
     beaconResource = $resource("" + baseUrl + "/beacons.json");
     areaResource = $resource("" + baseUrl + "/areas.json?locale=de");
     imageResource = $resource("" + baseUrl + "/images.json");
@@ -2702,7 +2766,7 @@
     };
   };
 
-  PaperChase.service("RestApi", ["$resource", "$q", f]);
+  PaperChase.service("RestApi", ["$resource", "$q", "maaasConfig", f]);
 
 }).call(this);
 
