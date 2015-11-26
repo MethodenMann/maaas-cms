@@ -7,12 +7,12 @@ import {DetailUpdateView} from './detail-update-view';
 export function loadMuseum(app) {
   var componentName = 'museums';
 
-  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+  app.config(function ($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
 
-  app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.${componentName}`,
         RouteUtil.getAbstractRoute('/museums', 'Museum'))

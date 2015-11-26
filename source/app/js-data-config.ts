@@ -39,7 +39,7 @@ export function loadJsDataConfig(app) {
           media: {
             foreignKey: 'mediumableId',
             localField: 'media',
-            get: function(Area, relationDef, area, orig) {
+            get: function (Area, relationDef, area, orig) {
               return DS.filter('media', {
                 mediumableId: area.id,
                 mediumableType: 'Area'
@@ -74,7 +74,7 @@ export function loadJsDataConfig(app) {
           media: {
             localField: 'media',
             foreignKey: 'mediumableId',
-            get: function(Content, relationDef, content, orig) {
+            get: function (Content, relationDef, content, orig) {
               return DS.filter('media', {
                 mediumableId: content.id,
                 mediumableType: 'Content'

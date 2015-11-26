@@ -9,19 +9,19 @@ export class CreateView extends AbstractDetailView {
 
 
   saveHook() {
-      this.Tour.create({ tour: this.tour }).then((tour:ITour) => {
-        this.$scope.$broadcast('save', {id: tour.id, type: 'Tour'});
-        this.$scope.$broadcast('mas.saveprogess', 'successfully');
-        this.AlertService.addAlert({ type: 'success', msg: 'Der Rundgang wurde erfolgreich erstellt!' });
-        this.$state.go('cms.tours.detail.update', {tourId: tour.id});
-      });
+    this.Tour.create({tour: this.tour}).then((tour:ITour) => {
+      this.$scope.$broadcast('save', {id: tour.id, type: 'Tour'});
+      this.$scope.$broadcast('mas.saveprogess', 'successfully');
+      this.AlertService.addAlert({type: 'success', msg: 'Der Rundgang wurde erfolgreich erstellt!'});
+      this.$state.go('cms.tours.detail.update', {tourId: tour.id});
+    });
   }
 
 
   loadData() {
     this.tour = <ITour>{
       selectedContents: [],
-      selectedChallenges:[]
+      selectedChallenges: []
     };
 
     return this.$q.when();

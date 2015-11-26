@@ -65,12 +65,9 @@ export class ImageUploadDirective {
   }
 
   private static link($scope, element: JQuery, attributes) {
-
-    $scope.ctrl.AuthUtil.getMuseumId().then( (museumId) => {
-      $scope.ctrl.Museum.find(museumId).then((museum) => { //TODO: Own Service for this  authentication
+    $scope.ctrl.AuthUtil.getMuseumId().then((museumId) => {
+      $scope.ctrl.Museum.find(museumId).then((museum) => {
         var museumFolder = museum.name.replace(/[^A-Z0-9]/ig, '').toLowerCase();
-
-        console.log('museumFolder', museumFolder);
         var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
           cloud_name: 'nmsg', folder: museumFolder
         }); //TODO: Change static dev folder to museum directory
@@ -82,8 +79,5 @@ export class ImageUploadDirective {
         element.find('#uploadbutton').append(imageTag);
       });
     });
-
-
-
   }
 }

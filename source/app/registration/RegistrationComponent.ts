@@ -2,13 +2,14 @@ import {Inject} from '../utils/di';
 
 export class RegistrationComponent {
   private static selector = 'mas-registration-component';
-  private static templateUrl = './app/registration/view/registration-component.html';
+  private static templateUrl = './app/registration/registration-component.html';
 
-  private email: String;
-  private password: String;
-  private passwordConfirmation: String;
+  private email:String;
+  private password:String;
+  private passwordConfirmation:String;
 
-  constructor(@Inject('Auth') private Auth) {}
+  constructor(@Inject('Auth') private Auth) {
+  }
 
   register() {
     var credentials = {
@@ -19,10 +20,11 @@ export class RegistrationComponent {
 
     this.Auth.register(credentials).then((user) => {
 
-    }, function(error) {
+    }, function (error) {
 
     });
   }
 
-  private static link($scope, element: JQuery, attributes) {}
+  private static link($scope, element:JQuery, attributes) {
+  }
 }

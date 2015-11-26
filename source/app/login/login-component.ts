@@ -4,15 +4,14 @@ export class LoginComponent {
   private static selector = 'mas-login-component';
   private static templateUrl = './app/login/login-component.html';
 
-  private email: String;
-  private password: String;
-  private feedback: string = '';
+  private email:String;
+  private password:String;
+  private feedback:string = '';
 
-  constructor(
-    @Inject('Auth') private Auth,
-    @Inject('$state') private $state,
-    @Inject('$filter') private $filter
-  ) {}
+  constructor(@Inject('Auth') private Auth,
+              @Inject('$state') private $state,
+              @Inject('$filter') private $filter) {
+  }
 
   login() {
     this.feedback = '';
@@ -29,7 +28,7 @@ export class LoginComponent {
     });
   }
 
-  private static link($scope, element: JQuery, attributes) {
+  private static link($scope, element:JQuery, attributes) {
     element.bind('keydown keypress', (event) => {
       if (event.which === 13) {
         $scope.ctrl.login();
