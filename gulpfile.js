@@ -191,8 +191,12 @@ gulp.task('constants', function () {
   }).pipe(gulp.dest(config.applicationDestPath));
 });
 
+gulp.task('watchTsAction', function() {
+  runSequence(['typescript-lint', 'typescript'], 'bowerSyncReload')
+});
+
 gulp.task('watch', function() {
-  gulp.watch(config.applicationSrcPath + '/**/*.ts', ['typescript-lint', 'typescript', 'bowerSyncReload']);
+  gulp.watch(config.applicationSrcPath + '/**/*.ts', ['watchTsAction']);
   gulp.watch(config.testsSrcPath + '/**/*.ts', ['typescript-lint', 'typescript', 'bowerSyncReload']);
   gulp.watch([config.baseSrcPath + '/**/*.jade', config.baseSrcPath + '/**/*.html'], ['views', 'jade-lint', 'bowerSyncReload']);
   gulp.watch(config.sassSrcPath + '/**/*.scss', ['sass', 'bowerSyncReload']);
