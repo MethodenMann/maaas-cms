@@ -16,7 +16,7 @@ export class ListView {
               @Inject('Beacon') private Beacon,
               @Inject('Area') private Area,
               @Inject('Museum') private Museum,
-              @Inject('Auth') private Auth,
+              @Inject('AuthUtil') private AuthUtil,
               @Inject('KontaktIoService') private KontaktIoService) {
 
     this.loadData();
@@ -31,10 +31,10 @@ export class ListView {
       this.areas = areas;
     });
 
-    var museumId = this.Auth._currentUser.museum_id;
-
-    this.Museum.find(museumId).then((museum) => {
-      this.museum = museum;
+    this.AuthUtil.getMuseumId().then( (museumId) => {
+      this.Museum.find(museumId).then((museum) => {
+        this.museum = museum;
+      });
     });
   }
 
