@@ -5,12 +5,9 @@ export class ListView {
   public static templateUrl = './app/contents/list-view.html';
   private area;
 
-  constructor(
-    @Inject('$stateParams') private $stateParams,
-    @Inject('Area') private Area,
-    @Inject('Content') private Content
-
-    ) {
+  constructor(@Inject('$stateParams') private $stateParams,
+              @Inject('Area') private Area,
+              @Inject('Content') private Content) {
     Content.findAll().then((data) => {
       Area.find(this.$stateParams.areaId).then((data) => {
         this.area = data;
