@@ -56,7 +56,7 @@ export class ListView {
     });
     return res;
   }
-  
+
   private syncWithKontaktIO() {
     this.KontaktIoService.getNewBeacons(this.museum.kontaktIoApiKey, this.beacons).then(beacons => {
       var conf = confirm(beacons.length + ' Beacon(s) werden hinzugefügt'); //Todo: Make more sexy

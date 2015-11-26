@@ -12,7 +12,7 @@ export class Order {
     }
   };
 
-  private data: {
+  private data:{
     question:string,
     kind:string,
     list:Array<{idx:number, captionShort:string, captionLong:string, mediumId:number}>
@@ -34,7 +34,12 @@ export class Order {
   }
 
   addEntry() {
-    this.data.list.push({idx: this.data.list.length, captionShort: undefined, captionLong: undefined, mediumId: undefined});
+    this.data.list.push({
+      idx: this.data.list.length,
+      captionShort: undefined,
+      captionLong: undefined,
+      mediumId: undefined
+    });
   }
 
   private resetIndices() {

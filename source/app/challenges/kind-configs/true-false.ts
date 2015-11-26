@@ -11,7 +11,6 @@ export class TrueFalse {
   public static selector = 'mas-challenges-true-false';
   public static templateUrl = './app/challenges/kind-configs/true-false.html';
 
-
   private data:ITrueFalseConfig;
 
   private static options = {
@@ -45,7 +44,6 @@ export class TrueFalse {
       this.data.falseAnswerText = 'Nein';
     }
   }
-
 
   removeQuestion(idx) {
     this.data.questions.splice(idx, 1);

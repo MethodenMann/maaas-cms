@@ -7,7 +7,6 @@ export class Multiplechoice {
   public static selector = 'mas-challenges-multiple-choice';
   public static templateUrl = './app/challenges/kind-configs/multiple-choice.html';
 
-
   private data:any;
 
   private static options = {
@@ -25,7 +24,6 @@ export class Multiplechoice {
     if (this.data.type === undefined) {
       this.data.type = 'text';
     }
-
   }
 
   getUnusedAnswerIndex() {
@@ -54,10 +52,10 @@ export class Multiplechoice {
 
   addAnswer() {
     this.data.answers.push(
-        {
-          text: '',
-          idx: this.getUnusedAnswerIndex()
-        }
+      {
+        text: '',
+        idx: this.getUnusedAnswerIndex()
+      }
     );
   }
 }

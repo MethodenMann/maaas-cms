@@ -7,9 +7,8 @@ import {IMediumableUpdateBroadcast} from '../../common/image-management/Imediuma
 export class ImageRegion {
   public static selector = 'mas-challenges-image-region';
   public static templateUrl = './app/challenges/kind-configs/image-region.html';
-
-
   private data:any;
+
   private static options = {
     bindToController: {
       data: '='
@@ -27,7 +26,6 @@ export class ImageRegion {
         this.saveImageRelation(challenge.id, this.data.imageId );
         this.saveImageRelation(challenge.id, this.data.imageSolvedId );
     });
-
   }
 
   saveImageRelation(challengeId, imageId) {
