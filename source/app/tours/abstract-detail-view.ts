@@ -34,7 +34,7 @@ export abstract class AbstractDetailView extends FormView {
     @Inject('AlertService') protected AlertService
   ) {
     super($scope);
-
+    Area.refreshAll();
     this.$q.all([Content.findAll(), Challenge.findAll(), this.loadData()]).then((values) => {
       this.initDictionaries(values[0], values[1]);
       this.Area.findAll().then((areas) => {

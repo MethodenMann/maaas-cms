@@ -3,23 +3,23 @@ import {IArea} from './IArea';
 import {FormView} from '../common/forms/form-view';
 
 export abstract class DetailAbstract extends FormView {
-  protected area: IArea;
-
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('$stateParams') protected $stateParams,
-    @Inject('Area') protected Area,
-    @Inject('$state') protected $state,
-    @Inject('AlertService') protected AlertService,
-    @Inject('$filter') protected $filter,
-    @Inject('PreviewService') protected PreviewService
-    ) {
+  constructor(@Inject('$scope') protected $scope,
+              @Inject('$stateParams') protected $stateParams,
+              @Inject('Area') protected Area,
+              @Inject('$state') protected $state,
+              @Inject('AlertService') protected AlertService,
+              @Inject('$filter') protected $filter,
+              @Inject('PreviewService') protected PreviewService) {
     super($scope);
     this.loadData();
   }
 
-  protected loadData(): void {}
-  abstract saveHook(): void;
+  protected area:IArea;
+
+  protected loadData():void {
+  }
+
+  abstract saveHook():void;
 
 
   protected publishPreview() {
