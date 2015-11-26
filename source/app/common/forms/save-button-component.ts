@@ -10,16 +10,14 @@ export class SaveButtonComponent {
   private feedbackMessage = '';
 
 
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('$timeout') protected $timeout
-  ) {
+  constructor(@Inject('$scope') protected $scope,
+              @Inject('$timeout') protected $timeout) {
 
     this.showDefault();
 
     $scope.$on('mas.saveprogess', (e, status) => {
       if (status === 'in-progress') {
-       this.showInProgress();
+        this.showInProgress();
       }
       if (status === 'rejected') {
         this.showRejected();
@@ -28,11 +26,9 @@ export class SaveButtonComponent {
         $timeout(() => {
           this.showSuccessfully();
         }, 500);
-
       }
     });
   }
-
 
   showDefault() {
     this.animationClass = '';
@@ -45,7 +41,6 @@ export class SaveButtonComponent {
 
     var currentdate = new Date();
     var time = `${currentdate.getHours()}:${currentdate.getMinutes() < 10 ? '0' : ''}${currentdate.getMinutes()}`;
-
 
     this.feedbackMessage = 'Zuletzt gespeichert um ' + time + ' Uhr';
   }

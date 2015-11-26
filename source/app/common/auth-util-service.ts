@@ -1,15 +1,11 @@
 import {Inject} from './../utils/di';
 import {IAlert} from './ialert';
 
-
 export class AuthUtil {
-
   private isAuthenticatedDeferred;
 
-  constructor(
-    @Inject('$q') protected $q,
-    @Inject('Auth') protected Auth
-    ) {
+  constructor(@Inject('$q') protected $q,
+              @Inject('Auth') protected Auth) {
     this.isAuthenticatedDeferred = this.$q.defer();
   }
 
@@ -37,6 +33,4 @@ export class AuthUtil {
     }
     return this.isAuthenticatedDeferred.promise;
   }
-
-
 }

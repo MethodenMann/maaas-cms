@@ -22,16 +22,16 @@ export function loadCommon(app) {
   });
 
   app
-  .directive(
-    makeSelector(NewButton),
-    makeDirective(NewButton));
+    .directive(
+      makeSelector(NewButton),
+      makeDirective(NewButton));
 
   app
     .directive(
       makeSelector(NewButtonSmall),
       makeDirective(NewButtonSmall));
 
-    app
+  app
     .directive(
       makeSelector(FormGroupComponent),
       makeDirective(FormGroupComponent));
