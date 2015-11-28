@@ -19,7 +19,7 @@ export class UpdateView extends AbstractDetailView {
       });
     });
 
-    this.$scope.$on('image-management.imageUploaded', (e, data: IMediumUploadBroadcast) => {
+    this.$scope.$on('image-management.imageUploaded', (e, data:IMediumUploadBroadcast) => {
       if (data.uploadId !== 'previewImage') {
         var medium = {
           mediumId: data.mediumId,
@@ -31,7 +31,6 @@ export class UpdateView extends AbstractDetailView {
         this.addToImageList(data.mediumId);
       }
     });
-
   }
 
   saveHook() {

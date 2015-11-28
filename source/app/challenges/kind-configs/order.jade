@@ -13,11 +13,10 @@ ol(style='list-style-type: decimal;' ui-sortable='ctrl.options' ng-model='ctrl.d
           input.form-control(ng-model='entry.captionLong' name='{{"captionLong"+$index}}' required ng-minlength='4')
       .col-md-3
         mas-form-group(field-name='{{ "image" + $index}}' localization-prefix='challenges_details_order_image')
-          mas-image-form-wrapper(image-id='{{ "image" + $index}}' model='entry.mediumId' height='50' is-required='true')
+          mas-image-form-wrapper(image-id='{{ "image" + $index}}' model='entry.imageId' height='50' is-required='true')
 
         //mas-form-group(field-name='{{"image"+$index}}' localization-prefix='challenges_details_question')
-        //  image-upload(upload-id='{{"orderQuizImage"+$index}}' medium-id='entry.mediumId')
-        //  image-load(upload-id='{{"orderQuizImage"+$index}}' initial-media-id='{{entry.mediumId}}' height='50')
-        //  input.form-control(type='hidden' ng-model='entry.mediumId' name='{{"image"+$index}}' required)
+        //  image-upload(upload-id='{{"orderQuizImage"+$index}}' medium-id='entry.imageId')
+        //  image-load(upload-id='{{"orderQuizImage"+$index}}' initial-media-id='{{entry.imageId}}' height='50')
+        //  input.form-control(type='hidden' ng-model='entry.imageId' name='{{"image"+$index}}' required)
 mas-new-button-sm(ng-click='ctrl.addEntry()' text='{{ "challenges_details_order_add" | translate }}')
-

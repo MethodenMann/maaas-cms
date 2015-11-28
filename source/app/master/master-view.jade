@@ -70,6 +70,10 @@
             a(ui-sref='cms.translations.list'  ui-sref-active-if='cms.translations')
               i.fa.fa-flag
               |  Übersetzen
+          li
+            a(onClick='MyWindow=window.open("#/preview","MyWindow",width=600,height=300)')
+              i.fa.fa-mobile
+              |  Vorschau
     // Page Content
   #page-wrapper
     .container-fluid
@@ -77,8 +81,5 @@
         .col-lg-12
           div(ncy-breadcrumb)
           div.slidr(ui-view='')
-        // /.col-lg-12
-      // /.row
-    // /.container-fluid
-  // /#page-wrapper
-// /#wrapper
+
+uib-alert.alert-box(style='bottom: {{ 5 + $index*90 }}px;' ng-repeat='alert in ctrl.alerts' type='{{alert.type}}' close='ctrl.closeAlert($index)') {{alert.msg}}

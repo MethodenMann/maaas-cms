@@ -1,0 +1,3 @@
+.form-group(ng-repeat='answer in ctrl.bindTo.answers')
+  label {{ 'challenges_multiple-choice_answer' | translate }} {{ $index + 1 }}
+  input.form-control(ng-model='answer.text')

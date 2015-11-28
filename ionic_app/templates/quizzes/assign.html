@@ -1,0 +1,21 @@
+
+<div class="pap-assign">
+  <div style="text-align: center; font-size: 2vh; line-height: 2.5vh">{{question}}</div>
+  <pap-draggables-container>
+    <pap-quiz-assign-sub-ctrl>
+      <svg class="pap-assign-svg">
+        <path pap-line-path="line" stroke="rgba(130, 89, 72, 0.7)" stroke-width="12" stroke-linecap="round" fill="none"></path>
+        <path ng-repeat="va in visualizedAssignments" pap-line-path="va" stroke="rgba(50, 25, 0, 0.70)" stroke-width="12" stroke-linecap="round" fill="none"></path>
+      </svg>
+      <div ng-repeat="item in ::listA.values" pap-height="{{calculateRowHeight()}}" class="row">
+        <div class="col-50">
+          <pap-draggable id="l{{item.idx}}" class="pap-box pap-box-left">{{::item.value}}</pap-draggable>
+        </div>
+        <div class="col-50">
+          <pap-draggable id="r{{listB.values[$index].idx}}" ng-style="::getBgImageFor($index)" pap-height="{{calculateRowHeight() - 15}}" pap-width="{{calculateRowHeight() - 15}}" class="pap-box pap-box-right">{{listB.values[$index].val}}</pap-draggable>
+        </div>
+      </div>
+      <pap-quiz-check-answer-button button-state="buttonState" check-quiz-callback="checkAnswer" give-second-chance="true" ng-show="show"></pap-quiz-check-answer-button>
+    </pap-quiz-assign-sub-ctrl>
+  </pap-draggables-container>
+</div>

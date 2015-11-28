@@ -16,16 +16,14 @@ export class FormGroupComponent {
     }
   };
 
-  private form: any;
-  private fieldName: string;
-  private localizationPrefix: string;
-  private hideLabel: boolean = false;
-  private hideHelp: boolean = false;
-  private hideError: boolean = false;
+  private form:any;
+  private fieldName:string;
+  private localizationPrefix:string;
+  private hideLabel:boolean = false;
+  private hideHelp:boolean = false;
+  private hideError:boolean = false;
 
-  constructor(
-    @Inject('$scope') private $scope
-  ) {
+  constructor(@Inject('$scope') private $scope) {
   }
 
   isValidAndSubmitted() {
@@ -35,19 +33,19 @@ export class FormGroupComponent {
     return false;
   }
 
-  localizedName() : string {
+  localizedName():string {
     return this.localizationPrefix + '_label';
   }
 
-  localizedHelp() : string {
+  localizedHelp():string {
     return this.localizationPrefix + '_help';
   }
 
-  localizedError() : string {
+  localizedError():string {
     return this.localizationPrefix + '_error';
   }
 
-  private static link($scope, element: JQuery, attributes, FormController) {
+  private static link($scope, element:JQuery, attributes, FormController) {
     $scope.ctrl.form = FormController;
   }
 }

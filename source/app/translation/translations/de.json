@@ -1,8 +1,4 @@
 {
-  "beacons_list_title": "Beacon",
-  "beacons_list_description": "Verknüpfen Sie die Beacons mit einer Area.",
-  "beacons_list_sync_btn": "Mit Kontakt.io synchronisieren",
-  "beacons_list_delete_btn": "Löschen",
-  "beacons_list_columnheader_name": "Name",
-  "beacons_list_columnheader_alias": "Beschreibung."
+  "translations_quiz_configuration_empty_label": "",
+  "translations_quiz_configuration_empty_help": ""
 }

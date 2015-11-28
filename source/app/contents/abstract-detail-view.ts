@@ -9,22 +9,20 @@ export abstract class AbstractDetailView extends FormView {
   private static selector = 'mas-content-detail-view';
   private static templateUrl = './app/contents/abstract-detail-view.html';
 
-  protected content: IContent = <IContent>{};
-  protected imageList: any[] = [];
-  protected backgroundImageId: String;
-  protected ids: String[] = [];
-  protected area: IArea;
-  protected tinymceConfig: any;
+  protected content:IContent = <IContent>{};
+  protected imageList:any[] = [];
+  protected backgroundImageId:String;
+  protected ids:String[] = [];
+  protected area:IArea;
+  protected tinymceConfig:any;
 
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('Content') protected Content,
-    @Inject('Medium') protected Medium,
-    @Inject('Area') protected Area,
-    @Inject('$stateParams') protected $stateParams,
-    @Inject('$state') protected $state,
-    @Inject('$q') protected $q
-  ) {
+  constructor(@Inject('$scope') protected $scope,
+              @Inject('Content') protected Content,
+              @Inject('Medium') protected Medium,
+              @Inject('Area') protected Area,
+              @Inject('$stateParams') protected $stateParams,
+              @Inject('$state') protected $state,
+              @Inject('$q') protected $q) {
     super($scope);
     this.tinymceConfig = {
       selector: 'textarea',
@@ -50,7 +48,8 @@ export abstract class AbstractDetailView extends FormView {
     this.constructorHook();
   }
 
-  protected constructorHook() {}
+  protected constructorHook() {
+  }
 
   protected getCloudinaryUrl(medium) {
     return $.cloudinary.url(medium.publicId, {
@@ -65,7 +64,7 @@ export abstract class AbstractDetailView extends FormView {
     });
   }
 
-  abstract saveHook(): void;
+  abstract saveHook():void;
 
   protected save() {
     this.$scope.$broadcast('mas.saveprogess', 'in-progress');

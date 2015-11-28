@@ -7,15 +7,12 @@ import {DetailAbstract} from './detail-abstract';
 export class UpdateView extends DetailAbstract {
   public static selector = 'mas-challenge-update-view';
   public static templateUrl = './app/challenges/detail-view.html';
-
   private disableKindSelect = true;
-
 
   protected loadData() {
     this.Challenge.find(this.$stateParams.challengeId).then((data) => {
       this.challenge = data;
       this.setKind();
-
     });
   }
 
@@ -27,10 +24,8 @@ export class UpdateView extends DetailAbstract {
     });
   }
 
-
   saveHook() {
-    this.Challenge.update(this.challenge.id, { challenge: this.challenge }).then((challenge) => {
-      this.$scope.$broadcast('challenge.saved', challenge); //TODO: Make obsolete
+    this.Challenge.update(this.challenge.id, {challenge: this.challenge}).then((challenge) => {
       this.$scope.$broadcast('save', {id: challenge.id, type: 'Challenge'});
       this.$scope.$broadcast('mas.saveprogess', 'successfully');
     });

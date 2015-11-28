@@ -25,7 +25,8 @@ export abstract class DetailAbstract extends FormView {
               @Inject('$stateParams') protected $stateParams,
               @Inject('$state') protected $state,
               @Inject('Area') protected Area,
-              @Inject('Challenge') protected Challenge) {
+              @Inject('Challenge') protected Challenge,
+              @Inject('AlertService') protected AlertService) {
     super($scope);
 
     this.Area.find(this.$stateParams.areaId).then((data) => {
@@ -46,7 +47,7 @@ export abstract class DetailAbstract extends FormView {
   protected loadData():void {
   }
 
-  abstract saveHook(): void;
+  abstract saveHook():void;
 
   protected save() {
     this.$scope.$broadcast('mas.saveprogess', 'in-progress');
@@ -57,5 +58,4 @@ export abstract class DetailAbstract extends FormView {
       this.focusFirstInputWithError();
     }
   }
-
 }

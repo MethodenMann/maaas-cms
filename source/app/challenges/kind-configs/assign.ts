@@ -6,7 +6,7 @@ export class Assign {
   public static selector = 'mas-challenges-assign';
   public static templateUrl = './app/challenges/kind-configs/assign.html';
 
-  private data: {
+  private data:{
     listA: {
       kind:string,
       values:Array<{idx:number, value:string}>

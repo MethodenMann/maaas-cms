@@ -1,0 +1,20 @@
+
+<ion-view title="Stickerheft" hide-back-button="false">
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button ng-click="goBack()">{{::backButtonLabel}}</ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content scroll="false">
+    <div class="pap-logo-background"></div>
+    <div class="pap-stickerbook">
+      <div class="status">{{status}}</div>
+      <pap-draggables-container>
+        <pap-stickerbook-sub-ctrl>
+          <div class="pap-stickers-container">
+            <pap-draggable id="{{$index}}" ng-repeat="quest in quests" ng-class="::getClasses(quest)" ng-style="::getStyle(quest)" class="pap-sticker"></pap-draggable>
+          </div>
+        </pap-stickerbook-sub-ctrl>
+      </pap-draggables-container>
+    </div>
+    <overlay></overlay>
+  </ion-content>
+</ion-view>

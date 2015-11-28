@@ -1,0 +1,12 @@
+
+<ion-view title="Quiz" cache-view="false">
+  <ion-content scroll="false" style="margin: 0px;">
+    <div class="pap-logo-background"></div>
+    <div class="pap-quiz-view">
+      <pap-quiz-loader area-key="{{currentAreaKey}}"></pap-quiz-loader>
+    </div>
+    <div style="position: fixed; bottom: 0; left: 0; z-index: 1000;">
+      <button ng-show="DevMode.isOn()" ng-click="completeQuiz()" class="button button-small button-light">Complete Quiz</button>
+    </div>
+  </ion-content>
+</ion-view>

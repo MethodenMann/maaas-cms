@@ -11,11 +11,11 @@ export function loadContent(app) {
     makeSelector(CreateView),
     makeDirective(CreateView));
 
-  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+  app.config(function ($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
-  app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.areas.detail.${componentName}`,
         RouteUtil.getAbstractRoute(`/${componentName}`))

@@ -96,3 +96,12 @@
 .error{
   color: $danger;
 }
+
+
+.alert-box{
+  position: fixed;
+  right:55px;
+  width:250px;
+  height:80px;
+  z-index:999999;
+}

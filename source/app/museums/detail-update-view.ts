@@ -14,10 +14,10 @@ export class DetailUpdateView extends DetailAbstract {
   }
 
   saveHook() {
-      this.Museum.update(this.museum.id, { museum: this.museum }).then( () => {
-        this.$scope.$broadcast('save', {id: this.museum.id, type: 'Museum'});
-        this.$scope.$broadcast('mas.saveprogess', 'successfully');
-      });
+    this.Museum.update(this.museum.id, {museum: this.museum}).then(() => {
+      this.$scope.$broadcast('save', {id: this.museum.id, type: 'Museum'});
+      this.$scope.$broadcast('mas.saveprogess', 'successfully');
+    });
   }
 
 

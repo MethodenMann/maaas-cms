@@ -25,7 +25,6 @@ import 'js-data-angular';
 
 import 'devise';
 import 'angularjs-color-picker';
-import 'angular-ui-grid';
 
 
 import {makeDirective, makeSelector} from '../app/utils/component';

@@ -1,9 +1,10 @@
 import {Inject} from '../../utils/di';
 
 export abstract class FormView {
-  constructor(protected $scope) {}
+  constructor(protected $scope) {
+  }
 
-  protected isFormValid(): Boolean {
+  protected isFormValid():Boolean {
     return this.$scope.form.$valid;
   }
 

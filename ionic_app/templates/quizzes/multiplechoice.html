@@ -1,0 +1,10 @@
+
+<div class="pap-multiplechoice">
+  <div>{{question}}</div><br/>
+  <div ng-repeat="option in options">
+    <ion-radio ng-model="$parent.choice" ng-value="option.idx">
+      <div dynamic="option.data" class="answer"></div>
+    </ion-radio>
+  </div>
+  <pap-quiz-check-answer-button style="z-index:1000;" ng-show="choice!=undefined" button-state="buttonState" check-quiz-callback="checkAnswer" give-second-chance="false" custom-successful-message="data.successfullyMessage"></pap-quiz-check-answer-button>
+</div>

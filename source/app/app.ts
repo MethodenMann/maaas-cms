@@ -3,9 +3,9 @@ import 'bootstrap';
 import 'metis-menu';
 import 'jquery-cloudinary';
 import 'jquery.ui.sortable';
-
 import 'angular';
 import 'angular-bootstrap';
+import 'angular-bootstrap-tpls';
 import 'angular-animate';
 import 'angular-ui-router';
 import 'angular-cookies';
@@ -17,31 +17,26 @@ import 'angular-translate-storage-local';
 import 'angular-breadcrumb';
 import 'angular-ui-tinymce';
 import 'angular-ui-sortable';
-
-
+import 'angular-socket-io';
 import 'angular-chart';
-
 import 'js-data';
 import 'js-data-http';
 import 'js-data-angular';
-
 import 'devise';
 import 'angularjs-color-picker';
 import 'maaas-config';
 import {makeDirective, makeSelector} from './utils/component';
 
 
-
 import {loadApp} from './loadApp';
+import {AuthUtil} from './common/auth-util-service';
 
-var leApp = angular.module('maaas', [ 'maaas.config',
-  'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data', 'ui.router',
-  'Devise', 'color.picker',
-  'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable', 'chart.js', 'ngAnimate', 'ui.bootstrap'
+var cmsApp = angular.module('maaas', ['maaas.config', 'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data',
+  'ui.router', 'Devise', 'color.picker', 'btford.socket-io', 'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable',
+  'chart.js', 'ngAnimate', 'ui.bootstrap'
 ]);
 
-leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_BASEURL) {
-
+cmsApp.config(function (DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_BASEURL) {
   angular.extend(DSHttpAdapterProvider.defaults, {
     basePath: BACKEND_BASEURL
   });
@@ -52,8 +47,7 @@ leApp.config(function(DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_B
 });
 
 
-
-leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
+cmsApp.config(function ($translateProvider, $translatePartialLoaderProvider) {
   $translateProvider.useLoader('$translatePartialLoader', {
     urlTemplate: 'app/{part}/translations/{lang}.json'
   });
@@ -63,55 +57,43 @@ leApp.config(function($translateProvider, $translatePartialLoaderProvider) {
   $translateProvider.useLocalStorage();
 });
 
-leApp.config(function($breadcrumbProvider) {
-    $breadcrumbProvider.setOptions({
-      //includeAbstract: true
-    });
+cmsApp.config(function ($breadcrumbProvider) {
+  $breadcrumbProvider.setOptions({
+    //includeAbstract: true
   });
+});
 
-// This is needed so the session is sent back to the backend with
-// every request.
-leApp.config(['$httpProvider', function($httpProvider) {
-    $httpProvider.defaults.withCredentials = true;
-  }
+
+cmsApp.config(['$httpProvider', function ($httpProvider) {
+  // This is needed so the session is sent back to the backend with every request.
+  $httpProvider.defaults.withCredentials = true;
+}
 ]);
 
-leApp.run(function ($rootScope, Auth, $state) {
-  // var credentials = {
-  //   email: 'regula@gmail.com',
-  //   password: 'Biberbau15'
-  // };
-  //
-  // Auth.login(credentials).then((user) => {
-  //   $state.go('cms');
-  // });
-  //
+cmsApp.run(function ($rootScope, AuthUtil, $state) {
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     console.log(toState.data);
+
     if (toState.data && toState.data.ignoreLogin) {
       console.log('ignoring login!');
     } else {
-      if (!Auth.isAuthenticated()) {
-        console.log('getting user from memory failed. trying to get user from server session');
-        Auth.currentUser().then((user) => {
+      AuthUtil.isAuthenticated().then(isAuthenticated => {
+        if (isAuthenticated) {
           console.log('user is authenticated!');
-        }, (error) => {
+        } else {
           console.log('user is not authenticated!');
           event.preventDefault();
           $state.go('login');
-        });
-      } else {
-        console.log('user is authenticated!');
-      }
+        }
+      });
     }
   });
 });
 
-loadApp(leApp);
+loadApp(cmsApp);
 
-// TODO: remove this
-export var app = leApp;
+export var app = cmsApp;
 
-angular.element(document).ready(function() {
+angular.element(document).ready(function () {
   angular.bootstrap(document, ['maaas']);
 });

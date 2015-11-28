@@ -1,0 +1,20 @@
+
+<ion-view title="Rundgang auswählen" hide-back-button="false">
+  <ion-content height="100%">
+    <header>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">Museum</div>
+          <select ng-options="museum.name for museum in museums" ng-model="data.selectedMuseum"></select>
+        </label>
+      </div>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">Rundgang</div>
+          <select ng-options="tour.name for tour in data.selectedMuseum.tours" ng-model="data.selectedTour"></select>
+        </label>
+      </div>
+      <button ng-click="start()" class="button button-full button-positive">Rundgang Starten</button>
+    </header>
+  </ion-content>
+</ion-view>

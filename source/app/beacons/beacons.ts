@@ -14,11 +14,11 @@ export function loadBeacon(app) {
 
   app.service('KontaktIoService', KontaktIoService);
 
-  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+  app.config(function ($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
-  app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function ($stateProvider) {
     $stateProvider
       .state(`cms.${componentName}`,
         RouteUtil.getAbstractRoute(`/${componentName}`, 'Beacons'))
@@ -26,8 +26,8 @@ export function loadBeacon(app) {
         RouteUtil.getRoute(ListView, 'Beacons'));
   });
 
-  app.filter('number', [function() {
-    return function(input) {
+  app.filter('number', [function () {
+    return function (input) {
       return parseInt(input, 10);
     };
   }]);

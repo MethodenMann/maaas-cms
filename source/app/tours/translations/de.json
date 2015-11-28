@@ -17,5 +17,7 @@
 
   "tours_details_image_label": "Bild",
   "tours_details_image_help": "Das Bild wird in der App bei der Rundgang Auswahl angezeigt",
-  "tours_details_image_error": "Bitte laden Sie ein Bild hoch"
+  "tours_details_image_error": "Bitte laden Sie ein Bild hoch",
+
+  "tours_details_removearea_confirm" : "Sind die sicher, dass Sie diesen Bereich aus dem Rundgang entfernen möchten?"
 }

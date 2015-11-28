@@ -1,0 +1,25 @@
+
+<ion-view title="PaperChase" hide-back-button="false">
+  <ion-content class="has-header">
+    <h1>{{msg}}</h1>
+    <div ng-repeat="beaconData in beaconDatas track by $index">
+      <div>Minor: {{beaconData.minor}} Accurracy {{beaconData.accuracy}} Prox. {{beaconData.proximity}}</div>
+    </div>
+    <div>interval</div>
+    <div class="item range range-positive">
+      <input type="range" name="interval" min="100" max="5000" ng-model="interval.v" value="{{interval.v}}" ng-change="changeSettings()"/>
+      <div>{{interval.v}}</div>
+    </div>
+    <div>history</div>
+    <div class="item range range-positive">
+      <input type="range" name="history" min="1" max="30" ng-model="history.v" value="{{history.v}}" ng-change="changeSettings()"/>
+      <div>{{history.v}}</div>
+    </div>
+    <div>milliseconds</div>
+    <div class="item range range-positive">
+      <input type="range" name="milliseconds" min="500" max="20000" ng-model="milliseconds.v" value="{{milliseconds.v}}" ng-change="changeSettings()"/>
+      <div>{{milliseconds.v}}</div>
+    </div>
+    <div>Callback Accuracy {{callbackBeaconAccuracy}}</div>
+  </ion-content>
+</ion-view>

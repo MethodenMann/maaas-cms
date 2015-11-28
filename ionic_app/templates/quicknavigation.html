@@ -1,0 +1,11 @@
+
+<ion-view title="Schnellnavigation" hide-back-button="false">
+  <ion-content height="100%">
+    <header></header>
+    <ion-list>
+      <div ng-repeat="area in areas">
+        <ion-item ng-click="navigateToArea(area)">{{area.title}}</ion-item>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

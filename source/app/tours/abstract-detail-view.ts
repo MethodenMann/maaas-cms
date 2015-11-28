@@ -12,28 +12,27 @@ export abstract class AbstractDetailView extends FormView {
   private areas:Array<IArea> = [];
   private selectedArea:IArea;
 
+  public isPopOverOpen = false;
 
-  private configuredAreas: IArea[] = [];
-  private unconfiguredAreas: IArea[] = [];
+  private configuredAreas:IArea[] = [];
+  private unconfiguredAreas:IArea[] = [];
 
-  private contentAreaDict: { [id: string] : number; } = {};
-  private challangeAreaDict: { [id: string] : number; } = {};
+  private contentAreaDict:{ [id: string] : number; } = {};
+  private challangeAreaDict:{ [id: string] : number; } = {};
+  protected tour:ITour;
 
-  protected tour: ITour;
-
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('Area') protected Area,
-    @Inject('Content') protected Content,
-    @Inject('Challenge') protected Challenge,
-    @Inject('Tour') protected Tour,
-    @Inject('Medium') protected Medium,
-    @Inject('$stateParams') protected $stateParams,
-    @Inject('$state') protected $state,
-    @Inject('$q') protected $q
-  ) {
+  constructor(@Inject('$scope') protected $scope,
+              @Inject('Area') protected Area,
+              @Inject('Content') protected Content,
+              @Inject('Challenge') protected Challenge,
+              @Inject('Tour') protected Tour,
+              @Inject('Medium') protected Medium,
+              @Inject('$stateParams') protected $stateParams,
+              @Inject('$state') protected $state,
+              @Inject('$q') protected $q,
+              @Inject('AlertService') protected AlertService) {
     super($scope);
-
+    Area.refreshAll();
     this.$q.all([Content.findAll(), Challenge.findAll(), this.loadData()]).then((values) => {
       this.initDictionaries(values[0], values[1]);
       this.Area.findAll().then((areas) => {
@@ -43,9 +42,11 @@ export abstract class AbstractDetailView extends FormView {
     });
   }
 
-  protected loadData() {}
+  protected loadData() {
+  }
 
-  abstract saveHook(): void;
+  abstract saveHook():void;
+
   protected save() {
     this.$scope.$broadcast('mas.saveprogess', 'in-progress');
     if (this.isFormValid()) {
@@ -67,7 +68,7 @@ export abstract class AbstractDetailView extends FormView {
   }
 
   private loadConfiguredAreas() {
-    var configuredAreaIds: number[] = [];
+    var configuredAreaIds:number[] = [];
 
     this.tour.selectedContents.forEach((contentId) => {
       var areaId = this.contentAreaDict[contentId];
@@ -113,39 +114,37 @@ export abstract class AbstractDetailView extends FormView {
   }
 
 
-  removeArea(area: IArea) {
-    var confirmed = confirm('Sind die sicher, dass Sie diesen Bereich aus dem Rundgang entfernen möchten?'); //TODO: Make nicer
-    if (confirmed) {
-      area.contents.forEach((content) => {
-        var pos = this.tour.selectedContents.indexOf(content.id);
-        if (pos > -1) {
-          this.tour.selectedContents.splice(pos, 1);
-        }
-      });
+  removeArea(area:IArea) {
+    area.contents.forEach((content) => {
+      var pos = this.tour.selectedContents.indexOf(content.id);
+      if (pos > -1) {
+        this.tour.selectedContents.splice(pos, 1);
+      }
+    });
 
-      area.challenges.forEach((challange) => {
-        var pos = this.tour.selectedChallenges.indexOf(challange.id);
-        if (pos > -1) {
-          this.tour.selectedChallenges.splice(pos, 1);
-        }
-      });
+    area.challenges.forEach((challange) => {
+      var pos = this.tour.selectedChallenges.indexOf(challange.id);
+      if (pos > -1) {
+        this.tour.selectedChallenges.splice(pos, 1);
+      }
+    });
 
 
-      var idx = this.configuredAreas.indexOf(area);
-      this.configuredAreas.splice(idx, 1);
-      this.unconfiguredAreas.push(area);
+    var idx = this.configuredAreas.indexOf(area);
+    this.configuredAreas.splice(idx, 1);
+    this.unconfiguredAreas.push(area);
 
-      this.selectFirstArea();
-    }
+    this.selectFirstArea();
 
+    this.isPopOverOpen = false;
   }
 
-  selectArea(area: IArea) {
+  selectArea(area:IArea) {
     this.selectedArea = area;
   }
 
   selectFirstArea() {
-      this.selectedArea = this.configuredAreas[0];
+    this.selectedArea = this.configuredAreas[0];
   }
 
   handleCheckboxChecked(id:number, list:Array<number>, event) {

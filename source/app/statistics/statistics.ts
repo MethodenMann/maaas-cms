@@ -11,11 +11,11 @@ export function loadStatistic(app) {
     makeDirective(ListView));
 
 
-  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+  app.config(function ($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
-  app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state(`cms.${componentName}`,
         RouteUtil.getAbstractRoute(`/${componentName}`, 'Statistiken'))

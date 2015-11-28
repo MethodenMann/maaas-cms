@@ -4,19 +4,28 @@ export class MasterView {
   public static selector = 'mas-master-view';
   public static templateUrl = './app/master/master-view.html';
 
-
+  private alerts;
 
   constructor(
     @Inject('$window') private $window,
     @Inject('$state') private $state,
-    @Inject('Auth') private Auth
+    @Inject('Auth') private Auth,
+    @Inject('AlertService') private AlertService
     ) {
     $('#side-menu').metisMenu();
 
 
     angular.element($window).bind('load resize', this.resizeHandler);
     this.resizeHandler();
+
+   this.alerts = AlertService.getAlerts();
   }
+
+
+
+    protected closeAlert(idx) {
+      this.AlertService.removeAlert(idx);
+    }
 
 
   resizeHandler() {

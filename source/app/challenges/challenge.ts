@@ -4,7 +4,6 @@ import {Multiplechoice} from './kind-configs/multiple-choice';
 import {TrueFalse} from './kind-configs/true-false';
 import {Assign} from './kind-configs/assign';
 import {Order} from './kind-configs/order';
-
 import {ListView} from './list-view';
 import {CreateView} from './detail-create-view';
 import {UpdateView} from './detail-update-view';
@@ -15,7 +14,7 @@ import {ImageRegion} from './kind-configs/image-region';
 export function loadChallenge(app) {
   var componentName = 'challenges';
 
-  app.config(function($translateProvider, $translatePartialLoaderProvider) {
+  app.config(function ($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
   });
 
@@ -47,12 +46,12 @@ export function loadChallenge(app) {
     makeSelector(ImageRegion),
     makeDirective(ImageRegion));
 
-  app.config(function($stateProvider, $urlRouterProvider) {
+  app.config(function ($stateProvider) {
     $stateProvider
       .state(`cms.areas.detail.${componentName}`,
-        RouteUtil.getAbstractRoute(`/${componentName}`, 'QuizzeZZ'))
+        RouteUtil.getAbstractRoute(`/${componentName}`, ''))
       .state(`cms.areas.detail.${componentName}.list`,
-        RouteUtil.getRoute(ListView, 'Challenge', 'cms.areas.detail.update'))
+        RouteUtil.getRoute(ListView, 'Quiz', 'cms.areas.detail.update'))
       .state(`cms.areas.detail.${componentName}.create`,
         RouteUtil.getRoute(CreateView,
           'Quiz erstellen', `cms.areas.detail.${componentName}.list`, '/create'))

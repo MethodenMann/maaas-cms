@@ -5,12 +5,11 @@ export class ListView {
   public static selector = 'mas-tour-list-view';
   public static templateUrl = './app/tours/list-view.html';
 
-  private tours: ITour[];
+  private tours:ITour[];
 
-  constructor(
-    @Inject('$stateParams') private $stateParams,
-    @Inject('Tour') private Tour
-    ) {
+  constructor(@Inject('$stateParams') private $stateParams,
+              @Inject('Tour') private Tour) {
+    Tour.refreshAll();
     Tour.findAll().then((data) => {
       this.tours = data;
     });

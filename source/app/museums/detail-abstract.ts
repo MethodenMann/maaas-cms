@@ -5,20 +5,18 @@ import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-
 import {IMedium} from '../media/imedium';
 
 export abstract class DetailAbstract extends FormView {
-  protected museum: IMuseum;
+  protected museum:IMuseum;
 
-  constructor(
-    @Inject('$scope') protected $scope,
-    @Inject('$stateParams') protected $stateParams,
-    @Inject('Museum') protected Museum,
-    @Inject('$state') protected $state
-    ) {
+  constructor(@Inject('$scope') protected $scope,
+              @Inject('$stateParams') protected $stateParams,
+              @Inject('Museum') protected Museum,
+              @Inject('$state') protected $state) {
     super($scope);
 
     this.loadData();
   }
 
-  abstract saveHook(): void;
+  abstract saveHook():void;
 
   protected save() {
     this.$scope.$broadcast('mas.saveprogess', 'in-progress');
@@ -30,5 +28,6 @@ export abstract class DetailAbstract extends FormView {
     }
   }
 
-  protected loadData(): void { }
+  protected loadData():void {
+  }
 }

@@ -2,6 +2,7 @@
   .panel-heading
     | {{ 'challenge_details_title' | translate }}
   .panel-body
+
     form(name='form' role='form' novalidate)
       mas-form-group(field-name='name' localization-prefix='challenges_details_name')
         input.form-control(ng-model='ctrl.challenge.name' name='name' required ng-minlength='2')
@@ -11,8 +12,3 @@
         div(ng-include='ctrl.selectedKind.url')
 
       mas-save-button(ng-disabled='!ctrl.selectedKind'  ng-click='ctrl.save()')
-
-    //| {{ctrl.isUpdate}}
-    //h3 DEV challenge JSON
-    //| {{ctrl.challenge}}
-

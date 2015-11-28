@@ -12,8 +12,8 @@ export class ListView {
   bseries = ['Familien', 'Schulklassen'];
 
   bdata = [
-  [65, 59, 80, 81, 56, 55, 40],
-  [28, 48, 40, 19, 86, 27, 90]
+    [65, 59, 80, 81, 56, 55, 40],
+    [28, 48, 40, 19, 86, 27, 90]
   ];
 
   //http://jtblin.github.io/angular-chart.js/
@@ -22,7 +22,7 @@ export class ListView {
   slabels = ['Wolf', 'Bär', 'Frosch', 'Frisch', 'Bock', 'Dino', 'Ameise'];
 
   sdata = [
-  [65, 59, 90, 81, 56, 55, 40],
-  [28, 48, 40, 19, 96, 27, 100]
-];
+    [65, 59, 90, 81, 56, 55, 40],
+    [28, 48, 40, 19, 96, 27, 100]
+  ];
 }

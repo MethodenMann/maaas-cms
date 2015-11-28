@@ -1,5 +1,5 @@
 {
-  "areas_title": "Area",
+  "areas_title": "Bereiche",
   "areas_details_title": "Area Details",
   "areas_details_name_label": "Name",
   "areas_details_name_help": "Der Titel der Area, dieser erscheint oben",
@@ -19,6 +19,7 @@
   "areas_details_stickerimage_label": "Sticker Bild",
   "areas_details_stickerimage_help": "Das Stickerbild. Sollte rund Sein im SVG Format.",
   "areas_details_stickerimage_error": "Bitte laden sie ein Bild hoch",
+  "areas_details_save_successfullyalert": "Der Bereich wurde erfolgreich erstellt. Sie können nun Quiz und Inhalte dafür erfassen",
   "areas_details_gotoimage_label": "Gehe-Zu Bild",
   "areas_details_gotoimage_help": "Das Bild, welches neben dem Gehe-Zu-Text angezeigt wird. Sollte im SVG Format sein.",
   "areas_details_gotoimage_error": "Bitte laden sie ein Bild hoch"

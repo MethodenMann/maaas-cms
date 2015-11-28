@@ -32,6 +32,8 @@ System.config({
     'chart': 'libs/Chart.min.js',
     'maaas-config': 'app/ngConstants.js',
     'angular-animate': 'libs/angular-animate.min.js',
-    'angular-bootstrap': 'libs/ui-bootstrap.min.js'
+    'angular-bootstrap': 'libs/ui-bootstrap.min.js',
+    'angular-bootstrap-tpls': 'libs/ui-bootstrap-tpls.min.js',
+    'angular-socket-io': 'libs/socket.js'
   }
 });

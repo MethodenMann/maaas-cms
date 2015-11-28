@@ -11,6 +11,8 @@ import {loadMuseum} from './museums/museums';
 import {loadTour} from './tours/tour';
 import {loadTranslations} from './translation/translations';
 import {loadStatistic} from './statistics/statistics';
+import {loadPreview} from './preview/preview';
+
 
 export function loadApp(app) {
   loadJsDataConfig(app);
@@ -26,4 +28,5 @@ export function loadApp(app) {
   loadTour(app);
   loadTranslations(app);
   loadStatistic(app);
+  loadPreview(app);
 }

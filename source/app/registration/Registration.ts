@@ -10,7 +10,7 @@ export function loadRegistration(app) {
     $stateProvider
       .state('registration', {
       url: '/register',
-      templateUrl: './app/registration/view/registration.html',
+      templateUrl: './app/registration/registration.html',
       data: {
         ignoreLogin: true
       }

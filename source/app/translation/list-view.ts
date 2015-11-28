@@ -1,128 +1,81 @@
 import {Inject} from '../utils/di';
+import {Translatable} from './translatable';
 
 export class ListView {
   private static selector = 'mas-translation-list-view';
   private static templateUrl = './app/translation/list-view.html';
 
-  private fields:Array<any> = [];
   private mainLanguage:string = 'de';
   private currentLanguage:string = 'en';
   private locales = ['en', 'it', 'fr'];
 
-  private currentModel:any;
-  private allModels:Array<any>;
+  private currentModelIndex:number = 0;
 
-  private currentModelType:any;
-  private currentModelName:string;
-  private currentModelIndex:number;
+  private modelConfigs:Array<{name:string, modelType:any}>;
 
-  private fieldConfigs = {
-    'area': () => {
-      return [
-        {name: 'name', prefix: 'areas_details_name', inputType: 'input'},
-        {name: 'gotoText', prefix: 'areas_details_gototext', inputType: 'input'}
-      ];
-    },
-    'content': () => {
-      return [
-        {name: 'title', prefix: 'areas_details_name', inputType: 'input'},
-        {name: 'description', prefix: 'areas_details_name', inputType: 'input'},
-        {name: 'data', prefix: 'areas_details_gototext', inputType: 'richtext'}
-      ];
-    },
-    'challenge': (currentModel:any) => {
-      return [
-        {name: 'name', prefix: 'challenges_details_name', inputType: 'input'},
-        {name: 'data', prefix: 'areas_details_gototext', inputType: `quiz-${currentModel.kind}`}
-      ];
-    }
-  };
+  private translatables:Array<Translatable> = [];
+  private filteredTranslatables:Array<Translatable> = [];
 
-  private quizPreparators = {
-    'multiple-choice': (data) => {
-      var clone = jQuery.extend(true, {}, data);
-      for (let answer of clone.answers) {
-        answer.text = '';
-      }
-      return clone;
-    },
+  private currentTranslationProgress = 0;
 
-    'true-false': (data) => {
-      var clone = jQuery.extend(true, {}, data);
-      for (let question of clone.questions) {
-        question.text = '';
-      }
-      return clone;
-    }
-  };
-
-  private modelPreparators = {
-    'area': () => {}, 'content': () => {},
-    'challenge': (currentModel:any) => {
-      var preparator = this.quizPreparators[currentModel.kind];
-      for (let locale of this.locales) {
-        if (jQuery.isEmptyObject(currentModel.translations[locale].data)) {
-          currentModel.translations[locale].data = preparator(currentModel.data);
-        }
-      }
-    }
-  };
-
-  private modelConfigs:Array<{value:string, modelType:any}>;
-  private selectedModel:{value:string, modelType:any};
+  private selectedMode:string;
 
   constructor(
     @Inject('$scope') private $scope,
+    @Inject('$q') private $q,
     @Inject('Area') private Area,
     @Inject('Content') private Content,
-    @Inject('Challenge') private Challenge
+    @Inject('Challenge') private Challenge,
+    @Inject('Museum') private Museum,
+    @Inject('Tour') private Tour
     ) {
 
     this.modelConfigs = [];
-    this.modelConfigs.push({value: 'area', modelType: Area});
-    this.modelConfigs.push({value: 'content', modelType: Content});
-    this.modelConfigs.push({value: 'challenge', modelType: Challenge});
-  }
+    this.modelConfigs.push({name: 'area', modelType: Area});
+    this.modelConfigs.push({name: 'content', modelType: Content});
+    this.modelConfigs.push({name: 'challenge', modelType: Challenge});
+    this.modelConfigs.push({name: 'museum', modelType: Museum});
+    this.modelConfigs.push({name: 'tour', modelType: Tour});
 
-  loadPreviousModel() {
-    this.currentModelIndex = Math.max(0, --this.currentModelIndex);
-    this.loadModel();
-  }
+    var promises = [];
 
-  loadNextModel() {
-    this.currentModelIndex = Math.min(this.allModels.length - 1, ++this.currentModelIndex);
-    this.loadModel();
-  }
+    for (let modelConfig of this.modelConfigs) {
+      // this needs to be called in a self executing function, otherwise
+      // the modelConfig variable gets overridden for other promises
+      ((modelConfig) => {
+        var promise = modelConfig.modelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
+          for (let model of models) {
+            this.translatables.push(new Translatable(modelConfig, model));
+          }
+        });
+        promises.push(promise);
+      })(modelConfig);
+    }
 
-  loadModel() {
-    this.currentModel = this.allModels[this.currentModelIndex];
-    this.prepareFieldsForCurrentModel();
-    this.prepareModel();
-  }
-
-  save() {
-    var payload = {};
-    payload[this.currentModelName] = this.currentModel;
-    payload['locale'] = this.mainLanguage;
-    this.currentModelType.update(this.currentModel.id, payload);
-  }
-
-  prepareFieldsForCurrentModel() {
-    this.fields = this.fieldConfigs[this.selectedModel.value](this.currentModel);
-  }
-
-  prepareModel() {
-    this.modelPreparators[this.selectedModel.value](this.currentModel);
-  }
-
-  selectedModelChanged() {
-    this.currentModelType = this.selectedModel.modelType;
-    this.currentModelName = this.selectedModel.value;
-
-    this.currentModelType.findAll({locale: this.mainLanguage, translations: 'yes'}).then((models) => {
-      this.allModels = models;
-      this.currentModelIndex = 0;
-      this.loadModel();
+    $q.all(promises).then(() => {
+      this.updateTranslationProgress();
     });
+
+    $scope.$on('mas.request-translation-progress-update', () => {
+      this.updateTranslationProgress();
+    });
+  }
+
+  updateTranslationProgress() {
+    var allTotal = 0;
+    for (let translatable of this.translatables) {
+      var [total, perLocale] = translatable.getTranslationProgress();
+      allTotal += total;
+    }
+    this.currentTranslationProgress = (allTotal / this.translatables.length);
+  }
+
+  getProgressBarStyle() {
+    var n = this.currentTranslationProgress * 100;
+    return {width: `${n}%`};
+  }
+
+  getModeTemplate() {
+    return `app/translation/${this.selectedMode}-mode-dummy.html`;
   }
 }
