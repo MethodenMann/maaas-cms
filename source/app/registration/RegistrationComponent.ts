@@ -7,8 +7,9 @@ export class RegistrationComponent {
   private email:String;
   private password:String;
   private passwordConfirmation:String;
+  private errors:any;
 
-  constructor(@Inject('Auth') private Auth) {
+  constructor(@Inject('Auth') private Auth, @Inject('$state') private $state) {
   }
 
   register() {
@@ -19,9 +20,10 @@ export class RegistrationComponent {
     };
 
     this.Auth.register(credentials).then((user) => {
-
-    }, function (error) {
-
+      this.errors = undefined;
+      this.$state.go('cms.welcome');
+    }, (error) => {
+      this.errors = error.data.errors;
     });
   }
 

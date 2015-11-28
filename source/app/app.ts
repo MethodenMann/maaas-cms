@@ -77,6 +77,7 @@ cmsApp.run(function ($rootScope, AuthUtil, $state) {
     if (toState.data && toState.data.ignoreLogin) {
       console.log('ignoring login!');
     } else {
+      // TODO something is wrong here
       AuthUtil.isAuthenticated().then(isAuthenticated => {
         if (isAuthenticated) {
           console.log('user is authenticated!');

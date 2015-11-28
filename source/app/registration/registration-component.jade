@@ -1,13 +1,14 @@
-.login-panel.panel.panel-default
-  .panel-heading
-    h3.panel-title Register
-  .panel-body
+div.top30
+  div(style='width: 400px;margin: 0 auto;')
     form(role='form')
       fieldset
-        .form-group
+        .form-group(ng-class='{ "has-error" : ctrl.errors.email }')
           input.form-control(ng-model='ctrl.email' placeholder='E-mail', type='email', autofocus='')
-        .form-group
+          p(ng-repeat="error in ctrl.errors.email").help-block {{error}}
+        .form-group(ng-class='{ "has-error" : ctrl.errors.password }')
           input.form-control(ng-model='ctrl.password' placeholder='Password', name='password', type='password')
-        .form-group
+          p(ng-repeat="error in ctrl.errors.password").help-block {{error}}
+        .form-group(ng-class='{ "has-error" : ctrl.errors.password_confirmation }')
           input.form-control(ng-model='ctrl.passwordConfirmation' placeholder='Password bestätigen', name='password', type='password')
-        a.btn.btn-lg.btn-success.btn-block(ng-click='ctrl.register()') Register
+          p(ng-repeat="error in ctrl.errors.password_confirmation").help-block {{error}}
+        a.btn.mas-login-btn.btn-block(ng-hide="ctrl.registrationSuccessful" ng-click='ctrl.register()') {{ 'register' | translate }}
