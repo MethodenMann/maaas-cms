@@ -4,11 +4,11 @@ div.top30
       fieldset
         .form-group(ng-class='{ "has-error" : ctrl.errors.email }')
           input.form-control(ng-model='ctrl.email' placeholder='E-mail', type='email', autofocus='')
-          p(ng-repeat="error in ctrl.errors.email").help-block {{error}}
+          p(ng-repeat='error in ctrl.errors.email').help-block {{error}}
         .form-group(ng-class='{ "has-error" : ctrl.errors.password }')
           input.form-control(ng-model='ctrl.password' placeholder='Password', name='password', type='password')
-          p(ng-repeat="error in ctrl.errors.password").help-block {{error}}
+          p(ng-repeat='error in ctrl.errors.password').help-block {{error}}
         .form-group(ng-class='{ "has-error" : ctrl.errors.password_confirmation }')
           input.form-control(ng-model='ctrl.passwordConfirmation' placeholder='Password bestätigen', name='password', type='password')
-          p(ng-repeat="error in ctrl.errors.password_confirmation").help-block {{error}}
-        a.btn.mas-login-btn.btn-block(ng-hide="ctrl.registrationSuccessful" ng-click='ctrl.register()') {{ 'register' | translate }}
+          p(ng-repeat='error in ctrl.errors.password_confirmation').help-block {{error}}
+        a.btn.mas-login-btn.btn-block(ng-hide='ctrl.registrationSuccessful' ng-click='ctrl.register()') {{ 'register' | translate }}
