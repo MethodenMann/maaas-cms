@@ -10,6 +10,7 @@ export abstract class DetailAbstract extends FormView {
   constructor(@Inject('$scope') protected $scope,
               @Inject('$stateParams') protected $stateParams,
               @Inject('Museum') protected Museum,
+              @Inject('Auth') protected Auth,
               @Inject('$state') protected $state) {
     super($scope);
 

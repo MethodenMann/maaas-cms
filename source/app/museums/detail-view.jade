@@ -1,3 +1,4 @@
+.alert.alert-warning(ng-show='ctrl.createMuseum') {{ 'museums_please_create_warning' | translate }}
 .panel.panel-green
   .panel-heading
     | {{ 'museums_details_title' | translate }}
@@ -13,8 +14,8 @@
       mas-form-group(field-name='address' localization-prefix='museums_details_address')
         textarea.form-control(type='text' rows='3' name='address' ng-model='ctrl.museum.address' required ng-minlength='5')
 
-      mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
-        mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
+      //- mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
+      //-   mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
 
       mas-form-group(field-name='kontaktioapikey' localization-prefix='museums_details_kontaktkey')
         input.form-control(ng-model='ctrl.museum.kontaktIoApiKey' name='name')

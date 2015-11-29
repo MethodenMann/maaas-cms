@@ -10,6 +10,7 @@ export class RegistrationComponent {
   private errors:any;
 
   constructor(@Inject('Auth') private Auth, @Inject('$state') private $state) {
+    this.Auth.logout();
   }
 
   register() {

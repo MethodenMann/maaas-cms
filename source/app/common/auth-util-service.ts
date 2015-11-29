@@ -7,6 +7,7 @@ export class AuthUtil {
   constructor(@Inject('$q') protected $q,
               @Inject('Auth') protected Auth) {
     this.isAuthenticatedDeferred = this.$q.defer();
+    this.isAuthenticatedDeferred.resolve(true);
   }
 
   public getMuseumId() {

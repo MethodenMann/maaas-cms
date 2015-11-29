@@ -11,6 +11,7 @@ export class LoginComponent {
   constructor(@Inject('Auth') private Auth,
               @Inject('$state') private $state,
               @Inject('$filter') private $filter) {
+    this.Auth.logout();
   }
 
   login() {
@@ -19,7 +20,6 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     };
-
 
     this.Auth.login(credentials).then((user) => {
       this.$state.go('cms.welcome');
