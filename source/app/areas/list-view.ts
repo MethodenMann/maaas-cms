@@ -20,13 +20,13 @@ export class ListView {
     });
 
     $scope.$on('deleteArea', (e, areaId) => {
-      console.log('bc ree');
       this.deleteArea(areaId);
     });
   }
 
   protected deleteArea(id) {
-    console.log('Delete Area rea', id);
+    this.Area.destroy(id);
+    //todo: Delete Quiz and Content as well
   }
 
 }

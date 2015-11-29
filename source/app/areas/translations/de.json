@@ -2,6 +2,8 @@
   "areas_title": "Bereiche",
   "areas_details_title": "Area Details",
   "areas_details_name_label": "Name",
+  "areas_delete_confirm" : "Sind Sie sicher, dass sie diesen Bereich mitsammt Inhalten und Quiz löschen möchten?",
+  "areas_delete" : "Bereich entfernen",
   "areas_details_name_help": "Der Titel der Area, dieser erscheint oben",
   "areas_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
   "areas_details_gototext_label": "Gehe zu Text",
