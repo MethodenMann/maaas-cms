@@ -72,8 +72,6 @@ cmsApp.config(['$httpProvider', function ($httpProvider) {
 
 function doMuseumCheck(Auth, toState, $state) {
   Auth.currentUser().then((user) => {
-    console.log(user);
-    console.log(toState);
     if (!user.museum_id) {
       if (toState.name !== 'cms.museums.create') {
         $state.go('cms.museums.create');
