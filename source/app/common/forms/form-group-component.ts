@@ -48,11 +48,6 @@ export class FormGroupComponent {
   private static link($scope, element:JQuery, attributes, FormController, transcludeFn) {
 
     $scope.ctrl.form = FormController;
-
-
-    element.find('input').attr('onblur', 'ctrl.publishPreview()');
-
-
   }
 
 

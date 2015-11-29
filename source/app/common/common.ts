@@ -8,6 +8,7 @@ import {AlertService} from './alert-service';
 import {PreviewService} from './preview-service';
 import {AuthUtil} from './auth-util-service';
 
+
 export function loadCommon(app) {
   loadImageManagement(app);
 
@@ -20,6 +21,11 @@ export function loadCommon(app) {
   app.factory('PreviewSocket', function (socketFactory) {
     return socketFactory();
   });
+
+  //app
+  //  .directive(
+  //    makeSelector(BlurBroadcast),
+  //    makeDirective(BlurBroadcast));
 
   app
     .directive(
