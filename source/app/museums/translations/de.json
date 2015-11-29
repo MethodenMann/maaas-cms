@@ -15,5 +15,6 @@
   "museums_details_image_error": "BItte laden sie ein Logo hoch",
   "museums_details_kontaktkey_label": "Kontakt.io API-Key",
   "museums_details_kontaktkey_help": "Wird für die Beacon synchronisation verwerden. Kann von https://panel.kontakt.io kopiert werden",
-  "museums_please_create_warning": "Bitte erstellen Sie ein Museum"
+  "museums_please_create_warning": "Bitte erstellen Sie ein Museum",
+  "museums_invitations": "Einladungen"
 }

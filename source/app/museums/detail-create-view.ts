@@ -8,6 +8,15 @@ export class DetailCreateView extends DetailAbstract {
   public static templateUrl = 'app/museums/detail-view.html';
 
   private createMuseum = true;
+  private invitations:Array<any>;
+
+  loadData() {
+    this.Auth.currentUser().then((user) => {
+      this.Invitation.findAll({forUser: true}).then((invitations) => {
+        this.invitations = invitations;
+      });
+    });
+  }
 
   saveHook() {
     this.Museum.create({museum: this.museum}).then((museum:IMuseum) => {
@@ -16,6 +25,14 @@ export class DetailCreateView extends DetailAbstract {
       this.$state.go('cms.museums.detail.update', {museumId: museum.id});
 
       this.Auth._currentUser.museum_id = museum.id;
+    });
+  }
+
+  acceptInvitation(invitation) {
+    this.Museum.update(invitation.museumId,
+         {museum: {addUser: this.Auth._currentUser.id}}).then((museum) => {
+      this.Auth._currentUser.museum_id = invitation.museumId;
+      this.$state.go('cms.welcome');
     });
   }
 }

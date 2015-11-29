@@ -1,4 +1,17 @@
 .alert.alert-warning(ng-show='ctrl.createMuseum') {{ 'museums_please_create_warning' | translate }}
+.panel.panel-green(ng-show='ctrl.createMuseum')
+  .panel-heading
+    | {{ 'museums_invitations' | translate }}
+  .panel-body
+    table.table.table-striped.top15
+      tr
+        th Email
+        th
+      tr.hover-row(ng-repeat='invitation in ctrl.invitations')
+        td {{invitation.museumName}}
+        td
+          button.btn(ng-click='ctrl.acceptInvitation(invitation)') Einladung Akzeptieren
+
 .panel.panel-green
   .panel-heading
     | {{ 'museums_details_title' | translate }}
@@ -22,3 +35,20 @@
 
 
       mas-save-button(ng-click='ctrl.save()')
+
+.panel.panel-green(ng-hide='ctrl.createMuseum')
+  .panel-heading
+    | {{ 'museums_details_title' | translate }}
+  .panel-body
+    table.table.table-striped.top15
+      tr
+        th Email
+        th Akzeptiert
+      tr.hover-row(ng-repeat='invitation in ctrl.invitations')
+        td {{invitation.email}}
+        td {{invitation.accepted}}
+
+    .form-group.input-group.col-md-4
+      input.form-control(ng-model="ctrl.emailToInvite" placeholder="Email...")
+      span.input-group-btn
+        button.btn(ng-click="ctrl.submitInvitation()") Einladen

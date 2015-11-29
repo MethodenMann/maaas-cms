@@ -11,6 +11,7 @@ export abstract class DetailAbstract extends FormView {
               @Inject('$stateParams') protected $stateParams,
               @Inject('Museum') protected Museum,
               @Inject('Auth') protected Auth,
+              @Inject('Invitation') protected Invitation,
               @Inject('$state') protected $state) {
     super($scope);
 
