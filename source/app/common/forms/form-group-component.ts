@@ -45,7 +45,17 @@ export class FormGroupComponent {
     return this.localizationPrefix + '_error';
   }
 
-  private static link($scope, element:JQuery, attributes, FormController) {
+  private static link($scope, element:JQuery, attributes, FormController, transcludeFn) {
+
     $scope.ctrl.form = FormController;
+
+
+    element.find('input').attr('onblur', 'ctrl.publishPreview()');
+
+
   }
+
+
+
+
 }

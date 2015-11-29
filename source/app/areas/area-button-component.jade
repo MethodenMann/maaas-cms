@@ -1,3 +1,13 @@
-a(href ui-sref='cms.areas.detail.update({areaId: ctrl.area.id})')
-  image-load(public-id='{{ctrl.area.stickerImage.publicId}}' height='100')
-  div {{ctrl.area.name}}
+div
+  a.btn.btn-warning.btn-circle(style='position:absolute; margin-left:30px' title='Bereich entfernen' popover-placement='left' popover-is-open='ctrl.isPopOverOpen'  uib-popover-template='"removeTemplate.html"' )
+    i.fa.fa-trash
+  a(href ui-sref='cms.areas.detail.update({areaId: ctrl.area.id})')
+    image-load(public-id='{{ctrl.area.stickerImage.publicId}}' height='100')
+    div {{ctrl.area.name}}
+
+
+
+script(type='text/ng-template', id='removeTemplate.html').
+  <div>{{ 'tours_details_removearea_confirm' | translate }}</div>
+  <input type='button' ng-click='ctrl.deleteArea(ctrl.area.id)' value='Ok' class='btn btn-default'>
+  <input type='button' ng-click='ctrl.isPopOverOpen = false' value='Abbrechen' class='btn btn-default'>

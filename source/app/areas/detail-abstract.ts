@@ -12,6 +12,10 @@ export abstract class DetailAbstract extends FormView {
               @Inject('PreviewService') protected PreviewService) {
     super($scope);
     this.loadData();
+
+    $scope.$on('maaas.formChanged', () => {
+      this.publishPreview();
+    });
   }
 
   protected area:IArea;
