@@ -1,5 +1,5 @@
-.alert.alert-warning(ng-show='ctrl.createMuseum') {{ 'museums_please_create_warning' | translate }}
-.panel.panel-green(ng-show='ctrl.createMuseum')
+//- .alert.alert-warning(ng-show='ctrl.createMuseum') {{ 'museums_please_create_warning' | translate }}
+.panel.panel-green(ng-show='ctrl.createMuseum && ctrl.invitations.length > 0')
   .panel-heading
     | {{ 'museums_invitations' | translate }}
   .panel-body
@@ -38,7 +38,7 @@
 
 .panel.panel-green(ng-hide='ctrl.createMuseum')
   .panel-heading
-    | {{ 'museums_details_title' | translate }}
+    | {{ 'museums_invitations' | translate }}
   .panel-body
     table.table.table-striped.top15
       tr
@@ -46,7 +46,8 @@
         th Akzeptiert
       tr.hover-row(ng-repeat='invitation in ctrl.invitations')
         td {{invitation.email}}
-        td {{invitation.accepted}}
+        td
+          span.glyphicon(ng-class='{"glyphicon-ok": invitation.accepted}')
 
     .form-group.input-group.col-md-4
       input.form-control(ng-model="ctrl.emailToInvite" placeholder="Email...")

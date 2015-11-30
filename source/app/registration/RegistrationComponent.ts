@@ -9,8 +9,11 @@ export class RegistrationComponent {
   private passwordConfirmation:String;
   private errors:any;
 
-  constructor(@Inject('Auth') private Auth, @Inject('$state') private $state) {
+  constructor(@Inject('Auth') private Auth,
+              @Inject('$state') private $state,
+              @Inject('DS') private DS) {
     this.Auth.logout();
+    DS.clear();
   }
 
   register() {
