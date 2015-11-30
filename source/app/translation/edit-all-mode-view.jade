@@ -1,4 +1,5 @@
-div(ng-repeat='translatable in ctrl.translatables')
+input.form-group.form-control(ng-model='ctrl.query' ng-model-options='{ debounce: 300 }' ng-change='ctrl.updateFilteredTranslatables()' placeholder='Suchen...')
+div(ng-repeat='translatable in ctrl.filteredTranslatables | filter: ctrl.myFilter')
   mas-translation-panel(translatable='translatable')
   mas-save-button(ng-click='ctrl.save(translatable)')
   hr

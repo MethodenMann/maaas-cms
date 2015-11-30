@@ -12,10 +12,30 @@ export class EditAllModeView {
   };
 
   private translatables:Array<Translatable>;
+  private filteredTranslatables:Array<Translatable>;
+  private query:string;
 
   constructor(
     @Inject('$scope') private $scope
     ) {
+    this.updateFilteredTranslatables();
+  }
+
+  updateFilteredTranslatables() {
+    this.filteredTranslatables = [];
+    if (this.query && this.query.trim() !== '') {
+      for (let translatable of this.translatables) {
+        // TODO solve this with polymorphism
+        if ((translatable.model.name && translatable.model.name.indexOf(this.query) > -1) ||
+            (translatable.model.title && translatable.model.title.indexOf(this.query) > -1)) {
+          this.filteredTranslatables.push(translatable);
+        }
+
+        if (this.filteredTranslatables.length > 5) {
+          return;
+        }
+      }
+    }
   }
 
   save(translatable:Translatable) {
