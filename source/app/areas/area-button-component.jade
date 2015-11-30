@@ -1,13 +1,7 @@
 div
-  a#delete-button.btn.btn-warning.btn-circle(title='{{ "areas_delete" | translate }}' popover-placement='left' popover-is-open='ctrl.isPopOverOpen' uib-popover-template='"removeTemplate.html"' )
-    i.fa.fa-trash
+  mas-delete-button(title-res='areas_delete' confirm-res='areas_delete_confirm' id='{{ctrl.area.id}}' type='areas')
+
   a(href ui-sref='cms.areas.detail.update({areaId: ctrl.area.id})')
     image-load(public-id='{{ctrl.area.stickerImage.publicId}}' height='100')
     div {{ctrl.area.name}}
 
-
-
-script(type='text/ng-template', id='removeTemplate.html').
-  <div>{{ 'areas_delete_confirm' | translate }}</div>
-  <input type='button' ng-click='ctrl.deleteArea(ctrl.area.id)' value='Ok' class='btn btn-default'>
-  <input type='button' ng-click='ctrl.isPopOverOpen = false' value='Abbrechen' class='btn btn-default'>

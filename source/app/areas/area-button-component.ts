@@ -8,12 +8,6 @@ export class AreaButtonComponent {
   private area: IArea;
 
   constructor(@Inject('$scope') private $scope) {
-
-  }
-
-
-  private deleteArea(id) {
-    this.$scope.$emit('deleteArea', id);
   }
 
   private static options = {

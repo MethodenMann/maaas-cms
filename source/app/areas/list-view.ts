@@ -18,15 +18,7 @@ export class ListView {
         this.areas = data;
       });
     });
-
-    $scope.$on('deleteArea', (e, areaId) => {
-      this.deleteArea(areaId);
-    });
   }
 
-  protected deleteArea(id) {
-    this.Area.destroy(id);
-    //todo: Delete Quiz and Content as well
-  }
 
 }

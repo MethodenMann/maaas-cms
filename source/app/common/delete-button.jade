@@ -1,0 +1,8 @@
+a#delete-button.btn.btn-warning.btn-circle(title='{{ ctrl.titleRes | translate }}' popover-placement='left' popover-is-open='ctrl.isPopOverOpen' uib-popover-template='"removeTemplate.html"' )
+  i.fa.fa-trash
+
+
+script(type='text/ng-template', id='removeTemplate.html').
+  <div>{{ ctrl.confirmRes | translate }}</div>
+  <input type='button' ng-click='ctrl.delete()' value='Ok' class='btn btn-default'>
+  <input type='button' ng-click='ctrl.isPopOverOpen = false' value='Abbrechen' class='btn btn-default'>

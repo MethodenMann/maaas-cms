@@ -15,7 +15,8 @@ export abstract class DetailAbstract extends FormView {
               @Inject('PreviewService') protected PreviewService) {
     super($scope);
     this.loadData();
-    $scope.$watch('ctrl.area', (n, o) => this.publishPreviewDebounce(n, o), true);
+
+    this.regististerDebouncewWatch($timeout, 'ctrl.area', this.publishPreview);
   }
 
 
@@ -24,15 +25,6 @@ export abstract class DetailAbstract extends FormView {
 
   abstract saveHook():void;
 
-  private timeout;
-  private publishPreviewDebounce(newVal, oldVal) {
-    if (newVal !== oldVal) {
-      if (this.timeout) {
-        this.$timeout.cancel(this.timeout);
-      }
-      this.timeout = this.$timeout(() => this.publishPreview(), 500);
-    }
-  }
 
   private publishPreview() {
     this.PreviewService.publishPreview('area', this.area.id, this.area);

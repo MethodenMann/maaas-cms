@@ -7,6 +7,7 @@ import {NewButtonSmall} from './new-button-sm';
 import {AlertService} from './alert-service';
 import {PreviewService} from './preview-service';
 import {AuthUtil} from './auth-util-service';
+import {DeleteButton} from './delete-button';
 
 
 export function loadCommon(app) {
@@ -22,28 +23,24 @@ export function loadCommon(app) {
     return socketFactory();
   });
 
-  //app
-  //  .directive(
-  //    makeSelector(BlurBroadcast),
-  //    makeDirective(BlurBroadcast));
 
-  app
-    .directive(
+  app.directive(
+    makeSelector(DeleteButton),
+    makeDirective(DeleteButton));
+
+  app.directive(
       makeSelector(NewButton),
       makeDirective(NewButton));
 
-  app
-    .directive(
+  app.directive(
       makeSelector(NewButtonSmall),
       makeDirective(NewButtonSmall));
 
-  app
-    .directive(
+  app.directive(
       makeSelector(FormGroupComponent),
       makeDirective(FormGroupComponent));
 
-  app
-    .directive(
+  app.directive(
       makeSelector(SaveButtonComponent),
       makeDirective(SaveButtonComponent));
 }

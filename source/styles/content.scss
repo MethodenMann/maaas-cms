@@ -1,16 +1,8 @@
 @import "vars";
 
 
-.mas-challenge-btn {
+.mas-content-btn {
     text-align: center;
-
-    img{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 50px;
-        border: 1px solid $gray;
-    }
 
     &:hover #delete-button  {
       visibility: visible;
