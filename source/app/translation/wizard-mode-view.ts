@@ -14,23 +14,28 @@ export class WizardModeView {
   private translatables:Array<Translatable>;
   private currentModelIndex:number = 0;
 
+  private currentTranslatable:Translatable;
+
   constructor(
     @Inject('$scope') private $scope
     ) {
+    this.loadNextModel();
   }
 
   getTranslatable() {
-    return this.translatables[this.currentModelIndex];
-  }
-
-  loadPreviousModel() {
-    this.currentModelIndex = Math.max(0, --this.currentModelIndex);
-    this.save();
+    return this.currentTranslatable;
   }
 
   loadNextModel() {
-    this.currentModelIndex = Math.min(this.translatables.length - 1, ++this.currentModelIndex);
+    for (let translatable of this.translatables) {
+      if (translatable.getTranslationProgress()[0] !== 1) {
+        this.currentTranslatable = translatable;
+        this.save();
+        return;
+      }
+    }
     this.save();
+    this.currentTranslatable = undefined;
   }
 
   save() {
