@@ -70,22 +70,35 @@ cmsApp.config(['$httpProvider', function ($httpProvider) {
 }
 ]);
 
-cmsApp.run(function ($rootScope, AuthUtil, $state) {
-  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-    console.log(toState.data);
+function doMuseumCheck(Auth, toState, $state) {
+  Auth.currentUser().then((user) => {
+    if (!user.museum_id) {
+      if (toState.name !== 'cms.museums.create') {
+        $state.go('cms.museums.create');
+      }
+    }
+  });
+}
 
+cmsApp.run(function ($rootScope, Auth, $state) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
     if (toState.data && toState.data.ignoreLogin) {
       console.log('ignoring login!');
     } else {
-      AuthUtil.isAuthenticated().then(isAuthenticated => {
-        if (isAuthenticated) {
-          console.log('user is authenticated!');
-        } else {
-          console.log('user is not authenticated!');
+      if (!Auth.isAuthenticated()) {
+        console.log('getting user from memory failed. trying to get user from server session');
+
+        Auth.currentUser().then((user) => {
+          console.log('retrieved user from server session. user is now authenticated!');
+          doMuseumCheck(Auth, toState, $state);
+        }, (error) => {
+          console.log('no user from server session. user is not authenticated!');
           event.preventDefault();
           $state.go('login');
-        }
-      });
+        });
+      } else {
+        doMuseumCheck(Auth, toState, $state);
+      }
     }
   });
 });

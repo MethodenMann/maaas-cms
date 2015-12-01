@@ -1,11 +1,8 @@
-.row
-  .col-md-1
-    | {{ctrl.currentModelIndex + 1}} of {{ctrl.translatables.length}}
-  .col-md-2
-    button.form-control(ng-click='ctrl.loadPreviousModel()') Previous
-  .col-md-2
-    button.form-control(ng-click='ctrl.loadNextModel()') Next
+div(ng-show='ctrl.getTranslatable()')
+  .row
+    .col-md-2
+      button.form-control(ng-click='ctrl.loadNextModel()') Next
+  br
+  mas-translation-panel(translatable='ctrl.getTranslatable()')
 
-mas-translation-panel(translatable='ctrl.getTranslatable()')
-
-mas-save-button(ng-click='ctrl.save()')
+  mas-save-button(ng-click='ctrl.save()')

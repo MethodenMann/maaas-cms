@@ -1,3 +1,6 @@
 {
-  "master_cms": "CMS"
+  "master_cms": "CMS",
+  "login": "Login",
+  "register": "Registrieren",
+  "registration_successful": "Registration erfolgreich"
 }
