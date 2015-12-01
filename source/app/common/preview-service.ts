@@ -20,7 +20,7 @@ export class PreviewService {
   }
 
   public publishPreview(type, id, data) {
-    this.$http.post(`${this.BACKEND_BASEURL}/preview/${type}`, {area: data}, {}).then(converted => {
+    this.$http.post(`${this.BACKEND_BASEURL}/preview/${type}`, {data: data}, {}).then(converted => {
       this.previewSocket.emit('publishPreview', {'type': type, 'id': id, 'data': converted.data[0]});
       console.log('publishPreview', {'type': type, 'id': id, 'data': converted.data[0]});
     });
