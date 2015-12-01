@@ -9,6 +9,7 @@ export class MasterView {
   constructor(
     @Inject('$window') private $window,
     @Inject('$state') private $state,
+    @Inject('$scope') private $scope,
     @Inject('Auth') private Auth,
     @Inject('AlertService') private AlertService
     ) {
@@ -56,5 +57,11 @@ export class MasterView {
   goToMuseum() {
     var museumId = this.Auth._currentUser.museum_id;
     this.$state.go('cms.museums.detail.update', {museumId: museumId});
+  }
+
+  private searchText;
+  search() {
+    this.$state.go('cms.search.list');
+    this.$scope.$broadcast('mas.search', this.searchText);
   }
 }

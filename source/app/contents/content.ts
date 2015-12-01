@@ -9,10 +9,6 @@ export function loadContent(app) {
   var componentName = 'contents';
 
   app.directive(
-    makeSelector(CreateView),
-    makeDirective(CreateView));
-
-  app.directive(
     makeSelector(ContentButtonComponent),
     makeDirective(ContentButtonComponent));
 

@@ -1,10 +1,9 @@
 h1 {{ 'areas_title' | translate }}
-.area-list
-  .row
-    .col-md-4.top30(ng-repeat-start='area in ctrl.areas | orderBy : "name"')
-      mas-area-button(area='area')
-    .clearfix(ng-if='$index%3==2')
-    div(ng-repeat-end='')
-    .col-md-4.top30.text-center
-      mas-new-button(ref='cms.areas.create' text='Neu')
+.row
+  .col-md-4.top30(ng-repeat-start='area in ctrl.areas | orderBy : "name"')
+    mas-area-button(area='area')
+  .clearfix(ng-if='$index%3==2')
+  div(ng-repeat-end='')
+  .col-md-4.top30.text-center
+    mas-new-button(ref='cms.areas.create' text='Neu')
 

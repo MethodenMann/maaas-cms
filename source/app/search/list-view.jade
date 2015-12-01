@@ -1,0 +1,26 @@
+h1 {{ 'search_title' | translate }}
+
+input.form-control(name='searchText' ng-model='ctrl.searchText')
+
+
+h2 {{ 'areas_title' | translate }}
+.row
+  .col-md-4.top30(ng-repeat='area in ctrl.areas | orderBy : "name" | filter: ctrl.searchText')
+    mas-area-button(area='area')
+
+h2 {{ 'contents_title' | translate }}
+.row
+  .col-md-4.top30(ng-repeat='content in ctrl.contents | orderBy : "title" | filter: ctrl.searchText')
+    mas-content-button(content='content')
+
+
+h2 {{ 'challenges_title' | translate }}
+.row
+  .col-md-4.top30(ng-repeat='challenge in ctrl.challenges | orderBy : "name" | filter: ctrl.searchText')
+    mas-challenge-button(challenge='challenge')
+
+
+h2 {{ 'tours_title' | translate }}
+.row
+  .col-md-4.top30(ng-repeat='tour in ctrl.tours | orderBy : "name" | filter: ctrl.searchText')
+    mas-tour-button(tour='tour')

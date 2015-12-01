@@ -1,13 +1,12 @@
 @import "vars";
 
 
-.mas-content-btn {
+mas-content-button {
     text-align: center;
 
     &:hover #delete-button  {
       visibility: visible;
     }
-
 }
 
 .mas-challenge-order-entry {

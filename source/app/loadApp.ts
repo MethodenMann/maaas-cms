@@ -12,6 +12,7 @@ import {loadTour} from './tours/tour';
 import {loadTranslations} from './translation/translations';
 import {loadStatistic} from './statistics/statistics';
 import {loadPreview} from './preview/preview';
+import {loadSearch} from './search/search';
 
 
 export function loadApp(app) {
@@ -29,4 +30,5 @@ export function loadApp(app) {
   loadTranslations(app);
   loadStatistic(app);
   loadPreview(app);
+  loadSearch(app);
 }

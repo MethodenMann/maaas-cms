@@ -41,11 +41,11 @@
         ul#side-menu.nav
           li.sidebar-search
             .input-group.custom-search-form
-              //input.form-control(type='text', placeholder='Search...')
-              //span.input-group-btn
-              //  button.btn.btn-default(type='button')
-              //    i.fa.fa-search
-            // /input-group
+              input.form-control(type='text', placeholder='Schnellsuche...' ng-model="ctrl.searchText" ng-change='ctrl.search()')
+              span.input-group-btn
+                button.btn.btn-default(type='button')
+                  i.fa.fa-search
+
           li
              a(ng-click='ctrl.goToMuseum()' href=''  ui-sref-active-if='cms.museums')
               i.fa.fa-building

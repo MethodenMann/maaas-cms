@@ -80,6 +80,8 @@
         "./app/preview/preview.ts",
         "./app/registration/Registration.ts",
         "./app/registration/registration-component.ts",
+        "./app/search/list-view.ts",
+        "./app/search/search.ts",
         "./app/statistics/list-view.ts",
         "./app/statistics/statistics.ts",
         "./app/tours/abstract-detail-view.ts",
