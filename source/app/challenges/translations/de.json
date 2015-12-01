@@ -2,6 +2,9 @@
   "challenges_title": "Quiz",
   "challenge_details_title": "Quiz Details",
 
+  "challenge_delete_confirm" : "Sind Sie sicher, dass sie diesen Quiz löschen möchten?",
+  "challenge_delete" : "Quiz löschen",
+
   "challenges_details_name_label": "Name",
   "challenges_details_name_help": "Der Name des Quiz, dieser erscheint in der App nicht",
   "challenges_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
@@ -78,6 +81,7 @@
 
 
   "challenges_image-region_config_title": "Bildregion",
+  "challenges_image-region_name": "Bildregion",
   "challenges_image-region_question_label": "Frage",
   "challenges_image-region_question_help": "Welche Frage soll gestellt werden",
   "challenges_image-region_question_error": "Bitte gebne sie eine Frage ein",

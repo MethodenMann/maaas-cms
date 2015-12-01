@@ -1,5 +1,5 @@
 div
-  mas-delete-button(title-res='areas_delete' confirm-res='areas_delete_confirm' id='{{ctrl.content.id}}' type='contents')
+  mas-delete-button(title-res='content_delete' confirm-res='content_delete_confirm' id='{{ctrl.content.id}}' type='contents')
   a(style='text-align: center;' href ui-sref='cms.areas.detail.contents.update({contentId: ctrl.content.id})')
     image-load.mas-round-img(initial-media-id='{{ctrl.content.previewImageId}}' height='100')
   div.center-text {{ctrl.content.title}}

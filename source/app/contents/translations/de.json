@@ -1,5 +1,8 @@
 {
   "contents_title": "Inhalte",
+  "contents_delete_confirm" : "Sind Sie sicher, dass sie diesen Inhalt löschen möchten?",
+  "contents_delete" : "Inhalt löschen",
+
   "contents_details_title": "Inhalt Details",
   "contents_details_title_label": "Titel",
   "contents_details_title_help": "Der Titel der Area, dieser erscheint oben",

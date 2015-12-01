@@ -2,6 +2,9 @@
   "tours_title": "Rundgang",
   "tours_details_title": "Rundgang Details",
 
+  "tours__delete_confirm" : "Sind Sie sicher, dass sie diesen Rundgang löschen möchten?",
+  "tours__delete" : "Rundgang löschen",
+
   "tours_details_compose_title": "Rundgang Zusammenstellen",
   "tours_details_compose_areas": "Bereiche",
   "tours_details_compose_contents": "Inhalte",
