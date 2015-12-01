@@ -1,0 +1,6 @@
+div
+  mas-delete-button(title-res='areas_delete' confirm-res='areas_delete_confirm' id='{{ctrl.tour.id}}' type='tours')
+
+  a(href ui-sref='cms.tours.detail.update({tourId: ctrl.tour.id})')
+    image-load.mas-round-img(initial-media-id='{{ctrl.tour.imageId}}' height='100')
+    div.center-text {{ctrl.tour.name}}

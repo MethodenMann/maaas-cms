@@ -1,5 +1,15 @@
 @import "vars";
 
+
+mas-tour-button {
+  text-align: center;
+
+  &:hover #delete-button  {
+    visibility: visible;
+  }
+}
+
+
 .mas-tourcomposition-box {
   min-height:200px;
   border-radius: 4px;
