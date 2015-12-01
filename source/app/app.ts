@@ -29,7 +29,6 @@ import {makeDirective, makeSelector} from './utils/component';
 
 
 import {loadApp} from './loadApp';
-import {AuthUtil} from './common/auth-util-service';
 
 var cmsApp = angular.module('maaas', ['maaas.config', 'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data',
   'ui.router', 'Devise', 'color.picker', 'btford.socket-io', 'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable',

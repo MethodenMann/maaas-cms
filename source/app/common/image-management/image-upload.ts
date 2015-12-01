@@ -25,7 +25,7 @@ export class ImageUploadDirective {
     @Inject('$scope') private $scope,
     @Inject('$rootScope') private $rootScope,
     @Inject('Medium') private Medium,
-    @Inject('AuthUtil') private AuthUtil,
+    @Inject('Auth') private Auth,
     @Inject('Museum') private Museum
   ) {
 
@@ -65,7 +65,9 @@ export class ImageUploadDirective {
   }
 
   private static link($scope, element: JQuery, attributes) {
-    $scope.ctrl.AuthUtil.getMuseumId().then((museumId) => {
+    $scope.ctrl.Auth.currentUser().then((user) => {
+      var museumId = user.museum_id;
+      console.log('museum id', museumId);
       $scope.ctrl.Museum.find(museumId).then((museum) => {
         var museumFolder = museum.name.replace(/[^A-Z0-9]/ig, '').toLowerCase();
         var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {

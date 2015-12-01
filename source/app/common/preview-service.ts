@@ -6,16 +6,17 @@ export class PreviewService {
   private code:string;
 
   constructor(@Inject('PreviewSocket') protected previewSocket,
-              @Inject('AuthUtil') protected AuthUtil,
+              @Inject('Auth') protected Auth,
               @Inject('$http') protected $http,
               @Inject('BACKEND_BASEURL') protected BACKEND_BASEURL,
               @Inject('$timeout') protected $timeout) {
 
     this.code = this.generateRandomCode(4);
 
-    AuthUtil.getMuseumId().then((id) => {
-      this.previewSocket.emit('setMuseum', {'museumId': id});
-      this.previewSocket.emit('registerCode', {'museumId': id, 'code': this.code});
+    Auth.currentUser().then((user) => {
+      var museumId = user.museum_id;
+      this.previewSocket.emit('setMuseum', {'museumId': museumId});
+      this.previewSocket.emit('registerCode', {'museumId': museumId, 'code': this.code});
     });
   }
 

@@ -1,13 +1,12 @@
 import {Inject} from '../utils/di';
 import {IArea} from '../areas/iarea';
-import {AuthUtil} from '../common/auth-util-service';
 
 
 export class PreviewView {
   public static selector = 'mas-preview-view';
   public static templateUrl = './app/preview/preview-view.html';
 
-  private url = 'ionic-app/index.html';
+  private url = '';
   private frameWidth = 375;
   private frameHeight = 600;
   private areas: IArea[] = [];
@@ -19,13 +18,15 @@ export class PreviewView {
     @Inject('Area') private Area,
     @Inject('Challenge') private Challenge,
     @Inject('Content') private Content,
-    @Inject('AuthUtil') private AuthUtil
+    @Inject('Auth') private Auth
     ) {
 
     this.code = PreviewService.getCode();
 
-    AuthUtil.getMuseumId().then( (museumId) => {
+    Auth.currentUser().then((user) => {
+      var museumId = user.museum_id;
       parent.document['museumId'] = museumId;
+      this.url = 'ionic-app/index.html';
     });
 
 
