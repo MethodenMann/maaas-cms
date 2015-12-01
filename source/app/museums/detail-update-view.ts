@@ -6,10 +6,29 @@ export class DetailUpdateView extends DetailAbstract {
   public static selector = 'mas-museums-detail-update-view';
   public static templateUrl = 'app/museums/detail-view.html';
 
+  private invitations:Array<any>;
+  private emailToInvite:string;
 
   loadData() {
     this.Museum.find(this.$stateParams.museumId).then((data) => {
       this.museum = data;
+    });
+
+    this.Invitation.findAll().then((invitations) => {
+      this.invitations = invitations;
+    });
+  }
+
+  submitInvitation() {
+    for (let el of this.invitations) {
+      if (el.email === this.emailToInvite) {
+        return;
+      }
+    }
+    var payload:any = {};
+    payload.invitation = {email: this.emailToInvite};
+    this.Invitation.create(payload).then((invitation) => {
+      this.invitations.push(invitation);
     });
   }
 
@@ -19,6 +38,4 @@ export class DetailUpdateView extends DetailAbstract {
       this.$scope.$broadcast('mas.saveprogess', 'successfully');
     });
   }
-
-
 }

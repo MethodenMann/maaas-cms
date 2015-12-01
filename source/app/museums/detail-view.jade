@@ -1,3 +1,17 @@
+//- .alert.alert-warning(ng-show='ctrl.createMuseum') {{ 'museums_please_create_warning' | translate }}
+.panel.panel-green(ng-show='ctrl.createMuseum && ctrl.invitations.length > 0')
+  .panel-heading
+    | {{ 'museums_invitations' | translate }}
+  .panel-body
+    table.table.table-striped.top15
+      tr
+        th Email
+        th
+      tr.hover-row(ng-repeat='invitation in ctrl.invitations')
+        td {{invitation.museumName}}
+        td
+          button.btn(ng-click='ctrl.acceptInvitation(invitation)') Einladung Akzeptieren
+
 .panel.panel-green
   .panel-heading
     | {{ 'museums_details_title' | translate }}
@@ -13,11 +27,29 @@
       mas-form-group(field-name='address' localization-prefix='museums_details_address')
         textarea.form-control(type='text' rows='3' name='address' ng-model='ctrl.museum.address' required ng-minlength='5')
 
-      mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
-        mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
+      //- mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
+      //-   mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
 
       mas-form-group(field-name='kontaktioapikey' localization-prefix='museums_details_kontaktkey')
         input.form-control(ng-model='ctrl.museum.kontaktIoApiKey' name='name')
 
 
       mas-save-button(ng-click='ctrl.save()')
+
+.panel.panel-green(ng-hide='ctrl.createMuseum')
+  .panel-heading
+    | {{ 'museums_invitations' | translate }}
+  .panel-body
+    table.table.table-striped.top15
+      tr
+        th Email
+        th Akzeptiert
+      tr.hover-row(ng-repeat='invitation in ctrl.invitations')
+        td {{invitation.email}}
+        td
+          span.glyphicon(ng-class='{"glyphicon-ok": invitation.accepted}')
+
+    .form-group.input-group.col-md-4
+      input.form-control(ng-model='ctrl.emailToInvite' placeholder='Email...')
+      span.input-group-btn
+        button.btn(ng-click='ctrl.submitInvitation()') Einladen

@@ -9,8 +9,11 @@ export class LoginComponent {
   private feedback:string = '';
 
   constructor(@Inject('Auth') private Auth,
+              @Inject('DS') private DS,
               @Inject('$state') private $state,
               @Inject('$filter') private $filter) {
+    this.Auth.logout();
+    DS.clear();
   }
 
   login() {
@@ -19,7 +22,6 @@ export class LoginComponent {
       email: this.email,
       password: this.password
     };
-
 
     this.Auth.login(credentials).then((user) => {
       this.$state.go('cms.welcome');

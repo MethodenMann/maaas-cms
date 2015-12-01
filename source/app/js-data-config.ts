@@ -117,4 +117,10 @@ export function loadJsDataConfig(app) {
       name: 'tours'
     });
   });
+
+  app.factory('Invitation', function (DS) {
+    return DS.defineResource({
+      name: 'invitations'
+    });
+  });
 }
