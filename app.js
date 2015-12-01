@@ -79,14 +79,19 @@ io.on('connection', function(socket){
   });
 
   socket.on('publishPreview', function(data){
-    console.log('publishPreview', data.type, data.id, data.data);
+    console.log('publishPreview', data);
     var sockets = getSocketsOfMuseum(socketMuseumMapping[socket.id]);
     console.log("SEND TO: ", JSON.stringify(sockets));
     sockets.forEach(function(socketId) {
-      io.sockets.connected[socketId].emit('navigateTo', {'type': data.type, 'id': data.id});
-      io.sockets.connected[socketId].emit('publishPreviewData', data);
+      console.log('publish' +capitalizeFirstLetter(data.type)+'PreviewData', data.obj);
+      io.sockets.connected[socketId].emit('publish' +capitalizeFirstLetter(data.type)+'PreviewData', data.obj);
     });
 
   });
+
+
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 });
 
