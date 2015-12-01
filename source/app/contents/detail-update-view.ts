@@ -1,9 +1,9 @@
 import {Inject} from '../utils/di';
-import {AbstractDetailView} from './abstract-detail-view';
+import {DetailAbstract} from './detail-abstract';
 import {IMedium} from '../media/imedium';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 
-export class UpdateView extends AbstractDetailView {
+export class UpdateView extends DetailAbstract {
   constructorHook() {
     // TODO fetch media differently
     this.Medium.findAll().then((data) => {

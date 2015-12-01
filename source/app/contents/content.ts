@@ -1,7 +1,7 @@
 import {makeDirective, makeSelector} from '../utils/component';
 import {RouteUtil} from '../master/route-util';
-import {CreateView} from '../contents/create-view';
-import {UpdateView} from '../contents/update-view';
+import {CreateView} from '../contents/detail-create-view';
+import {UpdateView} from '../contents/detail-update-view';
 import {ListView} from './list-view';
 import {ContentButtonComponent} from './content-button-component';
 

@@ -1,9 +1,9 @@
 import {Inject} from '../utils/di';
-import {AbstractDetailView} from './abstract-detail-view';
+import {DetailAbstract} from './detail-abstract';
 import {IMedium} from '../media/imedium';
 import {IMediumUploadBroadcast} from '../common/image-management/imedium-upload-broadcast';
 
-export class CreateView extends AbstractDetailView {
+export class CreateView extends DetailAbstract {
   constructorHook() {
     this.content.areaId = this.$stateParams.areaId;
 

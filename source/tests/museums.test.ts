@@ -28,7 +28,7 @@ import 'angularjs-color-picker';
 
 
 import {makeDirective, makeSelector} from '../app/utils/component';
-import {DetailUpdateView} from "../app/museums/detail-update-view";
+import {DetailUpdateView} from '../app/museums/detail-update-view';
 import '../app/template-cache';
 
 
@@ -45,7 +45,7 @@ describe('Museums', () => {
   var MuseumServiceMock =  {
       find: () => {
         var deferred = _$q.defer();
-        deferred.resolve({ "name" : "nmsg", "description": "blabla"});
+        deferred.resolve({ 'name' : 'nmsg', 'description': 'blabla'});
         return deferred.promise;
       }
     };
@@ -75,7 +75,7 @@ describe('Museums', () => {
 
   it('generate the appropriate HTML...', () => {
     _$scope.museum = {
-      name: "nmsg"
+      name: 'nmsg'
     };
 
 

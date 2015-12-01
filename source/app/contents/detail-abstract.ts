@@ -5,9 +5,9 @@ import {IMedium} from '../media/imedium';
 import {FormView} from '../common/forms/form-view';
 import {IArea} from '../areas/iarea';
 
-export abstract class AbstractDetailView extends FormView {
+export abstract class DetailAbstract extends FormView {
   private static selector = 'mas-content-detail-view';
-  private static templateUrl = './app/contents/abstract-detail-view.html';
+  private static templateUrl = './app/contents/detail-view.html';
 
   protected content:IContent = <IContent>{};
   protected imageList:any[] = [];
