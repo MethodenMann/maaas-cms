@@ -9,6 +9,7 @@ export class ListView {
 
   constructor(@Inject('$location') private $location,
               @Inject('Area') private Area,
+              @Inject('$scope') private $scope,
               @Inject('Medium') private Medium) {
     // TODO load media differently
     Area.refreshAll();
@@ -18,4 +19,6 @@ export class ListView {
       });
     });
   }
+
+
 }

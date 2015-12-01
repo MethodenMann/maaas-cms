@@ -1,7 +1,7 @@
 h1 {{ 'challenges_title' | translate }}
 
 .row
-  .col-md-4.top30(ng-repeat-start='challenge in ctrl.challenges')
+  .col-md-4.top30(ng-repeat-start='challenge in ctrl.area.challenges')
     mas-challenge-button.mas-challenge-btn(challenge='challenge')
   .clearfix(ng-if='$index%3==2')
   div(ng-repeat-end='')

@@ -3,18 +3,22 @@ import {IArea} from './IArea';
 import {FormView} from '../common/forms/form-view';
 
 export abstract class DetailAbstract extends FormView {
+  protected area:IArea;
+
   constructor(@Inject('$scope') protected $scope,
               @Inject('$stateParams') protected $stateParams,
               @Inject('Area') protected Area,
               @Inject('$state') protected $state,
               @Inject('AlertService') protected AlertService,
               @Inject('$filter') protected $filter,
+              @Inject('$timeout') protected $timeout,
               @Inject('PreviewService') protected PreviewService) {
     super($scope);
     this.loadData();
+
+    this.regististerDebouncewWatch($timeout, 'ctrl.area', this.publishPreview);
   }
 
-  protected area:IArea;
 
   protected loadData():void {
   }
@@ -22,7 +26,7 @@ export abstract class DetailAbstract extends FormView {
   abstract saveHook():void;
 
 
-  protected publishPreview() {
+  private publishPreview() {
     this.PreviewService.publishPreview('area', this.area.id, this.area);
   }
 

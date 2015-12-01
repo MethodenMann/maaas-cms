@@ -1,3 +1,6 @@
 mas-area-button {
   text-align: center;
+  &:hover #delete-button  {
+    visibility: visible;
+  }
 }

@@ -5,9 +5,9 @@
     form(name='form' role='form' novalidate)
 
       mas-form-group(field-name='name' localization-prefix='areas_details_name')
-        input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength='2')
+          input.form-control(ng-model='ctrl.area.name' name='name' required ng-minlength='2')
 
-      mas-form-group(field-name='gotoText' localization-prefix='areas_details_gototext')
+      mas-form-group(field-name='gotoText' localization-prefix='areas_details_gototext' )
         input.form-control(name='gotoText' ng-model='ctrl.area.gotoText' required ng-minlength='5')
 
       mas-form-group(field-name='primaryColor' localization-prefix='areas_details_primarycolor')

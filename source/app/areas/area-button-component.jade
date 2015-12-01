@@ -1,3 +1,7 @@
-a(href ui-sref='cms.areas.detail.update({areaId: ctrl.area.id})')
-  image-load(public-id='{{ctrl.area.stickerImage.publicId}}' height='100')
-  div {{ctrl.area.name}}
+div
+  mas-delete-button(title-res='areas_delete' confirm-res='areas_delete_confirm' id='{{ctrl.area.id}}' type='areas')
+
+  a(href ui-sref='cms.areas.detail.update({areaId: ctrl.area.id})')
+    image-load(public-id='{{ctrl.area.stickerImage.publicId}}' height='100')
+    div {{ctrl.area.name}}
+

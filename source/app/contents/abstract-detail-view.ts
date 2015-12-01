@@ -20,8 +20,10 @@ export abstract class AbstractDetailView extends FormView {
               @Inject('Content') protected Content,
               @Inject('Medium') protected Medium,
               @Inject('Area') protected Area,
+              @Inject('PreviewService') protected PreviewService,
               @Inject('$stateParams') protected $stateParams,
               @Inject('$state') protected $state,
+              @Inject('$timeout') protected $timeout,
               @Inject('$q') protected $q) {
     super($scope);
     this.tinymceConfig = {
@@ -46,9 +48,16 @@ export abstract class AbstractDetailView extends FormView {
     });
 
     this.constructorHook();
+
+    this.regististerDebouncewWatch($timeout, 'ctrl.content', this.publishPreview);
   }
 
   protected constructorHook() {
+  }
+
+
+  private publishPreview() {
+    this.PreviewService.publishPreview('content', this.content.id, this.content);
   }
 
   protected getCloudinaryUrl(medium) {

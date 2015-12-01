@@ -7,6 +7,9 @@ export class AreaButtonComponent {
 
   private area: IArea;
 
+  constructor(@Inject('$scope') private $scope) {
+  }
+
   private static options = {
     bindToController: {
       area: '='

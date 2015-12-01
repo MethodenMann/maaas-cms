@@ -1,5 +1,13 @@
 @import "vars";
 
+
+#delete-button {
+  position: absolute;
+  margin-left: 30px;
+  visibility: hidden;
+}
+
+
 .mas-round-img {
   img{
     display: block;

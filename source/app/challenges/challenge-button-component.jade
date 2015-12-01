@@ -1,4 +1,8 @@
-a(href ui-sref='cms.areas.detail.challenges.update({challengeId: ctrl.challenge.id})')
-  img(style='width:100px' ng-src='img/challenges/{{ctrl.challenge.kind}}.png')
-  div {{ctrl.challenge.name}}
-  div ({{ 'challenges_'+ctrl.challenge.kind+'_name'| translate }})
+div
+  mas-delete-button(title-res='areas_delete' confirm-res='areas_delete_confirm' id='{{ctrl.challenge.id}}' type='challenges')
+
+  a(href ui-sref='cms.areas.detail.challenges.update({challengeId: ctrl.challenge.id})')
+    img(style='width:100px' ng-src='img/challenges/{{ctrl.challenge.kind}}.png')
+    div {{ctrl.challenge.name}}
+    div ({{ 'challenges_'+ctrl.challenge.kind+'_name'| translate }})
+

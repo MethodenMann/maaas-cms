@@ -26,7 +26,9 @@ export abstract class DetailAbstract extends FormView {
               @Inject('$state') protected $state,
               @Inject('Area') protected Area,
               @Inject('Challenge') protected Challenge,
-              @Inject('AlertService') protected AlertService) {
+              @Inject('$timeout') protected $timeout,
+              @Inject('AlertService') protected AlertService,
+              @Inject('PreviewService') protected PreviewService) {
     super($scope);
 
     this.Area.find(this.$stateParams.areaId).then((data) => {
@@ -34,6 +36,12 @@ export abstract class DetailAbstract extends FormView {
     });
     this.loadData();
     this.constructorHook();
+
+    this.regististerDebouncewWatch($timeout, 'ctrl.challenge', this.publishPreview);
+  }
+
+  private publishPreview() {
+    this.PreviewService.publishPreview('challenge', this.challenge.id, this.challenge);
   }
 
   protected kindChange() {

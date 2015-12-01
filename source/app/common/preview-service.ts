@@ -7,6 +7,8 @@ export class PreviewService {
 
   constructor(@Inject('PreviewSocket') protected previewSocket,
               @Inject('AuthUtil') protected AuthUtil,
+              @Inject('$http') protected $http,
+              @Inject('BACKEND_BASEURL') protected BACKEND_BASEURL,
               @Inject('$timeout') protected $timeout) {
 
     this.code = this.generateRandomCode(4);
@@ -18,7 +20,10 @@ export class PreviewService {
   }
 
   public publishPreview(type, id, data) {
-    this.previewSocket.emit('publishPreview', {'type': type, 'id': id, 'data': data});
+    this.$http.post(`${this.BACKEND_BASEURL}/preview/${type}`, {area: data}, {}).then(converted => {
+      this.previewSocket.emit('publishPreview', {'type': type, 'id': id, 'data': converted.data[0]});
+      console.log('publishPreview', {'type': type, 'id': id, 'data': converted.data[0]});
+    });
   }
 
   public getCode() {

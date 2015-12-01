@@ -12,6 +12,7 @@ export class ListView {
               @Inject('Area') private Area,
               @Inject('Challenge') private Challenge) {
 
+    Challenge.refreshAll();
     Challenge.findAll().then((data) => {
       Area.find(this.$stateParams.areaId).then((data) => {
         this.area = data;

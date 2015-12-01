@@ -3,6 +3,7 @@ import {RouteUtil} from '../master/route-util';
 import {CreateView} from '../contents/create-view';
 import {UpdateView} from '../contents/update-view';
 import {ListView} from './list-view';
+import {ContentButtonComponent} from './content-button-component';
 
 export function loadContent(app) {
   var componentName = 'contents';
@@ -10,6 +11,11 @@ export function loadContent(app) {
   app.directive(
     makeSelector(CreateView),
     makeDirective(CreateView));
+
+  app.directive(
+    makeSelector(ContentButtonComponent),
+    makeDirective(ContentButtonComponent));
+
 
   app.config(function ($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart(componentName);
