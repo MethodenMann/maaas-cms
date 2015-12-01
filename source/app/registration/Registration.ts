@@ -1,5 +1,5 @@
 import {makeDirective, makeSelector} from '../utils/component';
-import {RegistrationComponent} from './RegistrationComponent';
+import {RegistrationComponent} from './registration-component';
 
 export function loadRegistration(app) {
   app.directive(
