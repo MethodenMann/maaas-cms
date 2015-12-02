@@ -30,7 +30,7 @@ import {makeDirective, makeSelector} from './utils/component';
 
 import {loadApp} from './loadApp';
 
-var cmsApp = angular.module('maaas', ['maaas.config', 'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data',
+var cmsApp = angular.module('maaas', ['maaas.templates', 'maaas.config', 'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data',
   'ui.router', 'Devise', 'color.picker', 'btford.socket-io', 'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable',
   'chart.js', 'ngAnimate', 'ui.bootstrap'
 ]);

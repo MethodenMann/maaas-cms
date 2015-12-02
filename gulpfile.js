@@ -96,7 +96,11 @@ gulp.task('template-cache', function () {
     ])
     .pipe(templateCache('template-cache.js', {
       module: 'maaas.templates',
-      standalone: true
+      standalone: true,
+      transformUrl: function(url) {
+        console.log('TRANSFORMING URL!!!!!!!!!!!!!!!!!!!!!!!', url);
+        return '/' + url
+      }
     }))
     .pipe(size({title: 'Template Cache Size:'}))
     .pipe(gulp.dest(config.applicationDestPath));

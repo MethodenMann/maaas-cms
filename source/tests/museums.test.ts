@@ -1,9 +1,9 @@
+import '../app/template-cache';
 import '../app/app'
 
 
 // import {makeDirective, makeSelector} from '../app/utils/component';
 // import {DetailUpdateView} from '../app/museums/detail-update-view';
-import '../app/template-cache';
 
 describe('Museums', () => {
   console.log('Test Museums1');
@@ -29,18 +29,27 @@ describe('Museums', () => {
   //     makeDirective(DetailUpdateView));
 
 
-  beforeEach(angular.mock.module('maaas'));
+
+  // beforeEach();
 
   beforeEach(() => {
-    angular.mock.module(function ($provide) {
+    angular.mock.module('maaas')
+    // angular.mock.module('maaas.templates')
+
+    angular.mock.module(function ($provide, $translateProvider) {
       $provide.value('Museum', MuseumServiceMock);
+
+      $translateProvider.translations('de', {});
     });
 
 
-    angular.mock.inject(($compile, $rootScope, $q) => {
+    angular.mock.inject(($compile, $rootScope, $q, $templateCache) => {
       _$scope = $rootScope.$new();
       _$compile = $compile;
       _$q = $q;
+
+      console.log('MASTER VIEW ============================================');
+      console.log($templateCache.get('/app/master/master-view.html'));
     });
   });
 
@@ -48,7 +57,6 @@ describe('Museums', () => {
     _$scope.museum = {
       name: 'nmsg'
     };
-
 
     let element = angular.element(
       `<mas-museums-detail-update-view/>`);
