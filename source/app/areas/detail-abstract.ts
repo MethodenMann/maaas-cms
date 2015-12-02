@@ -27,7 +27,7 @@ export abstract class DetailAbstract extends FormView {
 
 
   private publishPreview() {
-    this.PreviewService.publishPreview('area', this.area.id, this.area);
+    this.PreviewService.publishPreview('area', this.area);
   }
 
   protected save() {

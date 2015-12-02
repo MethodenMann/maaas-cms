@@ -29,12 +29,16 @@ export class PreviewView {
       this.url = 'ionic-app/index.html';
     });
 
-
     this.$q.all([Content.findAll(), Challenge.findAll()]).then((values) => {
       this.Area.findAll().then((areas) => {
         this.areas = areas;
       });
     });
+  }
+
+
+  private areaPreview(area) {
+    this.PreviewService.publishPreview('area', area);
   }
 }
 

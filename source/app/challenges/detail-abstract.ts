@@ -41,7 +41,7 @@ export abstract class DetailAbstract extends FormView {
   }
 
   private publishPreview() {
-    this.PreviewService.publishPreview('challenge', this.challenge.id, this.challenge);
+    this.PreviewService.publishPreview('challenge', this.challenge);
   }
 
   protected kindChange() {

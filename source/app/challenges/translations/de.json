@@ -36,7 +36,7 @@
 
 
 
-  "challenges_details_assign_text_label" : "Text",
+  "challenges_assign_name" : "Zuordnen",
   "challenges_details_assign_text_help" : "Der Text steht auf der Linken Seite und muss dem Bild zugeordnet werden",
   "challenges_details_assign_text_error" : "Bitte geben Sie einen Text ein.",
   "challenges_details_assign_image_label" : "Bild",

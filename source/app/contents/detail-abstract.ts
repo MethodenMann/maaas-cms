@@ -57,7 +57,7 @@ export abstract class DetailAbstract extends FormView {
 
 
   private publishPreview() {
-    this.PreviewService.publishPreview('content', this.content.id, this.content);
+    this.PreviewService.publishPreview('content', this.content);
   }
 
   protected getCloudinaryUrl(medium) {
