@@ -1,7 +1,7 @@
 'use strict';
 var GulpConfig = (function() {
   function gulpConfig() {
-    this.appPath = 'ionic_app';
+    this.appPath = 'ionic-app';
     this.baseSrcPath = 'source';
     this.baseDestPath = 'out';
 
