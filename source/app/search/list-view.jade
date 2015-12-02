@@ -1,7 +1,11 @@
 h1 {{ 'search_title' | translate }}
 
-input.form-control(name='searchText' ng-model='ctrl.searchText')
 
+.input-group.custom-search-form(style='width: 400px')
+  input.form-control(type='text', placeholder='Schnellsuche...' ng-model="ctrl.searchText")
+  span.input-group-btn
+    button.btn.btn-default(type='button' ng-click='ctrl.search()')
+      i.fa.fa-search
 
 h2 {{ 'areas_title' | translate }}
 .row
