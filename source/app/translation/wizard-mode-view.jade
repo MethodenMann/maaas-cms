@@ -2,6 +2,8 @@ div(ng-show='ctrl.getTranslatable()')
   .row
     .col-md-2
       button.form-control(ng-click='ctrl.loadNextModel()') Next
+    .col-md-6(ng-show='ctrl.translationNotCompleteMessage')
+      | {{ctrl.translationNotCompleteMessage}}
   br
   mas-translation-panel(translatable='ctrl.getTranslatable()')
 
