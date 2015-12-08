@@ -53,6 +53,7 @@ export class ListView {
     }
 
     $q.all(promises).then(() => {
+      this.selectedMode = 'wizard';
       this.updateTranslationProgress();
     });
 

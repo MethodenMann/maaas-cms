@@ -16,6 +16,8 @@ export class WizardModeView {
 
   private currentTranslatable:Translatable;
 
+  private translationNotCompleteMessage:string = '';
+
   constructor(
     @Inject('$scope') private $scope
     ) {
@@ -29,6 +31,12 @@ export class WizardModeView {
   loadNextModel() {
     for (let translatable of this.translatables) {
       if (translatable.getTranslationProgress()[0] !== 1) {
+        if (this.currentTranslatable === translatable) {
+          this.translationNotCompleteMessage = 'Dieser Inhalt ist noch nicht vollständig übersetzt!';
+        } else {
+          this.translationNotCompleteMessage = '';
+          this.$scope.$broadcast('translation.changeCurrentLanguage', 'en');
+        }
         this.currentTranslatable = translatable;
         this.save();
         return;

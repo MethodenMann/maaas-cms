@@ -20,6 +20,9 @@ export class TranslationPanel {
   constructor(
     @Inject('$scope') protected $scope
   ) {
+    $scope.$on('translation.changeCurrentLanguage', (event, locale) => {
+      this.currentLanguage = locale;
+    });
   }
 
   getTranslatable() {
