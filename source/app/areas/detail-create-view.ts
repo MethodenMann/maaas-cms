@@ -7,6 +7,15 @@ export class DetailCreateView extends DetailAbstract {
   public static templateUrl = './app/areas/detail-view.html';
   private createMode = true; //needed in view
 
+
+  loadData() {
+       this.area = <IArea>{};
+      this.area.secondaryColor = '#ccc';
+      this.area.primaryColor = '#ccc';
+
+  }
+
+
   saveHook() {
     this.Area.create({area: this.area}).then((area:IArea) => {
       this.$scope.$broadcast('save', {id: area.id, type: 'Area'});

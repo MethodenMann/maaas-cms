@@ -14,8 +14,6 @@ export class PreviewService {
     this.code = this.generateRandomCode(4);
 
     Auth.currentUser().then((user) => {
-      console.log("CURRENT USER:", user)
-
       this.previewSocket.emit('setUserSession', {'userId': user.id});
       this.previewSocket.emit('registerCode', {'userId': user.id, 'code': this.code});
     });
