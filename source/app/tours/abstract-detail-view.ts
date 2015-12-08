@@ -66,12 +66,7 @@ export abstract class AbstractDetailView extends FormView {
     });
 
   }
-
-  protected addExpanded = false;
-  protected showAdd() {
-    this.addExpanded = !this.addExpanded;
-  }
-
+  
   private loadConfiguredAreas() {
     var configuredAreaIds:number[] = [];
 
