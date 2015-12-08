@@ -25,8 +25,13 @@
       mas-form-group(field-name='gotoImage' localization-prefix='areas_details_gotoimage')
           mas-image-form-wrapper(image-id='gotoImage' model='ctrl.area.gotoImageId' height='100' is-required='true')
 
+      mas-form-group(field-name='hintText' localization-prefix='areas_details_hinttext')
+        input.form-control(ng-model='ctrl.area.hintText' name='hintText' required ng-minlength='5')
+
+      mas-form-group(field-name='hintImage' localization-prefix='areas_details_hintimage')
+        mas-image-form-wrapper(image-id='hintImage' model='ctrl.area.hintImageId' height='100' is-required='true')
+
       mas-save-button(ng-click='ctrl.save()')
-      a.btn.btn-default(ng-click='ctrl.publishPreview()') Preview
 
       div.well.top30(ng-hide='ctrl.createMode')
         button.btn.mas-navigation-btn(ui-sref='cms.areas.detail.challenges.list')

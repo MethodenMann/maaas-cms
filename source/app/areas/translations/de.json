@@ -24,5 +24,14 @@
   "areas_details_save_successfullyalert": "Der Bereich wurde erfolgreich erstellt. Sie können nun Quiz und Inhalte dafür erfassen",
   "areas_details_gotoimage_label": "Gehe-Zu Bild",
   "areas_details_gotoimage_help": "Das Bild, welches neben dem Gehe-Zu-Text angezeigt wird. Sollte im SVG Format sein.",
-  "areas_details_gotoimage_error": "Bitte laden sie ein Bild hoch"
+  "areas_details_gotoimage_error": "Bitte laden sie ein Bild hoch",
+  "areas_details_hinttext_label": "Hinweis Text",
+  "areas_details_hinttext_help": "Dieser Hinweis gibt dem Besucher einen Tipp, wo genau der Beacon oder Sticker versteckt ist.",
+  "areas_details_hinttext_error": "Bitte geben Sie einen Hinwei Text an",
+  "areas_details_hintimage_label": "Hinweis Bild",
+  "areas_details_hintimage_help": "Ein Bild des Standort des Beacons",
+  "areas_details_hintimage_error": "Bitte laden Sie ein Hinweisbild hoch"
 }
+
+
+
