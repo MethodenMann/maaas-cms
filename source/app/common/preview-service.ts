@@ -14,9 +14,10 @@ export class PreviewService {
     this.code = this.generateRandomCode(4);
 
     Auth.currentUser().then((user) => {
-      var museumId = user.museum_id;
-      this.previewSocket.emit('setMuseum', {'museumId': museumId});
-      this.previewSocket.emit('registerCode', {'museumId': museumId, 'code': this.code});
+      console.log("CURRENT USER:", user)
+
+      this.previewSocket.emit('setUserSession', {'userId': user.id});
+      this.previewSocket.emit('registerCode', {'userId': user.id, 'code': this.code});
     });
   }
 

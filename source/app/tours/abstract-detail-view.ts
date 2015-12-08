@@ -66,7 +66,7 @@ export abstract class AbstractDetailView extends FormView {
     });
 
   }
-  
+
   private loadConfiguredAreas() {
     var configuredAreaIds:number[] = [];
 

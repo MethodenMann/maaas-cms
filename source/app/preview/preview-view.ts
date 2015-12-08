@@ -24,8 +24,7 @@ export class PreviewView {
     this.code = PreviewService.getCode();
 
     Auth.currentUser().then((user) => {
-      var museumId = user.museum_id;
-      parent.document['museumId'] = museumId;
+      parent.document['userId'] = user.id;
       this.url = 'ionic-app/index.html';
     });
 
