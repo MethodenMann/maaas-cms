@@ -1,30 +1,18 @@
 .preview-view
-  h1 App Vorschau
-  p(translate='{{ "preview_gotourl" }}' translate-values='{code: ctrl.code}')
-  .container-fluid.top15
-    .row
-      .col-md-5
-
-        div
-          div.center-block(ng-style='{ "width" : ctrl.frameWidth, "height" : ctrl.frameHeight }')
-            iframe.phoneframe(ng-src='{{ctrl.url}}' style='height:100%; width:100%')
-          div.center-block.sizebox(style='')
-            input(type='text' ng-model='ctrl.frameWidth')
-            span  x
-            input(type='text' ng-model='ctrl.frameHeight')
-      .col-md-3.linkbox.top30.center
-        h4 Schnellnavigation
-        div(ng-repeat='area in ctrl.areas')
-          a(ng-click='ctrl.areaPreview(area)') {{area.name}}
-           //ul
-           //  li Inhalte
-           //  ul
-           //   li(ng-repeat='content in area.contents' )
-           //     a(ng-click='ctrl.navigateToContent(area.id, content.id)') {{content.title}}
-           // ul
-           //   li Quiz
-           //   ul
-           //     li(ng-repeat='challenge in area.challenges' )
-           //       a(ng-click='ctrl.navigateToChallenge(area.id, challenge.id)' ) {{challenge.name}}
-
-
+  .preview-content
+    h1 App Vorschau
+    p(translate='{{ "preview_gotourl" }}' translate-values='{code: ctrl.code}')
+    .container-fluid.top15
+      .row
+        .col-md-5
+          div
+            div.center-block(ng-style='{ "width" : ctrl.frameWidth, "height" : ctrl.frameHeight }')
+              iframe.phoneframe(ng-src='{{ctrl.url}}' style='height:100%; width:100%')
+            div.center-block.sizebox(style='')
+              input(type='text' ng-model='ctrl.frameWidth')
+              span  x
+              input(type='text' ng-model='ctrl.frameHeight')
+        .col-md-3.linkbox.top30.center
+          h4 Schnellnavigation
+          div(ng-repeat='area in ctrl.areas')
+            a(ng-click='ctrl.areaPreview(area)') {{area.name}}
