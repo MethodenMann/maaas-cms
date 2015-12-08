@@ -16,7 +16,7 @@
 
       h3 {{ 'tours_details_compose_title' | translate }}
       .dropdown
-        button#addArea.btn.btn-default.dropdown-toggle(type='button' ng-disabled='ctrl.unconfiguredAreas.length == 0' data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
+        button#addArea.btn.btn-default.dropdown-toggle(type='button' ng-disabled='ctrl.unconfiguredAreas.length == 0' data-toggle='dropdown', aria-haspopup='true', aria-expanded='{{ctrl.addExpanded}}' ng-click='ctrl.showAdd();')
           | Area hinzufügen
           span.caret
         ul.dropdown-menu(aria-labelledby='addArea')

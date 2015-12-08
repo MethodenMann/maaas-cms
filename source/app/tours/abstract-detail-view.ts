@@ -67,6 +67,11 @@ export abstract class AbstractDetailView extends FormView {
 
   }
 
+  protected addExpanded = false;
+  protected showAdd() {
+    this.addExpanded = !this.addExpanded;
+  }
+
   private loadConfiguredAreas() {
     var configuredAreaIds:number[] = [];
 
@@ -84,16 +89,15 @@ export abstract class AbstractDetailView extends FormView {
       }
     });
 
-    this.Area.findAll().then((areas) => {
-      areas.forEach((area) => {
-        if (configuredAreaIds.indexOf(area.id) > -1) {
-          this.configuredAreas.push(area);
-        } else {
-          this.unconfiguredAreas.push(area);
-        }
-      });
-      this.selectFirstArea();
+    this.areas.forEach((area) => {
+      if (configuredAreaIds.indexOf(area.id) > -1) {
+        this.configuredAreas.push(area);
+      } else {
+        this.unconfiguredAreas.push(area);
+      }
     });
+
+    this.selectFirstArea();
   }
 
   addArea(idx) {
