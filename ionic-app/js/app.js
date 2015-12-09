@@ -253,7 +253,7 @@
 
 (function() {
   PaperChase.constant("maaasConfig", {
-    "backendUrl": "https://maaas-backend.herokuapp.com"
+    "backendUrl": "http://localhost:3000"
   });
 
 }).call(this);
@@ -869,6 +869,7 @@
 
   f = function($scope, AppData, DataStore, NavigationService, BeaconManager) {
     $scope.museums = [];
+    $scope.languages = ["de", "en", "it", "fr"];
     DataStore.awaitMuseumLoadCompletion().then(function() {
       $scope.museums = DataStore.getMuseums();
       return $scope.data.selectedMuseum = $scope.museums[1];
@@ -877,7 +878,7 @@
     return $scope.start = function() {
       if ($scope.data.selectedTour != null) {
         BeaconManager.setBeaconFilter("area", $scope.data.selectedTour.beacons);
-        DataStore.loadAreas($scope.data.selectedTour.id);
+        DataStore.loadAreas($scope.data.selectedTour.id, $scope.data.selectedLanguage);
         return NavigationService.navigateToHome();
       }
     };
@@ -2101,47 +2102,21 @@
 }).call(this);
 
 (function() {
-  var realBeaconListener;
+  var mockedBeaconListener;
 
-  realBeaconListener = function() {
-    var checkCordovaPlugin, createDelegate, monitoringCallbacks, rangingCallbacks;
-    checkCordovaPlugin = function() {
-      if ((typeof cordova === "undefined" || cordova === null) || (cordova.plugins == null) || (cordova.plugins.locationManager == null)) {
-        console.log("Cordova beacon plugin not loaded!");
-      }
-      if (cordova.plugins.locationManager.requestWhenInUseAuthorization) {
-        return cordova.plugins.locationManager.requestWhenInUseAuthorization();
-      }
-    };
-    createDelegate = function() {
-      var delegate;
-      delegate = new cordova.plugins.locationManager.Delegate();
-      delegate.didDetermineStateForRegion = function(data) {
-        var i, len, monitoringCallback, state;
-        state = "";
-        if (data.state === "CLRegionStateOutside") {
-          state = "OUT";
-        }
-        if (data.state === "CLRegionStateInside") {
-          state = "IN";
-        }
-        for (i = 0, len = monitoringCallbacks.length; i < len; i++) {
-          monitoringCallback = monitoringCallbacks[i];
-          monitoringCallback(data.region, state);
-        }
-      };
-      delegate.didStartMonitoringForRegion = function(data) {};
-      delegate.didRangeBeaconsInRegion = function(data) {
-        var i, len, rangingCallback;
-        for (i = 0, len = rangingCallbacks.length; i < len; i++) {
-          rangingCallback = rangingCallbacks[i];
-          rangingCallback(data.beacons);
-        }
-      };
-      return delegate;
-    };
+  mockedBeaconListener = function($interval, RandomBeaconData) {
+    var interval, monitoringCallbacks, rangingCallbacks;
     rangingCallbacks = [];
     monitoringCallbacks = [];
+    interval = function() {
+      var callback, i, len, results;
+      results = [];
+      for (i = 0, len = rangingCallbacks.length; i < len; i++) {
+        callback = rangingCallbacks[i];
+        results.push(callback(RandomBeaconData.getData()));
+      }
+      return results;
+    };
     return {
       registerForRanging: function(rangingCallback) {
         return rangingCallbacks.push(rangingCallback);
@@ -2150,44 +2125,13 @@
         return monitoringCallbacks.push(monitoringCallback);
       },
       startRanging: function(beacons) {
-        var beacon, e, error, i, k, len, region, uuidRegions, v;
-        checkCordovaPlugin();
-        cordova.plugins.locationManager.setDelegate(createDelegate());
-        try {
-          uuidRegions = {};
-          for (i = 0, len = beacons.length; i < len; i++) {
-            beacon = beacons[i];
-            if (uuidRegions[beacon.uuid] == null) {
-              region = new cordova.plugins.locationManager.BeaconRegion("RegionByUUID", beacon.uuid);
-              uuidRegions[beacon.uuid] = region;
-            }
-          }
-          for (k in uuidRegions) {
-            v = uuidRegions[k];
-            cordova.plugins.locationManager.startRangingBeaconsInRegion(v).fail(console.error).done();
-          }
-        } catch (error) {
-          e = error;
-          return alert(e);
-        }
-      },
-      startMonitoring: function(beacons) {
-        var beacon, e, error, i, len, regionFull;
-        try {
-          for (i = 0, len = beacons.length; i < len; i++) {
-            beacon = beacons[i];
-            regionFull = new cordova.plugins.locationManager.BeaconRegion("RegionFullID", beacon.uuid, beacon.major, beacon.minor);
-            cordova.plugins.locationManager.startMonitoringForRegion(regionFull).fail(console.error).done();
-          }
-        } catch (error) {
-          e = error;
-          return alert(e);
-        }
+        RandomBeaconData.initialize(beacons);
+        return $interval(interval, 50);
       }
     };
   };
 
-  PaperChase.service("BeaconListener", [realBeaconListener]);
+  PaperChase.service("BeaconListener", ["$interval", "RandomBeaconData", mockedBeaconListener]);
 
 }).call(this);
 
@@ -2332,8 +2276,8 @@
       }
       return results;
     };
-    loadAreas = function(id) {
-      return RestApi.getAreas(id).then(function(data) {
+    loadAreas = function(id, locale) {
+      return RestApi.getAreas(id, locale).then(function(data) {
         areas = loadIntoModel(data, Area);
         return areaLoadDeferred.resolve();
       });
@@ -2370,11 +2314,16 @@
       initialize: function() {
         return initialize();
       },
-      loadAreas: function(id) {
-        return loadAreas(id);
+      loadAreas: function(id, locale) {
+        return loadAreas(id, locale);
       },
       setAreaForPreview: function(data) {
         return areas = [data];
+      },
+      reloadImagesIndexForPreview: function() {
+        return RestApi.getImages().then(function(data) {
+          return images = data;
+        });
       },
       resolveAreaDeferred: function() {
         return areaLoadDeferred.resolve();
@@ -2640,10 +2589,12 @@
           area.key = "dummy";
           DataStore.setAreaForPreview(area);
           DataStore.resolveAreaDeferred();
-          return $state.go("app.quiz", {
-            "areaKey": area.key
-          }, {
-            reload: true
+          return DataStore.reloadImagesIndexForPreview().then(function() {
+            return $state.go("app.quiz", {
+              "areaKey": area.key
+            }, {
+              reload: true
+            });
           });
         });
       }
@@ -2837,13 +2788,16 @@
       getBeacons: function() {
         return beaconResource.query().$promise;
       },
-      getAreas: function(id) {
+      getAreas: function(id, locale) {
         if (id == null) {
           id = 0;
         }
+        if (locale == null) {
+          locale = "de";
+        }
         return areaResource.query({
           tour_id: id,
-          locale: "de"
+          locale: locale
         }).$promise;
       },
       getImages: function() {
