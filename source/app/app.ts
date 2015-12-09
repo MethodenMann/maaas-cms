@@ -24,6 +24,7 @@ import 'js-data-http';
 import 'js-data-angular';
 import 'devise';
 import 'angularjs-color-picker';
+import 'ngAnalytics';
 import 'maaas-config';
 import {makeDirective, makeSelector} from './utils/component';
 
@@ -32,7 +33,7 @@ import {loadApp} from './loadApp';
 
 var cmsApp = angular.module('maaas', ['maaas.config', 'ngResource', 'ngCookies', 'pascalprecht.translate', 'js-data',
   'ui.router', 'Devise', 'color.picker', 'btford.socket-io', 'ncy-angular-breadcrumb', 'ui.tinymce', 'ui.sortable',
-  'chart.js', 'ngAnimate', 'ui.bootstrap'
+  'chart.js', 'ngAnimate', 'ui.bootstrap', 'ngAnalytics'
 ]);
 
 cmsApp.config(function (DSProvider, DSHttpAdapterProvider, AuthProvider, BACKEND_BASEURL) {
@@ -101,6 +102,10 @@ cmsApp.run(function ($rootScope, Auth, $state) {
     }
   });
 });
+
+cmsApp.run(['ngAnalyticsService', function (ngAnalyticsService) {
+  ngAnalyticsService.setClientId('674398087076-8gg9f74d5j7gi2ga4fjdgcf35tbo2co7.apps.googleusercontent.com');
+}]);
 
 loadApp(cmsApp);
 

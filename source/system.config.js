@@ -34,6 +34,7 @@ System.config({
     'angular-animate': 'libs/angular-animate.min.js',
     'angular-bootstrap': 'libs/ui-bootstrap.min.js',
     'angular-bootstrap-tpls': 'libs/ui-bootstrap-tpls.min.js',
-    'angular-socket-io': 'libs/socket.js'
+    'angular-socket-io': 'libs/socket.js',
+    'ngAnalytics': 'libs/ng-analytics.min.js'
   }
 });
