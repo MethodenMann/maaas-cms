@@ -5,7 +5,7 @@ import {loadMaster} from './master/master';
 import {loadJsDataConfig} from './js-data-config';
 import {loadCommon} from './common/common';
 import {loadLogin} from './login/login';
-import {loadRegistration} from './registration/Registration';
+import {loadRegistration} from './registration/registration';
 import {loadContent} from './contents/content';
 import {loadMuseum} from './museums/museums';
 import {loadTour} from './tours/tour';
