@@ -253,7 +253,7 @@
 
 (function() {
   PaperChase.constant("maaasConfig", {
-    "backendUrl": "http://localhost:3000"
+    "backendUrl": "https://maaas-backend.herokuapp.com"
   });
 
 }).call(this);
@@ -293,6 +293,11 @@
       $scope.buttonFrontStyle = function() {
         return {
           "background-image": "url('" + currentArea.styles.stickerImageUrl + "')"
+        };
+      };
+      $scope.buttonBackStyle = function() {
+        return {
+          "background-image": "url('" + currentArea.styles.hintImageUrl + "')"
         };
       };
       return $scope.primaryColorStyle = function() {
@@ -2096,21 +2101,47 @@
 }).call(this);
 
 (function() {
-  var mockedBeaconListener;
+  var realBeaconListener;
 
-  mockedBeaconListener = function($interval, RandomBeaconData) {
-    var interval, monitoringCallbacks, rangingCallbacks;
+  realBeaconListener = function() {
+    var checkCordovaPlugin, createDelegate, monitoringCallbacks, rangingCallbacks;
+    checkCordovaPlugin = function() {
+      if ((typeof cordova === "undefined" || cordova === null) || (cordova.plugins == null) || (cordova.plugins.locationManager == null)) {
+        console.log("Cordova beacon plugin not loaded!");
+      }
+      if (cordova.plugins.locationManager.requestWhenInUseAuthorization) {
+        return cordova.plugins.locationManager.requestWhenInUseAuthorization();
+      }
+    };
+    createDelegate = function() {
+      var delegate;
+      delegate = new cordova.plugins.locationManager.Delegate();
+      delegate.didDetermineStateForRegion = function(data) {
+        var i, len, monitoringCallback, state;
+        state = "";
+        if (data.state === "CLRegionStateOutside") {
+          state = "OUT";
+        }
+        if (data.state === "CLRegionStateInside") {
+          state = "IN";
+        }
+        for (i = 0, len = monitoringCallbacks.length; i < len; i++) {
+          monitoringCallback = monitoringCallbacks[i];
+          monitoringCallback(data.region, state);
+        }
+      };
+      delegate.didStartMonitoringForRegion = function(data) {};
+      delegate.didRangeBeaconsInRegion = function(data) {
+        var i, len, rangingCallback;
+        for (i = 0, len = rangingCallbacks.length; i < len; i++) {
+          rangingCallback = rangingCallbacks[i];
+          rangingCallback(data.beacons);
+        }
+      };
+      return delegate;
+    };
     rangingCallbacks = [];
     monitoringCallbacks = [];
-    interval = function() {
-      var callback, i, len, results;
-      results = [];
-      for (i = 0, len = rangingCallbacks.length; i < len; i++) {
-        callback = rangingCallbacks[i];
-        results.push(callback(RandomBeaconData.getData()));
-      }
-      return results;
-    };
     return {
       registerForRanging: function(rangingCallback) {
         return rangingCallbacks.push(rangingCallback);
@@ -2119,13 +2150,44 @@
         return monitoringCallbacks.push(monitoringCallback);
       },
       startRanging: function(beacons) {
-        RandomBeaconData.initialize(beacons);
-        return $interval(interval, 50);
+        var beacon, e, error, i, k, len, region, uuidRegions, v;
+        checkCordovaPlugin();
+        cordova.plugins.locationManager.setDelegate(createDelegate());
+        try {
+          uuidRegions = {};
+          for (i = 0, len = beacons.length; i < len; i++) {
+            beacon = beacons[i];
+            if (uuidRegions[beacon.uuid] == null) {
+              region = new cordova.plugins.locationManager.BeaconRegion("RegionByUUID", beacon.uuid);
+              uuidRegions[beacon.uuid] = region;
+            }
+          }
+          for (k in uuidRegions) {
+            v = uuidRegions[k];
+            cordova.plugins.locationManager.startRangingBeaconsInRegion(v).fail(console.error).done();
+          }
+        } catch (error) {
+          e = error;
+          return alert(e);
+        }
+      },
+      startMonitoring: function(beacons) {
+        var beacon, e, error, i, len, regionFull;
+        try {
+          for (i = 0, len = beacons.length; i < len; i++) {
+            beacon = beacons[i];
+            regionFull = new cordova.plugins.locationManager.BeaconRegion("RegionFullID", beacon.uuid, beacon.major, beacon.minor);
+            cordova.plugins.locationManager.startMonitoringForRegion(regionFull).fail(console.error).done();
+          }
+        } catch (error) {
+          e = error;
+          return alert(e);
+        }
       }
     };
   };
 
-  PaperChase.service("BeaconListener", ["$interval", "RandomBeaconData", mockedBeaconListener]);
+  PaperChase.service("BeaconListener", [realBeaconListener]);
 
 }).call(this);
 
@@ -2529,7 +2591,7 @@
             text: '<b>Bestätigen</b>',
             type: 'button-positive',
             onTap: function(e) {
-              return PreviewSocket.emit("setMuseum", {
+              return PreviewSocket.emit("setUserSession", {
                 "code": e.view.document.getElementById("code").value
               });
             }
@@ -2539,9 +2601,10 @@
     };
     return {
       init: function() {
-        if (parent && parent.document && parent.document.museumId) {
-          PreviewSocket.emit("setMuseum", {
-            "museumId": parent.document.museumId
+        if (parent && parent.document && parent.document.userId) {
+          console.log("set usersession", parent.document.userId);
+          PreviewSocket.emit("setUserSession", {
+            "userId": parent.document.userId
           });
         } else {
           openCodeDialog();
