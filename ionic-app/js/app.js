@@ -59,6 +59,7 @@
         }
       }
       DataStore.initialize();
+      DataStore.loadAreas(27, "de");
       DataStore.awaitLoadCompletion().then(function() {
         var areaBeacons, beacon, i, len, questBeacons, ref;
         areaBeacons = [];
@@ -1603,7 +1604,7 @@
         };
         $scope.getBgImageFor = function(index) {
           var url;
-          url = DataStore.getImages()[$scope.listB.values[index].mediumId];
+          url = DataStore.getImages()[$scope.listB.values[index].imageId];
           return {
             "background-image": "url('" + url + "')"
           };
@@ -1719,7 +1720,7 @@
         });
         $scope.openModal = function(item) {
           var url;
-          url = DataStore.getImages()[item.mediumId];
+          url = DataStore.getImages()[item.imageId];
           $scope.imageSrc = url;
           $scope.caption_long = item.captionLong;
           return $scope.modal.show();
@@ -1732,7 +1733,8 @@
         };
         return $scope.getBgImageFor = function(item) {
           var url;
-          url = DataStore.getImages()[item.mediumId];
+          url = DataStore.getImages()[item.imageId];
+          console.log(item);
           return {
             "background-image": "url('" + url + "')"
           };
