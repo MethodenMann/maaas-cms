@@ -16,5 +16,10 @@
   "museums_details_kontaktkey_label": "Kontakt.io API-Key",
   "museums_details_kontaktkey_help": "Wird für die Beacon synchronisation verwerden. Kann von https://panel.kontakt.io kopiert werden",
   "museums_please_create_warning": "Museum erstellen",
-  "museums_invitations": "Einladungen"
+  "museums_invitations": "Einladungen",
+  "museums_administration" : "Administration",
+  "museums_details_analyticstrackingkey_label" : "Google Analytics Tracking Key",
+  "museums_details_analyticstrackingkey_help" : "Wir benötigt um Statistiken in der App zu sammeln.",
+  "museums_details_analyticsviewkey_labely" : "Google Analytics Ansichts Key",
+  "museums_details_analyticsviewkey_help" : "Wird für das Anzeigen der Statistiken benötigt."
 }

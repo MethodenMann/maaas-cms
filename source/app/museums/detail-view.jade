@@ -30,11 +30,26 @@
       //- mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
       //-   mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
 
+      mas-save-button(ng-click='ctrl.save()')
+
+
+.panel.panel-green(ng-hide='ctrl.createMuseum')
+  .panel-heading
+    | {{ 'museums_administration' | translate }}
+  .panel-body
+    form(name='form' role='form' novalidate)
       mas-form-group(field-name='kontaktioapikey' localization-prefix='museums_details_kontaktkey')
-        input.form-control(ng-model='ctrl.museum.kontaktIoApiKey' name='name')
+        input.form-control(ng-model='ctrl.museum.kontaktIoApiKey' name='kontaktioapikey')
+
+      mas-form-group(field-name='googleAnalyticsTrackingKey' localization-prefix='museums_details_analyticstrackingkey')
+        input.form-control(ng-model='ctrl.museum.googleAnalyticsTrackingKey' name='googleAnalyticsTrackingKey')
+
+      mas-form-group(field-name='googleAnalyticsViewKey' localization-prefix='museums_details_analyticsviewkey')
+        input.form-control(ng-model='ctrl.museum.googleAnalyticsViewKey' name='googleAnalyticsTrackingKey')
 
 
       mas-save-button(ng-click='ctrl.save()')
+
 
 .panel.panel-green(ng-hide='ctrl.createMuseum')
   .panel-heading
