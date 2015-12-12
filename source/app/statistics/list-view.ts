@@ -1,28 +1,70 @@
 import {Inject} from '../utils/di';
+import {IMuseum} from '../museums/imuseum';
 
 export class ListView {
   private static selector = 'mas-statistics-list-view';
   private static templateUrl = './app/statistics/list-view.html';
 
 
-  dlabels = ['Fertig gelöst', 'Unfertig'];
-  ddata = [420, 280];
 
-  blabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  bseries = ['Familien', 'Schulklassen'];
-
-  bdata = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-
-  //http://jtblin.github.io/angular-chart.js/
+  constructor(@Inject('ngAnalyticsService') private ngAnalyticsService,
+              @Inject('Auth') private Auth,
+              @Inject('Museum') private Museum,
+              @Inject('$q') private $q
+  ) {
+    this.generateCharts();
 
 
-  slabels = ['Wolf', 'Bär', 'Frosch', 'Frisch', 'Bock', 'Dino', 'Ameise'];
+  }
 
-  sdata = [
-    [65, 59, 90, 81, 56, 55, 40],
-    [28, 48, 40, 19, 96, 27, 100]
-  ];
+
+
+  private charts = [];
+
+  private generateCharts() {
+    this.loadMuseum().then((museum: IMuseum) => {
+      var chartTypes = ['Area', 'Quiz', 'Content'];
+      if (museum.googleAnalyticsViewKey) {
+        chartTypes.forEach((chartType) => {
+          this.charts.push({type: chartType.toLowerCase(), details: this.getViewChartDetails(chartType, museum.googleAnalyticsViewKey)});
+        });
+      }
+    });
+  }
+
+
+  public getViewChartDetails(type:string, viewkey: string) {
+    return {
+      reportType: 'ga',
+      query: {
+        metrics: 'ga:screenviews,ga:uniqueScreenviews,ga:timeOnScreen,ga:avgScreenviewDuration',
+        dimensions: 'ga:screenName',
+        'start-date': '30daysAgo',
+        'end-date': 'yesterday',
+        'filters':  `ga:screenName=~^${type}.*`,
+        'ids':`ga:${viewkey}`
+      },
+      chart: {
+        container: `chart-container-${type}`,
+        type: 'TABLE',
+        options: {
+          width: '100%'
+        }
+      }
+    };
+  }
+
+
+  private loadMuseum() {
+    var deferred = this.$q.defer();
+    this.Auth.currentUser().then((user) => {
+      console.log(user);
+      var museumId = user.museum_id;
+      this.Museum.find(museumId).then((museum) => {
+        deferred.resolve(museum);
+      });
+    });
+    return deferred.promise;
+  }
+
 }
