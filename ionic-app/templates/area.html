@@ -26,7 +26,7 @@
           <div class="pap-sticker-container">
             <div ng-click="toggleSticker()" ng-class="{'pap-magnified': searchingForSticker}" class="pap-sticker">
               <div ng-style="::buttonFrontStyle()" ng-class="solvedClass" class="pap-front"></div>
-              <div class="pap-back">
+              <div ng-style="::buttonBackStyle()" class="pap-back">
                 <div class="pap-sonar"></div>
                 <div ng-class="questFoundClass" class="pap-loader-circle"></div>
               </div>

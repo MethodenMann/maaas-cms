@@ -14,6 +14,12 @@
           <select ng-options="tour.name for tour in data.selectedMuseum.tours" ng-model="data.selectedTour"></select>
         </label>
       </div>
+      <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">Sprache</div>
+          <select ng-options="language for language in languages" ng-model="data.selectedLanguage"></select>
+        </label>
+      </div>
       <button ng-click="start()" class="button button-full button-positive">Rundgang Starten</button>
     </header>
   </ion-content>

@@ -3,7 +3,7 @@
   <div class="pap-quiz-order-question">{{question}}</div>
   <div>
     <ul ui-sortable="options" ng-model="list">
-      <li ng-repeat="item in list" ng-click="openModal(item)" ng-class="{'pap-wrong-answer' : getCorrectAnswerIndicator($index)}"><span>{{ item.caption_short }}</span><i class="ion-navicon"></i>
+      <li ng-repeat="item in list" ng-click="openModal(item)" ng-class="{'pap-wrong-answer' : getCorrectAnswerIndicator($index)}"><span>{{ item.captionShort }}</span><i class="ion-navicon"></i>
         <div ng-style="::getBgImageFor(item)" class="pap-order-quiz-image"></div>
       </li>
     </ul>

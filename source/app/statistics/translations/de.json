@@ -1,3 +1,6 @@
 {
- "Test": "jaja"
+ "statistics_nokey": "Bitte hinterlegen Sie in den Museumseinstellungen die Ansichts Id",
+ "chart_title_area": "Bereich Aufrufstatistiken",
+ "chart_title_content": "Inhalte Aufrufstatistiken",
+ "chart_title_quiz": "Quiz Aufrufstatistiken"
 }
