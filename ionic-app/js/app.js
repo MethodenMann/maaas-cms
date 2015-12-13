@@ -7,9 +7,9 @@
 
   window.PaperChaseBeaconSimulator = angular.module("PaperChaseBeaconSimulator", []);
 
-  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase", "btford.socket-io"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation, PreviewService) {
+  starter = angular.module("starter", ["ionic", "ngCordova", "ui.sortable", "PaperChase", "btford.socket-io"]).run(function($ionicPlatform, $cordovaSplashscreen, $state, $ionicPopup, BeaconManager, Beacon, RestApi, DataStore, AppData, NavigationService, StickerbookNavigation, PreviewService, Analytics) {
     $ionicPlatform.ready(function() {
-      var alertPopUp, areaKey, areaKeys, i, len, results;
+      var alertPopUp, areaKey, areaKeys, _i, _len, _results;
       if ((typeof cordova === "undefined" || cordova === null) && (typeof io !== "undefined" && io !== null)) {
         PreviewService.init();
       }
@@ -59,14 +59,13 @@
         }
       }
       DataStore.initialize();
-      DataStore.loadAreas(27, "de");
       DataStore.awaitLoadCompletion().then(function() {
-        var areaBeacons, beacon, i, len, questBeacons, ref;
+        var areaBeacons, beacon, questBeacons, _i, _len, _ref;
         areaBeacons = [];
         questBeacons = [];
-        ref = DataStore.getBeacons();
-        for (i = 0, len = ref.length; i < len; i++) {
-          beacon = ref[i];
+        _ref = DataStore.getBeacons();
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          beacon = _ref[_i];
           if (beacon.kind === "area_beacon") {
             areaBeacons.push(beacon);
           } else {
@@ -78,15 +77,15 @@
         BeaconManager.start();
         try {
           return $cordovaSplashscreen.hide();
-        } catch (undefined) {}
+        } catch (_error) {}
       });
       areaKeys = [];
-      results = [];
-      for (i = 0, len = areaKeys.length; i < len; i++) {
-        areaKey = areaKeys[i];
-        results.push(AppData.saveQuestCompletion(areaKey));
+      _results = [];
+      for (_i = 0, _len = areaKeys.length; _i < _len; _i++) {
+        areaKey = areaKeys[_i];
+        _results.push(AppData.saveQuestCompletion(areaKey));
       }
-      return results;
+      return _results;
     });
     $ionicPlatform.registerBackButtonAction((function(event) {
       var confirmPopup;
@@ -223,7 +222,6 @@
 
   starter.controller("AppCtrl", function($scope, $rootScope, NavigationService, RandomBeaconData, DataStore, $ionicModal, DevMode, BeaconManager) {
     $scope.DevMode = DevMode;
-    DevMode.switchDevModeOn();
     $ionicModal.fromTemplateUrl("templates/beacon-simulator-modal.html", {
       scope: $scope
     }).then(function(modal) {
@@ -254,7 +252,7 @@
 
 (function() {
   PaperChase.constant("maaasConfig", {
-    "backendUrl": "https://maaas-backend.herokuapp.com"
+    "backendUrl": "http://localhost:3000"
   });
 
 }).call(this);
@@ -262,7 +260,7 @@
 (function() {
   var f;
 
-  f = function($scope, $timeout, $stateParams, $ionicPopup, NavigationService, DataStore, BeaconManager, Dictionary, AppData, DevMode) {
+  f = function($scope, $timeout, $stateParams, $ionicPopup, NavigationService, DataStore, BeaconManager, Dictionary, AppData, DevMode, Analytics) {
     var accuracyToOwnProximity, activateSearchForSticker, areaCtrl, collectedImmediates, deactivateSearchForSticker, questSolved;
     $scope.DevMode = DevMode;
     questSolved = false;
@@ -278,8 +276,9 @@
       $scope.searchingForSticker = false;
       if (AppData.isQuestCompleted($scope.areaKey)) {
         questSolved = true;
-        return $scope.solvedClass = "pap-sticker-solved";
+        $scope.solvedClass = "pap-sticker-solved";
       }
+      return Analytics.trackView('Area:' + $scope.areaKey);
     };
     areaCtrl();
     DataStore.awaitLoadCompletion().then(function() {
@@ -385,7 +384,7 @@
     };
   };
 
-  PaperChase.controller("AreaCtrl", ["$scope", "$timeout", "$stateParams", "$ionicPopup", "NavigationService", "DataStore", "BeaconManager", "Dictionary", "AppData", "DevMode", f]);
+  PaperChase.controller("AreaCtrl", ["$scope", "$timeout", "$stateParams", "$ionicPopup", "NavigationService", "DataStore", "BeaconManager", "Dictionary", "AppData", "DevMode", "Analytics", f]);
 
 }).call(this);
 
@@ -425,7 +424,7 @@
 (function() {
   var f;
 
-  f = function($scope, $location, $stateParams, $ionicModal, $sce, DataStore, NavigationService) {
+  f = function($scope, $location, $stateParams, $ionicModal, $sce, DataStore, NavigationService, Analytics) {
     var areaKey, contentId;
     if (screen.unlockOrientation != null) {
       screen.unlockOrientation();
@@ -435,7 +434,8 @@
     $scope.contentClass = "pap-content-" + areaKey;
     DataStore.awaitLoadCompletion().then(function() {
       $scope.content = DataStore.getContent(areaKey, contentId);
-      return $scope.html = $sce.trustAsHtml($scope.content.data);
+      $scope.html = $sce.trustAsHtml($scope.content.data);
+      return Analytics.trackView('Content:' + $scope.title);
     });
     $scope.navigateToArea = function() {
       return NavigationService.navigateToArea(areaKey, "back");
@@ -466,7 +466,7 @@
     });
   };
 
-  PaperChase.controller("ContentCtrl", ["$scope", "$location", "$stateParams", "$ionicModal", "$sce", "DataStore", "NavigationService", f]);
+  PaperChase.controller("ContentCtrl", ["$scope", "$location", "$stateParams", "$ionicModal", "$sce", "DataStore", "NavigationService", "Analytics", f]);
 
 }).call(this);
 
@@ -509,7 +509,8 @@
 (function() {
   var f;
 
-  f = function($scope, $ionicModal, DataStore, AppData, NavigationService, Dictionary, DevMode) {
+  f = function($scope, $ionicModal, DataStore, AppData, NavigationService, Dictionary, TourSelection, $ionicPopup, DevMode) {
+    var checkIfTourSelected;
     $scope.nearestArea = void 0;
     $scope.DevMode = DevMode;
     $ionicModal.fromTemplateUrl("templates/beacon-simulator-modal.html", {
@@ -525,7 +526,7 @@
       return NavigationService.navigateTo('app/quicknavigation');
     };
     $scope.navigateToTourSelection = function() {
-      return NavigationService.navigateToTourSelection();
+      return NavigationService.navigateTo('app/tourselection');
     };
     $scope.navigateToStickerbook = function() {
       return NavigationService.navigateToStickerbook();
@@ -542,12 +543,48 @@
     $scope.navigateToArea = function(areaKey) {
       return NavigationService.navigateToArea(areaKey);
     };
-    return $scope.resetScore = function() {
+    $scope.cancelTour = function() {
+      var confirmPopUp;
+      confirmPopUp = $ionicPopup.confirm({
+        title: 'Rundgang abbrechen',
+        template: 'Bist du sicher? Du wirst sämmtliche gesammelten Stickers verlieren.',
+        okText: 'Ja',
+        okType: 'button-energized',
+        cancelText: 'Abbrechen'
+      });
+      return confirmPopUp.then(function(res) {
+        if (res) {
+          AppData.reset();
+          return NavigationService.navigateTo('app/tourselection');
+        }
+      });
+    };
+    $scope.resetScore = function() {
       return AppData.reset();
     };
+    checkIfTourSelected = function() {
+      var currentTour;
+      currentTour = AppData.getCurrentTour();
+      if (!TourSelection.isTourSelected()) {
+        console.log("currentTour", JSON.stringify(currentTour));
+        if (!currentTour || !currentTour.museumId || !currentTour.tourId) {
+          return $scope.navigateToTourSelection();
+        } else {
+          return DataStore.awaitMuseumLoadCompletion().then(function() {
+            $scope.museumName = DataStore.getMuseumById(currentTour.museumId).name;
+            $scope.tourName = DataStore.getTourById(currentTour.museumId, currentTour.tourId).name;
+            return TourSelection.selectTour(currentTour.museumId, currentTour.tourId, currentTour.language);
+          });
+        }
+      } else {
+        $scope.museumName = TourSelection.getSelectedMuseumName();
+        return $scope.tourName = TourSelection.getSelectedTourName();
+      }
+    };
+    return checkIfTourSelected();
   };
 
-  PaperChase.controller("HomeCtrl", ["$scope", "$ionicModal", "DataStore", "AppData", "NavigationService", "Dictionary", "DevMode", f]);
+  PaperChase.controller("HomeCtrl", ["$scope", "$ionicModal", "DataStore", "AppData", "NavigationService", "Dictionary", "TourSelection", "$ionicPopup", "DevMode", f]);
 
 }).call(this);
 
@@ -632,7 +669,8 @@
           area = DataStore.getAreaByKey(areaKey);
           directiveConfig = kindToDirectiveMapping[area.challenge.kind];
           directiveConfig.prepare($scope, $element, area);
-          return $compile($element)($scope);
+          $compile($element)($scope);
+          return Analytics.trackView('Quiz:' + area.challenge.name);
         });
       }
     };
@@ -868,7 +906,7 @@
 (function() {
   var f;
 
-  f = function($scope, AppData, DataStore, NavigationService, BeaconManager) {
+  f = function($scope, AppData, DataStore, NavigationService, TourSelection) {
     $scope.museums = [];
     $scope.languages = ["de", "en", "it", "fr"];
     DataStore.awaitMuseumLoadCompletion().then(function() {
@@ -878,14 +916,13 @@
     $scope.data = {};
     return $scope.start = function() {
       if ($scope.data.selectedTour != null) {
-        BeaconManager.setBeaconFilter("area", $scope.data.selectedTour.beacons);
-        DataStore.loadAreas($scope.data.selectedTour.id, $scope.data.selectedLanguage);
+        TourSelection.selectTour($scope.data.selectedMuseum.id, $scope.data.selectedTour.id, $scope.data.selectedLanguage);
         return NavigationService.navigateToHome();
       }
     };
   };
 
-  PaperChase.controller("TourSelectionCtrl", ["$scope", "AppData", "DataStore", "NavigationService", "BeaconManager", f]);
+  PaperChase.controller("TourSelectionCtrl", ["$scope", "AppData", "DataStore", "NavigationService", "TourSelection", f]);
 
 }).call(this);
 
@@ -910,8 +947,8 @@
           }
         };
         $scope.getGotoImageSrc = function() {
-          var ref, ref1;
-          return (ref = $scope.areaToNavigate) != null ? (ref1 = ref.styles) != null ? ref1.gotoImageUrl : void 0 : void 0;
+          var _ref, _ref1;
+          return (_ref = $scope.areaToNavigate) != null ? (_ref1 = _ref.styles) != null ? _ref1.gotoImageUrl : void 0 : void 0;
         };
         $scope.$on('areaBeaconUpdate', function(event, beaconDatas) {
           return DataStore.awaitLoadCompletion().then(function() {
@@ -1031,10 +1068,10 @@
         beaconFilter = BeaconManager.getBeaconFilter();
         container = element.find("div");
         return RandomBeaconData.getBeacons().then(function(beacons) {
-          var beacon, clientPosition, draggable, i, len, x, y;
+          var beacon, clientPosition, draggable, x, y, _i, _len;
           beacons = RandomBeaconData.getSeBeacons();
-          for (i = 0, len = beacons.length; i < len; i++) {
-            beacon = beacons[i];
+          for (_i = 0, _len = beacons.length; _i < _len; _i++) {
+            beacon = beacons[_i];
             if (beaconFilter["area"].find(function(b) {
               return b.id === beacon.id;
             })) {
@@ -1042,8 +1079,8 @@
               x = beacon.position.x * beaconLocationScaling;
               y = beacon.position.y * beaconLocationScaling;
               draggable.css({
-                left: x + "px",
-                top: y + "px",
+                left: "" + x + "px",
+                top: "" + y + "px",
                 position: "absolute"
               });
               draggable.html(beacon.area.title);
@@ -1056,8 +1093,8 @@
           x = clientPosition.x * beaconLocationScaling;
           y = clientPosition.y * beaconLocationScaling;
           draggable.css({
-            left: x + "px",
-            top: y + "px",
+            left: "" + x + "px",
+            top: "" + y + "px",
             position: "absolute"
           });
           draggable = new Draggabilly(draggable[0], {
@@ -1080,9 +1117,9 @@
   var BoundingBox, ctrl, draggable, draggablesContainer;
 
   BoundingBox = (function() {
-    function BoundingBox(id1, element) {
+    function BoundingBox(id, element) {
       var el;
-      this.id = id1;
+      this.id = id;
       el = element[0];
       this.top = el.offsetTop;
       this.right = el.offsetLeft + el.offsetWidth;
@@ -1098,8 +1135,8 @@
     }
 
     BoundingBox.prototype.liesWithin = function(coordinates) {
-      var ref, ref1;
-      if ((this.left < (ref = coordinates.x) && ref < this.right) && (this.top < (ref1 = coordinates.y) && ref1 < this.bottom)) {
+      var _ref, _ref1;
+      if ((this.left < (_ref = coordinates.x) && _ref < this.right) && (this.top < (_ref1 = coordinates.y) && _ref1 < this.bottom)) {
         return true;
       }
       return false;
@@ -1123,18 +1160,18 @@
       return boundingBoxes.push(boundingBox);
     };
     this.entryForCoordinates = function(coordinates) {
-      var boundingBox, i, len;
-      for (i = 0, len = boundingBoxes.length; i < len; i++) {
-        boundingBox = boundingBoxes[i];
+      var boundingBox, _i, _len;
+      for (_i = 0, _len = boundingBoxes.length; _i < _len; _i++) {
+        boundingBox = boundingBoxes[_i];
         if (boundingBox.liesWithin(coordinates)) {
           return boundingBox;
         }
       }
     };
     this.getBoundingBoxById = function(id) {
-      var boundingBox, i, len;
-      for (i = 0, len = boundingBoxes.length; i < len; i++) {
-        boundingBox = boundingBoxes[i];
+      var boundingBox, _i, _len;
+      for (_i = 0, _len = boundingBoxes.length; _i < _len; _i++) {
+        boundingBox = boundingBoxes[_i];
         if (boundingBox.id === id) {
           return boundingBox;
         }
@@ -1278,7 +1315,7 @@
 (function() {
   var f;
 
-  f = function($rootScope) {
+  f = function($rootScope, $timeout) {
     return {
       restrict: 'E',
       template: "<div class='pap-load-overlay' ng-class='hideClass' />",
@@ -1286,16 +1323,20 @@
       link: function($scope) {
         $scope.hideClass = "pap-load-overlay-show";
         $rootScope.$on("$ionicView.enter", function() {
-          return $scope.hideClass = "pap-load-overlay-hide";
+          return $timeout((function() {
+            $scope.hideClass = 'pap-load-overlay-hide';
+          }), 100);
         });
         return $scope.$on("$ionicView.enter", function() {
-          return $scope.hideClass = "pap-load-overlay-hide";
+          return $timeout((function() {
+            $scope.hideClass = 'pap-load-overlay-hide';
+          }), 100);
         });
       }
     };
   };
 
-  PaperChase.directive("overlay", ["$rootScope", f]);
+  PaperChase.directive("overlay", ["$rootScope", "$timeout", f]);
 
 }).call(this);
 
@@ -1424,28 +1465,28 @@
         link: function($scope) {
           var prepareData;
           prepareData = function() {
-            var i, len, ref, results, v;
+            var v, _i, _len, _ref, _results;
             $scope.options = [];
             $scope.question = $scope.data.question;
-            ref = $scope.data.answers;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              v = ref[i];
+            _ref = $scope.data.answers;
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              v = _ref[_i];
               if ($scope.data.type === "text") {
-                results.push($scope.options.push({
+                _results.push($scope.options.push({
                   idx: v.idx,
                   data: v.text
                 }));
               } else if ($scope.data.type === "image") {
-                results.push($scope.options.push({
+                _results.push($scope.options.push({
                   idx: v.idx,
                   data: "<image-load image-id='" + v.imageId + "'/>"
                 }));
               } else {
-                results.push(void 0);
+                _results.push(void 0);
               }
             }
-            return results;
+            return _results;
           };
           prepareData();
           return $scope.checkAnswer = function() {
@@ -1551,12 +1592,12 @@
         $scope.buttonState = void 0;
         $scope.show = false;
         addAssignment = function(srcId, dstId) {
-          var assignment, assignments, i, ids, k, len, ref;
+          var assignment, assignments, i, ids, _i, _len, _ref;
           $scope.buttonState = true;
           assignments = [];
-          ref = $scope.assignments;
-          for (i = k = 0, len = ref.length; k < len; i = ++k) {
-            assignment = ref[i];
+          _ref = $scope.assignments;
+          for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+            assignment = _ref[i];
             if (!(assignment.srcId === srcId || assignment.srcId === dstId || assignment.dstId === srcId || assignment.dstId === dstId)) {
               assignments.push(assignment);
             }
@@ -1576,11 +1617,11 @@
         srcId = void 0;
         srcPoint = void 0;
         visualizeAssignments = function() {
-          var assignment, dst, k, len, ref, src, visualizedAssignments;
+          var assignment, dst, src, visualizedAssignments, _i, _len, _ref;
           visualizedAssignments = [];
-          ref = $scope.assignments;
-          for (k = 0, len = ref.length; k < len; k++) {
-            assignment = ref[k];
+          _ref = $scope.assignments;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            assignment = _ref[_i];
             src = Ctrl.getBoundingBoxById(assignment.srcId).getCenter();
             dst = Ctrl.getBoundingBoxById(assignment.dstId).getCenter();
             visualizedAssignments.push(new Line(src.x, src.y, dst.x, dst.y));
@@ -1589,13 +1630,13 @@
         };
         $scope.line = null;
         $scope.checkAnswer = function() {
-          var assignment, k, len, ref;
+          var assignment, _i, _len, _ref;
           if ($scope.assignments.length !== $scope.listA.values.length) {
             return false;
           }
-          ref = $scope.assignments;
-          for (k = 0, len = ref.length; k < len; k++) {
-            assignment = ref[k];
+          _ref = $scope.assignments;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            assignment = _ref[_i];
             if (assignment.srcId.replace("l") !== assignment.dstId.replace("r")) {
               return false;
             }
@@ -1680,23 +1721,23 @@
         $scope.buttonState = void 0;
         correctAnswers = [];
         resetCorrectAnswers = function() {
-          var i, item, j, len, ref, results;
-          ref = $scope.list;
-          results = [];
-          for (i = j = 0, len = ref.length; j < len; i = ++j) {
-            item = ref[i];
-            results.push(correctAnswers[i] = true);
+          var i, item, _i, _len, _ref, _results;
+          _ref = $scope.list;
+          _results = [];
+          for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+            item = _ref[i];
+            _results.push(correctAnswers[i] = true);
           }
-          return results;
+          return _results;
         };
         resetCorrectAnswers();
         $scope.checkAnswer = function() {
-          var entry, i, j, len, previousValue, ref, somethingIsWrong;
+          var entry, i, previousValue, somethingIsWrong, _i, _len, _ref;
           previousValue = -1;
           somethingIsWrong = false;
-          ref = $scope.list;
-          for (i = j = 0, len = ref.length; j < len; i = ++j) {
-            entry = ref[i];
+          _ref = $scope.list;
+          for (i = _i = 0, _len = _ref.length; _i < _len; i = ++_i) {
+            entry = _ref[i];
             if (entry.idx !== i) {
               somethingIsWrong = true;
             }
@@ -1734,7 +1775,6 @@
         return $scope.getBgImageFor = function(item) {
           var url;
           url = DataStore.getImages()[item.imageId];
-          console.log(item);
           return {
             "background-image": "url('" + url + "')"
           };
@@ -1799,10 +1839,10 @@
             return $ionicSlideBoxDelegate.enableSlide(false);
           };
           $scope.prepareQuestions = function(rawQuestionData) {
-            var i, question, ref;
-            ref = rawQuestionData.questions;
-            for (i in ref) {
-              question = ref[i];
+            var i, question, _ref;
+            _ref = rawQuestionData.questions;
+            for (i in _ref) {
+              question = _ref[i];
               question.id = i;
               if (question.questionText == null) {
                 question.questionText = rawQuestionData.defaultQuestionText;
@@ -1884,7 +1924,7 @@
             } else {
               try {
                 $cordovaVibration.vibrate(400);
-              } catch (undefined) {}
+              } catch (_error) {}
               return $scope.feedbackText = $scope.question.wrongFeedback;
             }
           };
@@ -1964,12 +2004,12 @@
     var BeaconData;
     return BeaconData = (function() {
       function BeaconData(rawData) {
-        var ref;
+        var _ref;
         this.id = rawData.minor;
         this.uuid = rawData.uuid;
         this.major = rawData.major;
         this.minor = rawData.minor;
-        this.proximity = (ref = rawData.proximity) != null ? ref.replace("Proximity", "").toLowerCase() : void 0;
+        this.proximity = (_ref = rawData.proximity) != null ? _ref.replace("Proximity", "").toLowerCase() : void 0;
         this.accuracy = rawData.accuracy;
         this.rssi = rawData.rssi;
         this.tx = rawData.tx;
@@ -2054,6 +2094,47 @@
 (function() {
   var f;
 
+  f = function(DataStore) {
+    var analyticsAvailable;
+    analyticsAvailable = false;
+    return {
+      initialize: function(museum) {
+        if ((typeof analytics !== "undefined" && analytics !== null)) {
+          analytics.startTrackerWithId("UA-71259918-1");
+          console.log("start tracking");
+          return analyticsAvailable = true;
+        } else {
+          return console.log("Google Analytics Unavailable");
+        }
+      },
+      trackView: function(name) {
+        console.log("trackView");
+        if (analyticsAvailable) {
+          return analytics.trackView(name);
+        }
+      },
+      trackEvent: function(category, action, label, value) {
+        console.log("trackEvent");
+        if (analyticsAvailable) {
+          return analytics.trackEvent(category, action, label, value);
+        }
+      },
+      trackException: function(exception) {
+        console.log("trackException");
+        if (analyticsAvailable) {
+          return analytics.trackException(exception, true);
+        }
+      }
+    };
+  };
+
+  PaperChase.service("Analytics", ["DataStore", f]);
+
+}).call(this);
+
+(function() {
+  var f;
+
   f = function(DataStore, LocalStorage, $q) {
     var getCompletedQuests;
     getCompletedQuests = function() {
@@ -2075,18 +2156,29 @@
         return getCompletedQuests();
       },
       reset: function() {
-        return LocalStorage.setObject("challengeCompletions", {});
+        LocalStorage.setObject("challengeCompletions", {});
+        return LocalStorage.setObject("currentTour", {});
+      },
+      saveCurrentTour: function(museumId, tourId, language) {
+        return LocalStorage.setObject("currentTour", {
+          museumId: museumId,
+          tourId: tourId,
+          language: language
+        });
+      },
+      getCurrentTour: function() {
+        return LocalStorage.getObject("currentTour");
       },
       allQuetsCompleted: function() {
         var deferred;
         deferred = $q.defer();
         DataStore.awaitLoadCompletion().then(function() {
-          var challengeCompletions, completed, i, key, len, ref;
+          var challengeCompletions, completed, key, _i, _len, _ref;
           challengeCompletions = getCompletedQuests();
           completed = true;
-          ref = DataStore.getAreaKeys();
-          for (i = 0, len = ref.length; i < len; i++) {
-            key = ref[i];
+          _ref = DataStore.getAreaKeys();
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            key = _ref[_i];
             if (challengeCompletions[key] == null) {
               completed = false;
               break;
@@ -2104,47 +2196,21 @@
 }).call(this);
 
 (function() {
-  var realBeaconListener;
+  var mockedBeaconListener;
 
-  realBeaconListener = function() {
-    var checkCordovaPlugin, createDelegate, monitoringCallbacks, rangingCallbacks;
-    checkCordovaPlugin = function() {
-      if ((typeof cordova === "undefined" || cordova === null) || (cordova.plugins == null) || (cordova.plugins.locationManager == null)) {
-        console.log("Cordova beacon plugin not loaded!");
-      }
-      if (cordova.plugins.locationManager.requestWhenInUseAuthorization) {
-        return cordova.plugins.locationManager.requestWhenInUseAuthorization();
-      }
-    };
-    createDelegate = function() {
-      var delegate;
-      delegate = new cordova.plugins.locationManager.Delegate();
-      delegate.didDetermineStateForRegion = function(data) {
-        var i, len, monitoringCallback, state;
-        state = "";
-        if (data.state === "CLRegionStateOutside") {
-          state = "OUT";
-        }
-        if (data.state === "CLRegionStateInside") {
-          state = "IN";
-        }
-        for (i = 0, len = monitoringCallbacks.length; i < len; i++) {
-          monitoringCallback = monitoringCallbacks[i];
-          monitoringCallback(data.region, state);
-        }
-      };
-      delegate.didStartMonitoringForRegion = function(data) {};
-      delegate.didRangeBeaconsInRegion = function(data) {
-        var i, len, rangingCallback;
-        for (i = 0, len = rangingCallbacks.length; i < len; i++) {
-          rangingCallback = rangingCallbacks[i];
-          rangingCallback(data.beacons);
-        }
-      };
-      return delegate;
-    };
+  mockedBeaconListener = function($interval, RandomBeaconData) {
+    var interval, monitoringCallbacks, rangingCallbacks;
     rangingCallbacks = [];
     monitoringCallbacks = [];
+    interval = function() {
+      var callback, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = rangingCallbacks.length; _i < _len; _i++) {
+        callback = rangingCallbacks[_i];
+        _results.push(callback(RandomBeaconData.getData()));
+      }
+      return _results;
+    };
     return {
       registerForRanging: function(rangingCallback) {
         return rangingCallbacks.push(rangingCallback);
@@ -2153,44 +2219,13 @@
         return monitoringCallbacks.push(monitoringCallback);
       },
       startRanging: function(beacons) {
-        var beacon, e, error, i, k, len, region, uuidRegions, v;
-        checkCordovaPlugin();
-        cordova.plugins.locationManager.setDelegate(createDelegate());
-        try {
-          uuidRegions = {};
-          for (i = 0, len = beacons.length; i < len; i++) {
-            beacon = beacons[i];
-            if (uuidRegions[beacon.uuid] == null) {
-              region = new cordova.plugins.locationManager.BeaconRegion("RegionByUUID", beacon.uuid);
-              uuidRegions[beacon.uuid] = region;
-            }
-          }
-          for (k in uuidRegions) {
-            v = uuidRegions[k];
-            cordova.plugins.locationManager.startRangingBeaconsInRegion(v).fail(console.error).done();
-          }
-        } catch (error) {
-          e = error;
-          return alert(e);
-        }
-      },
-      startMonitoring: function(beacons) {
-        var beacon, e, error, i, len, regionFull;
-        try {
-          for (i = 0, len = beacons.length; i < len; i++) {
-            beacon = beacons[i];
-            regionFull = new cordova.plugins.locationManager.BeaconRegion("RegionFullID", beacon.uuid, beacon.major, beacon.minor);
-            cordova.plugins.locationManager.startMonitoringForRegion(regionFull).fail(console.error).done();
-          }
-        } catch (error) {
-          e = error;
-          return alert(e);
-        }
+        RandomBeaconData.initialize(beacons);
+        return $interval(interval, 50);
       }
     };
   };
 
-  PaperChase.service("BeaconListener", [realBeaconListener]);
+  PaperChase.service("BeaconListener", ["$interval", "RandomBeaconData", mockedBeaconListener]);
 
 }).call(this);
 
@@ -2205,23 +2240,23 @@
     beaconFilter = {};
     AccuracyFilter.configure(15, 5000);
     notifyRanging = function(rangedBeacons) {
-      var beaconData, j, len, rangedBeacon, results;
-      results = [];
-      for (j = 0, len = rangedBeacons.length; j < len; j++) {
-        rangedBeacon = rangedBeacons[j];
+      var beaconData, rangedBeacon, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = rangedBeacons.length; _i < _len; _i++) {
+        rangedBeacon = rangedBeacons[_i];
         beaconData = new BeaconData(rangedBeacon);
         AccuracyFilter.set(beaconData, Date.now());
         if (beaconData.minor + "" === singleBeaconRangingId + "") {
           if (typeof singleBeaconRangingCallback !== "undefined" && singleBeaconRangingCallback !== null) {
-            results.push(singleBeaconRangingCallback(beaconData));
+            _results.push(singleBeaconRangingCallback(beaconData));
           } else {
-            results.push(void 0);
+            _results.push(void 0);
           }
         } else {
-          results.push(void 0);
+          _results.push(void 0);
         }
       }
-      return results;
+      return _results;
     };
     notifyMonitoring = function(region, state) {};
     sortByKey = function(array, key) {
@@ -2239,27 +2274,27 @@
       });
     };
     interval = function() {
-      var beacon, beaconDatas, beaconDatasSorted, beacons, j, k, len, results, v;
-      results = [];
+      var beacon, beaconDatas, beaconDatasSorted, beacons, k, v, _i, _len, _results;
+      _results = [];
       for (k in beaconGroups) {
         v = beaconGroups[k];
         beaconDatas = [];
         if (v.sendBroadcast) {
           if (beacons = beaconFilter[k]) {
-            for (j = 0, len = beacons.length; j < len; j++) {
-              beacon = beacons[j];
+            for (_i = 0, _len = beacons.length; _i < _len; _i++) {
+              beacon = beacons[_i];
               beaconDatas.push(AccuracyFilter.get(beacon.minor));
             }
             beaconDatasSorted = sortByKey(beaconDatas, 'accuracy');
-            results.push($rootScope.$broadcast(k + "BeaconUpdate", beaconDatasSorted));
+            _results.push($rootScope.$broadcast("" + k + "BeaconUpdate", beaconDatasSorted));
           } else {
-            results.push(void 0);
+            _results.push(void 0);
           }
         } else {
-          results.push(void 0);
+          _results.push(void 0);
         }
       }
-      return results;
+      return _results;
     };
     int = void 0;
     initializeInterval = function() {
@@ -2293,13 +2328,13 @@
         return beaconFilter;
       },
       start: function() {
-        var compoundBeacons, i, j, k, len, ref, v;
+        var compoundBeacons, i, k, v, _i, _len, _ref;
         compoundBeacons = [];
         for (k in beaconGroups) {
           v = beaconGroups[k];
-          ref = v.beacons;
-          for (j = 0, len = ref.length; j < len; j++) {
-            i = ref[j];
+          _ref = v.beacons;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            i = _ref[_i];
             compoundBeacons.push(i);
           }
         }
@@ -2318,48 +2353,38 @@
   var f;
 
   f = function($q, RestApi, Beacon, Area) {
-    var areaLoadDeferred, areas, beacons, currentTour, images, initialLoadDeferred, initialize, loadAreas, loadIntoModel, museums;
+    var areaLoadDeferred, areas, beacons, images, initialLoadDeferred, initialize, loadIntoModel, museums, selectTour;
     initialLoadDeferred = $q.defer();
     areaLoadDeferred = $q.defer();
     areas = void 0;
     beacons = void 0;
     images = void 0;
     museums = void 0;
-    currentTour = void 0;
     loadIntoModel = function(list, Model) {
-      var i, item, len, results;
-      results = [];
-      for (i = 0, len = list.length; i < len; i++) {
-        item = list[i];
-        results.push(new Model(item));
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = list.length; _i < _len; _i++) {
+        item = list[_i];
+        _results.push(new Model(item));
       }
-      return results;
+      return _results;
     };
-    loadAreas = function(id, locale) {
-      return RestApi.getAreas(id, locale).then(function(data) {
+    selectTour = function(tourId, locale) {
+      return RestApi.getAreas(tourId, locale).then(function(data) {
         areas = loadIntoModel(data, Area);
         return areaLoadDeferred.resolve();
       });
     };
     initialize = function() {
-      var p, promises;
+      var promises;
       promises = [];
-      p = RestApi.getBeacons();
-      promises.push(p.promise);
-      p.then(function(data) {
-        return beacons = loadIntoModel(data, Beacon);
-      });
-      p = RestApi.getImages();
-      promises.push(p.promise);
-      p.then(function(data) {
-        return images = data;
-      });
-      p = RestApi.getMuseums();
-      promises.push(p.promise);
-      p.then(function(data) {
-        return museums = data;
-      });
-      $q.all(promises).then(function() {
+      promises.push(RestApi.getBeacons());
+      promises.push(RestApi.getImages());
+      promises.push(RestApi.getMuseums());
+      $q.all(promises).then(function(datas) {
+        beacons = loadIntoModel(datas[0], Beacon);
+        images = datas[1];
+        museums = datas[2];
         return initialLoadDeferred.resolve();
       });
     };
@@ -2373,8 +2398,8 @@
       initialize: function() {
         return initialize();
       },
-      loadAreas: function(id, locale) {
-        return loadAreas(id, locale);
+      selectTour: function(tourId, locale) {
+        return selectTour(tourId, locale);
       },
       setAreaForPreview: function(data) {
         return areas = [data];
@@ -2400,51 +2425,75 @@
         return museums;
       },
       getAreaKeys: function() {
-        var area, i, len, results;
-        results = [];
-        for (i = 0, len = areas.length; i < len; i++) {
-          area = areas[i];
-          results.push(area.key);
+        var area, _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = areas.length; _i < _len; _i++) {
+          area = areas[_i];
+          _results.push(area.key);
         }
-        return results;
+        return _results;
+      },
+      getMuseumById: function(museumId) {
+        var museum, _i, _len;
+        for (_i = 0, _len = museums.length; _i < _len; _i++) {
+          museum = museums[_i];
+          if (museum.id === museumId) {
+            return museum;
+          }
+        }
+      },
+      getTourById: function(museumId, tourId) {
+        var museum, tour, _i, _j, _len, _len1, _ref;
+        for (_i = 0, _len = museums.length; _i < _len; _i++) {
+          museum = museums[_i];
+          if (museum.id === museumId) {
+            _ref = museum.tours;
+            for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+              tour = _ref[_j];
+              if (tour.id === tourId) {
+                return tour;
+              }
+            }
+          }
+        }
       },
       getBeaconById: function(id) {
-        var beacon, i, len;
-        for (i = 0, len = beacons.length; i < len; i++) {
-          beacon = beacons[i];
+        var beacon, _i, _len;
+        for (_i = 0, _len = beacons.length; _i < _len; _i++) {
+          beacon = beacons[_i];
           if (beacon.id === id) {
             return beacon;
           }
         }
       },
       getBeaconByMinor: function(minor) {
-        var beacon, i, len;
-        for (i = 0, len = beacons.length; i < len; i++) {
-          beacon = beacons[i];
+        var beacon, _i, _len;
+        for (_i = 0, _len = beacons.length; _i < _len; _i++) {
+          beacon = beacons[_i];
           if (beacon.minor + "" === minor + "") {
             return beacon;
           }
         }
       },
       getAreaByBeacon: function(beacon) {
-        var area, i, len;
+        var area, _i, _len;
         if (beacon == null) {
           return;
         }
-        for (i = 0, len = areas.length; i < len; i++) {
-          area = areas[i];
+        for (_i = 0, _len = areas.length; _i < _len; _i++) {
+          area = areas[_i];
           if (area.areaBeaconId + "" === beacon.id + "") {
             return area;
           }
         }
       },
       getAreaByQuestBeacon: function(beacon) {
-        var area, i, len;
+        var area, _i, _len;
         if (beacon == null) {
           return;
         }
-        for (i = 0, len = areas.length; i < len; i++) {
-          area = areas[i];
+        for (_i = 0, _len = areas.length; _i < _len; _i++) {
+          area = areas[_i];
           if (area.questBeaconId === beacon.id) {
             return area;
           }
@@ -2456,20 +2505,20 @@
         return this.getAreaByBeacon(beacon);
       },
       getAreaByKey: function(key) {
-        var area, i, len;
-        for (i = 0, len = areas.length; i < len; i++) {
-          area = areas[i];
+        var area, _i, _len;
+        for (_i = 0, _len = areas.length; _i < _len; _i++) {
+          area = areas[_i];
           if (area.key === key) {
             return area;
           }
         }
       },
       getContent: function(areaKey, contentId) {
-        var area, content, i, len, ref;
+        var area, content, _i, _len, _ref;
         area = this.getAreaByKey(areaKey);
-        ref = area.contents;
-        for (i = 0, len = ref.length; i < len; i++) {
-          content = ref[i];
+        _ref = area.contents;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          content = _ref[_i];
           if (content.id === contentId) {
             return content;
           }
@@ -2544,7 +2593,7 @@
 (function() {
   var f;
 
-  f = function($location, $ionicViewSwitcher) {
+  f = function($state, $location, $ionicViewSwitcher) {
     return {
       navigateTo: function(path) {
         return $location.path(decodeURIComponent(path));
@@ -2563,7 +2612,9 @@
       },
       navigateToHome: function() {
         $ionicViewSwitcher.nextDirection("back");
-        return $location.path("/app/home");
+        return $state.go("app.home", {}, {
+          reload: true
+        });
       },
       navigateToArea: function(areaKey, direction) {
         if (direction == null) {
@@ -2578,7 +2629,7 @@
     };
   };
 
-  PaperChase.service("NavigationService", ["$location", "$ionicViewSwitcher", f]);
+  PaperChase.service("NavigationService", ["$state", "$location", "$ionicViewSwitcher", f]);
 
 }).call(this);
 
@@ -2676,9 +2727,9 @@
   var Beacon, Counter, Point, bigAnomalyRange, bigAnomalyRangeHalf, f, smallAnomalyRange, smallAnomalyRangeHalf;
 
   Point = (function() {
-    function Point(x1, y1) {
-      this.x = x1;
-      this.y = y1;
+    function Point(x, y) {
+      this.x = x;
+      this.y = y;
     }
 
     return Point;
@@ -2701,8 +2752,8 @@
   })();
 
   Counter = (function() {
-    function Counter(max1) {
-      this.max = max1;
+    function Counter(max) {
+      this.max = max;
       this.n = this.max;
     }
 
@@ -2778,10 +2829,10 @@
     };
     return {
       initialize: function(_beacons) {
-        var beacon, i, len;
+        var beacon, _i, _len;
         clientPosition = new Point(8, 9);
-        for (i = 0, len = _beacons.length; i < len; i++) {
-          beacon = _beacons[i];
+        for (_i = 0, _len = _beacons.length; _i < _len; _i++) {
+          beacon = _beacons[_i];
           addBeacon(new Beacon(beacon.id, beacon.uuid, beacon.major, beacon.minor, beacon.kind, getRandomBeaconLocation(), "abc"));
         }
         counter = new Counter(beacons.length);
@@ -2794,9 +2845,9 @@
         return deferred.promise;
       },
       getSeBeacons: function() {
-        var area, beacon, i, len;
-        for (i = 0, len = beacons.length; i < len; i++) {
-          beacon = beacons[i];
+        var area, beacon, _i, _len;
+        for (_i = 0, _len = beacons.length; _i < _len; _i++) {
+          beacon = beacons[_i];
           area = void 0;
           if (beacon.kind === "area_beacon") {
             area = DataStore.getAreaByBeacon(beacon);
@@ -2839,10 +2890,10 @@
   f = function($resource, $q, maaasConfig) {
     var areaResource, baseUrl, beaconResource, imageResource, museumResource;
     baseUrl = maaasConfig.backendUrl + "/consume";
-    beaconResource = $resource(baseUrl + "/beacons.json");
-    areaResource = $resource(baseUrl + "/areas.json");
-    imageResource = $resource(baseUrl + "/images.json");
-    museumResource = $resource(baseUrl + "/museums.json");
+    beaconResource = $resource("" + baseUrl + "/beacons.json");
+    areaResource = $resource("" + baseUrl + "/areas.json");
+    imageResource = $resource("" + baseUrl + "/images.json");
+    museumResource = $resource("" + baseUrl + "/museums.json");
     return {
       getBeacons: function() {
         return beaconResource.query().$promise;
@@ -2896,21 +2947,21 @@
         }
       },
       getBackButtonLabel: function() {
-        var areaKey, currentArea, ref;
+        var areaKey, currentArea, _ref;
         if (this.lastViewType() === "home") {
           return "Home";
         } else {
-          areaKey = (ref = $ionicHistory.backView()) != null ? ref.stateParams.areaKey : void 0;
+          areaKey = (_ref = $ionicHistory.backView()) != null ? _ref.stateParams.areaKey : void 0;
           currentArea = DataStore.getAreaByKey(areaKey);
           return currentArea.title;
         }
       },
       goBack: function() {
-        var areaKey, ref;
+        var areaKey, _ref;
         if (this.lastViewType() === "home") {
           return NavigationService.navigateToHome();
         } else {
-          areaKey = (ref = $ionicHistory.backView()) != null ? ref.stateParams.areaKey : void 0;
+          areaKey = (_ref = $ionicHistory.backView()) != null ? _ref.stateParams.areaKey : void 0;
           return NavigationService.navigateToArea(areaKey, "back");
         }
       }
@@ -2918,6 +2969,42 @@
   };
 
   PaperChase.service("StickerbookNavigation", ["$ionicHistory", "NavigationService", "DataStore", "Dictionary", f]);
+
+}).call(this);
+
+(function() {
+  var f;
+
+  f = function($q, DataStore, BeaconManager, AppData, Analytics) {
+    var _selectedLanuage, _selectedMuseum, _selectedTour, _tourSelected;
+    _tourSelected = false;
+    _selectedMuseum = void 0;
+    _selectedTour = void 0;
+    _selectedLanuage = void 0;
+    return {
+      isTourSelected: function() {
+        return _tourSelected;
+      },
+      selectTour: function(museumId, tourId, language) {
+        console.log("SELECT TOUR:", museumId, tourId, language);
+        _selectedMuseum = DataStore.getMuseumById(museumId);
+        _selectedTour = DataStore.getTourById(museumId, tourId);
+        BeaconManager.setBeaconFilter("area", _selectedTour.beacons);
+        DataStore.selectTour(tourId, language);
+        AppData.saveCurrentTour(museumId, tourId, language);
+        Analytics.initialize(_selectedMuseum);
+        return _tourSelected = true;
+      },
+      getSelectedTourName: function() {
+        return _selectedTour.name;
+      },
+      getSelectedMuseumName: function() {
+        return _selectedMuseum.name;
+      }
+    };
+  };
+
+  PaperChase.service("TourSelection", ["$q", "DataStore", "BeaconManager", "AppData", "Analytics", f]);
 
 }).call(this);
 

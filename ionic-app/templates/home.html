@@ -1,12 +1,15 @@
 
-<ion-view title="{{::title}}" hide-back-button="true" class="pap-logo-background">
+<ion-view title="{{::title}}" hide-back-button="true" cache-view="false" class="pap-logo-background">
   <ion-content height="100%" class="pap-home">
-    <header><img src="img/logo.svg"/></header>
+    <header><img src="img/logo.svg"/>
+      <div class="museum-title">{{ museumName }}</div>
+      <div class="tour-title">{{ tourName }}</div>
+    </header>
     <ion-list>
-      <ion-item ng-click="navigateToTourSelection()" class="item-icon-left"><i class="icon ion-ios-keypad-outline"></i>Rundgang auswählen</ion-item>
       <ion-item ng-click="navigateToStickerbook()" class="item-icon-left"><i class="icon ion-ios-keypad-outline"></i>Stickerheft</ion-item>
       <ion-item ng-click="navigateToHelp()" class="item-icon-left"><i class="icon ion-help"></i>Hilfe</ion-item>
       <ion-item ng-click="navigateToSettings()" class="item-icon-left"><i class="icon ion-settings"></i>Einstellungen</ion-item>
+      <ion-item ng-click="cancelTour()" class="item-icon-left"><i class="icon ion-ios-undo-outline"></i>Rundgang beenden</ion-item>
       <ion-item ng-show="DevMode.isOn()" ng-click="resetScore()">Reset Score</ion-item>
       <ion-item ng-show="DevMode.isOn()" ng-click="navigateToQuickNavigation()">Schnellnavigation</ion-item>
       <ion-item ng-show="DevMode.isOn()" ng-click="showBeaconSimulator()">Beacon Simulator</ion-item>
