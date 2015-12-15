@@ -32,5 +32,10 @@ export class RegistrationComponent {
   }
 
   private static link($scope, element:JQuery, attributes) {
+    element.bind('keydown keypress', (event) => {
+      if (event.which === 13) {
+        $scope.ctrl.register();
+      }
+    });
   }
 }
