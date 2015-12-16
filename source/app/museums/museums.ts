@@ -23,10 +23,9 @@ export function loadMuseum(app) {
           '/{museumId:[0-9]{1,8}}', 'Bereiche'))
 
 
-
       .state(`cms.${componentName}.detail.update`,
         RouteUtil.getRoute(DetailUpdateView,
-          'Bearbeiten', `cms.${componentName}`))
+          'Museum Bearbeiten', `cms.${componentName}`))
 
 
       .state(`cms.${componentName}.create`,

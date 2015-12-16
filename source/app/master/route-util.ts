@@ -1,5 +1,5 @@
 export class RouteUtil {
-  public static getAbstractRoute(url, displayName = '', parent = 'cms') {
+  public static getAbstractRoute(url, displayName = '', parent = 'cms.welcome') {
     return {
       url: url,
       abstract: true,
@@ -14,18 +14,7 @@ export class RouteUtil {
     };
   }
 
-  //public static getDetailRoute(url, parent) {
-  //  return {
-  //    url: url,
-  //    abstract: true,
-  //    template: '<div ui-view=""></div>',
-  //    ncyBreadcrumb: {
-  //      parent: parent
-  //    }
-  //  };
-  //}
-
-  public static getRoute(component, displayName, parent = '', url = '') {
+  public static getRoute(component, displayName, parent = 'cms.welcome', url = '') {
     return {
       url: url,
       controller: component,
