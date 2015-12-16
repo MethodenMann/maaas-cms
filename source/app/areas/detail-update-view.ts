@@ -10,6 +10,7 @@ export class DetailUpdateView extends DetailAbstract {
   loadData() {
     this.Area.find(this.$stateParams.areaId).then((data) => {
       this.area = data;
+      this.publishPreview();
     });
   }
 
