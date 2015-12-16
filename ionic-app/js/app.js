@@ -59,7 +59,7 @@
         }
       }
       DataStore.initialize();
-      DataStore.selectTour(37, "de");
+      DataStore.selectTour(58, "de");
       DataStore.awaitLoadCompletion().then(function() {
         var areaBeacons, beacon, i, len, questBeacons, ref;
         areaBeacons = [];
@@ -223,6 +223,7 @@
 
   starter.controller("AppCtrl", function($scope, $rootScope, NavigationService, RandomBeaconData, DataStore, $ionicModal, DevMode, BeaconManager) {
     $scope.DevMode = DevMode;
+    DevMode.switchDevModeOn();
     $ionicModal.fromTemplateUrl("templates/beacon-simulator-modal.html", {
       scope: $scope
     }).then(function(modal) {
@@ -688,7 +689,13 @@
     completeQuiz = function(customSuccessfulMessage) {
       var currentArea;
       AppData.saveQuestCompletion(areaKey);
-      $scope.areaStickerClass = "pap-sticker-" + areaKey;
+      $scope.getStyle = function() {
+        var area;
+        area = DataStore.getAreaByKey(areaKey);
+        return {
+          "background-image": "url('" + area.styles.stickerImageUrl + "')"
+        };
+      };
       currentArea = DataStore.getAreaByKey(areaKey);
       $scope.areaStickerName = currentArea.title;
       if (customSuccessfulMessage != null) {
@@ -1941,7 +1948,7 @@
             }
           };
           setStyles = function() {
-            if ($scope.question.questionImageSrc != null) {
+            if ($scope.question.imageId != null) {
               return $scope.questionClass = "";
             } else {
               return $scope.questionClass = "question-textonly";

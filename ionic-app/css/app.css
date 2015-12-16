@@ -781,6 +781,7 @@
 .pap-multiplechoice {
   margin-top: 10px;
   font-size: large;
+  font-weight: bold;
   text-align: center;
   left: auto;
   right: auto;
