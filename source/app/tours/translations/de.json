@@ -16,7 +16,7 @@
 
   "tours_details_description_label": "Zusammenfassung",
   "tours_details_description_help": "Einen kurzen Beschreib des Rundgangs.",
-  "tours_details_description_error": "Bitte Geben Sie eine gülten Beschreib an",
+  "tours_details_description_error": "Bitte Geben Sie eine gültigen Beschreib an",
 
   "tours_details_image_label": "Bild",
   "tours_details_image_help": "Das Bild wird in der App bei der Rundgang Auswahl angezeigt",
