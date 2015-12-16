@@ -14,21 +14,21 @@
 
     // /.navbar-header
     ul.nav.navbar-top-links.navbar-right
-
+      span Eingeloggt als: {{ ctrl.loggedInEmail }}
       li.dropdown
         a.dropdown-toggle(data-toggle='dropdown', href='#')
           i.fa.fa-user.fa-fw
           i.fa.fa-caret-down
         ul.dropdown-menu.dropdown-user
-          li
-            a(href='#')
-              i.fa.fa-user.fa-fw
-              |  User Profile
-          li
-            a(href='#')
-              i.fa.fa-gear.fa-fw
-              |  Settings
-          li.divider
+          //li
+          //  a(href='#')
+          //    i.fa.fa-user.fa-fw
+          //    |  User Profile
+          //li
+          //  a(href='#')
+          //    i.fa.fa-gear.fa-fw
+          //    |  Settings
+          //li.divider
           li
             a(ng-click='ctrl.logout()')
               i.fa.fa-sign-out.fa-fw
