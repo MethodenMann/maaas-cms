@@ -8,6 +8,7 @@ export class MasterView {
   private loggedInEmail:string = '';
 
   constructor(@Inject('$window') private $window,
+              @Inject('$document') private $document,
               @Inject('$state') private $state,
               @Inject('$scope') private $scope,
               @Inject('Auth') private Auth,
@@ -65,5 +66,14 @@ export class MasterView {
   search() {
     this.$state.go('cms.search.list');
     this.$scope.$broadcast('mas.search', this.searchText);
+  }
+
+  openPreview() {
+    var screenWidth = screen.width || 500;
+    var screenHeight = screen.height || 500;
+    var left = screenWidth * 0.66;
+    var height = screenHeight;
+    var width = screenWidth / 3;
+    this.$window.open('#/preview', 'PreviewPopUp', `width=${width},height=${height},left=${left},top=0'`);
   }
 }
