@@ -5,33 +5,29 @@ export class MasterView {
   public static templateUrl = './app/master/master-view.html';
 
   private alerts;
-  private loggedInEmail: string = '';
+  private loggedInEmail:string = '';
 
-  constructor(
-    @Inject('$window') private $window,
-    @Inject('$state') private $state,
-    @Inject('$scope') private $scope,
-    @Inject('Auth') private Auth,
-    @Inject('AlertService') private AlertService
-    ) {
+  constructor(@Inject('$window') private $window,
+              @Inject('$state') private $state,
+              @Inject('$scope') private $scope,
+              @Inject('Auth') private Auth,
+              @Inject('AlertService') private AlertService) {
     $('#side-menu').metisMenu();
 
 
     angular.element($window).bind('load resize', this.resizeHandler);
     this.resizeHandler();
 
-   this.alerts = AlertService.getAlerts();
+    this.alerts = AlertService.getAlerts();
 
     Auth.currentUser().then((user) => {
       this.loggedInEmail = user.email;
     });
   }
 
-
-
-    protected closeAlert(idx) {
-      this.AlertService.removeAlert(idx);
-    }
+  protected closeAlert(idx) {
+    this.AlertService.removeAlert(idx);
+  }
 
 
   resizeHandler() {
@@ -65,6 +61,7 @@ export class MasterView {
   }
 
   private searchText;
+
   search() {
     this.$state.go('cms.search.list');
     this.$scope.$broadcast('mas.search', this.searchText);
