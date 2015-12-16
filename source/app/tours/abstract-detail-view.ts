@@ -11,7 +11,7 @@ export abstract class AbstractDetailView extends FormView {
 
   private areas:Array<IArea> = [];
   private selectedArea:IArea;
-
+  private selectedUnconfiguredArea:IArea;
   public isPopOverOpen = false;
 
   private configuredAreas:IArea[] = [];
@@ -30,6 +30,7 @@ export abstract class AbstractDetailView extends FormView {
               @Inject('$stateParams') protected $stateParams,
               @Inject('$state') protected $state,
               @Inject('$q') protected $q,
+              @Inject('orderByFilter') protected orderByFilter,
               @Inject('AlertService') protected AlertService) {
     super($scope);
     Area.refreshAll();
@@ -92,14 +93,7 @@ export abstract class AbstractDetailView extends FormView {
       }
     });
 
-    this.selectFirstArea();
-  }
-
-  addArea(idx) {
-    var area = this.unconfiguredAreas[idx];
-    this.unconfiguredAreas.splice(idx, 1);
-    this.configuredAreas.push(area);
-    this.selectArea(area);
+    this.SortAndSelectAreas();
   }
 
   countSelectedContents(area:IArea) {
@@ -110,6 +104,15 @@ export abstract class AbstractDetailView extends FormView {
       }
     });
     return count;
+  }
+
+  addArea() {
+    var idx = this.unconfiguredAreas.indexOf(this.selectedUnconfiguredArea);
+    var area = this.unconfiguredAreas[idx];
+    this.unconfiguredAreas.splice(idx, 1);
+    this.configuredAreas.push(area);
+
+    this.SortAndSelectAreas(area);
   }
 
 
@@ -133,17 +136,38 @@ export abstract class AbstractDetailView extends FormView {
     this.configuredAreas.splice(idx, 1);
     this.unconfiguredAreas.push(area);
 
-    this.selectFirstArea();
-
     this.isPopOverOpen = false;
+
+    this.SortAndSelectAreas();
   }
 
-  selectArea(area:IArea) {
+  private SortAndSelectAreas(area:IArea = undefined){
+    this.sortUnconfiguredAreas();
+    this.sortConfiguredAreas();
+
+    if (area){
+      this.selectConfiguredArea(area);
+    } else {
+      this.selectFirstConfiguredArea();
+    }
+
+    this.selectFirstUnconfiguredArea();
+
+
+  }
+
+  selectConfiguredArea(area:IArea) {
     this.selectedArea = area;
   }
 
-  selectFirstArea() {
+  selectFirstConfiguredArea() {
     this.selectedArea = this.configuredAreas[0];
+  }
+
+  selectFirstUnconfiguredArea() {
+    if (this.unconfiguredAreas.length >= 1) {
+      this.selectedUnconfiguredArea = this.unconfiguredAreas[0];
+    }
   }
 
   handleCheckboxChecked(id:number, list:Array<number>, event) {
@@ -180,5 +204,13 @@ export abstract class AbstractDetailView extends FormView {
 
   isChallengeSelected(id:number) {
     return this.isSelected(id, this.tour.selectedChallenges);
+  }
+
+  private sortConfiguredAreas() {
+    this.configuredAreas = this.orderByFilter(this.configuredAreas, 'name');
+  }
+
+  private sortUnconfiguredAreas() {
+    this.unconfiguredAreas = this.orderByFilter(this.unconfiguredAreas, 'name');
   }
 }
