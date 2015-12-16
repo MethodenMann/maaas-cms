@@ -12,43 +12,44 @@
         td
           button.btn(ng-click='ctrl.acceptInvitation(invitation)') Einladung Akzeptieren
 
-.panel.panel-green
-  .panel-heading
-    | {{ 'museums_details_title' | translate }}
-  .panel-body
+form(name='form' role='form' novalidate)
+  .panel.panel-green
 
-    form(name='form' role='form' novalidate)
-      mas-form-group(field-name='name' localization-prefix='museums_details_name')
-        input.form-control(ng-model='ctrl.museum.name' name='name' required ng-minlength='2')
-
-      mas-form-group(field-name='description' localization-prefix='museums_details_description')
-        textarea.form-control(type='text' rows='3' name='description' ng-model='ctrl.museum.description' required ng-minlength='5')
-
-      mas-form-group(field-name='address' localization-prefix='museums_details_address')
-        textarea.form-control(type='text' rows='3' name='address' ng-model='ctrl.museum.address' required ng-minlength='5')
-
-      //- mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
-      //-   mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
-
-      mas-save-button(ng-click='ctrl.save()')
+    .panel-heading
+      | {{ 'museums_details_title' | translate }}
+    .panel-body
 
 
-.panel.panel-green(ng-hide='ctrl.createMuseum')
-  .panel-heading
-    | {{ 'museums_administration' | translate }}
-  .panel-body
-    form(name='form' role='form' novalidate)
-      mas-form-group(field-name='kontaktioapikey' localization-prefix='museums_details_kontaktkey')
-        input.form-control(ng-model='ctrl.museum.kontaktIoApiKey' name='kontaktioapikey')
+        mas-form-group(field-name='name' localization-prefix='museums_details_name')
+          input.form-control(ng-model='ctrl.museum.name' name='name' required ng-minlength='2')
 
-      mas-form-group(field-name='googleAnalyticsTrackingKey' localization-prefix='museums_details_analyticstrackingkey')
-        input.form-control(ng-model='ctrl.museum.googleAnalyticsTrackingKey' name='googleAnalyticsTrackingKey')
+        mas-form-group(field-name='description' localization-prefix='museums_details_description')
+          textarea.form-control(type='text' rows='3' name='description' ng-model='ctrl.museum.description' required ng-minlength='5')
 
-      mas-form-group(field-name='googleAnalyticsViewKey' localization-prefix='museums_details_analyticsviewkey')
-        input.form-control(ng-model='ctrl.museum.googleAnalyticsViewKey' name='googleAnalyticsTrackingKey')
+        mas-form-group(field-name='address' localization-prefix='museums_details_address')
+          textarea.form-control(type='text' rows='3' name='address' ng-model='ctrl.museum.address' required ng-minlength='5')
+
+        //- mas-form-group(field-name='imageId' localization-prefix='museums_details_image')
+        //-   mas-image-form-wrapper(image-id='imageId' model='ctrl.museum.imageId' height='150'  is-required='true')
+
+        mas-save-button(ng-click='ctrl.save()')
 
 
-      mas-save-button(ng-click='ctrl.save()')
+  .panel.panel-green(ng-hide='ctrl.createMuseum')
+    .panel-heading
+      | {{ 'museums_administration' | translate }}
+    .panel-body
+        mas-form-group(field-name='kontaktioapikey' localization-prefix='museums_details_kontaktkey')
+          input.form-control(ng-model='ctrl.museum.kontaktIoApiKey' name='kontaktioapikey')
+
+        mas-form-group(field-name='googleAnalyticsTrackingKey' localization-prefix='museums_details_analyticstrackingkey')
+          input.form-control(ng-model='ctrl.museum.googleAnalyticsTrackingKey' name='googleAnalyticsTrackingKey')
+
+        mas-form-group(field-name='googleAnalyticsViewKey' localization-prefix='museums_details_analyticsviewkey')
+          input.form-control(ng-model='ctrl.museum.googleAnalyticsViewKey' name='googleAnalyticsTrackingKey')
+
+
+        mas-save-button(ng-click='ctrl.save()')
 
 
 .panel.panel-green(ng-hide='ctrl.createMuseum')
