@@ -13,8 +13,9 @@
       mas-form-group(field-name='primaryColor' localization-prefix='areas_details_primarycolor')
         color-picker(name='primaryColor' ng-model='ctrl.area.primaryColor', color-picker-format='"hex"')
 
-      mas-form-group(field-name='secondaryColor' localization-prefix='areas_details_secondarycolor')
-        color-picker(name='secondaryColor' ng-model='ctrl.area.secondaryColor', color-picker-format='"hex"')
+      //Secondary Color is not yet needed in app
+      //mas-form-group(field-name='secondaryColor' localization-prefix='areas_details_secondarycolor')
+      //  color-picker(name='secondaryColor' ng-model='ctrl.area.secondaryColor', color-picker-format='"hex"')
 
       mas-form-group(field-name='backgroundImage' localization-prefix='areas_details_backgroundimage')
           mas-image-form-wrapper(image-id='backgroundImage' model='ctrl.area.backgroundImageId' height='200' is-required='true')

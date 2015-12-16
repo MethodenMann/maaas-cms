@@ -5,6 +5,7 @@ import {RouteUtil} from './route-util';
 import {UiSrefActiveIf} from './ui-sref-active-if';
 import {makeDirective, makeSelector} from '../utils/component';
 
+
 export function loadMaster(app) {
   app.config(function ($translateProvider, $translatePartialLoaderProvider) {
     $translatePartialLoaderProvider.addPart('master');
@@ -14,8 +15,18 @@ export function loadMaster(app) {
     $urlRouterProvider.otherwise('/cms');
 
     $stateProvider
-      .state('cms', RouteUtil.getRoute(MasterView, 'CMS', '', '/cms'))
-      .state('cms.welcome', RouteUtil.getRoute(WelcomeView, 'Wilkommen', 'cms', '/welcome'));
+      .state('cms',{
+        url: '/cms',
+        controller: MasterView,
+        controllerAs: 'ctrl',
+        Abstract: true,
+        templateUrl: MasterView.templateUrl,
+        ncyBreadcrumb: {
+          skip: true,
+          label: 'CMS',
+        }
+      })
+      .state('cms.welcome', RouteUtil.getRoute(WelcomeView, 'CMS', 'cms', '/welcome'));
   });
 
 
