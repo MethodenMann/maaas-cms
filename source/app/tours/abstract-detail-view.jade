@@ -15,20 +15,18 @@
 
 
       h3 {{ 'tours_details_compose_title' | translate }}
-      .dropdown
-        button#addArea.btn.btn-default.dropdown-toggle(type='button'  data-toggle='dropdown')
-          | Area hinzufügen
-          span.caret
-        ul.dropdown-menu
-          li(ng-repeat='area in ctrl.unconfiguredAreas')
-            a(ng-click='ctrl.addArea($index)') {{area.name}}
-      .row(style='min-height:200px')
 
+      div
+        select.form-control.area-add-dropdown(ng-options='area.name for area in ctrl.unconfiguredAreas' ng-model='ctrl.selectedUnconfiguredArea')
+        button.btn.area-add-button.left5( ng-click='ctrl.addArea()' ng-disabled='!ctrl.selectedUnconfiguredArea') Bereich hinzufügen
+
+
+      .row(style='min-height:200px')
 
         .col-md-3
           h4 {{ 'tours_details_compose_areas' | translate }}
           .list-group
-            div.list-group-item.list-group-item-gray(ng-repeat='area in ctrl.configuredAreas | orderBy:"name"' ng-click='ctrl.selectArea(area)' ng-class='{ "active" : ctrl.selectedArea.id == area.id }')
+            div.list-group-item.list-group-item-gray(ng-repeat='area in ctrl.configuredAreas' ng-click='ctrl.selectConfiguredArea(area)' ng-class='{ "active" : ctrl.selectedArea.id == area.id }')
               | {{area.name}} ({{ ctrl.countSelectedContents(area) }} Inhalte)
         div(ng-show='ctrl.selectedArea')
 
