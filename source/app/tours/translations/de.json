@@ -12,7 +12,7 @@
 
   "tours_details_name_label": "Name",
   "tours_details_name_help": "Name des Rundgangs",
-  "tours_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
+  "tours_details_name_error": "Bitte geben Sie einen gültigen Namen ein",
 
   "tours_details_description_label": "Zusammenfassung",
   "tours_details_description_help": "Einen kurzen Beschreib des Rundgangs.",

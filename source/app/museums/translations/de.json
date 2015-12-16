@@ -3,7 +3,7 @@
   "museums_details_title": "Museum Details",
   "museums_details_name_label": "Name",
   "museums_details_name_help": "Der Name des Museums.",
-  "museums_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
+  "museums_details_name_error": "Bitte geben Sie einen gültigen Namen ein",
   "museums_details_description_label": "Beschreibung",
   "museums_details_description_help": "Eine kurze Beschreibung des Museums.",
   "museums_details_description_error": "Bitte Geben Sie eine Beschreibung ein",

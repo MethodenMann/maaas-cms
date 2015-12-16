@@ -2,18 +2,18 @@
   "challenges_title": "Quiz",
   "challenge_details_title": "Quiz Details",
 
-  "challenge_delete_confirm" : "Sind Sie sicher, dass sie diesen Quiz löschen möchten?",
+  "challenge_delete_confirm" : "Sind Sie sicher, dass Sie diesen Quiz löschen möchten?",
   "challenge_delete" : "Quiz löschen",
 
   "challenges_details_name_label": "Name",
-  "challenges_details_name_help": "Der Name des Quiz, dieser erscheint in der App nicht",
-  "challenges_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
+  "challenges_details_name_help": "Der Name des Quiz",
+  "challenges_details_name_error": "Bitte geben Sie einen gültigen Namen ein",
   "challenges_details_question_label": "Frage",
   "challenges_details_question_help": "Wählen sie eine Frage aus",
   "challenges_details_question_error": "Bitte Geben Sie einen gülte Frage ein",
   "challenges_details_kind_label": "Quiz Typ",
   "challenges_details_kind_help": "Wählen sie die Art des gwünschten Quiz aus.",
-  "challenges_details_kind_error": "Bitte Geben Sie einen gülten Quiz-Typ ein",
+  "challenges_details_kind_error": "Bitte geben Sie einen gültigen Quiz-Typ ein",
 
   "challenges_details_assign_pairs" : "Antwort-Paare",
   "challenges_details_assign_add" : "Antwort-Paar hinzufügen",
