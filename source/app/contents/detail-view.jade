@@ -17,9 +17,10 @@
         .row
           .col-md-6
             textarea(ui-tinymce='ctrl.tinymceConfig' ng-model='ctrl.content.data')
-          .col-md-4
-            image-upload(upload-id='contentImage')
             br
+          .col-md-6
+            image-upload(upload-id='contentImage')
+            p.help-block {{ 'contents_details_drag_and_drop_info' | translate }}
             div.pull-left(ng-repeat='image in ctrl.imageList')
               image-load(public-id='{{image.medium.publicId}}' height='100')
 

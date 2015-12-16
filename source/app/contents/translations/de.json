@@ -13,5 +13,6 @@
   "contents_details_previewimage_label": "Vorschaubild",
   "contents_details_previewimage_help": "Dieses Bild wird in der Inhaltsübersicht angezeigt",
   "contents_details_previewimage_error": "Bitte laden Sie ein Bild hoch",
-  "contents_details_Text_label": "Text"
+  "contents_details_Text_label": "Text",
+  "contents_details_drag_and_drop_info": "Hinweis: Sie können die Bilder per drag & drop einfügen"
 }
