@@ -14,7 +14,7 @@ Dies installiert alle nötigen npm-Packages und andere Abhängigkeiten. tsd bein
 Um den Source-Code zu kompilieren und einen Lokalen Web-Server zu starten muss der Default-Task von gulp aufgerufen werden. Dies geschieht mit folgendem Befehl
 
 ```
-> gulp -–production`
+> gulp -–production
 ```
 
 Ohne das Production flag würde das CMS das Backend lokal addressieren. Dazu müsste man das Backend local hosten. In diesem Falle geht das CMS direkt auf das Heroku Backened.
