@@ -7,7 +7,7 @@ Es muss zunächst Node und npm installiert sein. Danach müssen in Ordner des Pr
 > npm install -g bower tsd gulp
 > npm install
 > bower install
-> tsd install`
+> tsd install
 ```
 
 Dies installiert alle nötigen npm-Packages und andere Abhängigkeiten. tsd beinhaltet die Typen-Definitionen der verwendeten Frameworks welche für Type-Script benötigt werden.
