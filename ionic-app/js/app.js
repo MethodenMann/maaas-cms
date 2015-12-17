@@ -59,7 +59,6 @@
         }
       }
       DataStore.initialize();
-      DataStore.selectTour(58, "de");
       DataStore.awaitLoadCompletion().then(function() {
         var areaBeacons, beacon, i, len, questBeacons, ref;
         areaBeacons = [];
@@ -223,7 +222,6 @@
 
   starter.controller("AppCtrl", function($scope, $rootScope, NavigationService, RandomBeaconData, DataStore, $ionicModal, DevMode, BeaconManager) {
     $scope.DevMode = DevMode;
-    DevMode.switchDevModeOn();
     $ionicModal.fromTemplateUrl("templates/beacon-simulator-modal.html", {
       scope: $scope
     }).then(function(modal) {
