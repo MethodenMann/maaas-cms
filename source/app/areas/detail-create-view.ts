@@ -12,7 +12,6 @@ export class DetailCreateView extends DetailAbstract {
        this.area = <IArea>{};
       this.area.secondaryColor = '#ccc';
       this.area.primaryColor = '#ccc';
-
   }
 
 

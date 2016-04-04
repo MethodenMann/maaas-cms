@@ -82,31 +82,4 @@ export class ImageUploadDirective {
       });
     });
   }
-
-  // private static link($scope, element: JQuery, attributes) {
-  //   let call = (museumName) => {
-  //     var museumFolder = museumName.replace(/[^A-Z0-9]/ig, '').toLowerCase();
-  //     var imageTag = $.cloudinary.unsigned_upload_tag('cy0noj45', {
-  //       cloud_name: 'nmsg', folder: museumFolder
-  //     });
-  //
-  //     imageTag.bind('cloudinarydone', (e, data) => {
-  //       $scope.ctrl.handleSuccessfulUpload(data);
-  //     });
-  //
-  //     element.find('#uploadbutton').append(imageTag);
-  //   };
-  //
-  //   $scope.ctrl.AuthUtil.getMuseumId().then((museumId) => {
-  //     if (museumId) {
-  //       $scope.ctrl.Museum.find(museumId).then((museum) => {
-  //         call(museum.name);
-  //       });
-  //     } else {
-  //       // TODO In case of an inexisting museum, this should be
-  //       //      done properly. This is a quick fix.
-  //       call('default');
-  //     }
-  //   });
-  // }
 }

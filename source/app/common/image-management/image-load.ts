@@ -45,9 +45,7 @@ export class ImageLoadDirective {
       });
     } else if (this.publicId) {
       this.loadImage({publicId: this.publicId});
-    } else {
-      // lol wtf?
-    }
+    } 
   }
 
   private loadMedium(mediaId) {

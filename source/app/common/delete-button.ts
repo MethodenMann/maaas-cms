@@ -13,20 +13,14 @@ export class DeleteButton {
     }
   };
 
-
   private id;
   private type;
+
   constructor(@Inject('DS') protected DS) {
 
   }
 
-
-
   public delete() {
     this.DS.definitions[this.type].destroy(this.id);
   }
-
-
-
-
 }

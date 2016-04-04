@@ -2,7 +2,6 @@ import {Inject} from '../utils/di';
 import {IArea} from './iarea';
 import {DetailAbstract} from './detail-abstract';
 
-
 export class DetailUpdateView extends DetailAbstract {
   public static selector = 'mas-area-detail-update-view';
   public static templateUrl = './app/areas/detail-view.html';

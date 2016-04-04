@@ -19,18 +19,9 @@ export class ImageFormWrapper {
     }
   };
 
-
-
+  
   private model: any;
   private imageId: string;
-  //private width: string;
-  //private height: string;
-  //private element: JQuery;
-  //private thumbnailTag: JQuery;
-  //private uploadId: string;
-  //private initialMediaId: string;
-  //private publicId: string;
-  //private isRequired: Boolean;
 
   constructor(
     @Inject('$scope') protected $scope
