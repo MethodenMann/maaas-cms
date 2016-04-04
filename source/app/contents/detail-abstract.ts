@@ -30,7 +30,7 @@ export abstract class DetailAbstract extends FormView {
       selector: 'textarea',
       menu: {},
       toolbar: 'styleselect | undo redo | bold italic | link image',
-      plugins: 'image paste',
+      plugins: 'paste',
       image_dimensions: false,
       height: 400,
       style_formats: [
@@ -56,7 +56,7 @@ export abstract class DetailAbstract extends FormView {
   }
 
 
-  private publishPreview() {
+  protected publishPreview() {
     this.PreviewService.publishPreview('content', this.content);
   }
 

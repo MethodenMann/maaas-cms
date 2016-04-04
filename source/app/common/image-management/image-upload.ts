@@ -5,10 +5,11 @@ import {IMedium} from '../../media/imedium';
 
 
 export class ImageUploadDirective {
-  private static selector = 'image-upload';
-  private static template = `<btn id="uploadbutton" class="fileUpload btn mas-image-upload-btn">
-                                    <i class="fa fa-image"/>
-                                    {{ \'imageupload_button\' | translate }} </btn>`;
+  private static selector =  'image-upload';
+  private static template =  `<btn id="uploadbutton" class="fileUpload btn mas-image-upload-btn">
+                                <i class="fa" ng-class='[ctrl.iconClass, ctrl.animationClass]'/>
+                                {{ \'imageupload_button\' | translate }}
+                              </btn>`;
   private static replace = true;
 
   private static options = {
@@ -18,8 +19,10 @@ export class ImageUploadDirective {
     }
   };
 
-  private uploadId: string;
-  private mediumId: number;
+  private uploadId:string;
+  private mediumId:number;
+  private animationClass:string;
+  private iconClass:string;
 
   constructor(
     @Inject('$scope') private $scope,
@@ -32,6 +35,8 @@ export class ImageUploadDirective {
     this.$scope.$on('image-management.mediumableUpdate', (e, data) => {
       this.handleMediumAbleUpdate(data);
     });
+
+    this.initializeImageLoadIndication();
   }
 
   private handleMediumAbleUpdate(data: IMediumableUpdateBroadcast) {
@@ -64,6 +69,16 @@ export class ImageUploadDirective {
     });
   }
 
+  indicateImageUploading() {
+    this.animationClass = 'spinning';
+    this.iconClass =      'fa-spinner';
+  }
+
+  initializeImageLoadIndication() {
+    this.animationClass = '';
+    this.iconClass =      'fa-image';
+  }
+
   private static link($scope, element: JQuery, attributes) {
     $scope.ctrl.Auth.currentUser().then((user) => {
       var museumId = user.museum_id;
@@ -74,8 +89,15 @@ export class ImageUploadDirective {
           cloud_name: 'nmsg', folder: museumFolder
         }); //TODO: Change static dev folder to museum directory
 
+        imageTag.bind('fileuploadstart', (e, data) => {
+          $scope.ctrl.indicateImageUploading();
+          $scope.$apply();
+        });
+
         imageTag.bind('cloudinarydone', (e, data) => {
           $scope.ctrl.handleSuccessfulUpload(data);
+          $scope.ctrl.initializeImageLoadIndication();
+          $scope.$apply();
         });
 
         element.find('#uploadbutton').append(imageTag);

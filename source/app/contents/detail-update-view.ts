@@ -16,6 +16,7 @@ export class UpdateView extends DetailAbstract {
           list.push({title: 'a', value: url, medium: medium});
         });
         this.imageList = list;
+        this.publishPreview();
       });
     });
 

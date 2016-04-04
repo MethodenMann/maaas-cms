@@ -40,7 +40,7 @@ export abstract class DetailAbstract extends FormView {
     this.regististerDebouncewWatch($timeout, 'ctrl.challenge', this.publishPreview);
   }
 
-  private publishPreview() {
+  protected publishPreview() {
     this.PreviewService.publishPreview('challenge', this.challenge);
   }
 

@@ -5,28 +5,30 @@ export class MasterView {
   public static templateUrl = './app/master/master-view.html';
 
   private alerts;
+  private loggedInEmail:string = '';
 
-  constructor(
-    @Inject('$window') private $window,
-    @Inject('$state') private $state,
-    @Inject('$scope') private $scope,
-    @Inject('Auth') private Auth,
-    @Inject('AlertService') private AlertService
-    ) {
+  constructor(@Inject('$window') private $window,
+              @Inject('$document') private $document,
+              @Inject('$state') private $state,
+              @Inject('$scope') private $scope,
+              @Inject('Auth') private Auth,
+              @Inject('AlertService') private AlertService) {
     $('#side-menu').metisMenu();
 
 
     angular.element($window).bind('load resize', this.resizeHandler);
     this.resizeHandler();
 
-   this.alerts = AlertService.getAlerts();
+    this.alerts = AlertService.getAlerts();
+
+    Auth.currentUser().then((user) => {
+      this.loggedInEmail = user.email;
+    });
   }
 
-
-
-    protected closeAlert(idx) {
-      this.AlertService.removeAlert(idx);
-    }
+  protected closeAlert(idx) {
+    this.AlertService.removeAlert(idx);
+  }
 
 
   resizeHandler() {
@@ -60,8 +62,18 @@ export class MasterView {
   }
 
   private searchText;
+
   search() {
     this.$state.go('cms.search.list');
     this.$scope.$broadcast('mas.search', this.searchText);
+  }
+
+  openPreview() {
+    var screenWidth = screen.width || 500;
+    var screenHeight = screen.height || 500;
+    var left = screenWidth * 0.66;
+    var height = screenHeight;
+    var width = screenWidth / 3;
+    this.$window.open('#/preview', 'PreviewPopUp', `width=${width},height=${height},left=${left},top=0'`);
   }
 }

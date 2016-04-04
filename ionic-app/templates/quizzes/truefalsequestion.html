@@ -1,8 +1,8 @@
 
 <div class="pap-truefalse">
   <div class="pap-truefalse-question-container">
-    <div ng-hide="question.imageId" ng-class="questionClass">{{question.text}}</div>
-    <image-load image-id="{{question.imageId}}"></image-load>
+    <div ng-class="questionClass">{{question.text}}</div>
+    <image-load ng-show="question.imageId" image-id="{{question.imageId}}"></image-load>
   </div>
   <div class="pap-truefalse-answerbutton-container">
     <div ng-click="submitAnswer(true)" ng-class="trueButtonClass" class="button answerbutton">{{question.trueAnswer}}</div>

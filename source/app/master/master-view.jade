@@ -7,28 +7,28 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='#cms/')
+      a.navbar-brand(href='#cms/welcome')
         div
           img(src="./img/maaas_logo.svg")
           div {{ 'master_cms' | translate }}
 
     // /.navbar-header
     ul.nav.navbar-top-links.navbar-right
-
+      span {{ ctrl.loggedInEmail }}
       li.dropdown
         a.dropdown-toggle(data-toggle='dropdown', href='#')
           i.fa.fa-user.fa-fw
           i.fa.fa-caret-down
         ul.dropdown-menu.dropdown-user
-          li
-            a(href='#')
-              i.fa.fa-user.fa-fw
-              |  User Profile
-          li
-            a(href='#')
-              i.fa.fa-gear.fa-fw
-              |  Settings
-          li.divider
+          //li
+          //  a(href='#')
+          //    i.fa.fa-user.fa-fw
+          //    |  User Profile
+          //li
+          //  a(href='#')
+          //    i.fa.fa-gear.fa-fw
+          //    |  Settings
+          //li.divider
           li
             a(ng-click='ctrl.logout()')
               i.fa.fa-sign-out.fa-fw
@@ -71,7 +71,7 @@
               i.fa.fa-flag
               |  Übersetzen
           li
-            a(onClick='MyWindow=window.open("#/preview","MyWindow",width=600,height=300)')
+            a(ng-click='ctrl.openPreview()')
               i.fa.fa-mobile
               |  Vorschau
     // Page Content

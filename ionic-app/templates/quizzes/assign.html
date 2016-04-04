@@ -9,7 +9,7 @@
       </svg>
       <div ng-repeat="item in ::listA.values" pap-height="{{calculateRowHeight()}}" class="row">
         <div class="col-50">
-          <pap-draggable id="l{{item.idx}}" class="pap-box pap-box-left">{{::item.value}}</pap-draggable>
+          <pap-draggable id="l{{item.idx}}" class="pap-box pap-box-left">{{::item.text}}</pap-draggable>
         </div>
         <div class="col-50">
           <pap-draggable id="r{{listB.values[$index].idx}}" ng-style="::getBgImageFor($index)" pap-height="{{calculateRowHeight() - 15}}" pap-width="{{calculateRowHeight() - 15}}" class="pap-box pap-box-right">{{listB.values[$index].val}}</pap-draggable>

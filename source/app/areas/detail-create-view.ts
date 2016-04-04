@@ -9,9 +9,10 @@ export class DetailCreateView extends DetailAbstract {
 
 
   loadData() {
-       this.area = <IArea>{};
-      this.area.secondaryColor = '#ccc';
-      this.area.primaryColor = '#ccc';
+    this.area = <IArea>{};
+    this.area.secondaryColor = '#ccc';
+    this.area.primaryColor = '#ccc';
+
   }
 
 

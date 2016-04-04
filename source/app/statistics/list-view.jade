@@ -1,6 +1,8 @@
-h1 Statistiken
-ng-analytics-auth(label='Eingeloggt als: ' hide-on-auth='true' auth-container='embed-api-auth-container')
+h1 {{ 'statistics_title'| translate }}
+p {{ 'statistics_description' | translate}}
+
+ng-analytics-auth(label='Eingeloggt als:' hide-on-auth='true' auth-container='embed-api-auth-container')
 
 div(ng-repeat='chart in ctrl.charts')
-  h2 {{ 'chart_title_' + chart.type | translate }}
+  h2 {{ 'statistics_chart_title_' + chart.type | translate }}
   ng-analytics-chart(chart='chart.details' auth-container='embed-api-auth-container')

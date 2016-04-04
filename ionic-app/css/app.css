@@ -294,7 +294,7 @@
       font-size: 4vmin;
       line-height: 6vmin; }
       .pap-content-view ion-scroll article h1, .pap-content-view ion-scroll article h2, .pap-content-view ion-scroll article h3, .pap-content-view ion-scroll article h4, .pap-content-view ion-scroll article h5, .pap-content-view ion-scroll article h6 {
-        color: pink;
+        color: black;
         text-align: left; }
       .pap-content-view ion-scroll article h1 {
         font-size: 7vmin;
@@ -781,6 +781,7 @@
 .pap-multiplechoice {
   margin-top: 10px;
   font-size: large;
+  font-weight: bold;
   text-align: center;
   left: auto;
   right: auto;

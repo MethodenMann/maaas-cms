@@ -1,6 +1,8 @@
 {
- "statistics_nokey": "Bitte hinterlegen Sie in den Museumseinstellungen die Ansichts Id",
- "chart_title_area": "Bereich Aufrufstatistiken",
- "chart_title_content": "Inhalte Aufrufstatistiken",
- "chart_title_quiz": "Quiz Aufrufstatistiken"
+ "statistics_nokey": "Bitte hinterlegen Sie in den Museumseinstellungen den Ansichten Key",
+ "statistics_chart_title_area": "Bereich Aufrufstatistiken",
+ "statistics_chart_title_content": "Inhalte Aufrufstatistiken",
+ "statistics_chart_title_quiz": "Quiz Aufrufstatistiken",
+ "statistics_title" : "Statistiken",
+ "statistics_description" : "Die Statistiken der App werden über Google-Analytics gesammelt. Damit die Daten angezeigt werden muss ein Google Konto mit dem maaas-System verknüpfen. Kontaktieren Sie uns dazu bitte. Beachten Sie auch, dass die Aufrufstatistiken bei Google Analytics mit einer Verzögerung von ca. 2 Tagen publiziert werden."
 }

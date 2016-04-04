@@ -2,24 +2,24 @@
   "tours_title": "Rundgänge",
   "tours_details_title": "Rundgang Details",
 
-  "tours__delete_confirm" : "Sind Sie sicher, dass sie diesen Rundgang löschen möchten?",
+  "tours__delete_confirm" : "Sind Sie sicher, dass Sie diesen Rundgang löschen möchten?",
   "tours__delete" : "Rundgang löschen",
 
-  "tours_details_compose_title": "Rundgang Zusammenstellen",
+  "tours_details_compose_title": "Rundgang zusammenstellen",
   "tours_details_compose_areas": "Bereiche",
   "tours_details_compose_contents": "Inhalte",
   "tours_details_compose_challenges": "Quiz",
 
   "tours_details_name_label": "Name",
   "tours_details_name_help": "Name des Rundgangs",
-  "tours_details_name_error": "Bitte Geben Sie einen gülten Namen ein",
+  "tours_details_name_error": "Bitte geben Sie einen gültigen Namen ein",
 
   "tours_details_description_label": "Zusammenfassung",
-  "tours_details_description_help": "Einen kurzen Beschreib des Rundgangs.",
-  "tours_details_description_error": "Bitte Geben Sie eine gülten Beschreib an",
+  "tours_details_description_help": "Eine kurze Beschreibung des Rundgangs",
+  "tours_details_description_error": "Bitte geben Sie eine gültige Beschreibung an",
 
   "tours_details_image_label": "Bild",
-  "tours_details_image_help": "Das Bild wird in der App bei der Rundgang Auswahl angezeigt",
+  "tours_details_image_help": "Das Bild wird in der App bei der Rundgangauswahl angezeigt",
   "tours_details_image_error": "Bitte laden Sie ein Bild hoch",
 
   "tours_details_removearea_confirm" : "Sind die sicher, dass Sie diesen Bereich aus dem Rundgang entfernen möchten?"
